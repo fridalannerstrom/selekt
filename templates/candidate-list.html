@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Candidates</h1>
+  <ul class="list-group">
+    {% for candidate in candidates %}
+      <li class="list-group-item">
+        <strong>{{ candidate.name }}</strong> – {{ candidate.email }}<br>
+        <small>{{ candidate.top_skills }}</small>
+      </li>
+    {% empty %}
+      <li class="list-group-item">No candidates yet.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
