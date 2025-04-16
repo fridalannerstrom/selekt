@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from candidates import views as candidate_views
 from django.contrib.auth import views as auth_views
+from candidates import views as candidate_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +26,5 @@ urlpatterns = [
     path('dashboard/', candidate_views.dashboard, name='dashboard'),
     path('candidates/', include('candidates.urls')),
     path('', candidate_views.index, name='index'),
+    path('signup/', candidate_views.signup, name='signup'),
 ]

@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Candidate
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 def candidate_list(request):
@@ -20,3 +21,13 @@ def signup(request):
 def dashboard(request):
     candidates = Candidate.objects.all().order_by('-uploaded_at')[:5]  # senaste 5
     return render(request, 'dashboard.html', {'candidates': Candidate.objects.all()})
+
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard')  
+    else:
+        form = UserCreationForm()
+    return render(request, 'signup.html', {'form': form})
