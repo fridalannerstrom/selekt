@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5">
+  <h2 class="mb-4">Dashboard</h2>
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h4>Your Candidates</h4>
+    <a href="#" class="btn btn-success">+ Add Candidate</a>
+  </div>
+
+  {% if candidates %}
+    <ul class="list-group">
+      {% for candidate in candidates %}
+        <li class="list-group-item">
+          <strong>{{ candidate.name }}</strong><br>
+          {{ candidate.email }}<br>
+          <small>Top skills: {{ candidate.top_skills }}</small>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No candidates yet.</p>
+  {% endif %}
+
+  <div class="mt-4">
+    <a href="{% url 'candidate_list' %}" class="btn btn-outline-primary">View all candidates</a>
+  </div>
+</div>
+
+{% endblock %}
