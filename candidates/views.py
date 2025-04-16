@@ -32,12 +32,13 @@ def signup(request):
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
 
-@login_required
 def add_candidate(request):
     if request.method == 'POST':
         form = CandidateForm(request.POST)
         if form.is_valid():
-            form.save()
+            candidate = form.save(commit=False)  
+            candidate.user = request.user        
+            candidate.save()                    
             return redirect('dashboard')
     else:
         form = CandidateForm()
