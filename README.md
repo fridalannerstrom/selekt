@@ -134,59 +134,46 @@ This project was created by **Frida Lannerström** as part of Portfolio Project 
 
 ### April 15
 
-✅ What I did today
-Reflected on the project scope and decided to split Cleo into two parts:
-a school-appropriate version (cleo-school) and a more advanced product version (cleo-pro) for future development and commercial use.
+#### ✅ What I did today
 
-Created a new GitHub repository (cleo-school) and started fresh to keep the school project focused and clean.
+- Reflected on the project scope and decided to split Cleo into two parts:  
+  a school-appropriate version (`cleo-school`) and a more advanced product version (`cleo-pro`) for future development and commercial use.
+- Created a new GitHub repository (`cleo-school`) and started fresh to keep the school project focused and clean.
+- Set up a new Django project with virtual environment, Django installation, and initial server test.
+- Created the `candidates` app to manage candidate data.
+- Built the initial `Candidate` model with the following fields:
+  - `name`, `email`, `notes`, `top_skills` (comma-separated), and `uploaded_at`.
+- Performed migrations to set up the database using SQLite.
+- Registered the model in the Django admin panel and verified that it works.
+- Created a `candidate_list` view and connected it via a new `urls.py`.
+- Built a set of templates: `base.html`, `index.html`, `candidate_list.html`, and `login.html`.
+- Integrated Bootstrap via CDN for responsive design and created a custom `assets/` folder for CSS and JavaScript files.
+- Configured `STATICFILES_DIRS` in Django to serve custom static assets.
+- Created both Swedish and English versions of the project `README.md` file with full structure and project documentation.
 
-Set up a new Django project with virtual environment, Django installation, and initial server test.
+---
 
-Created the candidates app to manage candidate data.
+#### 💡 Why I did it
 
-Built the initial Candidate model with the following fields:
+- To meet the school’s requirements with a simplified version of my broader product idea.
+- To stay within the scope of a realistic and testable full-stack MVP.
+- To keep the school version clean, modular, and easier to document, test, and submit.
+- To establish good habits around structure, reusability, and version control from day one.
 
-name, email, notes, top_skills (comma-separated), and uploaded_at.
+---
 
-Performed migrations to set up the database using SQLite.
+#### 🤔 Challenges and reflections
 
-Registered the model in the Django admin panel and verified that it works.
+- Letting go of the earlier version and previous commits was tough, but starting fresh has been freeing and helpful.
+- Had a minor issue with activating the virtual environment on Windows, which I resolved by using the correct script path.
+- Realized the importance of focusing on core functionality and resisting feature creep – the simpler version is not only easier to build but likely to get a better grade.
 
-Created a candidate_list view and connected it via a new urls.py.
+---
 
-Built a set of templates: base.html, index.html, candidate_list.html, and login.html.
+#### 📌 Next up
 
-Integrated Bootstrap via CDN for responsive design and created a custom assets/ folder for CSS and JavaScript files.
-
-Configured STATICFILES_DIRS in Django to serve custom static assets.
-
-Created both Swedish and English versions of the project README.md file with full structure and project documentation.
-
-💡 Why I did it
-To meet the school’s requirements with a simplified version of my broader product idea.
-
-To stay within the scope of a realistic and testable full-stack MVP.
-
-To keep the school version clean, modular, and easier to document, test, and submit.
-
-To establish good habits around structure, reusability, and version control from day one.
-
-🤔 Challenges and reflections
-Letting go of the earlier version and previous commits was tough, but starting fresh has been freeing and helpful.
-
-Had a minor issue with activating the virtual environment on Windows, which I resolved by using the correct script path.
-
-Realized the importance of focusing on core functionality and resisting feature creep – the simpler version is not only easier to build but likely to get a better grade.
-
-📌 Next up
-Build a frontend form for adding candidates
-
-Add file upload functionality (CVs, test results)
-
-Implement detail views for each candidate
-
-Introduce role-based access
-
-Prepare for testing and deployment
-
-💬 Keeping this log directly in the README helps me stay focused and track decisions and progress. It will likely be removed or moved later.
+- Build a frontend form for adding candidates
+- Add file upload functionality (CVs, test results)
+- Implement detail views for each candidate
+- Introduce role-based access
+- Prepare for testing and deployment
