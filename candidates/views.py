@@ -3,6 +3,7 @@ from .models import Candidate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from .forms import CandidateForm
 
 # Create your views here.
 def candidate_list(request):
@@ -30,3 +31,14 @@ def signup(request):
     else:
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
+
+@login_required
+def add_candidate(request):
+    if request.method == 'POST':
+        form = CandidateForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard')
+    else:
+        form = CandidateForm()
+    return render(request, 'add-candidate.html', {'form': form})

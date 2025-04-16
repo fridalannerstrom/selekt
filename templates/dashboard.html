@@ -6,7 +6,7 @@
 
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h4>Your Candidates</h4>
-    <a href="#" class="btn btn-success">+ Add Candidate</a>
+    <a href="{% url 'add_candidate' %}" class="btn btn-success">+ Add Candidate</a>
   </div>
 
   {% if candidates %}
