@@ -62,7 +62,7 @@ class CandidateDetailView(DetailView):
 # Edit candidate
 class CandidateUpdateView(UpdateView):
     model = Candidate
-    fields = ['name', 'email', 'top_skills']
+    fields = ['name', 'email', 'top_skills', 'notes']
     template_name = 'candidate-form.html'
 
     def get_success_url(self):
