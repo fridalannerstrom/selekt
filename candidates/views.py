@@ -7,6 +7,7 @@ from django.utils.decorators import method_decorator
 from django.urls import reverse_lazy
 from .models import Candidate
 from .forms import CandidateForm
+from django.http import Http404
 
 # Index
 def index(request):
@@ -59,11 +60,23 @@ class CandidateDetailView(DetailView):
     template_name = 'candidate-detail.html'
     context_object_name = 'candidate'
 
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset)
+        if obj.user != self.request.user:
+            raise Http404("This candidate does not belong to you.")
+        return obj
+
 # Edit candidate
 class CandidateUpdateView(UpdateView):
     model = Candidate
     fields = ['name', 'email', 'top_skills', 'notes']
     template_name = 'candidate-form.html'
+
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset)
+        if obj.user != self.request.user:
+            raise Http404("This candidate does not belong to you.")
+        return obj    
 
     def get_success_url(self):
         return reverse_lazy('candidate_detail', kwargs={'pk': self.object.pk})
