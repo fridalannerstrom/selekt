@@ -1,13 +1,10 @@
 from django.urls import path
 from . import views
-from candidates import views as candidate_views
-from django.contrib.auth import views as auth_views
-from .views import CandidateDetailView
-
+from .views import CandidateDetailView, CandidateUpdateView, CandidateCreateView, CandidateListView
 
 urlpatterns = [
-    path('', views.candidate_list, name='candidate_list'),
-    path('add/', candidate_views.add_candidate, name='add_candidate'),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-    path("<int:pk>/", CandidateDetailView.as_view(), name="candidate_detail"),
+    path('', views.CandidateListView.as_view(), name='candidate_list'), # Lista alla kandidater
+    path('add/', views.CandidateCreateView.as_view, name='add_candidate'),  # Lägg till kandidat
+    path('<int:pk>/', CandidateDetailView.as_view(), name='candidate_detail'),  # Se profil
+    path('<int:pk>/edit/', CandidateUpdateView.as_view(), name='candidate_edit'),  # Redigera kandidat
 ]
