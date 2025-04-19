@@ -130,6 +130,43 @@ This project was created by **Frida Lannerström** as part of Portfolio Project 
 
 ---
 
+## 🔄 Agile Working Methodology
+
+This project is developed using an **Agile-inspired workflow** with GitHub Projects.
+
+All functionality is broken down into **user stories**, written from the user's perspective in the format:
+
+> *As a user, I want to... so that...*
+
+Each user story includes:
+- **Type:** User Story or Epic Story
+- **Priority:** Assigned using the [MoSCoW method](https://en.wikipedia.org/wiki/MoSCoW_method) (Must Have, Should Have, Could Have, Won’t Have)
+- **Acceptance Criteria:** Clear conditions to define when a story is complete
+
+I use **GitHub Projects (Kanban board view)** to visually organize and track my work:
+- `Backlog`: All user stories and epics are added here initially
+- `Ready`: Tasks that are prioritized and ready to begin
+- `In Progress`: Tasks currently being worked on
+- `In Review`: Stories ready for testing or feedback
+- `Done`: Completed work
+
+### 🏷️ Labels
+Each issue is tagged with:
+- **Type** (e.g., `user story`, `epic story`)
+- **Priority** (e.g., `must-have`, `should-have`)
+
+### 🧩 Epic Stories
+Larger themes are grouped into *epic stories*. Each epic includes links to related user stories and acts as a checklist of progress.  
+Example epics: `User Authentication`, `Candidate Management`, `File Uploads`.
+
+This structure helps me:
+- Keep focus and prioritize correctly
+- Demonstrate planning and iterative work
+- Track progress clearly, even on a solo project
+
+---
+
+
 ## Daily log
 
 ### April 15
