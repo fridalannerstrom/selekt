@@ -12,11 +12,10 @@
   {% if candidates %}
     <ul class="list-group">
       {% for candidate in candidates %}
-        <li class="list-group-item">
-          <strong>{{ candidate.name }}</strong><br>
-          {{ candidate.email }}<br>
-          <small>Top skills: {{ candidate.top_skills }}</small>
-        </li>
+      <li class="list-group-item">
+        <strong>{{ candidate.name }}</strong> – {{ candidate.email }}<br>
+        <small>{{ candidate.top_skills }}</small> <a href="{% url 'candidate_detail' candidate.id %}" class="btn btn-primary btn-sm">View Profile</a>
+      </li>      
       {% endfor %}
     </ul>
   {% else %}

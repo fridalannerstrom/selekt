@@ -4,11 +4,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from .forms import CandidateForm
+from django.views.generic.detail import DetailView
 
 # Create your views here.
 def candidate_list(request):
     candidates = Candidate.objects.all().order_by('-uploaded_at')
-    return render(request, 'candidate_list.html', {'candidates': candidates})
+    return render(request, 'candidate-list.html', {'candidates': candidates})
 
 def index(request):
     return render(request, 'index.html')
@@ -43,3 +44,8 @@ def add_candidate(request):
     else:
         form = CandidateForm()
     return render(request, 'add-candidate.html', {'form': form})
+
+class CandidateDetailView(DetailView):
+    model = Candidate
+    template_name = "candidate-detail.html"
+    context_object_name = "candidate"
