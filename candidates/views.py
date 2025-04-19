@@ -44,7 +44,7 @@ class CandidateListView(ListView):
 class CandidateCreateView(CreateView):
     model = Candidate
     form_class = CandidateForm
-    template_name = 'candidates/candidate-form.html'
+    template_name = 'candidate-form.html'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -56,14 +56,14 @@ class CandidateCreateView(CreateView):
 # Candidate detail
 class CandidateDetailView(DetailView):
     model = Candidate
-    template_name = 'candidates/candidate-detail.html'
+    template_name = 'candidate-detail.html'
     context_object_name = 'candidate'
 
 # Edit candidate
 class CandidateUpdateView(UpdateView):
     model = Candidate
     fields = ['name', 'email', 'top_skills']
-    template_name = 'candidates/candidate-form.html'
+    template_name = 'candidate-form.html'
 
     def get_success_url(self):
         return reverse_lazy('candidate_detail', kwargs={'pk': self.object.pk})
