@@ -256,3 +256,39 @@ This structure helps me:
 - Improve candidate list and dashboard with more metadata and styling
 - Add edit/delete functionality for candidates
 
+---
+
+### April 19
+
+#### Completed Features & Stories
+
+##### 🔐 User Authentication (Epic Completed)
+- ✅ User signup with validation and automatic login
+- ✅ User login redirects to dashboard, with clear error messages on failure
+- ✅ User logout redirects to homepage
+- ✅ Dashboard access is restricted to logged-in users only
+
+##### 👤 Candidate Management (Epic In Progress)
+- ✅ Candidate list displays name, email, and top skills (only current user's candidates)
+- ✅ Clicking a candidate opens their detailed profile
+- ✅ Candidate detail view is protected — users cannot access other users’ data
+- ✅ Edit candidate functionality implemented using a form
+
+##### ⚠️ Custom 404 Page
+- ✅ Custom 404 page shown when trying to access a candidate that doesn’t belong to the user
+- ✅ Helpful message: “This candidate does not belong to you.”
+
+#### 🔧 Technical Improvements
+
+- ✅ Switched to Django **class-based generic views**:
+  - `ListView`, `DetailView`, `CreateView`, `UpdateView`
+  - `get_queryset()` and `get_object()` properly scoped to current user
+- ✅ **URL structure cleaned up**:
+  - Most routes now live in `candidates/urls.py`
+  - Project-level `urls.py` simplified
+  - Removed duplicate route definitions
+
+#### ✅ Testing & Verification
+- All user flows in the **User Authentication** epic tested and verified
+- Candidate list and detail views only show current user's data
+- All redirects, logins, logouts, and access restrictions confirmed working
