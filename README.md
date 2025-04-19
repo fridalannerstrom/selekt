@@ -177,3 +177,45 @@ This project was created by **Frida Lannerström** as part of Portfolio Project 
 - Implement detail views for each candidate
 - Introduce role-based access
 - Prepare for testing and deployment
+
+### April 16
+
+#### ✅ What I did today
+
+- Created a signup page with Django's `UserCreationForm`, custom template, and post-signup redirection to dashboard.
+- Enabled **automatic login after signup** using `login(request, user)`.
+- Fixed URL issues: adjusted routing so dashboard is at `/dashboard/` instead of `/candidates/dashboard/`.
+- Ensured login and signup redirects work using `LOGIN_REDIRECT_URL` and `LOGIN_URL` in `settings.py`.
+- Created a form (`CandidateForm`) and view (`add_candidate`) for adding new candidates via the frontend.
+- Built a template `add_candidate.html` with Bootstrap layout and connection to dashboard.
+- Improved the dashboard layout with a list of candidates and connection to "Add Candidate" functionality.
+- Added a `user` field to the `Candidate` model to ensure that candidates are linked to the logged-in user.
+- Updated the dashboard view to only show candidates for the currently logged-in user.
+- Handled `IntegrityError` and migration issues caused by the new `user` field by resetting migrations and database when needed.
+- Verified candidate privacy: users now only see their own added candidates.
+
+---
+
+#### 💡 Why I did it
+
+- To build a real MVP-level system where users can manage their own data securely.
+- To prepare the project for individual user accounts and future features like uploads, file attachments, etc.
+- To learn best practices around Django forms, models, and user authentication.
+
+---
+
+#### 🤔 Challenges and reflections
+
+- Encountered an issue where the wrong `login()` function was used (naming conflict with a view) – solved by renaming the view and importing Django’s login method.
+- Faced migration errors due to the new `user` field, but resolved them through a full reset of the database and migrations.
+- Important realization: Form fields like `user` should not be exposed in the form, but handled manually in the view.
+
+---
+
+#### 📌 Next up
+
+- Implement file upload support for CVs and test results
+- Display uploaded files in the candidate detail view
+- Improve candidate list and dashboard with more metadata and styling
+- Add edit/delete functionality for candidates
+
