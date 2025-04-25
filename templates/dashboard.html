@@ -70,7 +70,7 @@
   
         <!-- Footer -->
         <div class="d-flex justify-content-between align-items-center px-4 pb-3">
-          <a href="#" onclick="openCandidateModal({{ candidate.id }})" class="btn button-base scn-button read-btn">Read more</a>
+          <a href="#" onclick="openCandidateModal({{ candidate.id|escapejs }})" class="btn button-base scn-button read-btn">Read more</a>
           <div class="dot-menu">
             <span class="dot"></span>
             <span class="dot"></span>
@@ -95,9 +95,9 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="candidateModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content" id="candidateModalContent">
+<div class="modal fade candidate-modal-bottom" id="candidateModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg mb-0">
+    <div class="modal-content candidate-modal-content" id="candidateModalContent">
       <!-- Modal content will load here -->
     </div>
   </div>

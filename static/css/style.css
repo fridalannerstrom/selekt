@@ -253,3 +253,41 @@ header {
   height: 48px;
   width: 48px;
 }
+
+/* CANDIDATE MODAL */
+
+.modal-dialog {
+  bottom: 0;
+  transform: translateX(-50%);
+  height: 90vh;
+  bottom: 0;
+  width: 80vw;
+  max-width: 1400px;
+  border: 1px solid red;
+  position: fixed;
+  left: 10%;
+  right: 10%;
+  bottom: 0;
+
+}
+
+.candidate-modal-content {
+  height: 100%;
+  overflow-y: auto;
+  border-radius: 16px 16px 0 0;
+  padding: 2rem;
+}
+
+.modal-dialog-centered {
+  align-items: end;
+}
+
+.candidate-modal-bottom .modal.fade .modal-dialog {
+  transition: transform 0.3s ease-out;
+  transform: translate(-50%, 100%);
+}
+
+.candidate-modal-bottom .modal.fade.show .modal-dialog {
+  transform: translate(-50%, 0);
+}
+

@@ -1,13 +1,78 @@
 <div class="modal-header">
-    <h5 class="modal-title">{{ candidate.name }}</h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
   </div>
   <div class="modal-body">
-    <p><strong>Email:</strong> {{ candidate.email }}</p>
-    <p><strong>Skills:</strong>
-      {% for skill in candidate.skill_list %}
-        <span class="badge bg-secondary">{{ skill }}</span>
+    <div class="d-flex justify-content-between align-items-start">
+      <div class="d-flex gap-3 align-items-center">
+        <img src="https://randomuser.me/api/portraits/women/65.jpg" class="profile-img" alt="Profile">
+        <div>
+          <h1 class="small-h1">{{ candidate.name }}</h1>
+          <small class="text-muted">Web Developer</small>
+        </div>
+      </div>
+      <div class="d-flex gap-2">
+        <button class="btn btn-outline-dark btn-sm">Add to favorites</button>
+        <button class="btn btn-dark btn-sm">Edit information</button>
+      </div>
+    </div>
+  
+    <ul class="nav nav-tabs mt-4" id="profileTabs">
+      <li class="nav-item">
+        <a class="nav-link active" href="#">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Notes</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Files</a>
+      </li>
+    </ul>
+  
+    <div class="row mt-4">
+      <div class="col-lg-8">
+        <h6 class="fw-bold">Profile</h6>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum molestias eveniet blanditiis omnis dicta.</p>
+  
+        {% for skill in candidate.skill_list %}
+        <span class="skill-badge">{{ skill }}</span>
       {% endfor %}
-    </p>
-    <p><strong>Notes:</strong> {{ candidate.notes }}</p>
+  
+        <h6 class="fw-bold mt-4">Work Experience</h6>
+        <div class="mb-3">
+          <strong>Role</strong><br>
+          <small>Place, title</small>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae fugit nihil earum reiciendis?</p>
+        </div>
+        <div class="mb-3">
+          <strong>Role</strong><br>
+          <small>Place, title</small>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae fugit nihil earum reiciendis?</p>
+        </div>
+  
+        <h6 class="fw-bold mt-4">Education</h6>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis ad iste laborum fuga.</p>
+  
+        <h6 class="fw-bold mt-4">Other</h6>
+        <p>Languages, driver's license, tools etc.</p>
+      </div>
+  
+      <div class="col-lg-4">
+        <div class="sidebar">
+          <h6 class="fw-bold">Contact information</h6>
+          <p><strong>Email</strong><br>{{ candidate.email }}</p>
+          <p><strong>Phone</strong><br>0731234567</p>
+          <p><strong>Address</strong><br>Stockholm, Sweden</p>
+          <p><strong>Links</strong><br>
+            LinkedIn<br>
+            Behance<br>
+            GitHub
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
+  
+  </div>
+
+
+</div>
