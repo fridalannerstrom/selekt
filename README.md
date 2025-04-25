@@ -292,3 +292,9 @@ This structure helps me:
 - All user flows in the **User Authentication** epic tested and verified
 - Candidate list and detail views only show current user's data
 - All redirects, logins, logouts, and access restrictions confirmed working
+
+### April 25
+
+#### Design changes
+- The current template is too much "dashboard" and will be to much for this project.. 
+- Decided to build my own template with Bootstrap. Custom CSS etc. Based on sketches in Adobe XD.
