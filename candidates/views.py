@@ -17,6 +17,11 @@ def index(request):
 @login_required
 def dashboard(request):
     candidates = Candidate.objects.filter(user=request.user).order_by('-uploaded_at')[:5]
+
+    for candidate in candidates:
+        # Dela upp strängen till en lista, t.ex. "HTML, CSS" → ["HTML", "CSS"]
+        candidate.skill_list = [skill.strip() for skill in candidate.top_skills.split(',')]
+
     return render(request, 'dashboard.html', {'candidates': candidates})
 
 # Signup
