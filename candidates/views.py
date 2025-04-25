@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.views.generic import DetailView, UpdateView, CreateView, ListView
+from django.views.generic import DetailView, UpdateView, CreateView, ListView, DeleteView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
@@ -99,3 +99,15 @@ def candidate_modal(request, pk):
 
     html = render_to_string('candidate-modal.html', {'candidate': candidate})
     return JsonResponse({'html': html})
+
+# Delete candidate
+class CandidateDeleteView(DeleteView):
+    model = Candidate
+    template_name = 'candidate-confirm-delete.html'
+    success_url = reverse_lazy('dashboard')
+
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset)
+        if obj.user != self.request.user:
+            raise Http404("This candidate does not belong to you.")
+        return obj
