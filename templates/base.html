@@ -27,7 +27,7 @@
 
   <!-- Header -->
   <header class="d-flex justify-content-between align-items-center px-4 py-3">
-    <a href="/" class="text-decoration-none">
+    <a href="{% url 'dashboard' %}" class="text-decoration-none">
       <img src="{% static 'media/images/logo.png' %}" alt="Logo" class="logo-img">
     </a>
     <a href="{% url 'candidate_add' %}" class="btn button-base border-button">

@@ -244,3 +244,20 @@ header {
   color: grey;
   padding-left: 15px;
 }
+
+/* SEARCH AND FILTER */
+
+.candidate-search input{
+  background-color: #EFEFEF;
+  border-radius: 100px;
+}
+
+.candidate-search input:focus{
+  background-color: #EFEFEF;
+  border-color: #5453EC;
+}
+
+.candidate-search .btn {
+  height: 48px;
+  width: 48px;
+}

@@ -1,13 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="container mt-5">
-  <h2 class="mb-4">Dashboard</h2>
+<div class="container hero">
 
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h4>Your Candidates</h4>
-    <a href="{% url 'candidate_add' %}" class="btn btn-success">+ Add Candidate</a>
+    <form class="d-flex align-items-center gap-2 w-100 candidate-search">
+      <input type="text" class="form-control px-4 py-3 border-1 shadow-none" placeholder="Who are you looking for?">
+      <button class="btn button-base scn-button d-flex justify-content-center align-items-center rounded-circle" type="submit">
+        <i class="fas fa-search"></i>
+      </button>
+    </form>
+ <div>
+    <h1>Your all-in-one hub for candidate profiles</h1>
+    <p>All your candidate data – CVs, tests, notes – searchable, structured, and powered by AI.</p>
+    <a href="{% url 'signup' %}" class="btn button-base cta-button">Create account</a>
   </div>
+
+</div>
 
   {% if candidates %}
     <ul class="list-group">
