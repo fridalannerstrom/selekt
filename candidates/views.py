@@ -87,7 +87,7 @@ class CandidateUpdateView(UpdateView):
         return obj    
 
     def get_success_url(self):
-        return reverse_lazy('candidate_detail', kwargs={'pk': self.object.pk})
+        return reverse_lazy('dashboard')
     
 
 # Candidate Modal
