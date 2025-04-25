@@ -29,6 +29,17 @@ h1 {
   font-weight: 200;
 }
 
+.small-h1 {
+  font-size: 1rem;
+  font-family: 'Libre Baskerville', serif;
+  font-weight: 200;
+}
+
+h3 {
+  font-family: 'Libre Baskerville', serif;
+  font-weight: 200;
+}
+
 h4 {
   font-size: 1.1rem;
   font-weight: 600;
@@ -154,4 +165,27 @@ header img {
   height: 4px;
   background-color: #7a7a7a;
   border-radius: 50%;
+}
+
+/* AUTH LAYOUT */
+
+.auth-body {
+  background-color: #fff;
+  font-family: 'Inter', sans-serif;
+}
+
+.auth-form-wrapper {
+  max-width: 380px;
+  margin: auto;
+}
+
+.object-fit-cover {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.auth-img {
+  height: 100vh;
+  padding: 0px;
 }
