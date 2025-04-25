@@ -29,12 +29,16 @@
         <div class="row h-100 g-0 p-0">
           
           <!-- Left column: logo + content -->
-          <div class="col-lg-5 d-flex flex-column justify-content-between p-5">
-            <div>
-              <img src="{% static 'media/images/logo.png' %}" alt="Selekt logo" height="28" class="mb-5">
+          <div class="col-lg-5 d-flex flex-column justify-content-between">
+            <div class="px-4 py-3">
+                <a href="/" class="text-decoration-none">
+                    <img src="{% static 'media/images/logo.png' %}" alt="Selekt logo" class="mb-5 logo-img">
+                </a>
             </div>
             <div class="auth-form-wrapper p-5">
-              {% block auth_content %}{% endblock %}
+              {% block auth_content %}
+              
+              {% endblock %}
             </div>
             <div></div> <!-- empty spacer -->
           </div>

@@ -1,7 +1,7 @@
 /* BASE STYLES */
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@200&family=Poppins:wght@400;600&display=swap');
 
-body {
+body, .index-body, .auth-body {
   font-family: 'Poppins', sans-serif;
 }
 
@@ -30,7 +30,7 @@ h1 {
 }
 
 .small-h1 {
-  font-size: 1rem;
+  font-size: 1.7rem;
   font-family: 'Libre Baskerville', serif;
   font-weight: 200;
 }
@@ -48,17 +48,19 @@ h4 {
 .text-muted {
   color: grey;
   font-size: 0.8rem;
+  font-family: 'Poppins', sans-serif;
 }
 
 /* BUTTONS */
 
 .button-base {
   border-radius: 100px;
-  padding: 10px 17px;
-  font-weight: 600;
+  padding: 10px 25px;
+  font-weight: 500;
   display: inline-block;
   text-decoration: none;
   border: none;
+  font-family: 'Poppins', sans-serif;
 }
 
 .cta-button {
@@ -80,6 +82,16 @@ h4 {
   color: white;
 }
 
+.base-link {
+  text-decoration: none;
+  color: #5453EC;
+  font-weight: 600;
+}
+
+.base-link:hover {
+  color: #8888f7;
+}
+
 /* HEADER */
 
 header {
@@ -87,7 +99,7 @@ header {
   height: 70px;
 }
 
-header img {
+.logo-img {
   width: 110px;
 }
 
@@ -188,4 +200,23 @@ header img {
 .auth-img {
   height: 100vh;
   padding: 0px;
+}
+
+/* FORMS */
+
+
+.auth-form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f5f5f5;
+  font-size: 1rem;
 }
