@@ -24,15 +24,15 @@
 </head>
 
 <body>
+    <!-- Header -->
     <header class="d-flex justify-content-between align-items-center px-4 py-3">
         <a href="/" class="text-decoration-none">
-          <img src="{% static 'media/images/logo.png' %}" alt="Logo" class="logo" />
+          <img src="{% static 'media/images/logo.png' %}" alt="Logo" class="logo">
         </a>
-      
-        <a href="/login" class="btn button-base scn-button">
+        <a href="{% url 'login' %}" class="btn button-base scn-button">
           Log in
         </a>
-      </header>
+    </header>
 
     <div class="container hero">
         <h1>Your all-in-one hub for candidate profiles</h1>
