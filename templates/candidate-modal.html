@@ -1,0 +1,13 @@
+<div class="modal-header">
+    <h5 class="modal-title">{{ candidate.name }}</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <p><strong>Email:</strong> {{ candidate.email }}</p>
+    <p><strong>Skills:</strong>
+      {% for skill in candidate.skill_list %}
+        <span class="badge bg-secondary">{{ skill }}</span>
+      {% endfor %}
+    </p>
+    <p><strong>Notes:</strong> {{ candidate.notes }}</p>
+  </div>

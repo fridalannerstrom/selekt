@@ -70,7 +70,7 @@
   
         <!-- Footer -->
         <div class="d-flex justify-content-between align-items-center px-4 pb-3">
-          <a href="{% url 'candidate_detail' candidate.id %}" class="btn button-base scn-button read-btn">Read more</a>
+          <a href="#" onclick="openCandidateModal({{ candidate.id }})" class="btn button-base scn-button read-btn">Read more</a>
           <div class="dot-menu">
             <span class="dot"></span>
             <span class="dot"></span>
@@ -93,5 +93,16 @@
   </form>
 
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="candidateModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" id="candidateModalContent">
+      <!-- Modal content will load here -->
+    </div>
+  </div>
+</div>
+
+
 
 {% endblock %}

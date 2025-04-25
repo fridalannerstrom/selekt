@@ -8,6 +8,9 @@ from django.urls import reverse_lazy
 from .models import Candidate
 from .forms import CandidateForm
 from django.http import Http404
+from django.template.loader import render_to_string
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 
 # Index
 def index(request):
@@ -85,3 +88,14 @@ class CandidateUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('candidate_detail', kwargs={'pk': self.object.pk})
+    
+
+# Candidate Modal
+@login_required
+def candidate_modal(request, pk):
+    candidate = get_object_or_404(Candidate, pk=pk, user=request.user)
+    skills = [skill.strip() for skill in candidate.top_skills.split(',')] if candidate.top_skills else []
+    candidate.skill_list = skills  # Lägg till för att kunna loopa
+
+    html = render_to_string('candidate-modal.html', {'candidate': candidate})
+    return JsonResponse({'html': html})
