@@ -12,6 +12,16 @@ h1 {
   font-weight: 200;
 }
 
+h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.text-muted {
+  color: grey;
+  font-size: 0.8rem;
+}
+
 /* BUTTONS */
 
 .button-base {
@@ -77,9 +87,13 @@ header img {
 
 .candidate-card {
   border-radius: 16px;
-  box-shadow: 0 0 24px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   transition: 0.3s ease;
   position: relative;
+}
+
+.candidate-card hr {
+  color: grey;
 }
 
 .candidate-img {
@@ -90,16 +104,17 @@ header img {
 }
 
 .skill-badge {
-  background-color: #f7f5ef;
+  background-color: #F6EEE3;
   font-size: 0.75rem;
   padding: 4px 8px;
   border-radius: 12px;
   margin-right: 4px;
+  border: 1px solid #EBD9C1;
 }
 
 .read-btn {
   font-size: 0.8rem;
-  padding: 6px 14px;
+  font-weight: 500;
 }
 
 /* Heart */
