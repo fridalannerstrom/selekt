@@ -24,10 +24,20 @@
 </head>
 
 <body>
+    <header class="d-flex justify-content-between align-items-center px-4 py-3">
+        <a href="/" class="text-decoration-none">
+          <img src="{% static 'media/images/logo.png' %}" alt="Logo" class="logo" />
+        </a>
+      
+        <a href="/login" class="btn button-base scn-button">
+          Log in
+        </a>
+      </header>
+
     <div class="container hero">
         <h1>Your all-in-one hub for candidate profiles</h1>
         <p>All your candidate data – CVs, tests, notes – searchable, structured, and powered by AI.</p>
-        <a href="#" class="btn btn-cta px-4 py-2">Create account</a>
+        <a href="#" class="btn button-base cta-button">Create account</a>
       </div>
 
       <div class="container py-5">

@@ -14,11 +14,43 @@ h1 {
 
 /* BUTTONS */
 
-.btn-cta {
-  background-color: #E1F44B;
-  border: none;
-  font-weight: 600;
+.button-base {
   border-radius: 100px;
+  padding: 10px 17px;
+  font-weight: 600;
+  display: inline-block;
+  text-decoration: none;
+  border: none;
+}
+
+.cta-button {
+  background-color: #E1F44B;
+  color: black;
+}
+
+.scn-button {
+  background-color: #2A2722;
+  color: white;
+}
+
+.cta-button:hover {
+  background-color: #cbdf3b;
+}
+
+.scn-button:hover {
+  background-color: #58544c;
+  color: white;
+}
+
+/* HEADER */
+
+header {
+  border-bottom: 0px;
+  height: 70px;
+}
+
+header img {
+  width: 120px;
 }
 
 /* HERO SECTION */
