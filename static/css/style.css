@@ -254,9 +254,9 @@ header {
   width: 48px;
 }
 
-/* CANDIDATE MODAL */
+/* CANDIDATE MODALS */
 
-.modal-dialog {
+.modal-candidate {
   bottom: 0;
   transform: translateX(-50%);
   height: 90vh;
@@ -289,4 +289,14 @@ header {
 .modal.fade.show .modal-dialog {
   transform: translateY(0);
   opacity: 1;
+}
+
+.delete-candidate-modal-content {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  border: 0;
+}
+
+body.modal-open #deleteCandidateModal + .modal-backdrop {
+  background-color: transparent !important;
+  opacity: 0 !important;
 }

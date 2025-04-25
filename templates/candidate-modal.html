@@ -13,7 +13,7 @@
       <div class="d-flex gap-2">
         <button class="btn btn-outline-dark btn-sm">Add to favorites</button>
         <a href="{% url 'candidate_edit' candidate.pk %}" class="btn button-base scn-button">Edit information</a>
-        <a href="#" class="btn button-base scn-button" onclick="confirmDelete({{ candidate.id }})">Delete</a>
+        <a href="#" class="btn button-base scn-button" onclick="openDeleteModal({{ candidate.id }})">Delete</a>
       </div>
     </div>
   
