@@ -42,57 +42,94 @@
 
       <div class="container py-5">
         <div class="row g-4 justify-content-center">
-          <!-- Candidate Card -->
-          <div class="col-md-4 col-sm-6">
-            <div class="card candidate-card p-3">
-              <div class="d-flex align-items-center gap-3">
-                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Candidate" class="candidate-img" />
-                <div>
-                  <h5 class="mb-1">Frida Larsson</h5>
-                  <p class="mb-1 text-muted small">Web Developer</p>
-                  <div class="small text-muted">React, CSS, JavaScript</div>
+
+            <!-- Candidate Card -->
+            <div class="col-md-4 col-sm-6">
+                <div class="candidate-card bg-white">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <img src="{% static 'media/images/people-1.png' %}" alt="Frida Larsson" class="candidate-img" />
+                        <div>
+                            <h6 class="mb-1">Frida Larsson</h6>
+                            <small class="text-muted">Web Developer</small>
+                        </div>
+                    </div>
+            
+                    <div class="mb-3">
+                        <span class="skill-badge">HTML</span>
+                        <span class="skill-badge">CSS</span>
+                        <span class="skill-badge">JavaScript</span>
+                        <span class="skill-badge">React</span>
+                    </div>
+            
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a href="#" class="btn btn-dark read-btn">Read more</a>
+                        <small class="text-muted">Last update: 2 days ago</small>
+                    </div>
                 </div>
-              </div>
-              <div class="mt-3 d-flex justify-content-between align-items-center">
-                <a href="#" class="btn btn-sm btn-dark">Read more</a>
-                <small class="text-muted">Last update: 2 days ago</small>
-              </div>
             </div>
-          </div>
-    
-          <div class="col-md-4 col-sm-6">
-            <div class="card candidate-card p-3">
-              <div class="d-flex align-items-center gap-3">
-                <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Candidate" class="candidate-img" />
-                <div>
-                  <h5 class="mb-1">Adam Green</h5>
-                  <p class="mb-1 text-muted small">UX Designer</p>
-                  <div class="small text-muted">Figma, UX, Accessibility</div>
+            
+            <!-- Candidate Card -->
+            <div class="col-md-4 col-sm-6">
+                <div class="candidate-card bg-white position-relative">
+                    <!-- Heart Icon -->
+                    <div class="position-absolute top-0 end-0 p-3">
+                        <span class="heart-icon"><i class="fa-regular fa-heart"></i></span>
+                    </div>
+            
+                    <div class="px-4 py-3">
+                        <div class="d-flex align-items-center gap-3 mb-3">
+                            <img src="{% static 'media/images/people-2.png' %}" alt="Frida Larsson" class="candidate-img" />
+                            <div>
+                                <h6 class="mb-1">Frida Larsson</h6>
+                                <small class="text-muted">Web Developer</small>
+                            </div>
+                        </div>
+            
+                        <div class="skill-container">
+                            <span class="skill-badge">HTML</span>
+                            <span class="skill-badge">CSS</span>
+                            <span class="skill-badge">JavaScript</span>
+                            <span class="skill-badge">React</span>
+                        </div>
+                    </div>
+            
+                    <hr>
+            
+                    <div class="d-flex justify-content-between align-items-center px-4 pb-3">
+                        <a href="#" class="btn btn-dark read-btn">Read more</a>
+                        <div class="dot-menu">
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="mt-3 d-flex justify-content-between align-items-center">
-                <a href="#" class="btn btn-sm btn-dark">Read more</a>
-                <small class="text-muted">Last update: 5 days ago</small>
-              </div>
             </div>
-          </div>
-    
-          <div class="col-md-4 col-sm-6">
-            <div class="card candidate-card p-3">
-              <div class="d-flex align-items-center gap-3">
-                <img src="https://randomuser.me/api/portraits/women/66.jpg" alt="Candidate" class="candidate-img" />
-                <div>
-                  <h5 class="mb-1">Isabella Chen</h5>
-                  <p class="mb-1 text-muted small">Data Analyst</p>
-                  <div class="small text-muted">SQL, Python, Tableau</div>
+            
+            <!-- Candidate Card -->
+            <div class="col-md-4 col-sm-6">
+                <div class="candidate-card bg-white">
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <img src="{% static 'media/images/people-3.png' %}" alt="Frida Larsson" class="candidate-img" />
+                        <div>
+                            <h6 class="mb-1">Frida Larsson</h6>
+                            <small class="text-muted">Web Developer</small>
+                        </div>
+                    </div>
+            
+                    <div class="mb-3">
+                        <span class="skill-badge">HTML</span>
+                        <span class="skill-badge">CSS</span>
+                        <span class="skill-badge">JavaScript</span>
+                        <span class="skill-badge">React</span>
+                    </div>
+            
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a href="#" class="btn btn-dark read-btn">Read more</a>
+                        <small class="text-muted">Last update: 2 days ago</small>
+                    </div>
                 </div>
-              </div>
-              <div class="mt-3 d-flex justify-content-between align-items-center">
-                <a href="#" class="btn btn-sm btn-dark">Read more</a>
-                <small class="text-muted">Last update: 1 day ago</small>
-              </div>
             </div>
-          </div>
         </div>
       </div>
 </body>

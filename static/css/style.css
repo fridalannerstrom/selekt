@@ -74,13 +74,52 @@ header img {
 
 /* CANDIDATE CARDS */
 
+
 .candidate-card {
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.05);
+  border-radius: 16px;
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.1);
+  transition: 0.3s ease;
+  position: relative;
 }
+
 .candidate-img {
-  width: 64px;
-  height: 64px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
   object-fit: cover;
+}
+
+.skill-badge {
+  background-color: #f7f5ef;
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  border-radius: 12px;
+  margin-right: 4px;
+}
+
+.read-btn {
+  font-size: 0.8rem;
+  padding: 6px 14px;
+}
+
+/* Heart */
+.heart-icon {
+  font-size: 1.1rem;
+  color: #E94C82;
+  background: #f7f5ef;
+  padding: 7px 10px;
+  border-radius: 10px;
+}
+
+/* Dot menu */
+.dot-menu {
+  display: flex;
+  gap: 4px;
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+  background-color: #7a7a7a;
   border-radius: 50%;
 }
