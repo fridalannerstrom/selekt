@@ -70,61 +70,54 @@
 </body>
 <script>
 
+// Open the candidate modal and load candidate data
 function openCandidateModal(candidateId) {
-  fetch(`/candidates/candidate-modal/${candidateId}/`)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
-    })
-    .then(data => {
-    document.getElementById("candidateModalContent").innerHTML = data.html;
-    const modal = new bootstrap.Modal(document.getElementById('candidateModal'));
+    fetch(`/candidates/candidate-modal/${candidateId}/`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.json();
+        })
+        .then(data => {
+            document.getElementById("candidateModalContent").innerHTML = data.html;
+            const modal = new bootstrap.Modal(document.getElementById('candidateModal'));
+            modal.show();
+
+            initUploadScript(); // Initialize file upload event listeners
+            loadCandidateFiles(candidateId); // Load the file list immediately
+        })
+        .catch(error => {
+            console.error("Error fetching candidate data:", error);
+        });
+}
+
+// Open the delete confirmation modal
+function openDeleteModal(candidateId) {
+    const modalEl = document.getElementById('deleteCandidateModal');
+    const form = document.getElementById('deleteCandidateForm');
+
+    form.action = `/candidates/${candidateId}/delete/`;
+
+    const modal = new bootstrap.Modal(modalEl, {
+        backdrop: false,
+        keyboard: true
+    });
     modal.show();
 
-    initUploadScript(); // laddar event listeners etc.
-
-    // ✅ När modalen är öppen, ladda filerna separat:
-    const candidateId = document.getElementById('fileUploadArea').getAttribute('data-candidate-id');
-    fetch(`/candidates/${candidateId}/files/`)
-      .then(response => response.json())
-      .then(data => {
-          document.getElementById('fileListArea').innerHTML = data.html;
-          addDeleteFileListeners(); // viktigt så delete fungerar
-      });
-    })
-    .catch(error => {
-      console.error("Error fetching candidate data:", error);
-    });
-}
-
-function openDeleteModal(candidateId) {
-  const modalEl = document.getElementById('deleteCandidateModal');
-  const form = document.getElementById('deleteCandidateForm');
-
-  // Sätt korrekt action för formuläret
-  form.action = `/candidates/${candidateId}/delete/`;
-
-  // Visa modalen (utan backdrop)
-  const modal = new bootstrap.Modal(modalEl, {
-    backdrop: false,
-    keyboard: true
-  });
-  modal.show();
-
-  function handleClickOutside(event) {
-    if (!modalEl.querySelector('.modal-content').contains(event.target)) {
-      modal.hide();
-      document.removeEventListener('mousedown', handleClickOutside);
+    function handleClickOutside(event) {
+        if (!modalEl.querySelector('.modal-content').contains(event.target)) {
+            modal.hide();
+            document.removeEventListener('mousedown', handleClickOutside);
+        }
     }
-  }
 
-  setTimeout(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-  }, 100);
+    setTimeout(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+    }, 100);
 }
 
+// Initialize file upload feature
 function initUploadScript() {
     const fileElem = document.getElementById('fileElem');
     const uploadBtn = document.getElementById('uploadBtn');
@@ -132,6 +125,7 @@ function initUploadScript() {
     let selectedFiles = [];
 
     if (fileElem && uploadBtn && selectedFilesList) {
+        // When files are selected
         fileElem.addEventListener('change', function(event) {
             selectedFiles = Array.from(fileElem.files);
 
@@ -141,6 +135,8 @@ function initUploadScript() {
                 listItem.textContent = file.name;
                 selectedFilesList.appendChild(listItem);
             });
+
+            // Show or hide the upload button
             if (selectedFiles.length > 0) {
                 uploadBtn.classList.remove('d-none');
             } else {
@@ -148,83 +144,94 @@ function initUploadScript() {
             }
         });
 
+        // When clicking upload
         uploadBtn.addEventListener('click', function(e) {
-          e.preventDefault();
+            e.preventDefault();
 
-          if (selectedFiles.length === 0) {
-              alert('Please select files first!');
-              return;
-          }
+            if (selectedFiles.length === 0) {
+                alert('Please select files first!');
+                return;
+            }
 
-          const candidateId = document.getElementById('fileUploadArea').getAttribute('data-candidate-id');
-          const url = `/candidates/${candidateId}/upload-files/`;
+            const candidateId = document.getElementById('fileUploadArea').getAttribute('data-candidate-id');
+            const url = `/candidates/${candidateId}/upload-files/`;
 
-          const formData = new FormData();
-          selectedFiles.forEach(file => {
-              formData.append('files', file);
-          });
+            const formData = new FormData();
+            selectedFiles.forEach(file => {
+                formData.append('files', file);
+            });
 
-          fetch(url, {
-              method: 'POST',
-              headers: {
-                  'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
-              },
-              body: formData
-          })
-          .then(response => response.json())
-          .then(data => {
-              if (data.message) {
-                  const flashMessage = document.getElementById('flashMessage');
-                  console.log('Files uploaded!');
-                  selectedFiles = [];
-                  selectedFilesList.innerHTML = "";
-                  uploadBtn.classList.add('d-none');
-                  flashMessage.classList.remove('d-none');
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                },
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    console.log('Files uploaded!');
+                    selectedFiles = [];
+                    selectedFilesList.innerHTML = "";
+                    uploadBtn.classList.add('d-none');
 
-                  setTimeout(() => {
-                      flashMessage.classList.add('d-none');
-                  }, 3000);
-                  reloadFiles(); // Uppdatera fil-listan
-              }
-          })
-          .catch(error => {
-              console.error('Upload failed', error);
-          });
-      });
-      function reloadFiles() {
-        const candidateId = document.getElementById('fileUploadArea').getAttribute('data-candidate-id');
-        fetch(`/candidates/${candidateId}/files/`)
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('fileListArea').innerHTML = data.html;
-            addDeleteFileListeners(); // (om du har delete)
-        });
-    }
+                    // Show success flash message
+                    const flashMessage = document.getElementById('flashMessage');
+                    flashMessage.classList.remove('d-none');
+                    setTimeout(() => {
+                        flashMessage.classList.add('d-none');
+                    }, 3000);
 
-      function addDeleteFileListeners() {
-        document.querySelectorAll('.delete-file-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const fileId = this.getAttribute('data-file-id');
-                if (confirm('Are you sure you want to delete this file?')) {
-                    fetch(`/candidates/file/${fileId}/delete/`, {
-                        method: 'POST',
-                        headers: {
-                            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
-                        }
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log(data.message);
-                        reloadFiles();
-                    })
-                    .catch(error => {
-                        console.error('Delete failed', error);
-                    });
+                    reloadFiles();
                 }
+            })
+            .catch(error => {
+                console.error('Upload failed', error);
             });
         });
     }
-    }
+}
+
+// Load the candidate's uploaded files
+function loadCandidateFiles(candidateId) {
+    fetch(`/candidates/${candidateId}/files/`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('fileListArea').innerHTML = data.html;
+            addDeleteFileListeners(); // Setup delete buttons
+        });
+}
+
+// Reload the files (alias for loadCandidateFiles)
+function reloadFiles() {
+    const candidateId = document.getElementById('fileUploadArea').getAttribute('data-candidate-id');
+    loadCandidateFiles(candidateId);
+}
+
+// Attach delete functionality to delete buttons
+function addDeleteFileListeners() {
+    document.querySelectorAll('.delete-file-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const fileId = this.getAttribute('data-file-id');
+            if (confirm('Are you sure you want to delete this file?')) {
+                fetch(`/candidates/file/${fileId}/delete/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.message);
+                    reloadFiles();
+                })
+                .catch(error => {
+                    console.error('Delete failed', error);
+                });
+            }
+        });
+    });
 }
 
   </script>
