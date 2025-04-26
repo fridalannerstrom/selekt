@@ -71,7 +71,7 @@ class CandidateDetailView(DetailView):
 class CandidateUpdateView(UpdateView):
     model = Candidate
     fields = [
-            'name', 'email', 'job_title', 'profile_summary',
+            'name', 'email', 'phone_number', 'job_title', 'profile_summary',
             'work_experience', 'education', 'location', 'links',
             'profile_image', 'other', 'notes', 'top_skills'
         ]

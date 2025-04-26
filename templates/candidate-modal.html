@@ -1,79 +1,80 @@
 <div class="modal-header">
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-  </div>
-  <div class="modal-body">
-    <div class="d-flex justify-content-between align-items-start">
-      <div class="d-flex gap-3 align-items-center">
-        <img src="https://randomuser.me/api/portraits/women/65.jpg" class="profile-img" alt="Profile">
-        <div>
-          <h1 class="small-h1">{{ candidate.name }}</h1>
-          <small class="text-muted">Web Developer</small>
-        </div>
-      </div>
-      <div class="d-flex gap-2">
-        <button class="btn btn-outline-dark btn-sm">Add to favorites</button>
-        <a href="{% url 'candidate_edit' candidate.pk %}" class="btn button-base scn-button">Edit information</a>
-        <a href="#" class="btn button-base scn-button" onclick="openDeleteModal({{ candidate.id }})">Delete</a>
-      </div>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body">
+<div class="d-flex justify-content-between align-items-start">
+  <div class="d-flex gap-3 align-items-center">
+    <img src="https://randomuser.me/api/portraits/women/65.jpg" class="profile-img" alt="Profile">
+    <div>
+      <h1 class="small-h1">{{ candidate.name }}</h1>
+      <small class="text-muted">{{ candidate.job_title }}</small>
     </div>
-  
-    <ul class="nav nav-tabs mt-4" id="profileTabs">
-      <li class="nav-item">
-        <a class="nav-link active" href="#">About</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Notes</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Files</a>
-      </li>
-    </ul>
-  
-    <div class="row mt-4">
+  </div>
+  <div class="d-flex gap-2">
+    <button class="btn btn-outline-dark btn-sm">Add to favorites</button>
+    <a href="{% url 'candidate_edit' candidate.pk %}" class="btn button-base scn-button">Edit information</a>
+    <a href="#" class="btn button-base scn-button" onclick="openDeleteModal({{ candidate.id }})">Delete</a>
+  </div>
+</div>
+
+<!-- Nav tabs -->
+<ul class="nav nav-tabs mt-4" id="profileTabs" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="about-tab" data-bs-toggle="tab" data-bs-target="#about" type="button" role="tab">About</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="notes-tab" data-bs-toggle="tab" data-bs-target="#notes" type="button" role="tab">Notes</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="files-tab" data-bs-toggle="tab" data-bs-target="#files" type="button" role="tab">Files</button>
+  </li>
+</ul>
+
+<!-- Tab content -->
+<div class="tab-content mt-4" id="profileTabsContent">
+  <div class="tab-pane fade show active" id="about" role="tabpanel">
+    <div class="row">
       <div class="col-lg-8">
         <h6 class="fw-bold">Profile</h6>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum molestias eveniet blanditiis omnis dicta.</p>
-  
+        <p>{{ candidate.profile_summary }}</p>
+
         {% for skill in candidate.skill_list %}
         <span class="skill-badge">{{ skill }}</span>
-      {% endfor %}
-  
+        {% endfor %}
+
         <h6 class="fw-bold mt-4">Work Experience</h6>
         <div class="mb-3">
-          <strong>Role</strong><br>
-          <small>Place, title</small>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae fugit nihil earum reiciendis?</p>
+          {{ candidate.work_experience }}
         </div>
-        <div class="mb-3">
-          <strong>Role</strong><br>
-          <small>Place, title</small>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae fugit nihil earum reiciendis?</p>
-        </div>
-  
+
         <h6 class="fw-bold mt-4">Education</h6>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis ad iste laborum fuga.</p>
-  
+        <p>{{ candidate.education }}</p>
+
         <h6 class="fw-bold mt-4">Other</h6>
-        <p>Languages, driver's license, tools etc.</p>
+        <p>{{ candidate.other }}</p>
       </div>
-  
+
       <div class="col-lg-4">
         <div class="sidebar">
           <h6 class="fw-bold">Contact information</h6>
           <p><strong>Email</strong><br>{{ candidate.email }}</p>
-          <p><strong>Phone</strong><br>0731234567</p>
-          <p><strong>Address</strong><br>Stockholm, Sweden</p>
-          <p><strong>Links</strong><br>
-            LinkedIn<br>
-            Behance<br>
-            GitHub
-          </p>
+          <p><strong>Phone</strong><br>{{ candidate.phone_number }}</p>
+          <p><strong>Address</strong><br>{{ candidate.location }}</p>
+          <p><strong>Links</strong><br>{{ candidate.links }}</p>
         </div>
       </div>
     </div>
   </div>
-  
+
+  <div class="tab-pane fade" id="notes" role="tabpanel">
+    <h6 class="fw-bold">Notes</h6>
+    <p>{{ candidate.notes }}</p>
   </div>
 
+  <div class="tab-pane fade" id="files" role="tabpanel">
+    <h6 class="fw-bold">Files</h6>
+    <p>Här kan du visa en lista med uppladdade filer (kommer senare)</p>
+  </div>
+</div>
 
 </div>
