@@ -12,7 +12,7 @@ from django.template.loader import render_to_string
 from django.http import JsonResponse
 from django.contrib import messages
 from django.utils.safestring import mark_safe
-from django.template import RequestContext
+from django.db.models import Q, Count
 
 
 def index(request):
@@ -20,16 +20,44 @@ def index(request):
         return redirect('dashboard')
     return render(request, 'index.html')
 
-# Dashboard
 @login_required
 def dashboard(request):
-    candidates = Candidate.objects.filter(user=request.user).order_by('-uploaded_at')[:5]
+    query = request.GET.get('q', '')
+    sort = request.GET.get('sort', '')
+    filter_title = request.GET.get('title', '')  # 👈 NYTT!
 
+    candidates = Candidate.objects.filter(user=request.user)
+    candidates = filter_candidates(candidates, query)
+
+    # Filter
+    if filter_title:
+        candidates = candidates.filter(job_title__iexact=filter_title)
+
+    # Sorting
+    if sort == 'name':
+        candidates = candidates.order_by('name')
+    else:
+        candidates = candidates.order_by('-uploaded_at')
+
+    # Top 6 jobbtitles
+    job_titles = (
+        Candidate.objects
+        .filter(user=request.user)
+        .exclude(job_title__isnull=True)
+        .exclude(job_title__exact='')
+        .values('job_title')
+        .annotate(count=Count('job_title'))
+        .order_by('-count')[:6]
+    )
     for candidate in candidates:
-        # Dela upp strängen till en lista, t.ex. "HTML, CSS" → ["HTML", "CSS"]
         candidate.skill_list = [skill.strip() for skill in candidate.top_skills.split(',')]
 
-    return render(request, 'dashboard.html', {'candidates': candidates})
+    context = {
+        'candidates': candidates,
+        'job_titles': job_titles,
+        'active_title': filter_title, 
+    }
+    return render(request, 'dashboard.html', context)
 
 # Signup
 def signup(request):
@@ -138,3 +166,22 @@ def delete_candidate_file(request, file_id):
     candidate_file = get_object_or_404(CandidateFile, id=file_id, candidate__user=request.user)
     candidate_file.delete()
     return JsonResponse({'message': 'File deleted successfully'})
+
+
+# Candidate Search
+def candidate_search(request):
+    query = request.GET.get('q', '')
+    candidates = Candidate.objects.all()
+    candidates = filter_candidates(candidates, query)
+
+    return render(request, 'candidate-search.html', {'candidates': candidates})
+
+def filter_candidates(queryset, query):
+    if query:
+        queryset = queryset.filter(
+            Q(name__icontains=query) |
+            Q(job_title__icontains=query) |
+            Q(location__icontains=query) |
+            Q(top_skills__icontains=query)
+        )
+    return queryset

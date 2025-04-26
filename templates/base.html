@@ -87,6 +87,41 @@
 </body>
 <script>
 
+document.addEventListener('DOMContentLoaded', function() {
+  const sortSelect = document.getElementById('sortSelect');
+  sortSelect.addEventListener('change', function() {
+    document.getElementById('sortForm').submit();
+  });
+  
+  const searchInput = document.getElementById('searchInput');
+  const clearBtn = document.getElementById('clearSearchBtn');
+
+  // Funktion för att visa eller gömma krysset
+  function updateClearButtonVisibility() {
+    if (searchInput.value.length > 0) {
+      clearBtn.classList.remove('d-none');
+    } else {
+      clearBtn.classList.add('d-none');
+    }
+  }
+
+  // Lyssna när användaren skriver
+  searchInput.addEventListener('input', updateClearButtonVisibility);
+
+  // Kör direkt när sidan laddas
+  updateClearButtonVisibility();
+
+  // När man klickar på krysset
+  clearBtn.addEventListener('click', function() {
+    searchInput.value = '';
+    updateClearButtonVisibility();
+    
+    // 🔥 NYTT: Redirecta till sidan utan ?q
+    const baseUrl = window.location.href.split('?')[0]; // Ta bort eventuella ?q= i URLen
+    window.location.href = baseUrl;
+  });
+});
+
 // Open the candidate modal and load candidate data
 function openCandidateModal(candidateId) {
     fetch(`/candidates/candidate-modal/${candidateId}/`)

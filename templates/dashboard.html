@@ -4,8 +4,22 @@
 
 <div class="container hero">
     <!-- Search Bar -->
-    <form class="d-flex align-items-center gap-2 w-100 candidate-search">
-      <input type="text" class="form-control px-4 py-3 border-1 shadow-none" placeholder="Who are you looking for?">
+    <form method="get" class="d-flex align-items-center gap-2 w-100 candidate-search position-relative">
+      <input type="text" 
+             class="form-control px-4 py-3 border-1 shadow-none" 
+             name="q" 
+             id="searchInput"
+             placeholder="Who are you looking for?" 
+             value="{{ request.GET.q }}">
+      
+      <!-- Clear button -->
+      <button type="button" 
+              id="clearSearchBtn" 
+              class="btn btn-sm btn-light position-absolute end-0 me-5 d-none" 
+              style="top: 50%; transform: translateY(-50%);">
+        <i class="fas fa-times"></i>
+      </button>
+    
       <button class="btn button-base scn-button d-flex justify-content-center align-items-center rounded-circle" type="submit">
         <i class="fas fa-search"></i>
       </button>
@@ -17,19 +31,28 @@
   <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
     
     <!-- Sort dropdown -->
-    <select class="form-select w-auto">
-      <option selected>Popular</option>
-      <option value="1">Newest</option>
-      <option value="2">Oldest</option>
-    </select>
+    <form id="sortForm" method="get" class="d-flex align-items-center">
+      {% if request.GET.q %}
+        <input type="hidden" name="q" value="{{ request.GET.q }}">
+      {% endif %}
+      <select name="sort" id="sortSelect" class="form-select w-auto">
+        <option value="" {% if not request.GET.sort %}selected{% endif %}>Default (Newest first)</option>
+        <option value="name" {% if request.GET.sort == 'name' %}selected{% endif %}>Alphabetical (A–Z)</option>
+      </select>
+    </form>
 
     <!-- Tabs -->
     <ul class="nav nav-pills justify-content-center flex-grow-1">
-      <li class="nav-item"><a class="nav-link active" href="#">Web Developer</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">Recruiter</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">Account Manager</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">Sales</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">Support</a></li>
+      <li class="nav-item">
+        <a class="nav-link {% if not active_title %}active{% endif %}" href="{% url 'dashboard' %}">All</a>
+      </li>
+      {% for title in job_titles %}
+      <li class="nav-item">
+        <a class="nav-link {% if active_title == title.job_title %}active{% endif %}" href="?title={{ title.job_title|urlencode }}">
+          {{ title.job_title }}
+        </a>
+      </li>
+      {% endfor %}
     </ul>
 
     <!-- Filters button -->
