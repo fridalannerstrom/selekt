@@ -1,128 +1,144 @@
-# Cleo – Candidate Management for Recruiters
+Selekt is a web application created to help recruiters and HR professionals manage candidates more efficiently.
 
-Cleo is a web-based tool designed to help recruiters structure and store all information about their candidates in one place. The project was developed as part of the Full Stack Developer Diploma and focuses on simple, accessible candidate data management.
+Built as part of my Full-Stack Software Development course, this project allowed me to combine my passion for psychology, recruitment, and technology into a practical, real-world platform.
 
----
+The goal of the application is to provide users with an intuitive and accessible system where they can register, log in, add and manage candidates, and store important information such as CVs, test results, and interview notes. I wanted the system to be simple yet powerful, making it easier to organize, compare, and assess candidates during a recruitment process.
 
-## 🔍 Project Purpose
+Selekt is designed with a clean and professional interface, focusing on usability, responsiveness, and a user-friendly experience.
 
-In many recruitment processes, information about candidates is scattered – resumes in folders, interview notes in Word, test results in PDFs, and feedback in email threads. Cleo solves this by acting as a digital "candidate binder" where everything can be organized and accessed through one interface.
 
----
+# Table of Contents
 
-## 👤 Target Audience
+1. [User Experience (UX)](#user-experience-ux)
+    - [Goals](#goals)
+    - [User Stories](#user-stories)
+    - [Wireframes](#wireframes)
+    - [Graphic Design & Color Scheme](#graphic-design--color-scheme)
+    - [UI/UX Design](#uiux-design)
+2. [Agile Methodology](#agile-methodology)
+3. [Project Overview](#project-overview)
+    - [Introduction](#introduction)
+    - [Workflows](#workflows)
+    - [Database Overview](#database-overview)
+    - [Project Goals](#project-goals)
+    - [Project Structure](#project-structure)
+4. [Features](#features)
+    - [Page Elements](#page-elements)
+    - [Key Features](#key-features)
+    - [Additional Features](#additional-features)
+    - [Feature Changes](#feature-changes)
+    - [Future Features](#future-features)
+5. [Tools and Technologies](#tools-and-technologies)
+    - [Languages](#languages)
+    - [Libraries](#libraries)
+    - [Development Tools](#development-tools)
+    - [Other Tools](#other-tools)
+6. [Testing](#testing)
+    - [Code Validation](#code-validation)
+    - [Browser Compatibility](#browser-compatibility)
+    - [Responsiveness](#responsiveness)
+    - [User Story Testing](#user-story-testing)
+    - [Manual Feature Testing](#manual-feature-testing)
+    - [Known Bugs](#known-bugs)
+    - [Unfixed Bugs](#unfixed-bugs)
+7. [Deployment](#deployment)
+    - [Local Deployment](#local-deployment)
+    - [GitHub Repository](#github-repository)
+    - [Heroku Deployment](#heroku-deployment)
+8. [Credits](#credits)
+    - [Content & Media](#content--media)
+    - [Other Credits](#other-credits)
+    - [Acknowledgements](#acknowledgements)
 
-Recruiters and HR professionals who work with multiple candidates and need a structured, user-friendly tool to manage their pipeline.
-
----
-
-## ⚙️ Included Features
-
-- User login and authentication (admin via Django)
-- Candidate list overview
-- Create candidates via admin
-- Candidate model with:
-  - Name
-  - Email
-  - Notes
-  - Top skills (comma-separated)
-  - Upload date
-- Responsive frontend using Bootstrap
-- Custom static file support (`assets/` folder for CSS/JS)
-- Homepage using `index.html` with routing to candidate views
-
----
-
-## 🛠️ Technologies
-
-- Python 3.12
-- Django 5.2
-- HTML, CSS, Bootstrap 5
-- JavaScript
-- SQLite (local development)
-- Django Templates
-- Git & GitHub
-
----
-
-## 📁 Project Structure
-
-```
-cleo-school/
-├── candidates/           # Django app for candidate data
-├── cleoproject/          # Project configuration
-├── templates/            # HTML templates
-├── assets/               # Custom static files (CSS/JS)
-│   ├── css/
-│   └── js/
-├── db.sqlite3            # Database
-├── manage.py
-└── requirements.txt
-```
 
 ---
 
-## 🚀 Getting Started (Local)
+## User Experience (UX)
 
-1. Clone the repo:
-```bash
-git clone https://github.com/your-username/cleo-school.git
-cd cleo-school
-```
+This section covers the user-centered design process of the project. It includes the project goals, user stories, wireframes, and the overall visual and interactive design decisions.
 
-2. Create and activate a virtual environment:
-```bash
-python -m venv venv
-source venv/Scripts/activate  # Windows
-```
-
-3. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-4. Run migrations and start the server:
-```bash
-python manage.py migrate
-python manage.py runserver
-```
-
-5. Visit `http://127.0.0.1:8000/` in your browser
+- **Goals:** Outlines the main goals for both external users and the site owner.
+- **User Stories:** Lists the user stories collected during the planning phase, prioritized by must-have, should-have, could-have categories.
+- **Wireframes:** Displays initial wireframes or mockups that guided the project layout and structure.
+- **Graphic Design & Color Scheme:** Describes the color palette, typography, and graphical elements used.
+- **UI/UX Design:** Explains how the user interface and experience were designed with usability, accessibility, and intuitive navigation in mind.
 
 ---
 
-## 🔐 Create Superuser (for admin)
+## Agile Methodology
 
-```bash
-python manage.py createsuperuser
-```
+This project followed an Agile approach throughout the development process. GitHub Projects was used to manage and track progress with Epics, User Stories, and Tasks. User Stories were categorized and prioritized using the MoSCoW method (Must-have, Should-have, Could-have, Won't-have). Screenshots and examples of the project board are provided to show how the project evolved over time.
 
 ---
 
-## ✅ Status
+## Project Overview
 
-- [x] Basic project structure ready
-- [x] Authentication and admin
-- [x] Candidate model implemented
-- [x] Bootstrap and custom static files connected
-- [x] Templates for index and candidate list created
-- [ ] Add candidate via frontend form
-- [ ] File uploads (CVs/test results)
-- [ ] Role-based permissions
-- [ ] Testing and README improvements
+This section gives a broad overview of the project and technical structure, specifically tailored for a Django-based web application.
+
+- **Introduction:** A brief explanation of the project purpose and its intended audience.
+- **Workflows:** Describes the user workflows and how users interact with the system (e.g., register, log in, add candidates).
+- **Database Overview:** Summarizes the Django data models and relationships used in the application.
+- **Project Goals:** Details the business logic and goals the application is designed to meet.
+- **Project Structure:** Outlines the Django app structure (apps, models, views, templates) and folder organization.
 
 ---
 
-## 📌 TODO (Next Steps)
+## Features
 
-- Frontend form for adding candidates
-- File uploads for documents (CV, test results)
-- Candidate detail views
-- Filtering/search functionality
-- Testing and deployment readiness
-- Deploy to Render
+This section details the core and additional features of the application.
+
+- **Page Elements:** Describes important static or dynamic page elements across the site.
+- **Key Features:** Highlights the main functionalities, such as CRUD operations, user authentication, and dashboard overview.
+- **Additional Features:** Lists extra features that improve usability or user experience (e.g., search, filtering).
+- **Feature Changes:** Mentions any features that evolved or changed during development.
+- **Future Features:** Lists planned future improvements and new features that were outside the current scope.
 
 ---
+
+## Tools and Technologies
+
+An overview of the core technologies and tools used during the development.
+
+- **Languages:** Lists the main programming languages used (Python, HTML5, CSS3, JavaScript).
+- **Libraries:** Mentions frameworks and libraries, such as Django, Bootstrap, etc.
+- **Development Tools:** Lists tools like GitHub, Gitpod, VS Code, etc.
+- **Other Tools:** Lists additional resources like Heroku, Postgres, Draw.io (for diagrams), etc.
+
+---
+
+## Testing
+
+This section explains the testing procedures applied throughout the project.
+
+- **Code Validation:** Validation of HTML, CSS, JavaScript, and Python (PEP8).
+- **Browser Compatibility:** Testing across multiple browsers to ensure consistent performance.
+- **Responsiveness:** Testing on different screen sizes to ensure mobile responsiveness.
+- **User Story Testing:** Verifying that each user story has been successfully implemented.
+- **Manual Feature Testing:** Describes the manual test cases applied to all major functionalities.
+- **Known Bugs:** Lists bugs identified during testing.
+- **Unfixed Bugs:** Describes any bugs that were identified but not resolved, including reasoning.
+
+---
+
+## Deployment
+
+This section describes the process for deploying the Django application.
+
+- **Local Deployment:** Instructions on how to set up and run the project locally.
+- **GitHub Repository:** Link to the GitHub repository and notes on Git version control practices.
+- **Heroku Deployment:** Detailed steps taken to deploy the project on Heroku, including configuration for environment variables, static files, and database setup.
+
+---
+
+## Credits
+
+Acknowledgements and references for resources, code snippets, or inspiration used in the project.
+
+- **Content & Media:** Credits for images, icons, or other media.
+- **Other Credits:** Acknowledgements for tutorials, code inspiration, or external support.
+- **Acknowledgements:** Personal thanks to anyone who supported the project journey.    
+
+
 
 ## ✍️ Author
 
