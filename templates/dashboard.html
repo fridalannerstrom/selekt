@@ -87,9 +87,14 @@
           </div>
   
           <div class="skill-container">
-            {% for skill in candidate.skill_list %}
-            <span class="skill-badge">{{ skill }}</span>
-          {% endfor %}
+            {% with candidate.skill_list as skills %}
+            {% for skill in skills|slice:":3" %}
+              <span class="skill-badge">{{ skill }}</span>
+            {% endfor %}
+            {% if skills|length > 3 %}
+              <span class="skill-badge">+{{ skills|length|add:"-3" }}</span>
+            {% endif %}
+          {% endwith %}
           </div>
         </div>
   
