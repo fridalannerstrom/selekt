@@ -28,3 +28,12 @@ class Candidate(models.Model):
 
     def skill_list(self):
         return [skill.strip() for skill in self.top_skills.split(",") if skill.strip()]
+
+
+class CandidateFile(models.Model):
+    candidate = models.ForeignKey('Candidate', on_delete=models.CASCADE, related_name='files')
+    file = models.FileField(upload_to='candidate_files/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.file.name

@@ -67,6 +67,34 @@
   </div>
 </div>
 
+<!-- Upload Files Modal -->
+<div class="modal fade" id="uploadFilesModal" tabindex="-1" aria-labelledby="uploadFilesModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="uploadFilesModalLabel">Upload Files</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <form id="fileUploadForm" method="post" enctype="multipart/form-data" action="">
+          {% csrf_token %}
+          <div id="drop-area" class="border rounded p-5 text-center">
+            <p>Drag & drop files here or click to select</p>
+            <input type="file" id="fileElem" name="files" multiple style="display:none">
+            <label for="fileElem" class="btn btn-primary">Select Files</label>
+          </div>
+        
+          <div id="fileList" class="mt-3"></div>
+        
+          <button type="submit" class="btn btn-success mt-3">Upload</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 <script>
 
@@ -113,6 +141,30 @@ function openDeleteModal(candidateId) {
     document.addEventListener('mousedown', handleClickOutside);
   }, 100);
 }
+
+const fileElem = document.getElementById("fileElem");
+const fileList = document.getElementById("fileList");
+
+fileElem.addEventListener("change", function() {
+  fileList.innerHTML = "";
+  for (const file of fileElem.files) {
+    const listItem = document.createElement("p");
+    listItem.textContent = file.name;
+    fileList.appendChild(listItem);
+  }
+});
+
+// Dynamiskt sätt form action och öppna modalen
+document.addEventListener('click', function(e) {
+  if (e.target.classList.contains('open-upload-modal')) {
+    const candidateId = e.target.getAttribute('data-candidate-id');
+    const form = document.getElementById('fileUploadForm');
+    form.action = `/candidates/${candidateId}/upload-files/`;
+    const uploadModal = new bootstrap.Modal(document.getElementById('uploadFilesModal'));
+    uploadModal.show();
+  }
+});
+
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="{% static 'js/script.js' %}"></script>

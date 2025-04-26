@@ -9,4 +9,5 @@ urlpatterns = [
     path('<int:pk>/edit/', views.CandidateUpdateView.as_view(), name='candidate_edit'),  # Redigera kandidat
     path('candidate-modal/<int:pk>/', views.candidate_modal, name='candidate_modal'),
     path('<int:pk>/delete/', views.CandidateDeleteView.as_view(), name='candidate_delete'),
+    path('<int:pk>/upload-files/', views.upload_candidate_files, name='upload_candidate_files'),
 ]

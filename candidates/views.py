@@ -5,13 +5,15 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.urls import reverse_lazy
-from .models import Candidate
+from .models import Candidate, CandidateFile
 from .forms import CandidateForm
 from django.http import Http404
 from django.template.loader import render_to_string
 from django.http import JsonResponse
 from django.contrib import messages
 from django.utils.safestring import mark_safe
+from django.template import RequestContext
+
 
 def index(request):
     if request.user.is_authenticated:
@@ -99,7 +101,7 @@ def candidate_modal(request, pk):
     skills = [skill.strip() for skill in candidate.top_skills.split(',')] if candidate.top_skills else []
     candidate.skill_list = skills  # Lägg till för att kunna loopa
 
-    html = render_to_string('candidate-modal.html', {'candidate': candidate})
+    html = render_to_string('candidate-modal.html', {'candidate': candidate}, request=request)
     return JsonResponse({'html': html})
 
 # Delete candidate
@@ -113,3 +115,13 @@ class CandidateDeleteView(DeleteView):
         if obj.user != self.request.user:
             raise Http404("This candidate does not belong to you.")
         return obj
+
+def upload_candidate_files(request, pk):
+    candidate = get_object_or_404(Candidate, id=pk)
+
+    if request.method == 'POST':
+        for file in request.FILES.getlist('files'):
+            CandidateFile.objects.create(candidate=candidate, file=file)
+        return JsonResponse({'message': 'Files uploaded successfully'})
+
+    return JsonResponse({'error': 'Only POST method allowed'}, status=400)
