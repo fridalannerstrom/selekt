@@ -12,7 +12,7 @@ from django.template.loader import render_to_string
 from django.http import JsonResponse
 from django.contrib import messages
 from django.utils.safestring import mark_safe
-from django.db.models import Q
+from django.db.models import Q, Count
 
 
 def index(request):
@@ -20,25 +20,44 @@ def index(request):
         return redirect('dashboard')
     return render(request, 'index.html')
 
-# Dashboard
 @login_required
 def dashboard(request):
     query = request.GET.get('q', '')
     sort = request.GET.get('sort', '')
+    filter_title = request.GET.get('title', '')  # 👈 NYTT!
 
     candidates = Candidate.objects.filter(user=request.user)
     candidates = filter_candidates(candidates, query)
 
-    # Sortering
+    # Filter
+    if filter_title:
+        candidates = candidates.filter(job_title__iexact=filter_title)
+
+    # Sorting
     if sort == 'name':
         candidates = candidates.order_by('name')
     else:
         candidates = candidates.order_by('-uploaded_at')
 
+    # Top 6 jobbtitles
+    job_titles = (
+        Candidate.objects
+        .filter(user=request.user)
+        .exclude(job_title__isnull=True)
+        .exclude(job_title__exact='')
+        .values('job_title')
+        .annotate(count=Count('job_title'))
+        .order_by('-count')[:6]
+    )
     for candidate in candidates:
         candidate.skill_list = [skill.strip() for skill in candidate.top_skills.split(',')]
 
-    return render(request, 'dashboard.html', {'candidates': candidates})
+    context = {
+        'candidates': candidates,
+        'job_titles': job_titles,
+        'active_title': filter_title, 
+    }
+    return render(request, 'dashboard.html', context)
 
 # Signup
 def signup(request):

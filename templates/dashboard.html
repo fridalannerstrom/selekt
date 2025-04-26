@@ -43,11 +43,16 @@
 
     <!-- Tabs -->
     <ul class="nav nav-pills justify-content-center flex-grow-1">
-      <li class="nav-item"><a class="nav-link active" href="#">Web Developer</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">Recruiter</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">Account Manager</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">Sales</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">Support</a></li>
+      <li class="nav-item">
+        <a class="nav-link {% if not active_title %}active{% endif %}" href="{% url 'dashboard' %}">All</a>
+      </li>
+      {% for title in job_titles %}
+      <li class="nav-item">
+        <a class="nav-link {% if active_title == title.job_title %}active{% endif %}" href="?title={{ title.job_title|urlencode }}">
+          {{ title.job_title }}
+        </a>
+      </li>
+      {% endfor %}
     </ul>
 
     <!-- Filters button -->
