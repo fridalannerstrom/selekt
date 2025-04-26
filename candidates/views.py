@@ -13,8 +13,9 @@ from django.http import JsonResponse
 from django.contrib import messages
 from django.utils.safestring import mark_safe
 
-# Index
 def index(request):
+    if request.user.is_authenticated:
+        return redirect('dashboard')
     return render(request, 'index.html')
 
 # Dashboard

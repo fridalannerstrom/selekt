@@ -3,7 +3,7 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.CandidateListView.as_view(), name='candidate_list'), # Lista alla kandidater
+    path('', views.index, name='index'),
     path('add/', views.CandidateCreateView.as_view(), name='candidate_add'),  # Lägg till kandidat
     path('<int:pk>/', views.CandidateDetailView.as_view(), name='candidate_detail'),  # Se profil
     path('<int:pk>/edit/', views.CandidateUpdateView.as_view(), name='candidate_edit'),  # Redigera kandidat
