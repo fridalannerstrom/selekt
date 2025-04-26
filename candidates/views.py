@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import DetailView, UpdateView, CreateView, ListView, DeleteView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
@@ -10,7 +10,8 @@ from .forms import CandidateForm
 from django.http import Http404
 from django.template.loader import render_to_string
 from django.http import JsonResponse
-from django.shortcuts import get_object_or_404
+from django.contrib import messages
+from django.utils.safestring import mark_safe
 
 # Index
 def index(request):
@@ -85,9 +86,14 @@ class CandidateUpdateView(UpdateView):
         if obj.user != self.request.user:
             raise Http404("This candidate does not belong to you.")
         return obj    
+    
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, mark_safe('Candidate is updated'))
+        return response    
 
     def get_success_url(self):
-        return reverse_lazy('dashboard')
+        return self.request.path
     
 
 # Candidate Modal
