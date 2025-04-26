@@ -322,3 +322,53 @@ Candidate profile layout needs further design polish.
 More data fields (education, work experience, links, etc.) to be added to the model and views.
 
 Delete button currently only available in candidate profile view – not yet in list/grid view.
+
+
+### April 26
+
+Today's Focus:
+Major improvements to the Candidate Form layout, editing experience, and user interactions.
+
+Tasks Completed:
+
+Rebuilt the Candidate Form with a modern WYSIWYG editor for fields like Profile, Work Experience, Education, and Other (using Trumbowyg).
+
+Added skills input with Tagify for a smoother and faster skills management experience.
+
+Redesigned the Links section: planned a dynamic system where users can add multiple link buttons (e.g., GitHub, LinkedIn) easily.
+
+Improved the visual layout of the form:
+
+Main fields (Profile, Work experience, etc.) on the left side
+
+Contact info, Skills, and Links on the right side
+
+Created a new system to display success messages when a candidate is saved (using Django's message framework).
+
+Improved handling of profile image uploads and preview.
+
+Fixed formatting issues when displaying rich text content on the Candidate profile view.
+
+Simplified the backend by moving data parsing logic into forms.py (instead of creating new templatetags).
+
+Made the links system functional (split name:::url pairs cleanly).
+
+Prepared dynamic frontend scripts for adding new skills and links.
+
+Branch:
+
+All work was done in a separate feature branch to keep main branch clean and stable.
+
+Challenges:
+
+Initial issues with WYSIWYG toolbar not displaying (solved by loading Trumbowyg in correct order).
+
+Some minor TemplateSyntaxErrors when simplifying link management without custom tags (solved by moving logic into form class).
+
+Next steps (optional):
+
+Fine-tune the dynamic "add link" system (e.g., edit/remove individual links directly in the form).
+
+Add better validation for links and skills.
+
+Polish the design of the skill and link components.
