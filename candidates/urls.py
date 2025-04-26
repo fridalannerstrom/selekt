@@ -10,4 +10,5 @@ urlpatterns = [
     path('candidate-modal/<int:pk>/', views.candidate_modal, name='candidate_modal'),
     path('<int:pk>/delete/', views.CandidateDeleteView.as_view(), name='candidate_delete'),
     path('<int:pk>/upload-files/', views.upload_candidate_files, name='upload_candidate_files'),
+    path('<int:pk>/files/', views.get_candidate_files, name='get_candidate_files'),
 ]

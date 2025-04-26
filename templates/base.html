@@ -67,34 +67,6 @@
   </div>
 </div>
 
-<!-- Upload Files Modal -->
-<div class="modal fade" id="uploadFilesModal" tabindex="-1" aria-labelledby="uploadFilesModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="uploadFilesModalLabel">Upload Files</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-
-        <form id="fileUploadForm" method="post" enctype="multipart/form-data" action="">
-          {% csrf_token %}
-          <div id="drop-area" class="border rounded p-5 text-center">
-            <p>Drag & drop files here or click to select</p>
-            <input type="file" id="fileElem" name="files" multiple style="display:none">
-            <label for="fileElem" class="btn btn-primary">Select Files</label>
-          </div>
-        
-          <div id="fileList" class="mt-3"></div>
-        
-          <button type="submit" class="btn btn-success mt-3">Upload</button>
-        </form>
-
-      </div>
-    </div>
-  </div>
-</div>
-
 </body>
 <script>
 
@@ -110,6 +82,8 @@ function openCandidateModal(candidateId) {
       document.getElementById("candidateModalContent").innerHTML = data.html;
       const modal = new bootstrap.Modal(document.getElementById('candidateModal'));
       modal.show();
+
+      initUploadScript();
     })
     .catch(error => {
       console.error("Error fetching candidate data:", error);
@@ -142,28 +116,70 @@ function openDeleteModal(candidateId) {
   }, 100);
 }
 
-const fileElem = document.getElementById("fileElem");
-const fileList = document.getElementById("fileList");
+function initUploadScript() {
+    const fileElem = document.getElementById('fileElem');
+    const uploadBtn = document.getElementById('uploadBtn');
+    const selectedFilesList = document.getElementById('selectedFilesList');
+    let selectedFiles = [];
 
-fileElem.addEventListener("change", function() {
-  fileList.innerHTML = "";
-  for (const file of fileElem.files) {
-    const listItem = document.createElement("p");
-    listItem.textContent = file.name;
-    fileList.appendChild(listItem);
-  }
-});
+    if (fileElem && uploadBtn && selectedFilesList) {
+        fileElem.addEventListener('change', function(event) {
+            selectedFiles = Array.from(fileElem.files);
 
-// Dynamiskt sätt form action och öppna modalen
-document.addEventListener('click', function(e) {
-  if (e.target.classList.contains('open-upload-modal')) {
-    const candidateId = e.target.getAttribute('data-candidate-id');
-    const form = document.getElementById('fileUploadForm');
-    form.action = `/candidates/${candidateId}/upload-files/`;
-    const uploadModal = new bootstrap.Modal(document.getElementById('uploadFilesModal'));
-    uploadModal.show();
-  }
-});
+            selectedFilesList.innerHTML = '<h6>Selected Files:</h6>';
+            selectedFiles.forEach(file => {
+                const listItem = document.createElement('p');
+                listItem.textContent = file.name;
+                selectedFilesList.appendChild(listItem);
+            });
+        });
+
+        uploadBtn.addEventListener('click', function(e) {
+          e.preventDefault(); // Lägg till denna rad!!
+
+          if (selectedFiles.length === 0) {
+              alert('Please select files first!');
+              return;
+          }
+
+          const candidateId = document.getElementById('fileUploadArea').getAttribute('data-candidate-id');
+          const url = `/candidates/${candidateId}/upload-files/`;
+
+          const formData = new FormData();
+          selectedFiles.forEach(file => {
+              formData.append('files', file);
+          });
+
+          fetch(url, {
+              method: 'POST',
+              headers: {
+                  'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+              },
+              body: formData
+          })
+          .then(response => response.json())
+          .then(data => {
+              if (data.message) {
+                  console.log('Files uploaded!');
+                  selectedFiles = [];
+                  selectedFilesList.innerHTML = "";
+                  reloadFiles(); // Uppdatera fil-listan
+              }
+          })
+          .catch(error => {
+              console.error('Upload failed', error);
+          });
+      });
+      function reloadFiles() {
+        const candidateId = document.getElementById('fileUploadArea').getAttribute('data-candidate-id');
+        fetch(`/candidates/${candidateId}/files/`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('fileListArea').innerHTML = data.html;
+        });
+    }
+    }
+}
 
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

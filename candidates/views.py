@@ -125,3 +125,9 @@ def upload_candidate_files(request, pk):
         return JsonResponse({'message': 'Files uploaded successfully'})
 
     return JsonResponse({'error': 'Only POST method allowed'}, status=400)
+
+@login_required
+def get_candidate_files(request, pk):
+    candidate = get_object_or_404(Candidate, pk=pk, user=request.user)
+    html = render_to_string('file-list.html', {'candidate': candidate})
+    return JsonResponse({'html': html})
