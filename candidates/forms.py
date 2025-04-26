@@ -21,3 +21,18 @@ class CandidateForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
+
+def get_links(self):
+    """
+    Return the links as a list of dictionaries: [{'name': ..., 'url': ...}]
+    """
+    links = []
+    link_data = self.data.get('links') or self.initial.get('links')
+
+    if link_data:
+        link_items = link_data.split(';;;')
+        for item in link_items:
+            parts = item.split(':::')
+            if len(parts) == 2:
+                links.append({'name': parts[0], 'url': parts[1]})
+    return links

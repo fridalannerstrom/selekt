@@ -91,7 +91,28 @@
         <!-- Links -->
         <div class="card p-3 mb-4">
           <h5 class="card-title fw-bold">Links</h5>
-          <input type="text" name="links" class="form-control" placeholder="LinkedIn, GitHub, Portfolio URLs" value="{{ form.links.value|default_if_none:'' }}">
+
+          <!-- Där knapparna kommer visas -->
+          <div id="linkButtons" class="d-flex flex-column gap-2 mb-3">
+            {% if form.links.value %}
+              {% for link in form.get_links %}
+              <button type="button" class="btn btn-light w-100">{{ link.name }}</button>
+              {% endfor %}
+            {% endif %}
+          </div>
+
+          <!-- Add link form (gömd från början) -->
+          <div id="addLinkForm" class="d-none">
+            <input type="text" id="linkName" class="form-control mb-2" placeholder="Link name">
+            <input type="text" id="linkURL" class="form-control mb-2" placeholder="Link URL">
+            <button type="button" class="btn btn-dark w-100" onclick="addLink()">Add link</button>
+          </div>
+
+          <!-- Liten text + knapp -->
+          <p class="mt-2 small text-primary" style="cursor:pointer;" onclick="showAddLinkForm()">+ Add another link</p>
+
+          <!-- GÖMD input för att skicka alla länkar -->
+          <input type="hidden" id="linksField" name="links" value="{{ form.links.value|default:'' }}">
         </div>
 
         <!-- Save Button -->
@@ -119,6 +140,36 @@
       alert.classList.remove('show');
     }
   }, 3000); // 3 sekunder
+
+  function showAddLinkForm() {
+  document.getElementById('addLinkForm').classList.remove('d-none');
+}
+
+function addLink() {
+  const nameInput = document.getElementById('linkName');
+  const urlInput = document.getElementById('linkURL');
+  const linkName = nameInput.value.trim();
+  const linkURL = urlInput.value.trim();
+
+  if (linkName && linkURL) {
+    // Skapa en ny knapp
+    const newButton = document.createElement('button');
+    newButton.className = 'btn btn-light w-100';
+    newButton.type = 'button';
+    newButton.innerText = linkName;
+    newButton.onclick = () => window.open(linkURL, '_blank');
+    
+    document.getElementById('linkButtons').appendChild(newButton);
+
+    // Uppdatera gömda fältet
+    const hiddenInput = document.getElementById('linksField');
+    hiddenInput.value += `${linkName}:::${linkURL};;;`;
+
+    // Töm inputs
+    nameInput.value = '';
+    urlInput.value = '';
+  }
+}
 
 </script>
 
