@@ -50,7 +50,7 @@
       <div class="tab-pane fade show active" id="about" role="tabpanel">
         <h6 class="fw-bold">Profile</h6>
         {% if candidate.profile_summary %}
-          <p>{{ candidate.profile_summary }}</p>
+          <p>{{ candidate.profile_summary|safe }}</p>
         {% else %}
           <div class="alert alert-warning">
             No profile summary added yet. <a href="{% url 'candidate_edit' candidate.pk %}">Add information here</a>
@@ -70,7 +70,7 @@
 
         <h6 class="fw-bold mt-4">Work Experience</h6>
         {% if candidate.work_experience %}
-          <div class="mb-3">{{ candidate.work_experience }}</div>
+          <div class="mb-3">{{ candidate.work_experience|safe }}</div>
         {% else %}
           <div class="alert alert-warning">
             No work experience added yet. <a href="{% url 'candidate_edit' candidate.pk %}">Add information here</a>
@@ -79,7 +79,7 @@
 
         <h6 class="fw-bold mt-4">Education</h6>
         {% if candidate.education %}
-          <p>{{ candidate.education }}</p>
+          <p>{{ candidate.education|safe }}</p>
         {% else %}
           <div class="alert alert-warning">
             No education information yet. <a href="{% url 'candidate_edit' candidate.pk %}">Add information here</a>
@@ -88,7 +88,7 @@
 
         <h6 class="fw-bold mt-4">Other</h6>
         {% if candidate.other %}
-          <p>{{ candidate.other }}</p>
+          <p>{{ candidate.other|safe }}</p>
         {% else %}
           <div class="alert alert-warning">
             No additional information added yet. <a href="{% url 'candidate_edit' candidate.pk %}">Add information here</a>
