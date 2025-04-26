@@ -1,18 +1,113 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-{% if messages %}
-  <div class="messages">
-    {% for message in messages %}
-      <div class="alert {{ message.tags }}">{{ message }} <a href="{% url 'dashboard' %}" class="text-decoration-none">Go back</a></div>
-    {% endfor %}
-  </div>
-{% endif %}
 
-  <h2>Edit Candidate</h2>
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-success">Save changes</button>
-  </form>
+<div class="container py-5">
+
+  {% if messages %}
+    <div class="messages mb-4">
+      {% for message in messages %}
+        <div class="alert {{ message.tags }}">
+          {{ message }}
+          <a href="{% url 'dashboard' %}" class="text-decoration-none">Go back</a>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <div class="card shadow-sm p-4">
+    <h2 class="mb-4">{{ form.instance.pk|yesno:"Edit Candidate,Add New Candidate" }}</h2>
+
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <!-- Row 1: Name, Email, Phone -->
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label for="id_name" class="form-label">Name</label>
+          {{ form.name }}
+        </div>
+        <div class="col-md-4">
+          <label for="id_email" class="form-label">Email</label>
+          {{ form.email }}
+        </div>
+        <div class="col-md-4">
+          <label for="id_phone_number" class="form-label">Phone Number</label>
+          {{ form.phone_number }}
+        </div>
+      </div>
+
+      <!-- Row 2: Job Title, Location -->
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="id_job_title" class="form-label">Job Title</label>
+          {{ form.job_title }}
+        </div>
+        <div class="col-md-6">
+          <label for="id_location" class="form-label">Location</label>
+          {{ form.location }}
+        </div>
+      </div>
+
+      <!-- Row 3: Profile Summary -->
+      <div class="mb-3">
+        <label for="id_profile_summary" class="form-label">Profile Summary</label>
+        {{ form.profile_summary }}
+      </div>
+
+      <!-- Row 4: Work Experience -->
+      <div class="mb-3">
+        <label for="id_work_experience" class="form-label">Work Experience</label>
+        {{ form.work_experience }}
+      </div>
+
+      <!-- Row 5: Education -->
+      <div class="mb-3">
+        <label for="id_education" class="form-label">Education</label>
+        {{ form.education }}
+      </div>
+
+      <!-- Row 6: Links -->
+      <div class="mb-3">
+        <label for="id_links" class="form-label">Links (LinkedIn, GitHub)</label>
+        {{ form.links }}
+      </div>
+
+      <!-- Row 7: Profile Image -->
+      <div class="mb-3">
+        <label for="id_profile_image" class="form-label">Profile Image</label>
+        {{ form.profile_image }}
+        {% if form.instance.profile_image %}
+          <small class="text-muted d-block mt-2">Current: {{ form.instance.profile_image.name }}</small>
+        {% endif %}
+      </div>
+
+      <!-- Row 8: Other -->
+      <div class="mb-3">
+        <label for="id_other" class="form-label">Other</label>
+        {{ form.other }}
+      </div>
+
+      <!-- Row 9: Notes -->
+      <div class="mb-3">
+        <label for="id_notes" class="form-label">Notes</label>
+        {{ form.notes }}
+      </div>
+
+      <!-- Row 10: Top Skills -->
+      <div class="mb-4">
+        <label for="id_top_skills" class="form-label">Top Skills</label>
+        {{ form.top_skills }}
+        <small class="form-text text-muted">Separate skills by commas (e.g., Communication, Leadership, SQL)</small>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="text-end">
+        <button type="submit" class="btn button-base scn-button">Save Changes</button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
 {% endblock %}
