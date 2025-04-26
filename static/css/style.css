@@ -140,9 +140,9 @@ header {
   color: grey;
 }
 
-.candidate-img {
-  width: 60px;
-  height: 60px;
+.candidate-card img {
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -267,6 +267,13 @@ header {
   left: 10%;
   right: 10%;
   bottom: 0;
+}
+
+.modal-candidate img {
+  width: 20%;
+  max-width: 450px;
+  min-width: 100px;
+  border-radius: 100px;
 }
 
 .candidate-modal-content {

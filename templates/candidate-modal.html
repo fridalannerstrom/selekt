@@ -7,7 +7,9 @@
   <div class="d-flex gap-3 align-items-center">
     {% if candidate.profile_image %}
     <img src="{{ candidate.profile_image.url }}" alt="Profile Image" />
-{% endif %}
+{% else %}
+<img src="/static/images/default-profile.png" alt="Profile Image" />
+        {% endif %}
     <div>
       <h1 class="small-h1">{{ candidate.name }}</h1>
       {% if candidate.job_title %}
