@@ -55,7 +55,7 @@
             {% if candidate.profile_image %}
             <img src="{{ candidate.profile_image.url }}" alt="Profile Image" />
         {% else %}
-        <img src="/static/images/default-profile.png" alt="Profile Image" />
+        <img src="{% static 'media/images/user-pic.png' %}" alt="Profile Image" />
           {% endif %}
             <div>
               <h4 class="mb-0">{{ candidate.name }}</h4>
