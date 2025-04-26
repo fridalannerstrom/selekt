@@ -31,11 +31,15 @@
   <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
     
     <!-- Sort dropdown -->
-    <select class="form-select w-auto">
-      <option selected>Popular</option>
-      <option value="1">Newest</option>
-      <option value="2">Oldest</option>
-    </select>
+    <form id="sortForm" method="get" class="d-flex align-items-center">
+      {% if request.GET.q %}
+        <input type="hidden" name="q" value="{{ request.GET.q }}">
+      {% endif %}
+      <select name="sort" id="sortSelect" class="form-select w-auto">
+        <option value="" {% if not request.GET.sort %}selected{% endif %}>Default (Newest first)</option>
+        <option value="name" {% if request.GET.sort == 'name' %}selected{% endif %}>Alphabetical (A–Z)</option>
+      </select>
+    </form>
 
     <!-- Tabs -->
     <ul class="nav nav-pills justify-content-center flex-grow-1">

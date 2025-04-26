@@ -24,9 +24,16 @@ def index(request):
 @login_required
 def dashboard(request):
     query = request.GET.get('q', '')
+    sort = request.GET.get('sort', '')
+
     candidates = Candidate.objects.filter(user=request.user)
     candidates = filter_candidates(candidates, query)
-    candidates = candidates.order_by('-uploaded_at')[:5]
+
+    # Sortering
+    if sort == 'name':
+        candidates = candidates.order_by('name')
+    else:
+        candidates = candidates.order_by('-uploaded_at')
 
     for candidate in candidates:
         candidate.skill_list = [skill.strip() for skill in candidate.top_skills.split(',')]
