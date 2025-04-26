@@ -41,15 +41,6 @@ def signup(request):
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
 
-# Candidate list
-class CandidateListView(ListView):
-    model = Candidate
-    template_name = 'candidate-list.html'
-    context_object_name = 'candidates'
-
-    def get_queryset(self):
-        return Candidate.objects.filter(user=self.request.user).order_by('-uploaded_at')
-
 # Add candidate
 @method_decorator(login_required, name='dispatch')
 class CandidateCreateView(CreateView):
@@ -79,7 +70,11 @@ class CandidateDetailView(DetailView):
 # Edit candidate
 class CandidateUpdateView(UpdateView):
     model = Candidate
-    fields = ['name', 'email', 'top_skills', 'notes']
+    fields = [
+            'name', 'email', 'job_title', 'profile_summary',
+            'work_experience', 'education', 'location', 'links',
+            'profile_image', 'other', 'notes', 'top_skills'
+        ]
     template_name = 'candidate-form.html'
 
     def get_object(self, queryset=None):

@@ -6,6 +6,14 @@ class Candidate(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     email = models.EmailField()
+    job_title = models.CharField(max_length=100, blank=True)
+    profile_summary = models.TextField(blank=True)
+    work_experience = models.TextField(blank=True)
+    education = models.TextField(blank=True)
+    location = models.CharField(max_length=100, blank=True)
+    links = models.CharField(max_length=255, blank=True, help_text="e.g. LinkedIn, GitHub URLs")
+    profile_image = models.ImageField(upload_to='profile_images/', blank=True, null=True)
+    other = models.TextField(blank=True)
     notes = models.TextField(blank=True)
     top_skills = models.CharField(
         max_length=255,

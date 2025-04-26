@@ -5,5 +5,5 @@ from .models import Candidate
 
 @admin.register(Candidate)
 class CandidateAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'uploaded_at')
+    list_display = ('name', 'email', 'job_title', 'location', 'uploaded_at')
     search_fields = ('name', 'email', 'top_skills')
