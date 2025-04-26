@@ -17,24 +17,25 @@
   </div>
 </div>
 
-<!-- Nav tabs -->
-<ul class="nav nav-tabs mt-4" id="profileTabs" role="tablist">
-  <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="about-tab" data-bs-toggle="tab" data-bs-target="#about" type="button" role="tab">About</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="notes-tab" data-bs-toggle="tab" data-bs-target="#notes" type="button" role="tab">Notes</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="files-tab" data-bs-toggle="tab" data-bs-target="#files" type="button" role="tab">Files</button>
-  </li>
-</ul>
+<div class="row mt-4">
+  <!-- Left column with tabs -->
+  <div class="col-lg-8">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" id="profileTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="about-tab" data-bs-toggle="tab" data-bs-target="#about" type="button" role="tab">About</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="notes-tab" data-bs-toggle="tab" data-bs-target="#notes" type="button" role="tab">Notes</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="files-tab" data-bs-toggle="tab" data-bs-target="#files" type="button" role="tab">Files</button>
+      </li>
+    </ul>
 
-<!-- Tab content -->
-<div class="tab-content mt-4" id="profileTabsContent">
-  <div class="tab-pane fade show active" id="about" role="tabpanel">
-    <div class="row">
-      <div class="col-lg-8">
+    <!-- Tab content -->
+    <div class="tab-content mt-4" id="profileTabsContent">
+      <div class="tab-pane fade show active" id="about" role="tabpanel">
         <h6 class="fw-bold">Profile</h6>
         <p>{{ candidate.profile_summary }}</p>
 
@@ -54,26 +55,27 @@
         <p>{{ candidate.other }}</p>
       </div>
 
-      <div class="col-lg-4">
-        <div class="sidebar">
-          <h6 class="fw-bold">Contact information</h6>
-          <p><strong>Email</strong><br>{{ candidate.email }}</p>
-          <p><strong>Phone</strong><br>{{ candidate.phone_number }}</p>
-          <p><strong>Address</strong><br>{{ candidate.location }}</p>
-          <p><strong>Links</strong><br>{{ candidate.links }}</p>
-        </div>
+      <div class="tab-pane fade" id="notes" role="tabpanel">
+        <h6 class="fw-bold">Notes</h6>
+        <p>{{ candidate.notes }}</p>
+      </div>
+
+      <div class="tab-pane fade" id="files" role="tabpanel">
+        <h6 class="fw-bold">Files</h6>
+        <p>Här kan du visa en lista med uppladdade filer senare.</p>
       </div>
     </div>
   </div>
 
-  <div class="tab-pane fade" id="notes" role="tabpanel">
-    <h6 class="fw-bold">Notes</h6>
-    <p>{{ candidate.notes }}</p>
-  </div>
-
-  <div class="tab-pane fade" id="files" role="tabpanel">
-    <h6 class="fw-bold">Files</h6>
-    <p>Här kan du visa en lista med uppladdade filer (kommer senare)</p>
+  <!-- Right colums: Contact informaiton -->
+  <div class="col-lg-4">
+    <div class="sidebar">
+      <h6 class="fw-bold">Contact Information</h6>
+      <p><strong>Email</strong><br>{{ candidate.email }}</p>
+      <p><strong>Phone</strong><br>{{ candidate.phone_number }}</p>
+      <p><strong>Address</strong><br>{{ candidate.location }}</p>
+      <p><strong>Links</strong><br>{{ candidate.links }}</p>
+    </div>
   </div>
 </div>
 
