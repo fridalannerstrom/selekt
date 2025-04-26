@@ -4,8 +4,8 @@
 
 <div class="container hero">
     <!-- Search Bar -->
-    <form class="d-flex align-items-center gap-2 w-100 candidate-search">
-      <input type="text" class="form-control px-4 py-3 border-1 shadow-none" placeholder="Who are you looking for?">
+    <form method="get" class="d-flex align-items-center gap-2 w-100 candidate-search">
+      <input type="text" class="form-control px-4 py-3 border-1 shadow-none" name="q" placeholder="Who are you looking for?" value="{{ request.GET.q }}">
       <button class="btn button-base scn-button d-flex justify-content-center align-items-center rounded-circle" type="submit">
         <i class="fas fa-search"></i>
       </button>

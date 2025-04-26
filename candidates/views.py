@@ -12,7 +12,7 @@ from django.template.loader import render_to_string
 from django.http import JsonResponse
 from django.contrib import messages
 from django.utils.safestring import mark_safe
-from django.template import RequestContext
+from django.db.models import Q
 
 
 def index(request):
@@ -23,10 +23,12 @@ def index(request):
 # Dashboard
 @login_required
 def dashboard(request):
-    candidates = Candidate.objects.filter(user=request.user).order_by('-uploaded_at')[:5]
+    query = request.GET.get('q', '')
+    candidates = Candidate.objects.filter(user=request.user)
+    candidates = filter_candidates(candidates, query)
+    candidates = candidates.order_by('-uploaded_at')[:5]
 
     for candidate in candidates:
-        # Dela upp strängen till en lista, t.ex. "HTML, CSS" → ["HTML", "CSS"]
         candidate.skill_list = [skill.strip() for skill in candidate.top_skills.split(',')]
 
     return render(request, 'dashboard.html', {'candidates': candidates})
@@ -138,3 +140,22 @@ def delete_candidate_file(request, file_id):
     candidate_file = get_object_or_404(CandidateFile, id=file_id, candidate__user=request.user)
     candidate_file.delete()
     return JsonResponse({'message': 'File deleted successfully'})
+
+
+# Candidate Search
+def candidate_search(request):
+    query = request.GET.get('q', '')
+    candidates = Candidate.objects.all()
+    candidates = filter_candidates(candidates, query)
+
+    return render(request, 'candidate-search.html', {'candidates': candidates})
+
+def filter_candidates(queryset, query):
+    if query:
+        queryset = queryset.filter(
+            Q(name__icontains=query) |
+            Q(job_title__icontains=query) |
+            Q(location__icontains=query) |
+            Q(top_skills__icontains=query)
+        )
+    return queryset
