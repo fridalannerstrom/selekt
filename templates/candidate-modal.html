@@ -5,7 +5,9 @@
 <div class="modal-body">
 <div class="d-flex justify-content-between align-items-start">
   <div class="d-flex gap-3 align-items-center">
-    <img src="https://randomuser.me/api/portraits/women/65.jpg" class="profile-img" alt="Profile">
+    {% if candidate.profile_image %}
+    <img src="{{ candidate.profile_image.url }}" alt="Profile Image" />
+{% endif %}
     <div>
       <h1 class="small-h1">{{ candidate.name }}</h1>
       {% if candidate.job_title %}
