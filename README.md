@@ -298,3 +298,27 @@ This structure helps me:
 #### Design changes
 - The current template is too much "dashboard" and will be to much for this project.. 
 - Decided to build my own template with Bootstrap. Custom CSS etc. Based on sketches in Adobe XD.
+
+#### Features implemented:
+Grid layout of candidate cards with dynamic data from the database, showing name, title, email, and top skills.
+
+Candidate profile modal popup, displaying full profile info (name, contact, skills, notes, etc.) without leaving the page.
+
+Animated slide-up modal from the bottom of the screen – 90% height, 80% width, scrollable.
+
+Separate delete confirmation modal – centered, small, no dark backdrop, and closes when clicking outside.
+
+Delete functionality via JavaScript, correctly linked to each candidate and confirmed before deletion.
+
+Improved routing & user protection – candidate view/edit/delete only accessible to the associated user.
+
+Layout and animation improvements for both modals; responsive positioning and UI polishing.
+
+GitHub comments added to reflect current status and what remains on each relevant user story.
+
+#### Still to do / improve:
+Candidate profile layout needs further design polish.
+
+More data fields (education, work experience, links, etc.) to be added to the model and views.
+
+Delete button currently only available in candidate profile view – not yet in list/grid view.
