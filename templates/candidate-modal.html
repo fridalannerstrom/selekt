@@ -109,6 +109,9 @@
       <!-- Files Tab -->
       <div class="tab-pane fade" id="files" role="tabpanel">
         <h6 class="fw-bold">Files</h6>
+        <div id="flashMessage" class="alert alert-success d-none" role="alert">
+          Files uploaded successfully!
+        </div>
       <div id="fileUploadArea" class="border rounded p-4 text-center mb-4" data-candidate-id="{{ candidate.pk }}">
         <p>Drag & drop files here or click to select</p>
         <input type="file" id="fileElem" name="files[]" multiple style="display:none;">

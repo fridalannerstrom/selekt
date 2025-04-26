@@ -140,7 +140,7 @@ function initUploadScript() {
         });
 
         uploadBtn.addEventListener('click', function(e) {
-          e.preventDefault(); // Lägg till denna rad!!
+          e.preventDefault();
 
           if (selectedFiles.length === 0) {
               alert('Please select files first!');
@@ -165,9 +165,16 @@ function initUploadScript() {
           .then(response => response.json())
           .then(data => {
               if (data.message) {
+                  const flashMessage = document.getElementById('flashMessage');
                   console.log('Files uploaded!');
                   selectedFiles = [];
                   selectedFilesList.innerHTML = "";
+                  uploadBtn.classList.add('d-none');
+                  flashMessage.classList.remove('d-none');
+
+                  setTimeout(() => {
+                      flashMessage.classList.add('d-none');
+                  }, 3000);
                   reloadFiles(); // Uppdatera fil-listan
               }
           })
