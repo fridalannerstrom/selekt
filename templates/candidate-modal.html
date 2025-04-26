@@ -1,13 +1,18 @@
 <div class="modal-header">
   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 </div>
+
 <div class="modal-body">
 <div class="d-flex justify-content-between align-items-start">
   <div class="d-flex gap-3 align-items-center">
     <img src="https://randomuser.me/api/portraits/women/65.jpg" class="profile-img" alt="Profile">
     <div>
       <h1 class="small-h1">{{ candidate.name }}</h1>
-      <small class="text-muted">{{ candidate.job_title }}</small>
+      {% if candidate.job_title %}
+        <small class="text-muted">{{ candidate.job_title }}</small>
+      {% else %}
+        <div class="text-muted">No job title provided.</div>
+      {% endif %}
     </div>
   </div>
   <div class="d-flex gap-2">
@@ -37,27 +42,62 @@
     <div class="tab-content mt-4" id="profileTabsContent">
       <div class="tab-pane fade show active" id="about" role="tabpanel">
         <h6 class="fw-bold">Profile</h6>
-        <p>{{ candidate.profile_summary }}</p>
+        {% if candidate.profile_summary %}
+          <p>{{ candidate.profile_summary }}</p>
+        {% else %}
+          <div class="alert alert-warning">
+            No profile summary added yet. <a href="{% url 'candidate_edit' candidate.pk %}">Add information here</a>
+          </div>
+        {% endif %}
 
-        {% for skill in candidate.skill_list %}
-        <span class="skill-badge">{{ skill }}</span>
-        {% endfor %}
+        <h6 class="fw-bold mt-4">Skills</h6>
+        {% if candidate.top_skills %}
+          {% for skill in candidate.skill_list %}
+          <span class="skill-badge">{{ skill }}</span>
+          {% endfor %}
+        {% else %}
+          <div class="alert alert-warning">
+            No skills added yet. <a href="{% url 'candidate_edit' candidate.pk %}">Add information here</a>
+          </div>
+        {% endif %}
 
         <h6 class="fw-bold mt-4">Work Experience</h6>
-        <div class="mb-3">
-          {{ candidate.work_experience }}
-        </div>
+        {% if candidate.work_experience %}
+          <div class="mb-3">{{ candidate.work_experience }}</div>
+        {% else %}
+          <div class="alert alert-warning">
+            No work experience added yet. <a href="{% url 'candidate_edit' candidate.pk %}">Add information here</a>
+          </div>
+        {% endif %}
 
         <h6 class="fw-bold mt-4">Education</h6>
-        <p>{{ candidate.education }}</p>
+        {% if candidate.education %}
+          <p>{{ candidate.education }}</p>
+        {% else %}
+          <div class="alert alert-warning">
+            No education information yet. <a href="{% url 'candidate_edit' candidate.pk %}">Add information here</a>
+          </div>
+        {% endif %}
 
         <h6 class="fw-bold mt-4">Other</h6>
-        <p>{{ candidate.other }}</p>
+        {% if candidate.other %}
+          <p>{{ candidate.other }}</p>
+        {% else %}
+          <div class="alert alert-warning">
+            No additional information added yet. <a href="{% url 'candidate_edit' candidate.pk %}">Add information here</a>
+          </div>
+        {% endif %}
       </div>
 
       <div class="tab-pane fade" id="notes" role="tabpanel">
         <h6 class="fw-bold">Notes</h6>
-        <p>{{ candidate.notes }}</p>
+        {% if candidate.notes %}
+          <p>{{ candidate.notes }}</p>
+        {% else %}
+          <div class="alert alert-warning">
+            No notes yet. <a href="{% url 'candidate_edit' candidate.pk %}">Add information here</a>
+          </div>
+        {% endif %}
       </div>
 
       <div class="tab-pane fade" id="files" role="tabpanel">
@@ -67,16 +107,39 @@
     </div>
   </div>
 
-  <!-- Right colums: Contact informaiton -->
+  <!-- Right column: Contact information -->
   <div class="col-lg-4">
     <div class="sidebar">
       <h6 class="fw-bold">Contact Information</h6>
-      <p><strong>Email</strong><br>{{ candidate.email }}</p>
-      <p><strong>Phone</strong><br>{{ candidate.phone_number }}</p>
-      <p><strong>Address</strong><br>{{ candidate.location }}</p>
-      <p><strong>Links</strong><br>{{ candidate.links }}</p>
+      <p><strong>Email</strong><br>
+        {% if candidate.email %}
+          {{ candidate.email }}
+        {% else %}
+          <span class="text-muted">No email provided.</span>
+        {% endif %}
+      </p>
+      <p><strong>Phone</strong><br>
+        {% if candidate.phone_number %}
+          {{ candidate.phone_number }}
+        {% else %}
+          <span class="text-muted">No phone number provided.</span>
+        {% endif %}
+      </p>
+      <p><strong>Address</strong><br>
+        {% if candidate.location %}
+          {{ candidate.location }}
+        {% else %}
+          <span class="text-muted">No location provided.</span>
+        {% endif %}
+      </p>
+      <p><strong>Links</strong><br>
+        {% if candidate.links %}
+          {{ candidate.links }}
+        {% else %}
+          <span class="text-muted">No links provided.</span>
+        {% endif %}
+      </p>
     </div>
   </div>
 </div>
-
 </div>
