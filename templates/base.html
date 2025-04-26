@@ -79,11 +79,20 @@ function openCandidateModal(candidateId) {
       return response.json();
     })
     .then(data => {
-      document.getElementById("candidateModalContent").innerHTML = data.html;
-      const modal = new bootstrap.Modal(document.getElementById('candidateModal'));
-      modal.show();
+    document.getElementById("candidateModalContent").innerHTML = data.html;
+    const modal = new bootstrap.Modal(document.getElementById('candidateModal'));
+    modal.show();
 
-      initUploadScript();
+    initUploadScript(); // laddar event listeners etc.
+
+    // ✅ När modalen är öppen, ladda filerna separat:
+    const candidateId = document.getElementById('fileUploadArea').getAttribute('data-candidate-id');
+    fetch(`/candidates/${candidateId}/files/`)
+      .then(response => response.json())
+      .then(data => {
+          document.getElementById('fileListArea').innerHTML = data.html;
+          addDeleteFileListeners(); // viktigt så delete fungerar
+      });
     })
     .catch(error => {
       console.error("Error fetching candidate data:", error);
@@ -188,6 +197,31 @@ function initUploadScript() {
         .then(response => response.json())
         .then(data => {
             document.getElementById('fileListArea').innerHTML = data.html;
+            addDeleteFileListeners(); // (om du har delete)
+        });
+    }
+
+      function addDeleteFileListeners() {
+        document.querySelectorAll('.delete-file-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const fileId = this.getAttribute('data-file-id');
+                if (confirm('Are you sure you want to delete this file?')) {
+                    fetch(`/candidates/file/${fileId}/delete/`, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data.message);
+                        reloadFiles();
+                    })
+                    .catch(error => {
+                        console.error('Delete failed', error);
+                    });
+                }
+            });
         });
     }
     }

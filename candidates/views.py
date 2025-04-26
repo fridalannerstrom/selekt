@@ -131,3 +131,10 @@ def get_candidate_files(request, pk):
     candidate = get_object_or_404(Candidate, pk=pk, user=request.user)
     html = render_to_string('file-list.html', {'candidate': candidate})
     return JsonResponse({'html': html})
+
+
+@login_required
+def delete_candidate_file(request, file_id):
+    candidate_file = get_object_or_404(CandidateFile, id=file_id, candidate__user=request.user)
+    candidate_file.delete()
+    return JsonResponse({'message': 'File deleted successfully'})
