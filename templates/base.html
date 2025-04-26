@@ -132,6 +132,11 @@ function initUploadScript() {
                 listItem.textContent = file.name;
                 selectedFilesList.appendChild(listItem);
             });
+            if (selectedFiles.length > 0) {
+                uploadBtn.classList.remove('d-none');
+            } else {
+                uploadBtn.classList.add('d-none');
+            }
         });
 
         uploadBtn.addEventListener('click', function(e) {
