@@ -5,7 +5,7 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.urls import reverse_lazy
-from .models import Candidate, CandidateFile, Profile
+from .models import Candidate, CandidateFile, Profile, Favorite
 from .forms import CandidateForm
 from django.http import Http404
 from django.template.loader import render_to_string
@@ -14,6 +14,7 @@ from django.contrib import messages
 from django.utils.safestring import mark_safe
 from django.db.models import Q, Count
 from django.contrib.auth import logout
+from django.views.decorators.csrf import csrf_exempt
 
 
 def index(request):
@@ -25,9 +26,15 @@ def index(request):
 def dashboard(request):
     query = request.GET.get('q', '')
     sort = request.GET.get('sort', '')
-    filter_title = request.GET.get('title', '')  # 👈 NYTT!
+    filter_title = request.GET.get('title', '')
+    favorites_only = request.GET.get('sort') == 'favorites'  # NYTT
 
     candidates = Candidate.objects.filter(user=request.user)
+
+    if favorites_only:
+        favorite_ids = Favorite.objects.filter(user=request.user).values_list('candidate_id', flat=True)
+        candidates = candidates.filter(id__in=favorite_ids)
+
     candidates = filter_candidates(candidates, query)
 
     # Filter
@@ -52,6 +59,7 @@ def dashboard(request):
     )
     for candidate in candidates:
         candidate.skill_list = [skill.strip() for skill in candidate.top_skills.split(',')]
+        candidate.is_favorite = Favorite.objects.filter(user=request.user, candidate=candidate).exists()
 
     context = {
         'candidates': candidates,
@@ -230,3 +238,17 @@ def settings_view(request):
         return redirect('settings')
 
     return render(request, 'settings.html', {'user': user, 'profile': profile})
+
+@csrf_exempt
+@login_required
+def toggle_favorite(request, candidate_id):
+    candidate = get_object_or_404(Candidate, id=candidate_id)
+    favorite, created = Favorite.objects.get_or_create(user=request.user, candidate=candidate)
+
+    if not created:
+        favorite.delete()
+        is_favorite = False
+    else:
+        is_favorite = True
+
+    return JsonResponse({'is_favorite': is_favorite})

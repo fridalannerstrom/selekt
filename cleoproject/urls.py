@@ -32,6 +32,7 @@ urlpatterns = [
     path('candidates/', include('candidates.urls')), 
     path('settings/', views.settings_view, name='settings'),
     path('settings/delete/', views.delete_account, name='delete_account'),
+    path('toggle-favorite/<int:candidate_id>/', views.toggle_favorite, name='toggle_favorite'),
 ]
 
 if settings.DEBUG:

@@ -38,6 +38,7 @@
       <select name="sort" id="sortSelect" class="form-select w-auto">
         <option value="" {% if not request.GET.sort %}selected{% endif %}>Default (Newest first)</option>
         <option value="name" {% if request.GET.sort == 'name' %}selected{% endif %}>Alphabetical (A–Z)</option>
+        <option value="favorites" {% if request.GET.sort == 'favorites' %}selected{% endif %}>Favorites</option>
       </select>
     </form>
 
@@ -61,6 +62,8 @@
     </button>
   </div>
 
+  <!-- Candidates -->
+
   {% if candidates %}
   <div class="row g-4">
     {% for candidate in candidates %}
@@ -69,7 +72,9 @@
         
         <!-- Hjärta -->
         <div class="position-absolute top-0 end-0 p-4">
-          <span class="heart-icon"><i class="fa-regular fa-heart"></i></span>
+          <span class="heart-icon" onclick="toggleFavorite({{ candidate.id }}, this)">
+            <i class="fa{% if candidate.is_favorite %}-solid{% else %}-regular{% endif %} fa-heart"></i>
+          </span>
         </div>
   
         <!-- Info -->
