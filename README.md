@@ -466,3 +466,124 @@ Polish the design of the skill and link components.
 - [ ] Provide immediate feedback for all user actions.
 - [ ] Demonstrate high-level "craftsmanship" in code.
 - [ ] Implement strong security features (API error handling, form validation, 404 pages).
+
+
+
+
+# Daily Log - 2025-04-27
+
+## Work Done Today
+
+- **Favorites Feature:**
+  - Implementerat favoritfunktionalitet på kandidatkort och i kandidatmodals.
+  - Synkroniserat så att hjärtsymbol och "Add/Remove from favorites" uppdateras direkt utan att ladda om sidan.
+
+- **Candidate Modal Improvements:**
+  - Lagt till knapp i modalen för att lägga till/ta bort favoriter, med ikon och text.
+  - Fixat att klick på favoriter i modal även uppdaterar hjärtat i dashboardlistan.
+
+- **Candidate Add/Edit:**
+  - Åtgärdat bug där länkar inte sparades vid skapande av ny kandidat.
+  - Säkrat att profilbilder fungerar korrekt även vid mycket information i formuläret.
+
+- **Dashboard Improvements:**
+  - Implementerat sortering på namn och uppladdningsdatum.
+  - Lagt till filter för att visa endast favoriter.
+  - Begränsat tabs till de 5 jobbtitlar som har flest kandidater.
+  - Lagt till pagination med max 12 kandidater per sida.
+
+- **Testing Data:**
+  - Skapat 18 fiktiva kandidater med kompletta profiler för att kunna visa upp plattformen snyggt.
+
+- **Fixes and General Improvements:**
+  - Fixat buggar relaterade till dubbelhantering av favorites.
+  - Förbättrat DOM-hantering och JavaScript för bättre flöde och UX.
+  - Korrigerat problem med URL-hantering i pagineringen.
+
+## Reflections
+Idag har vi byggt klart alla huvudfunktioner för projektet! Plattformen är nu fullt fungerande med favoriter, sökning, filtrering, sortering, pagination och kandidathantering. Nästa steg är att göra de sista UI-justeringarna och skriva klart README och tester.
+
+
+
+### Bug Fixes
+
+#### 1. Profile Image Not Saving When Adding Candidate
+
+**Issue:**  
+When adding a new candidate, the profile image was not saved correctly.  
+The server complained because the uploaded file was missing, and the form was not configured to handle file uploads.
+
+**Solution:**  
+The form needed the attribute `enctype="multipart/form-data"` to handle image uploads correctly.  
+The corrected form setup:
+
+```html
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    ...
+</form>
+```
+
+After this change, both text data and the uploaded image are saved correctly to `/media/profile_images/`.
+
+---
+
+#### 2. Links Not Saving When Adding a Candidate
+
+**Issue:**  
+When adding a new candidate, links were not saved.  
+Links were only saved correctly when editing an existing candidate, not during creation.
+
+**Root Cause:**  
+In the `CandidateCreateView`, link information was not being added to the candidate instance before the form was saved.
+
+**Old code:**
+```python
+@method_decorator(login_required, name='dispatch')
+class CandidateCreateView(CreateView):
+    model = Candidate
+    form_class = CandidateForm
+    template_name = 'candidate-form.html'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('dashboard')
+```
+
+**Solution:**  
+Before calling `super().form_valid(form)`, the links must be combined and attached to `form.instance.links`. Corrected code:
+
+```python
+@method_decorator(login_required, name='dispatch')
+class CandidateCreateView(CreateView):
+    model = Candidate
+    form_class = CandidateForm
+    template_name = 'candidate-form.html'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+
+        link_names = self.request.POST.getlist('link_names')
+        link_urls = self.request.POST.getlist('link_urls')
+
+        combined_links = ''
+        for name, url in zip(link_names, link_urls):
+            if name and url:
+                combined_links += f'{name}:::{url};;;'
+
+        form.instance.links = combined_links  # Attach links before saving
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('dashboard')
+```
+
+**Summary of Link Saving Logic:**
+
+| Action | How links are saved |
+|:---|:---|
+| Create (add candidate) | `form.instance.links = combined_links` **before** saving |
+| Update (edit candidate) | `self.object.links = combined_links` **after** saving |
