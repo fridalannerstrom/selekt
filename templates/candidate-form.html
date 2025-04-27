@@ -98,6 +98,7 @@
                 <div class="d-flex gap-2 mb-2">
                   <input type="text" name="link_names" value="{{ link.name }}" class="form-control" placeholder="Link name">
                   <input type="text" name="link_urls" value="{{ link.url }}" class="form-control" placeholder="Link URL">
+                  <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeLink(this)">✖️</button>
                 </div>
                 {% endfor %}
               {% endif %}
@@ -147,7 +148,7 @@ document.addEventListener('input', function(event) {
 
 function addLinkRow(name = '', url = '') {
   const linkRow = document.createElement('div');
-  linkRow.className = 'd-flex gap-2 mb-2';
+  linkRow.className = 'd-flex align-items-center gap-2 mb-2 link-row';
 
   const nameInput = document.createElement('input');
   nameInput.type = 'text';
@@ -163,15 +164,23 @@ function addLinkRow(name = '', url = '') {
   urlInput.placeholder = 'Link URL';
   urlInput.value = url;
 
+  const removeButton = document.createElement('button');
+  removeButton.type = 'button';
+  removeButton.className = 'btn btn-outline-danger btn-sm';
+  removeButton.innerHTML = '✖️';
+  removeButton.onclick = function() {
+    linkRow.remove();
+  };
+
   linkRow.appendChild(nameInput);
   linkRow.appendChild(urlInput);
+  linkRow.appendChild(removeButton);
 
-  
   document.getElementById('linkFields').appendChild(linkRow);
+
 
   updateHiddenLinks();
 }
-
 
 function updateHiddenLinks() {
   const hiddenInput = document.getElementById('linksField');
@@ -188,6 +197,11 @@ function updateHiddenLinks() {
   });
 
   hiddenInput.value = linksData;
+}
+
+function removeLink(button) {
+  const row = button.parentElement;
+  row.remove();
 }
 
 </script>
