@@ -38,7 +38,6 @@
       <select name="sort" id="sortSelect" class="form-select w-auto">
         <option value="" {% if not request.GET.sort %}selected{% endif %}>Default (Newest first)</option>
         <option value="name" {% if request.GET.sort == 'name' %}selected{% endif %}>Alphabetical (A–Z)</option>
-        <option value="favorites" {% if request.GET.sort == 'favorites' %}selected{% endif %}>Favorites</option>
       </select>
     </form>
 
@@ -57,6 +56,7 @@
     </ul>
 
     <!-- Filters button -->
+     <div>
     {% if request.GET.favorites %}
     <a href="{% url 'dashboard' %}" class="btn btn-dark">
       <i class="fas fa-heart me-1"></i> Showing Favorites
@@ -66,6 +66,8 @@
       <i class="fas fa-heart me-1"></i> Show Favorites
     </a>
   {% endif %}
+  </div>
+</div>
 
   <!-- Candidates -->
 
