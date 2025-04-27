@@ -200,9 +200,6 @@ def filter_candidates(queryset, query):
         )
     return queryset
 
-def settings(request):
-    return render(request, 'settings.html')
-
 @login_required
 def delete_account(request):
     if request.method == 'POST':
@@ -215,15 +212,15 @@ def delete_account(request):
     
 @login_required
 def settings_view(request):
+    user = request.user
+
     if request.method == 'POST':
-        user = request.user
         user.first_name = request.POST.get('first_name', '')
         user.last_name = request.POST.get('last_name', '')
         user.email = request.POST.get('email', '')
-        if 'profile_image' in request.FILES:
-            profile.profile_image = request.FILES['profile_image']
+
         user.save()
         messages.success(request, 'Your settings have been updated successfully!')
         return redirect('settings')
 
-    return render(request, 'settings.html')
+    return render(request, 'settings.html', {'user': user})
