@@ -15,6 +15,7 @@ from django.utils.safestring import mark_safe
 from django.db.models import Q, Count
 from django.contrib.auth import logout
 from django.views.decorators.csrf import csrf_exempt
+from django.core.paginator import Paginator
 
 
 def index(request):
@@ -47,7 +48,7 @@ def dashboard(request):
     else:
         candidates = candidates.order_by('-uploaded_at')
 
-    # Top 6 jobbtitles
+    # Top 5 jobbtitles
     job_titles = (
         Candidate.objects
         .filter(user=request.user)
@@ -55,8 +56,13 @@ def dashboard(request):
         .exclude(job_title__exact='')
         .values('job_title')
         .annotate(count=Count('job_title'))
-        .order_by('-count')[:6]
+        .order_by('-count')[:5]
     )
+
+    paginator = Paginator(candidates, 12)
+    page_number = request.GET.get('page')
+    candidates = paginator.get_page(page_number)
+
     for candidate in candidates:
         candidate.skill_list = [skill.strip() for skill in candidate.top_skills.split(',')]
         candidate.is_favorite = Favorite.objects.filter(user=request.user, candidate=candidate).exists()
