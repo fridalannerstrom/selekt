@@ -160,7 +160,7 @@ function openDeleteCandidateModal(candidateId, name = '') {
     modalEl.querySelector('h5').innerHTML = `Are you sure you want to delete candidate <strong>${name}</strong>?`;
     form.action = `/candidates/${candidateId}/delete/`;
 
-    // Låt Django hantera vanlig submit
+
     const newForm = form.cloneNode(true);
     form.parentNode.replaceChild(newForm, form);
 

@@ -166,13 +166,13 @@ function addLinkRow(name = '', url = '') {
   linkRow.appendChild(nameInput);
   linkRow.appendChild(urlInput);
 
-  // ❗ Lägg till i rätt DIV
+  
   document.getElementById('linkFields').appendChild(linkRow);
 
   updateHiddenLinks();
 }
 
-// 🔥 Ny funktion som bygger om hidden input varje gång!
+
 function updateHiddenLinks() {
   const hiddenInput = document.getElementById('linksField');
   const linkRows = document.querySelectorAll('#linkFields > div');
