@@ -90,6 +90,17 @@ class CandidateCreateView(CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+
+        link_names = self.request.POST.getlist('link_names')
+        link_urls = self.request.POST.getlist('link_urls')
+
+        combined_links = ''
+        for name, url in zip(link_names, link_urls):
+            if name and url:
+                combined_links += f'{name}:::{url};;;'
+
+        form.instance.links = combined_links  
+
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -112,9 +123,9 @@ class CandidateDetailView(DetailView):
 class CandidateUpdateView(UpdateView):
     model = Candidate
     fields = [
-            'name', 'email', 'phone_number', 'job_title', 'profile_summary',
-            'work_experience', 'education', 'location', 'links',
-            'profile_image', 'other', 'notes', 'top_skills'
+        'name', 'email', 'phone_number', 'job_title', 'profile_summary',
+        'work_experience', 'education', 'location', 'links',
+        'profile_image', 'other', 'notes', 'top_skills'
     ]
     template_name = 'candidate-form.html'
 
@@ -123,7 +134,7 @@ class CandidateUpdateView(UpdateView):
         if obj.user != self.request.user:
             raise Http404("This candidate does not belong to you.")
         return obj    
-    
+
     def form_valid(self, form):
         response = super().form_valid(form)
 

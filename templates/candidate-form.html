@@ -70,7 +70,10 @@
           {% else %}
             <img src="{% static 'media/images/user-pic.png' %}" class="rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
           {% endif %}
-          <input type="file" name="profile_image" class="form-control mt-2">
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="profile_image" class="form-control mt-2">
+        </form>
         </div>
 
         <!-- Contact Information -->
