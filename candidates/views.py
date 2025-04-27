@@ -199,3 +199,9 @@ def filter_candidates(queryset, query):
             Q(top_skills__icontains=query)
         )
     return queryset
+
+def settings(request):
+    return render(request, 'settings.html')
+
+def password(request):
+    return render(request, 'change-password.html')

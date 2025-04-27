@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container py-5">
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row">
+
+      {% if messages %}
+      <div class="container mt-3">
+        {% for message in messages %}
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+          </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <!-- Left Side -->
+      <div class="col-md-8">
+
+        <!-- Back link -->
+        <a href="{% url 'dashboard' %}" class="base-link mb-4 d-inline-block">
+          <i class="fa-solid fa-arrow-left"></i> Back to dashboard
+        </a>
+
+        <!-- Username -->
+        <div class="mb-4">
+          <label class="form-label fw-bold">Username</label>
+          <input type="text" class="form-control" name="username" value="{{ user.username }}" readonly>
+        </div>
+
+        <!-- First Name -->
+        <div class="mb-4">
+          <label class="form-label fw-bold">First Name</label>
+          <input type="text" class="form-control" name="first_name" value="{{ user.first_name }}">
+        </div>
+
+        <!-- Last Name -->
+        <div class="mb-4">
+          <label class="form-label fw-bold">Last Name</label>
+          <input type="text" class="form-control" name="last_name" value="{{ user.last_name }}">
+        </div>
+
+        <!-- Email -->
+        <div class="mb-4">
+          <label class="form-label fw-bold">Email</label>
+          <input type="email" class="form-control" name="email" value="{{ user.email }}">
+        </div>
+
+      </div>
+
+      <!-- Right Side -->
+      <div class="col-md-4">
+
+        <!-- Profile Picture -->
+        <div class="card p-3 mb-4 text-center">
+          <h5 class="card-title fw-bold">Profile Picture</h5>
+          {% if user.profile.profile_picture %}
+            <img src="{{ user.profile.profile_picture.url }}" class="rounded-circle mb-3" style="width:150px; height:150px; object-fit:cover;">
+          {% else %}
+            <img src="{% static 'media/images/user-pic.png' %}" class="rounded-circle mb-3" style="width:150px; height:150px; object-fit:cover;">
+          {% endif %}
+          <input type="file" name="profile_picture" class="form-control mt-2">
+        </div>
+
+        <!-- Danger Zone -->
+        <div class="card p-3 border-danger">
+          <h5 class="card-title text-danger fw-bold">Danger Zone</h5>
+          <p class="small text-muted mb-3">Delete your account permanently. This action cannot be undone.</p>
+          <button type="button" class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
+            Delete Account
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Save Changes Button -->
+    <div class="text-end mt-4">
+      <button type="submit" class="btn button-base scn-button">Save Changes</button>
+    </div>
+
+  </form>
+</div>
+
+<!-- Modal for Delete Confirmation -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-4 text-center">
+      <h5>Are you sure you want to delete your account?</h5>
+      <p class="text-muted small">This action cannot be undone.</p>
+      <div class="d-flex justify-content-center gap-2 mt-3">
+        <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+        <form action="#" method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger btn-sm">Yes, delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
