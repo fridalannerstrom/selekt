@@ -28,25 +28,30 @@
         <!-- Username -->
         <div class="mb-4">
           <label class="form-label fw-bold">Username</label>
-          <input type="text" class="form-control" name="username" value="{{ user.username }}" readonly>
+          <input type="text" class="form-control" name="username" value="{{ user.username }}" readonly disabled>
         </div>
 
         <!-- First Name -->
         <div class="mb-4">
-          <label class="form-label fw-bold">First Name</label>
-          <input type="text" class="form-control" name="first_name" value="{{ user.first_name }}">
+            <label class="form-label fw-bold">First Name</label>
+            <input type="text" name="first_name" class="form-control" value="{{ user.first_name|default_if_none:'' }}">
         </div>
-
+        
         <!-- Last Name -->
         <div class="mb-4">
-          <label class="form-label fw-bold">Last Name</label>
-          <input type="text" class="form-control" name="last_name" value="{{ user.last_name }}">
+            <label class="form-label fw-bold">Last Name</label>
+            <input type="text" name="last_name" class="form-control" value="{{ user.last_name|default_if_none:'' }}">
         </div>
 
         <!-- Email -->
         <div class="mb-4">
           <label class="form-label fw-bold">Email</label>
           <input type="email" class="form-control" name="email" value="{{ user.email }}">
+        </div>
+
+        <!-- Save Changes Button -->
+        <div class="text-end mt-4">
+        <button type="submit" class="btn button-base scn-button">Save Changes</button>
         </div>
 
       </div>
@@ -76,11 +81,6 @@
 
       </div>
 
-    </div>
-
-    <!-- Save Changes Button -->
-    <div class="text-end mt-4">
-      <button type="submit" class="btn button-base scn-button">Save Changes</button>
     </div>
 
   </form>

@@ -118,7 +118,6 @@ class CandidateUpdateView(UpdateView):
     def form_valid(self, form):
         response = super().form_valid(form)
 
-        # 💥 Här måste vi hantera länkarna
         link_names = self.request.POST.getlist('link_names')
         link_urls = self.request.POST.getlist('link_urls')
 
@@ -213,3 +212,18 @@ def delete_account(request):
         return redirect('index')  
     else:
         return redirect('settings')
+    
+@login_required
+def settings_view(request):
+    if request.method == 'POST':
+        user = request.user
+        user.first_name = request.POST.get('first_name', '')
+        user.last_name = request.POST.get('last_name', '')
+        user.email = request.POST.get('email', '')
+        if 'profile_image' in request.FILES:
+            profile.profile_image = request.FILES['profile_image']
+        user.save()
+        messages.success(request, 'Your settings have been updated successfully!')
+        return redirect('settings')
+
+    return render(request, 'settings.html')
