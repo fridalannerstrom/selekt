@@ -5,7 +5,7 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.urls import reverse_lazy
-from .models import Candidate, CandidateFile
+from .models import Candidate, CandidateFile, Profile
 from .forms import CandidateForm
 from django.http import Http404
 from django.template.loader import render_to_string
@@ -213,14 +213,20 @@ def delete_account(request):
 @login_required
 def settings_view(request):
     user = request.user
+    profile, created = Profile.objects.get_or_create(user=user)
 
     if request.method == 'POST':
         user.first_name = request.POST.get('first_name', '')
         user.last_name = request.POST.get('last_name', '')
         user.email = request.POST.get('email', '')
 
+        if 'profile_picture' in request.FILES:
+            profile.profile_image = request.FILES['profile_picture']
+
         user.save()
+        profile.save()
+
         messages.success(request, 'Your settings have been updated successfully!')
         return redirect('settings')
 
-    return render(request, 'settings.html', {'user': user})
+    return render(request, 'settings.html', {'user': user, 'profile': profile})
