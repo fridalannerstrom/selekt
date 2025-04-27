@@ -150,8 +150,10 @@ class CandidateUpdateView(UpdateView):
 def candidate_modal(request, pk):
     candidate = get_object_or_404(Candidate, pk=pk, user=request.user)
     skills = [skill.strip() for skill in candidate.top_skills.split(',')] if candidate.top_skills else []
-    candidate.skill_list = skills  # Lägg till för att kunna loopa
+    candidate.skill_list = skills 
 
+    candidate.is_favorite = Favorite.objects.filter(user=request.user, candidate=candidate).exists()
+    
     html = render_to_string('candidate-modal.html', {'candidate': candidate}, request=request)
     return JsonResponse({'html': html})
 

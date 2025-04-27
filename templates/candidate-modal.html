@@ -21,7 +21,13 @@
     </div>
   </div>
   <div class="d-flex gap-2">
-    <button class="btn btn-outline-dark btn-sm">Add to favorites</button>
+    <button id="favoriteButtonModal-{{ candidate.id }}" class="btn btn-outline-dark" onclick="toggleFavorite({{ candidate.id }}, null, this)">
+      {% if candidate.is_favorite %}
+      <i id="heart-modal-{{ candidate.id }}" class="fa{% if candidate.is_favorite %}-solid{% else %}-regular{% endif %} fa-heart"></i> Remove from favorites
+      {% else %}
+      <i id="heart-modal-{{ candidate.id }}" class="fa{% if candidate.is_favorite %}-solid{% else %}-regular{% endif %} fa-heart"></i> Add to favorites
+      {% endif %}
+    </button>
     <a href="{% url 'candidate_edit' candidate.pk %}" class="btn button-base scn-button">Edit information</a>
     <a href="#" class="btn button-base scn-button" onclick="openDeleteCandidateModal({{ candidate.id }}, '{{ candidate.name|escapejs }}')">
       Delete Candidate

@@ -147,24 +147,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Favorites Toggle
   const favoritesToggle = document.getElementById('favoritesToggle');
-    if (favoritesToggle) {
-      favoritesToggle.addEventListener('click', function() {
-        const url = new URL(window.location.href);
-        const params = url.searchParams;
+  if (favoritesToggle) {
+    favoritesToggle.addEventListener('click', function() {
+      const url = new URL(window.location.href);
+      const params = url.searchParams;
 
-        if (params.get('favorites') === 'on') {
-          params.delete('favorites');
-        } else {
-          params.set('favorites', 'on');
-        }
+      if (params.get('favorites') === 'on') {
+        params.delete('favorites');
+      } else {
+        params.set('favorites', 'on');
+      }
 
-        window.location.href = url.pathname + '?' + params.toString();
-      });
-          // 🔥 NYTT: Ändra knappens innehåll direkt vid sidladdning beroende på läge
+      window.location.href = url.pathname + '?' + params.toString();
+    });
+
     const url = new URL(window.location.href);
     const params = url.searchParams;
     if (params.get('favorites') === 'on') {
-      favoritesToggle.innerHTML = '<i class="fas fa-heart"></i> Show Favorites';
+      favoritesToggle.innerHTML = '<i class="fas fa-heart"></i> Show All';
       favoritesToggle.classList.remove('btn-outline-dark');
       favoritesToggle.classList.add('btn-dark');
     } else {
@@ -199,13 +199,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  // Dot menu (klick på prickarna)
   document.querySelectorAll('.dot-menu').forEach(menu => {
     menu.addEventListener('click', function(e) {
       e.stopPropagation();
       const dropdown = this.querySelector('.dot-menu-dropdown');
       dropdown.classList.toggle('d-none');
 
-      // Stäng andra öppna menyer
+      // Stäng alla andra menyer
       document.querySelectorAll('.dot-menu-dropdown').forEach(d => {
         if (d !== dropdown) {
           d.classList.add('d-none');
@@ -214,7 +215,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Klick utanför menyn stänger alla öppna menyer
+  // Klicka utanför stänger menyer
   document.addEventListener('click', function() {
     document.querySelectorAll('.dot-menu-dropdown').forEach(d => d.classList.add('d-none'));
   });
@@ -406,25 +407,55 @@ function addDeleteFileListeners() {
     enforceWhitelist: false
   });
 
-  function toggleFavorite(candidateId, iconElement) {
-    fetch(`/toggle-favorite/${candidateId}/`, {
-        method: 'POST',
-        headers: {
-            'X-CSRFToken': '{{ csrf_token }}',
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.is_favorite) {
-            iconElement.querySelector('i').classList.remove('fa-regular');
-            iconElement.querySelector('i').classList.add('fa-solid');
-        } else {
-            iconElement.querySelector('i').classList.remove('fa-solid');
-            iconElement.querySelector('i').classList.add('fa-regular');
-        }
-    });
-}  
+  function toggleFavorite(candidateId, element = null) {
+  fetch(`/toggle-favorite/${candidateId}/`, {
+    method: 'POST',
+    headers: {
+      'X-CSRFToken': '{{ csrf_token }}',
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    // 1. Uppdatera hjärtat på kortet (dashboard list)
+    const cardHeart = document.getElementById(`heart-card-${candidateId}`);
+    if (cardHeart) {
+      if (data.is_favorite) {
+        cardHeart.classList.remove('fa-regular');
+        cardHeart.classList.add('fa-solid');
+      } else {
+        cardHeart.classList.remove('fa-solid');
+        cardHeart.classList.add('fa-regular');
+      }
+    }
 
+    // 2. Uppdatera hjärtat i modalen
+    const modalHeart = document.getElementById(`heart-modal-${candidateId}`);
+    if (modalHeart) {
+      if (data.is_favorite) {
+        modalHeart.classList.remove('fa-regular');
+        modalHeart.classList.add('fa-solid');
+      } else {
+        modalHeart.classList.remove('fa-solid');
+        modalHeart.classList.add('fa-regular');
+      }
+    }
+
+    // 3. Uppdatera text och färg på knappen i modalen
+    const favoriteButtonModal = document.getElementById(`favoriteButtonModal-${candidateId}`);
+    if (favoriteButtonModal) {
+      if (data.is_favorite) {
+        favoriteButtonModal.classList.add('btn-dark');
+        favoriteButtonModal.classList.remove('btn-outline-dark');
+        favoriteButtonModal.innerHTML = '<i class="fas fa-heart" id="heart-modal-' + candidateId + '"></i> Remove from favorites';
+      } else {
+        favoriteButtonModal.classList.add('btn-outline-dark');
+        favoriteButtonModal.classList.remove('btn-dark');
+        favoriteButtonModal.innerHTML = '<i class="far fa-heart" id="heart-modal-' + candidateId + '"></i> Add to favorites';
+      }
+    }
+  })
+  .catch(error => console.error('Error toggling favorite:', error));
+}
 
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
