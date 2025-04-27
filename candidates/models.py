@@ -28,6 +28,18 @@ class Candidate(models.Model):
 
     def skill_list(self):
         return [skill.strip() for skill in self.top_skills.split(",") if skill.strip()]
+    
+    def get_links(self):
+        """Delar upp links-fältet till [{name:..., url:...}, ...]"""
+        if not self.links:
+            return []
+        parts = self.links.split(';;;')
+        links = []
+        for part in parts:
+            if ':::' in part:
+                name, url = part.split(':::', 1)
+                links.append({'name': name, 'url': url})
+        return links
 
 
 class CandidateFile(models.Model):
@@ -37,3 +49,4 @@ class CandidateFile(models.Model):
 
     def __str__(self):
         return self.file.name
+    

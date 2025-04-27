@@ -91,29 +91,21 @@
         <!-- Links -->
         <div class="card p-3 mb-4">
           <h5 class="card-title fw-bold">Links</h5>
+            <!-- Här kommer alla existerande länkar -->
+            <div id="linkFields">
+              {% if form.instance.links %}
+                {% for link in form.instance.get_links %}
+                <div class="d-flex gap-2 mb-2">
+                  <input type="text" name="link_names" value="{{ link.name }}" class="form-control" placeholder="Link name">
+                  <input type="text" name="link_urls" value="{{ link.url }}" class="form-control" placeholder="Link URL">
+                </div>
+                {% endfor %}
+              {% endif %}
+            </div>
 
-          <!-- Där knapparna kommer visas -->
-          <div id="linkButtons" class="d-flex flex-column gap-2 mb-3">
-            {% if form.links.value %}
-              {% for link in form.get_links %}
-              <button type="button" class="btn btn-light w-100">{{ link.name }}</button>
-              {% endfor %}
-            {% endif %}
+            <!-- Här läggs nya rader till -->
+            <button type="button" class="btn btn-outline-primary mt-2" onclick="addLinkRow()">+ Add another link</button>
           </div>
-
-          <!-- Add link form (gömd från början) -->
-          <div id="addLinkForm" class="d-none">
-            <input type="text" id="linkName" class="form-control mb-2" placeholder="Link name">
-            <input type="text" id="linkURL" class="form-control mb-2" placeholder="Link URL">
-            <button type="button" class="btn btn-dark w-100" onclick="addLink()">Add link</button>
-          </div>
-
-          <!-- Liten text + knapp -->
-          <p class="mt-2 small text-primary" style="cursor:pointer;" onclick="showAddLinkForm()">+ Add another link</p>
-
-          <!-- GÖMD input för att skicka alla länkar -->
-          <input type="hidden" id="linksField" name="links" value="{{ form.links.value|default:'' }}">
-        </div>
 
         <!-- Save Button -->
         <div class="d-grid">
@@ -127,6 +119,14 @@
 </div>
 
 <script>
+
+document.addEventListener('input', function(event) {
+  if (event.target.closest('#linkInputs')) {
+    updateHiddenLinks();
+  }
+});
+
+
   $(document).ready(function() {
       $('#profile_summary').trumbowyg();
       $('#work_experience').trumbowyg();
@@ -145,30 +145,49 @@
   document.getElementById('addLinkForm').classList.remove('d-none');
 }
 
-function addLink() {
-  const nameInput = document.getElementById('linkName');
-  const urlInput = document.getElementById('linkURL');
-  const linkName = nameInput.value.trim();
-  const linkURL = urlInput.value.trim();
+function addLinkRow(name = '', url = '') {
+  const linkRow = document.createElement('div');
+  linkRow.className = 'd-flex gap-2 mb-2';
 
-  if (linkName && linkURL) {
-    // Skapa en ny knapp
-    const newButton = document.createElement('button');
-    newButton.className = 'btn btn-light w-100';
-    newButton.type = 'button';
-    newButton.innerText = linkName;
-    newButton.onclick = () => window.open(linkURL, '_blank');
-    
-    document.getElementById('linkButtons').appendChild(newButton);
+  const nameInput = document.createElement('input');
+  nameInput.type = 'text';
+  nameInput.name = 'link_names';
+  nameInput.className = 'form-control';
+  nameInput.placeholder = 'Link name';
+  nameInput.value = name;
 
-    // Uppdatera gömda fältet
-    const hiddenInput = document.getElementById('linksField');
-    hiddenInput.value += `${linkName}:::${linkURL};;;`;
+  const urlInput = document.createElement('input');
+  urlInput.type = 'text';
+  urlInput.name = 'link_urls';
+  urlInput.className = 'form-control';
+  urlInput.placeholder = 'Link URL';
+  urlInput.value = url;
 
-    // Töm inputs
-    nameInput.value = '';
-    urlInput.value = '';
-  }
+  linkRow.appendChild(nameInput);
+  linkRow.appendChild(urlInput);
+
+  // ❗ Lägg till i rätt DIV
+  document.getElementById('linkFields').appendChild(linkRow);
+
+  updateHiddenLinks();
+}
+
+// 🔥 Ny funktion som bygger om hidden input varje gång!
+function updateHiddenLinks() {
+  const hiddenInput = document.getElementById('linksField');
+  const linkRows = document.querySelectorAll('#linkFields > div');
+  let linksData = '';
+
+  linkRows.forEach(row => {
+    const inputs = row.querySelectorAll('input');
+    const name = inputs[0].value.trim();
+    const url = inputs[1].value.trim();
+    if (name && url) {
+      linksData += `${name}:::${url};;;`;
+    }
+  });
+
+  hiddenInput.value = linksData;
 }
 
 </script>

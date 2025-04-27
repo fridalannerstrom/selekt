@@ -85,6 +85,7 @@ class CandidateCreateView(CreateView):
     def get_success_url(self):
         return reverse_lazy('dashboard')
 
+
 # Candidate detail
 class CandidateDetailView(DetailView):
     model = Candidate
@@ -104,7 +105,7 @@ class CandidateUpdateView(UpdateView):
             'name', 'email', 'phone_number', 'job_title', 'profile_summary',
             'work_experience', 'education', 'location', 'links',
             'profile_image', 'other', 'notes', 'top_skills'
-        ]
+    ]
     template_name = 'candidate-form.html'
 
     def get_object(self, queryset=None):
@@ -115,6 +116,19 @@ class CandidateUpdateView(UpdateView):
     
     def form_valid(self, form):
         response = super().form_valid(form)
+
+        # 💥 Här måste vi hantera länkarna
+        link_names = self.request.POST.getlist('link_names')
+        link_urls = self.request.POST.getlist('link_urls')
+
+        combined_links = ''
+        for name, url in zip(link_names, link_urls):
+            if name and url:
+                combined_links += f'{name}:::{url};;;'
+
+        self.object.links = combined_links
+        self.object.save()
+
         messages.success(self.request, mark_safe('Candidate is updated'))
         return response    
 

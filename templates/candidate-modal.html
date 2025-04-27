@@ -160,11 +160,13 @@
         {% endif %}
       </p>
       <p><strong>Links</strong><br>
-        {% if candidate.links %}
-          {{ candidate.links }}
-        {% else %}
-          <span class="text-muted">No links provided.</span>
-        {% endif %}
+        {% if candidate.links_list %}
+        {% for link in candidate.links_list %}
+          <a href="{{ link.url }}" target="_blank">{{ link.name }}</a><br>
+        {% endfor %}
+      {% else %}
+        <p>No links provided.</p>
+      {% endif %}
       </p>
     </div>
   </div>
