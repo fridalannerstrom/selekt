@@ -115,7 +115,7 @@
             <span class="dot"></span>
           </div>
 
-          <!-- 🔥 Dropdown -->
+          <!-- Dropdown -->
           <div class="dot-menu-dropdown d-none position-absolute end-0 mt-2 p-2 bg-white border rounded shadow-sm">
             <a href="{% url 'candidate_edit' candidate.id %}" class="dropdown-item small">✏️ Edit</a>
             <button type="button" class="dropdown-item small text-danger" onclick="openDeleteCandidateModal({{ candidate.id|escapejs }}, '{{ candidate.name|escapejs }}')">
