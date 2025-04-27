@@ -27,13 +27,12 @@ def dashboard(request):
     query = request.GET.get('q', '')
     sort = request.GET.get('sort', '')
     filter_title = request.GET.get('title', '')
-    favorites_only = request.GET.get('sort') == 'favorites'  # NYTT
+    show_favorites = request.GET.get('favorites') == '1'
 
     candidates = Candidate.objects.filter(user=request.user)
 
-    if favorites_only:
-        favorite_ids = Favorite.objects.filter(user=request.user).values_list('candidate_id', flat=True)
-        candidates = candidates.filter(id__in=favorite_ids)
+    if show_favorites:
+        candidates = candidates.filter(favorite__user=request.user)
 
     candidates = filter_candidates(candidates, query)
 

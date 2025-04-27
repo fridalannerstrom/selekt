@@ -57,10 +57,15 @@
     </ul>
 
     <!-- Filters button -->
-    <button class="btn btn-outline-dark">
-      <i class="fas fa-filter me-1"></i> Filters
-    </button>
-  </div>
+    {% if request.GET.favorites %}
+    <a href="{% url 'dashboard' %}" class="btn btn-dark">
+      <i class="fas fa-heart me-1"></i> Showing Favorites
+    </a>
+  {% else %}
+    <a href="?favorites=1" class="btn btn-outline-dark">
+      <i class="fas fa-heart me-1"></i> Show Favorites
+    </a>
+  {% endif %}
 
   <!-- Candidates -->
 
