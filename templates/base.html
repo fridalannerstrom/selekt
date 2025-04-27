@@ -198,6 +198,27 @@ document.addEventListener('DOMContentLoaded', function() {
       window.location.href = baseUrl;
     });
   }
+
+  document.querySelectorAll('.dot-menu').forEach(menu => {
+    menu.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const dropdown = this.querySelector('.dot-menu-dropdown');
+      dropdown.classList.toggle('d-none');
+
+      // Stäng andra öppna menyer
+      document.querySelectorAll('.dot-menu-dropdown').forEach(d => {
+        if (d !== dropdown) {
+          d.classList.add('d-none');
+        }
+      });
+    });
+  });
+
+  // Klick utanför menyn stänger alla öppna menyer
+  document.addEventListener('click', function() {
+    document.querySelectorAll('.dot-menu-dropdown').forEach(d => d.classList.add('d-none'));
+  });
+
 });
 
 // Open the candidate modal and load candidate data

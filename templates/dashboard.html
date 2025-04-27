@@ -105,11 +105,24 @@
         <!-- Footer -->
         <div class="d-flex justify-content-between align-items-center px-4 pb-3">
           <a href="#" onclick="openCandidateModal({{ candidate.id|escapejs }})" class="btn button-base scn-button read-btn">Read more</a>
-          <div class="dot-menu">
+
+
+        <!-- Dot Menu -->
+        <div class="dot-menu position-relative p-2 rounded" style="cursor: pointer;">
+          <div class="d-flex flex-row justify-content-center align-items-center">
             <span class="dot"></span>
-            <span class="dot"></span>
+            <span class="dot mx-1"></span>
             <span class="dot"></span>
           </div>
+
+          <!-- 🔥 Dropdown -->
+          <div class="dot-menu-dropdown d-none position-absolute end-0 mt-2 p-2 bg-white border rounded shadow-sm">
+            <a href="{% url 'candidate_edit' candidate.id %}" class="dropdown-item small">✏️ Edit</a>
+            <button type="button" class="dropdown-item small text-danger" onclick="openDeleteCandidateModal({{ candidate.id|escapejs }}, '{{ candidate.name|escapejs }}')">
+              🗑️ Remove
+            </button>
+          </div>
+        </div>
         </div>
       </div>
     </div>

@@ -313,3 +313,26 @@ body.modal-open #deleteCandidateModal + .modal-backdrop {
   background-color: transparent !important;
   opacity: 0 !important;
 }
+
+/* CANDIDATE CARD DROPDOWN */
+
+.dot-menu-dropdown {
+  min-width: 120px;
+  z-index: 1000;
+}
+
+.dot-menu-dropdown a,
+.dot-menu-dropdown button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+.dot-menu-dropdown button:hover,
+.dot-menu-dropdown a:hover {
+  background-color: #f8f9fa;
+}
