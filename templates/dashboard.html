@@ -35,6 +35,13 @@
       {% if request.GET.q %}
         <input type="hidden" name="q" value="{{ request.GET.q }}">
       {% endif %}
+      {% if request.GET.title %}
+        <input type="hidden" name="title" value="{{ request.GET.title }}">
+      {% endif %}
+      {% if request.GET.favorites %}
+        <input type="hidden" name="favorites" value="{{ request.GET.favorites }}">
+      {% endif %}
+
       <select name="sort" id="sortSelect" class="form-select w-auto">
         <option value="" {% if not request.GET.sort %}selected{% endif %}>Default (Newest first)</option>
         <option value="name" {% if request.GET.sort == 'name' %}selected{% endif %}>Alphabetical (A–Z)</option>
