@@ -127,38 +127,65 @@
 <script>
 
 document.addEventListener('DOMContentLoaded', function() {
+  // Sortering
   const sortSelect = document.getElementById('sortSelect');
-  sortSelect.addEventListener('change', function() {
-    document.getElementById('sortForm').submit();
-  });
-  
+  if (sortSelect) {
+    sortSelect.addEventListener('change', function() {
+      const url = new URL(window.location.href);
+      const params = url.searchParams;
+
+      const selectedSort = this.value;
+      if (selectedSort) {
+        params.set('sort', selectedSort);
+      } else {
+        params.delete('sort');
+      }
+
+      window.location.href = url.pathname + '?' + params.toString();
+    });
+  }
+
+  // Favorites Toggle
+  const favoritesToggle = document.getElementById('favoritesToggle');
+    if (favoritesToggle) {
+      favoritesToggle.addEventListener('click', function() {
+        const url = new URL(window.location.href);
+        const params = url.searchParams;
+
+        if (params.get('favorites') === 'on') {
+          params.delete('favorites');
+        } else {
+          params.set('favorites', 'on');
+        }
+
+        window.location.href = url.pathname + '?' + params.toString();
+      });
+    }
+
+  // Search and Clear Search
   const searchInput = document.getElementById('searchInput');
   const clearBtn = document.getElementById('clearSearchBtn');
 
-  // Funktion för att visa eller gömma krysset
-  function updateClearButtonVisibility() {
-    if (searchInput.value.length > 0) {
-      clearBtn.classList.remove('d-none');
-    } else {
-      clearBtn.classList.add('d-none');
+  if (searchInput && clearBtn) {
+    function updateClearButtonVisibility() {
+      if (searchInput.value.length > 0) {
+        clearBtn.classList.remove('d-none');
+      } else {
+        clearBtn.classList.add('d-none');
+      }
     }
-  }
 
-  // Lyssna när användaren skriver
-  searchInput.addEventListener('input', updateClearButtonVisibility);
-
-  // Kör direkt när sidan laddas
-  updateClearButtonVisibility();
-
-  // När man klickar på krysset
-  clearBtn.addEventListener('click', function() {
-    searchInput.value = '';
+    searchInput.addEventListener('input', updateClearButtonVisibility);
     updateClearButtonVisibility();
-    
-    // 🔥 NYTT: Redirecta till sidan utan ?q
-    const baseUrl = window.location.href.split('?')[0]; // Ta bort eventuella ?q= i URLen
-    window.location.href = baseUrl;
-  });
+
+    clearBtn.addEventListener('click', function() {
+      searchInput.value = '';
+      updateClearButtonVisibility();
+
+      const baseUrl = window.location.href.split('?')[0];
+      window.location.href = baseUrl;
+    });
+  }
 });
 
 // Open the candidate modal and load candidate data

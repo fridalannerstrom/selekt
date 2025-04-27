@@ -65,10 +65,12 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
         Profile.objects.create(user=instance)
     instance.profile.save()
 
-
 class Favorite(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE)
+    candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE, related_name='favorites')
 
     class Meta:
-        unique_together = ('user', 'candidate')  # Så samma user inte kan favva samma kandidat flera gånger
+        unique_together = ('user', 'candidate')
+
+    def __str__(self):
+        return f"{self.user.username} ❤️ {self.candidate.name}"

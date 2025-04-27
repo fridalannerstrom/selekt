@@ -27,18 +27,19 @@ def dashboard(request):
     query = request.GET.get('q', '')
     sort = request.GET.get('sort', '')
     filter_title = request.GET.get('title', '')
-    show_favorites = request.GET.get('favorites') == '1'
+    show_favorites = request.GET.get('favorites') == 'on'
 
     candidates = Candidate.objects.filter(user=request.user)
-
-    if show_favorites:
-        candidates = candidates.filter(favorite__user=request.user)
-
     candidates = filter_candidates(candidates, query)
 
     # Filter
     if filter_title:
         candidates = candidates.filter(job_title__iexact=filter_title)
+
+    # Favorites
+    if show_favorites:
+        favorite_candidates = Favorite.objects.filter(user=request.user).values_list('candidate_id', flat=True)
+        candidates = candidates.filter(id__in=favorite_candidates)
 
     # Sorting
     if sort == 'name':
@@ -64,6 +65,7 @@ def dashboard(request):
         'candidates': candidates,
         'job_titles': job_titles,
         'active_title': filter_title, 
+        'show_favorites': show_favorites,
     }
     return render(request, 'dashboard.html', context)
 
