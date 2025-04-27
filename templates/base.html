@@ -160,7 +160,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
         window.location.href = url.pathname + '?' + params.toString();
       });
+          // 🔥 NYTT: Ändra knappens innehåll direkt vid sidladdning beroende på läge
+    const url = new URL(window.location.href);
+    const params = url.searchParams;
+    if (params.get('favorites') === 'on') {
+      favoritesToggle.innerHTML = '<i class="fas fa-heart"></i> Show Favorites';
+      favoritesToggle.classList.remove('btn-outline-dark');
+      favoritesToggle.classList.add('btn-dark');
+    } else {
+      favoritesToggle.innerHTML = '<i class="fas fa-heart"></i> Show Favorites';
+      favoritesToggle.classList.add('btn-outline-dark');
+      favoritesToggle.classList.remove('btn-dark');
     }
+  }
 
   // Search and Clear Search
   const searchInput = document.getElementById('searchInput');
