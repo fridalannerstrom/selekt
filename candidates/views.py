@@ -13,6 +13,7 @@ from django.http import JsonResponse
 from django.contrib import messages
 from django.utils.safestring import mark_safe
 from django.db.models import Q, Count
+from django.contrib.auth import logout
 
 
 def index(request):
@@ -203,5 +204,12 @@ def filter_candidates(queryset, query):
 def settings(request):
     return render(request, 'settings.html')
 
-def password(request):
-    return render(request, 'change-password.html')
+@login_required
+def delete_account(request):
+    if request.method == 'POST':
+        user = request.user
+        logout(request) 
+        user.delete()   
+        return redirect('index')  
+    else:
+        return redirect('settings')

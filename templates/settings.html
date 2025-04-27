@@ -88,19 +88,19 @@
 
 <!-- Modal for Delete Confirmation -->
 <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content p-4 text-center">
-      <h5>Are you sure you want to delete your account?</h5>
-      <p class="text-muted small">This action cannot be undone.</p>
-      <div class="d-flex justify-content-center gap-2 mt-3">
-        <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
-        <form action="#" method="post">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-danger btn-sm">Yes, delete</button>
-        </form>
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content p-4 text-center">
+        <h5>Are you sure you want to delete your account?</h5>
+        <p class="text-muted small">This action cannot be undone.</p>
+        <div class="d-flex justify-content-center gap-2 mt-3">
+          <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+          <form action="{% url 'delete_account' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-sm">Yes, delete</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 {% endblock %}

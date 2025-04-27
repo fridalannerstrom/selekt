@@ -4,9 +4,9 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('add/', views.CandidateCreateView.as_view(), name='candidate_add'),  # Lägg till kandidat
-    path('<int:pk>/', views.CandidateDetailView.as_view(), name='candidate_detail'),  # Se profil
-    path('<int:pk>/edit/', views.CandidateUpdateView.as_view(), name='candidate_edit'),  # Redigera kandidat
+    path('add/', views.CandidateCreateView.as_view(), name='candidate_add'), 
+    path('<int:pk>/', views.CandidateDetailView.as_view(), name='candidate_detail'),  
+    path('<int:pk>/edit/', views.CandidateUpdateView.as_view(), name='candidate_edit'),
     path('candidate-modal/<int:pk>/', views.candidate_modal, name='candidate_modal'),
     path('<int:pk>/delete/', views.CandidateDeleteView.as_view(), name='candidate_delete'),
     path('<int:pk>/upload-files/', views.upload_candidate_files, name='upload_candidate_files'),

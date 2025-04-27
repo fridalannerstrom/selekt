@@ -20,6 +20,7 @@ from candidates import views as candidate_views
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
+from candidates import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -30,6 +31,7 @@ urlpatterns = [
     path('dashboard/', candidate_views.dashboard, name='dashboard'),
     path('candidates/', include('candidates.urls')), 
     path('settings/', candidate_views.settings, name='settings'),
+    path('settings/delete/', views.delete_account, name='delete_account'),
 ]
 
 if settings.DEBUG:
