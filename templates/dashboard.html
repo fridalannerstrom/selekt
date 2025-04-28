@@ -136,11 +136,24 @@
           </li>
           {% endif %}
     
-          <li class="page-item disabled">
-            <span class="page-link">
-              Page {{ candidates.number }} of {{ candidates.paginator.num_pages }}
-            </span>
-          </li>
+          {# Smart sidnummer med "..." #}
+          {% for num in candidates.paginator.page_range %}
+            {% if num == 1 or num == candidates.paginator.num_pages or num >= candidates.number|add:"-2" and num <= candidates.number|add:"2" %}
+              {% if num == candidates.number %}
+                <li class="page-item active">
+                  <span class="page-link">{{ num }}</span>
+                </li>
+              {% else %}
+                <li class="page-item">
+                  <a class="page-link" href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ num }}">{{ num }}</a>
+                </li>
+              {% endif %}
+            {% elif num == 2 and candidates.number|add:"-2" > 2 %}
+              <li class="page-item disabled"><span class="page-link">...</span></li>
+            {% elif num == candidates.paginator.num_pages|add:"-1" and candidates.number|add:"2" < candidates.paginator.num_pages|add:"-1" %}
+              <li class="page-item disabled"><span class="page-link">...</span></li>
+            {% endif %}
+          {% endfor %}
     
           {% if candidates.has_next %}
           <li class="page-item">
