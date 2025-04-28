@@ -67,11 +67,16 @@ def dashboard(request):
         candidate.skill_list = [skill.strip() for skill in candidate.top_skills.split(',')]
         candidate.is_favorite = Favorite.objects.filter(user=request.user, candidate=candidate).exists()
 
+    show_welcome_popup = False
+    if hasattr(request.user, 'profile') and request.user.profile.is_first_login:
+        show_welcome_popup = True
+
     context = {
         'candidates': candidates,
         'job_titles': job_titles,
         'active_title': filter_title, 
         'show_favorites': show_favorites,
+        'show_welcome_popup': show_welcome_popup,
     }
     return render(request, 'dashboard.html', context)
 
@@ -272,3 +277,13 @@ def toggle_favorite(request, candidate_id):
         is_favorite = True
 
     return JsonResponse({'is_favorite': is_favorite})
+
+@csrf_exempt
+@login_required
+def dismiss_welcome(request):
+    if request.method == 'POST':
+        if hasattr(request.user, 'profile'):
+            request.user.profile.is_first_login = False
+            request.user.profile.save()
+        return JsonResponse({'status': 'ok'})
+    return JsonResponse({'status': 'error'}, status=400)
