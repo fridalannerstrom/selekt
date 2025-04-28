@@ -24,19 +24,13 @@
     <!-- Trumbowyg CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/trumbowyg@2.25.1/dist/ui/trumbowyg.min.css">
     <!-- Trumbowyg CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/trumbowyg@2.25.1/dist/ui/trumbowyg.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/trumbowyg@2.25.1/dist/ui/trumbowyg.min.css">
 
-<!-- jQuery -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-
-<!-- Trumbowyg JS -->
-<script src="https://cdn.jsdelivr.net/npm/trumbowyg@2.25.1/dist/trumbowyg.min.js"></script>
 </head>
 
 <body class="logged-in-body">
 
   <!-- Header -->
-<!-- Header -->
 <header class="d-flex justify-content-between align-items-center px-4 py-3">
   <a href="{% url 'dashboard' %}" class="text-decoration-none">
     <img src="{% static 'media/images/logo.png' %}" alt="Logo" class="logo-img">
@@ -124,19 +118,30 @@
 </div>
 
 {% if show_welcome_popup %}
-<!-- Bootstrap Modal -->
 <div class="modal fade" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="welcomeModalLabel">Welcome!</h5>
+    <div class="modal-content p-4" style="border-radius: 15px;">
+      
+      <!-- Modal Innehåll -->
+      <div class="d-flex justify-content-center gap-2 mb-3">
+        <img src="{% static 'media/images/welcome-popup-image.png' %}" alt="Welcome Image" style="width: 100%;">
       </div>
-      <div class="modal-body">
-        <p>Welcome to your dashboard! Here you can upload candidates, view CVs, add notes, and use our AI tools to make your recruitment smarter.</p>
+
+      <div class="text-center">
+        <h3 class="mb-3">Welcome to Selekt!</h3>
+        <p class="text-muted mb-4">Discover everything Selekt has to offer by uploading your first candidate.</p>
+
+        <a href="{% url 'candidate_add' %}" class="btn button-base cta-button mb-4" id="uploadFirstCandidateBtn">
+          Upload your first candidate
+        </a>
+
+        <div>
+          <button type="button" class="btn btn-link text-muted small" data-bs-dismiss="modal">
+            Do this later
+          </button>
+        </div>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="dismissWelcomeBtn">Get Started</button>
-      </div>
+
     </div>
   </div>
 </div>
