@@ -587,3 +587,12 @@ class CandidateCreateView(CreateView):
 |:---|:---|
 | Create (add candidate) | `form.instance.links = combined_links` **before** saving |
 | Update (edit candidate) | `self.object.links = combined_links` **after** saving |
+
+
+
+## Pagination Design Choice
+For the candidate listing on the dashboard, I implemented a dynamic pagination system that shows a limited number of page links around the current page, with ellipses (...) indicating skipped ranges.
+
+This choice was made to optimize usability and navigation, especially considering that the system is expected to grow and contain a large number of candidates. Displaying all page numbers at once would clutter the interface and make it harder for users to find their way. Instead, this approach ensures that the pagination stays clean, readable, and efficient even when there are many pages. It always shows the first page, the last page, and a few pages around the current one to allow users to quickly move between nearby pages while still having access to the beginning and end of the list.
+
+This design aligns with common UX best practices for pagination in large datasets and helps provide a better user experience as the platform scales.
