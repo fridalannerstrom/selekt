@@ -122,7 +122,7 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content p-4" style="border-radius: 15px;">
       
-      <!-- Modal Innehåll -->
+      <!-- Modal Content -->
       <div class="d-flex justify-content-center gap-2 mb-3">
         <img src="{% static 'media/images/welcome-popup-image.png' %}" alt="Welcome Image" style="width: 100%;">
       </div>
@@ -136,7 +136,7 @@
         </a>
 
         <div>
-          <button type="button" class="btn btn-link text-muted small" data-bs-dismiss="modal">
+          <button type="button" class="btn btn-link text-muted small" id="doLaterBtn">
             Do this later
           </button>
         </div>
@@ -148,28 +148,45 @@
 
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Welcome message
-    var welcomeModal = new bootstrap.Modal(document.getElementById('welcomeModal'));
+  document.addEventListener('DOMContentLoaded', function() {
+    var welcomeModalElement = document.getElementById('welcomeModal');
+    var welcomeModal = new bootstrap.Modal(welcomeModalElement);
+    var hasDismissed = false;
+    
     welcomeModal.show();
-
-    document.getElementById('dismissWelcomeBtn').addEventListener('click', function() {
-        fetch("{% url 'dismiss_welcome' %}", {
-            method: "POST",
-            headers: {
-                'X-CSRFToken': '{{ csrf_token }}',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({})
-        }).then(response => {
-            if (response.ok) {
-                welcomeModal.hide();
-            }
-        });
+  
+    function dismissWelcome() {
+      if (hasDismissed) return;
+      hasDismissed = true;
+      
+      fetch("{% url 'dismiss_welcome' %}", {
+        method: "POST",
+        headers: {
+          'X-CSRFToken': '{{ csrf_token }}',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({})
+      }).then(response => {
+        if (response.ok) {
+          welcomeModal.hide();
+        }
+      });
+    }
+  
+    document.getElementById('uploadFirstCandidateBtn').addEventListener('click', function() {
+      dismissWelcome();
+      window.location.href = "{% url 'candidate_add' %}";
+    });
+  
+    document.getElementById('doLaterBtn').addEventListener('click', function() {
+      dismissWelcome();
+    });
+  
+    welcomeModalElement.addEventListener('hide.bs.modal', function () {
+      dismissWelcome();
     });
   });
-
-</script>
+  </script>
 {% endif %}
 
 </body>
