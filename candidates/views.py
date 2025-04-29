@@ -165,7 +165,7 @@ class CandidateUpdateView(UpdateView):
 
     def get_success_url(self):
         return self.request.path
-    
+
 
 # Candidate Modal
 @login_required
@@ -175,7 +175,7 @@ def candidate_modal(request, pk):
     candidate.skill_list = skills 
 
     candidate.is_favorite = Favorite.objects.filter(user=request.user, candidate=candidate).exists()
-    
+  
     html = render_to_string('candidate-modal.html', {'candidate': candidate}, request=request)
     return JsonResponse({'html': html})
 
