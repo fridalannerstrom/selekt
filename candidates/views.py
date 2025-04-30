@@ -18,6 +18,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.password_validation import validate_password, ValidationError
+import fitz  # PyMuPDF
 
 
 def index(request):
@@ -316,3 +317,71 @@ def dismiss_welcome(request):
             request.user.profile.save()
         return JsonResponse({'status': 'ok'})
     return JsonResponse({'status': 'error'}, status=400)
+
+# Upload PDF candidates
+@login_required
+def upload_pdf_candidates(request):
+    if request.method == 'GET':
+        return render(request, 'upload-candidate.html')
+
+    elif request.method == 'POST':
+        files = request.FILES.getlist('files')
+        if not files:
+            return JsonResponse({'error': 'No files uploaded'}, status=400)
+
+        results = []
+        for file in files:
+            try:
+                text = extract_text_from_pdf(file)
+                results.append({
+                    'status': 'success',
+                    'filename': file.name,
+                    'text': text  # skicka med all extraherad text!
+                })
+            except Exception as e:
+                results.append({
+                    'status': 'error',
+                    'filename': file.name,
+                    'error': str(e)
+                })
+
+        return JsonResponse({'results': results})
+
+def extract_text_from_pdf(file):
+    text = ""
+    with fitz.open(stream=file.read(), filetype="pdf") as doc:
+        for page in doc:
+            text += page.get_text()
+    return text
+
+
+def call_openai(text):
+    import openai
+    openai.api_key = 'your-api-key-here'
+
+    prompt = f"Extract structured candidate data from the following CV:\n\n{text}"
+    response = openai.ChatCompletion.create(
+        model="gpt-4",
+        messages=[{"role": "user", "content": prompt}],
+        temperature=0.2
+    )
+
+    content = response.choices[0].message.content
+    return eval(content)  # för demo, byt gärna till json.loads(...) om du returnerar JSON
+
+def create_candidate_from_data(data, user):
+    return Candidate.objects.create(
+        user=user,
+        name=data.get('name', 'Unnamed'),
+        email=data.get('email', ''),
+        phone_number=data.get('phone_number', ''),
+        job_title=data.get('job_title', ''),
+        profile_summary=data.get('profile_summary', ''),
+        work_experience=data.get('work_experience', ''),
+        education=data.get('education', ''),
+        location=data.get('location', ''),
+        links=data.get('links', ''),
+        top_skills=", ".join(data.get('top_skills', [])),  # list → str
+        other=data.get('other', ''),
+        notes=data.get('notes', ''),
+    )

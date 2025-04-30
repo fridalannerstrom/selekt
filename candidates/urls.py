@@ -13,4 +13,5 @@ urlpatterns = [
     path('<int:pk>/files/', views.get_candidate_files, name='get_candidate_files'),
     path('file/<int:file_id>/delete/', views.delete_candidate_file, name='delete_candidate_file'),
     path('candidates/search/', views.candidate_search, name='candidate_search'),
+    path('upload/', views.upload_pdf_candidates, name='upload_pdf_candidates'),
 ]
