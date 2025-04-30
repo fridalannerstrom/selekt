@@ -16,6 +16,8 @@ from django.db.models import Q, Count
 from django.contrib.auth import logout
 from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.password_validation import validate_password, ValidationError
 
 
 def index(request):
@@ -243,6 +245,8 @@ def delete_account(request):
     else:
         return redirect('settings')
     
+
+# Settings
 @login_required
 def settings_view(request):
     user = request.user
@@ -255,6 +259,31 @@ def settings_view(request):
 
         if 'profile_picture' in request.FILES:
             profile.profile_image = request.FILES['profile_picture']
+        
+        current_password = request.POST.get('current_password')
+        new_password1 = request.POST.get('new_password1')
+        new_password2 = request.POST.get('new_password2')
+
+        if current_password and new_password1 and new_password2:
+            if not user.check_password(current_password):
+                messages.error(request, 'Current password is incorrect.')
+                return redirect('settings')
+
+            if new_password1 != new_password2:
+                messages.error(request, 'New passwords do not match.')
+                return redirect('settings')
+
+            try:
+                validate_password(new_password1, user=user)
+            except ValidationError as e:
+                for error in e.messages:
+                    messages.error(request, error)
+                return redirect('settings')
+
+            user.set_password(new_password1)
+            update_session_auth_hash(request, user)  # så att man inte loggas ut
+            messages.success(request, 'Your password has been changed successfully.')
+
 
         user.save()
         profile.save()
