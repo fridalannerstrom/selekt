@@ -19,6 +19,13 @@ from django.core.paginator import Paginator
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.password_validation import validate_password, ValidationError
 import fitz  # PyMuPDF
+from openai import OpenAI
+from django.conf import settings
+import env
+import json
+
+import os
+client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 
 def index(request):
@@ -333,10 +340,12 @@ def upload_pdf_candidates(request):
         for file in files:
             try:
                 text = extract_text_from_pdf(file)
+                structured_data = call_openai(text)
                 results.append({
                     'status': 'success',
                     'filename': file.name,
-                    'text': text  # skicka med all extraherad text!
+                    'text': text,
+                    'structured': structured_data
                 })
             except Exception as e:
                 results.append({
@@ -385,3 +394,36 @@ def create_candidate_from_data(data, user):
         other=data.get('other', ''),
         notes=data.get('notes', ''),
     )
+
+
+def call_openai(text):
+    prompt = f"""
+    Extract structured candidate data from this CV text and return a JSON object like this:
+
+    {{
+        "name": "",
+        "email": "",
+        "phone_number": "",
+        "job_title": "",
+        "profile_summary": "",
+        "work_experience": "",
+        "education": "",
+        "location": "",
+        "links": "",
+        "top_skills": ["", "", ""],
+        "other": "",
+        "notes": ""
+    }}
+
+    CV text:
+    {text}
+    """
+
+    response = client.chat.completions.create(
+        model="gpt-4",
+        messages=[{"role": "user", "content": prompt}],
+        temperature=0.3
+    )
+
+    content = response.choices[0].message.content.strip()
+    return json.loads(content)

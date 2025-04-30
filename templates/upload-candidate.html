@@ -23,78 +23,96 @@
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-  const fileElem = document.getElementById("fileElem");
-  const uploadBtn = document.getElementById("uploadBtn");
-  const selectedFilesList = document.getElementById("selectedFilesList");
-  const uploadResults = document.getElementById("uploadResults");
-  let selectedFiles = [];
-
-  fileElem.addEventListener("change", function () {
-    selectedFiles = Array.from(fileElem.files);
-    selectedFilesList.innerHTML = "<h6>Selected Files:</h6>";
-    selectedFiles.forEach(file => {
-      const listItem = document.createElement("p");
-      listItem.textContent = file.name;
-      selectedFilesList.appendChild(listItem);
-    });
-
-    uploadBtn.classList.toggle("d-none", selectedFiles.length === 0);
-  });
-
-  uploadBtn.addEventListener("click", function (e) {
-    e.preventDefault();
-
-    if (selectedFiles.length === 0) {
-      alert("Please select files first!");
-      return;
-    }
-
-    const formData = new FormData();
-    selectedFiles.forEach(file => formData.append("files", file));
-
-    fetch("/candidates/upload/", {
-      method: "POST",
-      headers: {
-        "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]").value,
-      },
-      body: formData,
-    })
-    .then(res => res.json())
-    .then(data => {
-      uploadResults.innerHTML = "";
-      if (data.results) {
-        data.results.forEach(r => {
-          const msg = document.createElement("div");
-          msg.className = `alert alert-${r.status === 'success' ? 'success' : 'danger'}`;
-          if (r.status === 'success') {
-            const title = document.createElement("h5");
-            title.textContent = `✅ Text extracted from ${r.filename}`;
-            title.className = "fw-bold";
-
-            const preview = document.createElement("pre");
-            preview.textContent = r.text || "(No text extracted)";
-            preview.className = "bg-light p-3 border rounded small";
-
-            uploadResults.appendChild(title);
-            uploadResults.appendChild(preview);
-            } else {
-            const errorMsg = document.createElement("div");
-            errorMsg.className = "alert alert-danger";
-            errorMsg.textContent = `❌ Error in ${r.filename}: ${r.error}`;
-            uploadResults.appendChild(errorMsg);
-            }
-          uploadResults.appendChild(msg);
+    document.addEventListener("DOMContentLoaded", function () {
+      const fileElem = document.getElementById("fileElem");
+      const uploadBtn = document.getElementById("uploadBtn");
+      const selectedFilesList = document.getElementById("selectedFilesList");
+      const uploadResults = document.getElementById("uploadResults");
+      let selectedFiles = [];
+    
+      fileElem.addEventListener("change", function () {
+        selectedFiles = Array.from(fileElem.files);
+        selectedFilesList.innerHTML = "<h6>Selected Files:</h6>";
+        selectedFiles.forEach(file => {
+          const listItem = document.createElement("p");
+          listItem.textContent = file.name;
+          selectedFilesList.appendChild(listItem);
         });
-      }
-      selectedFiles = [];
-      selectedFilesList.innerHTML = "";
-      uploadBtn.classList.add("d-none");
-    })
-    .catch(err => {
-      console.error("Upload failed:", err);
+    
+        uploadBtn.classList.toggle("d-none", selectedFiles.length === 0);
+      });
+    
+      uploadBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+    
+        if (selectedFiles.length === 0) {
+          alert("Please select files first!");
+          return;
+        }
+    
+        const formData = new FormData();
+        selectedFiles.forEach(file => formData.append("files", file));
+    
+        fetch("/candidates/upload/", {
+          method: "POST",
+          headers: {
+            "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]").value,
+          },
+          body: formData,
+        })
+        .then(res => res.json())
+        .then(data => {
+          uploadResults.innerHTML = "";
+          if (data.results) {
+            data.results.forEach(r => {
+              const container = document.createElement("div");
+              container.className = "mb-5";
+    
+              if (r.status === 'success') {
+                // Titel
+                const title = document.createElement("h5");
+                title.textContent = `✅ Text extracted from ${r.filename}`;
+                title.className = "fw-bold text-success";
+                container.appendChild(title);
+    
+                // Extraherad text
+                const preview = document.createElement("pre");
+                preview.textContent = r.text || "(No text extracted)";
+                preview.className = "bg-light p-3 border rounded small";
+                container.appendChild(preview);
+    
+                // Structured JSON från OpenAI
+                if (r.structured) {
+                  const structuredTitle = document.createElement("h6");
+                  structuredTitle.textContent = "📦 Structured data:";
+                  container.appendChild(structuredTitle);
+    
+                  const structuredBox = document.createElement("pre");
+                  structuredBox.textContent = JSON.stringify(r.structured, null, 2);
+                  structuredBox.className = "bg-white p-3 border rounded small";
+                  container.appendChild(structuredBox);
+                }
+    
+              } else {
+                const errorMsg = document.createElement("div");
+                errorMsg.className = "alert alert-danger";
+                errorMsg.textContent = `❌ Error in ${r.filename}: ${r.error}`;
+                container.appendChild(errorMsg);
+              }
+    
+              uploadResults.appendChild(container);
+            });
+          }
+    
+          // Reset UI
+          selectedFiles = [];
+          selectedFilesList.innerHTML = "";
+          uploadBtn.classList.add("d-none");
+        })
+        .catch(err => {
+          console.error("Upload failed:", err);
+        });
+      });
     });
-  });
-});
-</script>
+    </script>
 {% endblock %}
