@@ -1,11 +1,30 @@
-core.Microsoft*
-core.mongo*
-core.python*
-env.py
+# Python cache files
 __pycache__/
 *.py[cod]
-node_modules/
-.github/
-cloudinary_python.txt
-.venv
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+*.env
 env.py
+
+# IDE/editor settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Node.js dependencies
+node_modules/
+
+# GitHub folder
+.github/
+
+# Other files
+cloudinary_python.txt
