@@ -19,7 +19,6 @@ class Candidate(models.Model):
     other = models.TextField(blank=True)
     notes = models.TextField(blank=True)
     top_skills = models.CharField(
-        max_length=255,
         blank=True,
         help_text="Write top skills separated by commas (e.g. Communication, Leadership, SQL)"
     )
