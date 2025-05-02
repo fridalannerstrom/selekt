@@ -28,6 +28,9 @@ from django.views.generic.edit import FormView
 from django.urls import reverse
 from django.utils.http import urlencode
 from .forms import CandidateForm
+import logging
+
+logger = logging.getLogger(__name__)
 
 import os
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
@@ -351,11 +354,14 @@ def upload_pdf_candidates(request):
                 'structured': structured_data
             }
         except Exception as e:
-            result = {
-                'status': 'error',
-                'filename': file.name,
-                'error': str(e)
-            }
+            logger.error(f"OpenAI or parsing error: {e}")
+            return JsonResponse({
+                'results': [{
+                    'status': 'error',
+                    'filename': file.name,
+                    'error': "Something went wrong while analyzing the CV. Please try again with another file."
+                }]
+            }, status=500)
 
         return JsonResponse({'results': [result]})
 
