@@ -84,7 +84,7 @@
           {% endif %}
           <h6 class="fw-bold mt-4">Skills</h6>
           {% if candidate.top_skills %}
-            {% for skill in candidate.skill_list %}<span class="skill-badge">{{ skill }}</span>{% endfor %}
+            {% for skill in candidate.skill_list %}<span class="skill-badge-modal">{{ skill }}</span>{% endfor %}
           {% else %}
             <div class="alert alert-warning">
               No skills added yet. <a href="{% url 'candidate_edit' candidate.pk %}">Add information here</a>

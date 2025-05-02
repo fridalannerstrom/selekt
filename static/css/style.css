@@ -172,6 +172,13 @@ header {
   flex-shrink: 0;
 }
 
+.skill-badge-modal {
+  background-color: #fef6ed;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+}
+
 .skill-badge-extra {
   background-color: #fce5cd;
   font-weight: 500;
