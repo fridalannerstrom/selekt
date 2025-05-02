@@ -86,12 +86,10 @@
 
           <div class="skill-container">
             {% with candidate.skill_list as skills %}
-            {% for skill in skills|slice:":3" %}
-            <span class="skill-badge">{{ skill }}</span>
-            {% endfor %}
-            {% if skills|length > 3 %}
-            <span class="skill-badge">+{{ skills|length|add:"-3" }}</span>
-            {% endif %}
+              {% for skill in skills %}
+                <span class="skill-badge">{{ skill }}</span>
+              {% endfor %}
+              <span class="skill-badge skill-badge-extra" style="display: none;"></span>
             {% endwith %}
           </div>
         </div>
@@ -172,5 +170,37 @@
 </div>
 
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const containers = document.querySelectorAll('.skill-container');
+  
+    containers.forEach(container => {
+      const badges = Array.from(container.querySelectorAll('.skill-badge:not(.skill-badge-extra)'));
+      const plusBadge = container.querySelector('.skill-badge-extra');
+  
+      let totalWidth = 0;
+      const containerWidth = container.clientWidth;
+      let visibleCount = 0;
+  
+      badges.forEach((badge, index) => {
+        badge.style.display = 'inline-block';
+        const width = badge.offsetWidth + 8; // 8px = approx gap
+        if (totalWidth + width < containerWidth - 40) { // reserve ~40px for +X
+          totalWidth += width;
+          visibleCount++;
+        } else {
+          badge.style.display = 'none';
+        }
+      });
+  
+      const hiddenCount = badges.length - visibleCount;
+      if (hiddenCount > 0) {
+        plusBadge.textContent = `+${hiddenCount}`;
+        plusBadge.style.display = 'inline-block';
+      }
+    });
+  });
+  </script>
 
 {% endblock %}

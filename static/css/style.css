@@ -154,13 +154,27 @@ header {
   object-fit: cover;
 }
 
+.skill-container {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.4rem;
+  overflow: hidden;
+  max-width: 100%;
+  align-items: center;
+}
+
 .skill-badge {
-  background-color: #F6EEE3;
+  background-color: #fef6ed;
+  padding: 4px 10px;
+  border-radius: 20px;
   font-size: 0.75rem;
-  padding: 4px 8px;
-  border-radius: 12px;
-  margin-right: 4px;
-  border: 1px solid #EBD9C1;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.skill-badge-extra {
+  background-color: #fce5cd;
+  font-weight: 500;
 }
 
 .read-btn {
