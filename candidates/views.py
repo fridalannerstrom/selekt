@@ -401,19 +401,20 @@ def create_candidate_from_data(data, user):
 
 def call_openai(text):
     prompt = f"""
-    Extract structured candidate data from this CV text and return a JSON object like this:
+    You are an expert AI recruiter. Your task is to extract structured candidate data from the following CV text. 
+    Please return a JSON object in this format:
 
     {{
         "name": "",
         "email": "",
         "phone_number": "",
-        "job_title": "",
-        "profile_summary": "",
+        "job_title": "",       # Suggest a relevant title if not clearly stated
+        "profile_summary": "", # Write a short professional summary based on the CV content
         "work_experience": "",
         "education": "",
         "location": "",
         "links": "",
-        "top_skills": ["", "", ""],
+        "top_skills": "",      # Only list key skills as a comma-separated string (e.g. "Communication, Leadership, SQL")
         "other": "",
         "notes": ""
     }}
