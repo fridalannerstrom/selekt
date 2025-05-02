@@ -23,138 +23,64 @@
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const fileElem = document.getElementById("fileElem");
-      const uploadBtn = document.getElementById("uploadBtn");
-      const selectedFilesList = document.getElementById("selectedFilesList");
-      const uploadResults = document.getElementById("uploadResults");
-      let selectedFiles = [];
-    
-      fileElem.addEventListener("change", function () {
-        const selectedFile = fileElem.files[0];
-        if (!selectedFile) return;
-
-        const formData = new FormData();
-        formData.append("file", selectedFile);
-
-        fetch("/candidates/upload/", {
-          method: "POST",
-          headers: {
-            "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value,
-          },
-          body: formData,
-        })
-        .then(res => res.json())
-        .then(data => {
-          if (data.results && data.results[0].structured) {
-            return fetch("/candidates/create-from-openai/", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value
-              },
-              body: JSON.stringify(data.results[0].structured)
-            });
-          } else {
-            throw new Error("No structured data returned from OpenAI");
-          }
-        })
-        .then(res => res.json())
-        .then(data => {
-          if (data.redirect_url) {
-            window.location.href = data.redirect_url;
-          }
-        })
-        .catch(err => {
-          alert("Error: " + err.message);
-          console.error(err);
-        });
-      });
-    
-      uploadBtn.addEventListener("click", function (e) {
-        e.preventDefault();
-    
-        if (selectedFiles.length === 0) {
-          alert("Please select files first!");
-          return;
+  document.addEventListener("DOMContentLoaded", function () {
+    const fileElem = document.getElementById("fileElem");
+    const uploadArea = document.getElementById("fileUploadArea");
+  
+    fileElem.addEventListener("change", function () {
+      const selectedFile = fileElem.files[0];
+      if (!selectedFile) return;
+  
+      // Visa laddare direkt i uppladdningsrutan
+      uploadArea.innerHTML = `
+        <div class="text-center py-4">
+          <img src="/static/media/images/selekt-loading.gif" alt="Loading..." style="width: 70px;">
+          <p class="mt-3 fw-bold">Please while we scan your PDF for candidate details.</p>
+        </div>
+      `;
+  
+      const formData = new FormData();
+      formData.append("file", selectedFile);
+  
+      fetch("/candidates/upload/", {
+        method: "POST",
+        headers: {
+          "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value,
+        },
+        body: formData,
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.results && data.results[0].structured) {
+          return fetch("/candidates/create-from-openai/", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value
+            },
+            body: JSON.stringify(data.results[0].structured)
+          });
+        } else {
+          throw new Error("No structured data returned from OpenAI");
         }
-    
-        const formData = new FormData();
-        selectedFiles.forEach(file => formData.append("files", file));
-    
-        fetch("/candidates/upload/", {
-          method: "POST",
-          headers: {
-            "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]").value,
-          },
-          body: formData,
-        })
-        .then(res => res.json())
-        .then(data => {
-          uploadResults.innerHTML = "";
-          if (data.results) {
-            data.results.forEach(r => {
-              const container = document.createElement("div");
-              container.className = "mb-5";
-    
-              if (r.status === 'success') {
-                // Titel
-                const title = document.createElement("h5");
-                title.textContent = `✅ Text extracted from ${r.filename}`;
-                title.className = "fw-bold text-success";
-                container.appendChild(title);
-    
-                // Extraherad text
-                const preview = document.createElement("pre");
-                preview.textContent = r.text || "(No text extracted)";
-                preview.className = "bg-light p-3 border rounded small";
-                container.appendChild(preview);
-    
-                // Structured JSON från OpenAI
-                if (r.structured) {
-                  const redirectBtn = document.createElement("button");
-                  redirectBtn.className = "btn btn-primary mt-3";
-                  redirectBtn.textContent = "Create Candidate from this data";
-                  redirectBtn.onclick = () => {
-                    fetch("/candidates/create-from-openai/", {
-                      method: "POST",
-                      headers: {
-                        "Content-Type": "application/json",
-                        "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value
-                      },
-                      body: JSON.stringify(r.structured)
-                    })
-                    .then(res => res.json())
-                    .then(data => {
-                      if (data.redirect_url) {
-                        window.location.href = data.redirect_url;
-                      }
-                    });
-                  };
-
-  container.appendChild(redirectBtn);
-}
-    
-              } else {
-                const errorMsg = document.createElement("div");
-                errorMsg.className = "alert alert-danger";
-                errorMsg.textContent = `❌ Error in ${r.filename}: ${r.error}`;
-                container.appendChild(errorMsg);
-              }
-    
-              uploadResults.appendChild(container);
-            });
-          }
-    
-          // Reset UI
-          selectedFiles = [];
-          selectedFilesList.innerHTML = "";
-          uploadBtn.classList.add("d-none");
-        })
-        .catch(err => {
-          console.error("Upload failed:", err);
-        });
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.redirect_url) {
+          window.location.href = data.redirect_url;
+        }
+      })
+      .catch(err => {
+        console.error("Upload or parsing failed:", err);
+        uploadArea.innerHTML = `
+          <div class="alert alert-danger text-center p-4">
+            ❌ Woops, something went wrong.<br>Please make sure you upload a PDF file.<br>
+          </div>
+          <label for="fileElem" class="btn btn-primary mt-3">Choose a new file</label>
+          <input type="file" id="fileElem" name="file" style="display:none">
+        `;
       });
     });
-    </script>
+  });
+  </script>
 {% endblock %}
