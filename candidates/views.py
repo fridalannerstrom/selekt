@@ -420,7 +420,10 @@ def call_openai(text):
         "education": "",
         "location": "",
         "links": "",
-        "top_skills": "",      # Only list key skills as a comma-separated string (e.g. "Communication, Leadership, SQL")
+        "top_skills": "",      
+        # Only return short, keyword-style skills as a comma-separated string.
+        Prioritize the shortest and most relevant terms first (e.g. “SQL, Python, UX”).
+        Avoid full sentences or descriptive phrases.
         "other": "",
         "notes": ""
     }}
