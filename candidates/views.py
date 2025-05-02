@@ -408,7 +408,7 @@ def call_openai(text):
         "name": "",
         "email": "",
         "phone_number": "",
-        "job_title": "",       # Suggest a relevant title if not clearly stated
+        "job_title": "",       # Suggest a relevant title if not clearly stated. Make it short and relevant.
         "profile_summary": "", # Write a short professional summary based on the CV content
         "work_experience": "",
         "education": "",
