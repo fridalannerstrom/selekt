@@ -14,4 +14,6 @@ urlpatterns = [
     path('file/<int:file_id>/delete/', views.delete_candidate_file, name='delete_candidate_file'),
     path('candidates/search/', views.candidate_search, name='candidate_search'),
     path('upload/', views.upload_pdf_candidates, name='upload_pdf_candidates'),
+    path('create-from-openai/', views.create_candidate_from_openai, name='create_candidate_from_openai'),
+    path('new-from-prompt/', views.CandidateCreatePrefilledView.as_view(), name='candidate_create_with_prefill'),
 ]

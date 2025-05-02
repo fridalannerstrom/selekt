@@ -23,6 +23,11 @@ from openai import OpenAI
 from django.conf import settings
 import env
 import json
+from django.views.decorators.http import require_http_methods
+from django.views.generic.edit import FormView
+from django.urls import reverse
+from django.utils.http import urlencode
+from .forms import CandidateForm
 
 import os
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
@@ -332,29 +337,27 @@ def upload_pdf_candidates(request):
         return render(request, 'upload-candidate.html')
 
     elif request.method == 'POST':
-        files = request.FILES.getlist('files')
-        if not files:
-            return JsonResponse({'error': 'No files uploaded'}, status=400)
+        file = request.FILES.get('file')
+        if not file:
+            return JsonResponse({'error': 'No file uploaded'}, status=400)
 
-        results = []
-        for file in files:
-            try:
-                text = extract_text_from_pdf(file)
-                structured_data = call_openai(text)
-                results.append({
-                    'status': 'success',
-                    'filename': file.name,
-                    'text': text,
-                    'structured': structured_data
-                })
-            except Exception as e:
-                results.append({
-                    'status': 'error',
-                    'filename': file.name,
-                    'error': str(e)
-                })
+        try:
+            text = extract_text_from_pdf(file)
+            structured_data = call_openai(text)
+            result = {
+                'status': 'success',
+                'filename': file.name,
+                'text': text,
+                'structured': structured_data
+            }
+        except Exception as e:
+            result = {
+                'status': 'error',
+                'filename': file.name,
+                'error': str(e)
+            }
 
-        return JsonResponse({'results': results})
+        return JsonResponse({'results': [result]})
 
 def extract_text_from_pdf(file):
     text = ""
@@ -427,3 +430,45 @@ def call_openai(text):
 
     content = response.choices[0].message.content.strip()
     return json.loads(content)
+
+@login_required
+@require_http_methods(["POST"])
+def create_candidate_from_openai(request):
+    try:
+        data = json.loads(request.body)
+    except json.JSONDecodeError:
+        return JsonResponse({'error': 'Invalid JSON'}, status=400)
+
+    # Spara datan i sessionen så vi kan använda den i formuläret
+    request.session['prefill_candidate'] = data
+    return JsonResponse({'redirect_url': reverse('candidate_create_with_prefill')})
+
+class CandidateCreatePrefilledView(CreateView):
+    model = Candidate
+    form_class = CandidateForm
+    template_name = 'candidate-form.html'
+
+    def get_initial(self):
+        initial = super().get_initial()
+        data = self.request.session.get('prefill_candidate', {})
+        for field in data:
+            if field in initial:
+                initial[field] = data[field]
+        return data
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+
+        link_names = self.request.POST.getlist('link_names')
+        link_urls = self.request.POST.getlist('link_urls')
+
+        combined_links = ''
+        for name, url in zip(link_names, link_urls):
+            if name and url:
+                combined_links += f'{name}:::{url};;;'
+        form.instance.links = combined_links
+
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('dashboard')
