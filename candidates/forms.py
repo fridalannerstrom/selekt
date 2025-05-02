@@ -19,15 +19,21 @@ class CandidateForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        # All fields except 'name' are optional
         for field_name, field in self.fields.items():
+            if field_name != 'name':
+                field.required = False
+
             field.widget.attrs['class'] = 'form-control'
 
-def get_links(self):
+
+def get_links(form):
     """
     Return the links as a list of dictionaries: [{'name': ..., 'url': ...}]
     """
     links = []
-    link_data = self.data.get('links') or self.initial.get('links')
+    link_data = form.data.get('links') or form.initial.get('links')
 
     if link_data:
         link_items = link_data.split(';;;')
