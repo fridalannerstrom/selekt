@@ -163,8 +163,22 @@
         </ul>
       </nav>
     </div>
-  {% else %}
-  <p>No candidates yet.</p>
+    {% else %}
+    <div class="empty-state text-center py-5">
+      {% if show_favorites %}
+        <h2>No favorites yet</h2>
+        <p class="text-muted">Click the heart icon on candidates you like to add them here.</p>
+      {% elif request.GET.q or request.GET.title %}
+        <h2>No results found</h2>
+        <p class="text-muted">Try adjusting your search or filters.</p>
+      {% else %}
+        <h2>No candidates here</h2>
+        <p class="text-muted mb-4">Get started by uploading your first candidate</p>
+            <button type="button" class="btn button-base cta-button" data-bs-toggle="modal" data-bs-target="#uploadCandidateModal">
+      <i class="fa-solid fa-plus"></i> Upload Candidate
+            </button>
+      {% endif %}
+    </div>
   {% endif %}
 
 </div>
