@@ -87,13 +87,6 @@
           <textarea id="notes" name="notes" class="form-control wysiwyg" rows="4">{{ form.notes.value|default_if_none:'' }}</textarea>
         </div>
 
-        <!-- Files -->
-        <div class="mb-4">
-          <label class="form-label fw-bold">Files</label>
-          <input type="file" name="candidate_files" class="form-control" multiple>
-          <small class="text-muted">You can upload multiple files (PDF, DOCX, etc).</small>
-        </div>
-
       </div>
 
       <!-- Right side -->
@@ -170,6 +163,13 @@
             {{ form.links.errors.0 }}
           </div>
           {% endif %}
+
+          <!-- Files -->
+        <div class="mb-4">
+          <label class="form-label fw-bold">Files</label>
+          <input type="file" name="candidate_files" class="form-control" multiple>
+          <small class="text-muted">You can upload multiple files (PDF, DOCX, etc).</small>
+        </div>
 
         <!-- Save Button -->
         <div class="d-grid">
