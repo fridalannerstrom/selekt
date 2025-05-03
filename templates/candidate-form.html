@@ -81,6 +81,19 @@
           {% endif %}
         </div>
 
+        <!-- Notes -->
+        <div class="mb-4">
+          <label class="form-label fw-bold">Notes</label>
+          <textarea name="notes" class="form-control wysiwyg" rows="4">{{ form.notes.value|default_if_none:'' }}</textarea>
+        </div>
+
+        <!-- Files -->
+        <div class="mb-4">
+          <label class="form-label fw-bold">Files</label>
+          <input type="file" name="candidate_files" class="form-control" multiple>
+          <small class="text-muted">You can upload multiple files (PDF, DOCX, etc).</small>
+        </div>
+
       </div>
 
       <!-- Right side -->
@@ -170,6 +183,72 @@
 </div>
 
 <script>
+
+document.addEventListener("DOMContentLoaded", function () {
+  const uploadBtn = document.getElementById("uploadBtn");
+  const fileElem = document.getElementById("fileElem");
+  const selectedFilesList = document.getElementById("selectedFilesList");
+  const uploadArea = document.getElementById("fileUploadArea");
+  const fileListArea = document.getElementById("fileListArea");
+  let selectedFiles = [];
+
+  if (!uploadArea) return;
+  const candidateId = uploadArea.dataset.candidateId;
+
+  fileElem.addEventListener("change", function () {
+    selectedFiles = Array.from(fileElem.files);
+    selectedFilesList.innerHTML = selectedFiles.map(f => `<div>${f.name}</div>`).join("");
+    uploadBtn.classList.remove("d-none");
+  });
+
+  uploadBtn.addEventListener("click", function () {
+    const formData = new FormData();
+    selectedFiles.forEach(file => formData.append("files", file));
+
+    fetch(`/candidates/${candidateId}/upload-files/`, {
+      method: "POST",
+      headers: {
+        "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value,
+      },
+      body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+      selectedFiles = [];
+      selectedFilesList.innerHTML = "";
+      uploadBtn.classList.add("d-none");
+
+      return fetch(`/candidates/${candidateId}/files/`);
+    })
+    .then(res => res.json())
+    .then(data => {
+      fileListArea.innerHTML = data.html;
+      bindDeleteButtons(); // bind after refresh
+    });
+  });
+
+  function bindDeleteButtons() {
+    document.querySelectorAll(".delete-file-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const fileId = btn.dataset.fileId;
+        fetch(`/candidates/delete-file/${fileId}/`, {
+          method: "POST",
+          headers: {
+            "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value,
+          },
+        })
+        .then(() => fetch(`/candidates/${candidateId}/files/`))
+        .then(res => res.json())
+        .then(data => {
+          fileListArea.innerHTML = data.html;
+          bindDeleteButtons();
+        });
+      });
+    });
+  }
+
+  bindDeleteButtons();
+});
 
 document.addEventListener('input', function(event) {
   if (event.target.closest('#linkInputs')) {

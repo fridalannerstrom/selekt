@@ -120,17 +120,21 @@ class CandidateCreateView(CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
 
+        # Hantera länkar som vanligt
         link_names = self.request.POST.getlist('link_names')
         link_urls = self.request.POST.getlist('link_urls')
-
         combined_links = ''
         for name, url in zip(link_names, link_urls):
             if name and url:
                 combined_links += f'{name}:::{url};;;'
+        form.instance.links = combined_links
 
-        form.instance.links = combined_links  
+        response = super().form_valid(form)
 
-        return super().form_valid(form)
+        for file in self.request.FILES.getlist('candidate_files'):
+            CandidateFile.objects.create(candidate=self.object, file=file)
+
+        return response
 
     def get_success_url(self):
         return reverse_lazy('dashboard')
@@ -240,6 +244,7 @@ def candidate_search(request):
     candidates = filter_candidates(candidates, query)
 
     return render(request, 'candidate-search.html', {'candidates': candidates})
+
 
 def filter_candidates(queryset, query):
     if query:
@@ -471,14 +476,18 @@ class CandidateCreatePrefilledView(CreateView):
 
         link_names = self.request.POST.getlist('link_names')
         link_urls = self.request.POST.getlist('link_urls')
-
         combined_links = ''
         for name, url in zip(link_names, link_urls):
             if name and url:
                 combined_links += f'{name}:::{url};;;'
         form.instance.links = combined_links
 
-        return super().form_valid(form)
+        response = super().form_valid(form)
+
+        for file in self.request.FILES.getlist('candidate_files'):
+            CandidateFile.objects.create(candidate=self.object, file=file)
+
+        return response
 
     def get_success_url(self):
         return reverse_lazy('dashboard')
