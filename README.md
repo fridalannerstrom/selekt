@@ -596,3 +596,22 @@ For the candidate listing on the dashboard, I implemented a dynamic pagination s
 This choice was made to optimize usability and navigation, especially considering that the system is expected to grow and contain a large number of candidates. Displaying all page numbers at once would clutter the interface and make it harder for users to find their way. Instead, this approach ensures that the pagination stays clean, readable, and efficient even when there are many pages. It always shows the first page, the last page, and a few pages around the current one to allow users to quickly move between nearby pages while still having access to the beginning and end of the list.
 
 This design aligns with common UX best practices for pagination in large datasets and helps provide a better user experience as the platform scales.
+
+
+## 🐞 WYSIWYG Editor Bug – Investigation & Fix
+
+During development, the Trumbowyg WYSIWYG editor stopped working unexpectedly on the candidate form, even though it had worked earlier. The formatting toolbar was no longer visible, and browser console showed the following error:
+
+```
+Uncaught ReferenceError: $ is not defined
+```
+
+This indicated that jQuery was not available when the Trumbowyg initialization script ran. After investigating the load order of scripts, it became clear that the custom JavaScript was being executed **before jQuery was fully loaded**, despite jQuery being included in the base template.
+
+### ✅ Fix:
+The JavaScript was restructured so that:
+- All jQuery-dependent logic (like `$('#profile_summary').trumbowyg()`) now runs **after jQuery is guaranteed to be loaded**.
+- Vanilla JavaScript (`document.addEventListener('DOMContentLoaded', ...)`) was separated from jQuery-based DOM manipulations.
+- Script tags were ordered correctly: jQuery first, then Trumbowyg, then Bootstrap, and finally the custom script block.
+
+After this fix, the WYSIWYG editor works consistently across both **create** and **edit** candidate forms with full formatting functionality restored.
