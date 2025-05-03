@@ -118,7 +118,7 @@
         <div class="tab-pane fade" id="notes" role="tabpanel">
           <h6 class="fw-bold">Notes</h6>
           {% if candidate.notes %}
-            <p>{{ candidate.notes }}</p>
+            <p>{{ candidate.notes|safe }}</p>
           {% else %}
             <div class="alert alert-warning">
               No notes yet. <a href="{% url 'candidate_edit' candidate.pk %}">Add information here</a>
