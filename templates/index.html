@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-    {% load static %}
+{% load static %}
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Meta tags for search engines -->
     <meta name="description"
-       content="Selekt is your all-in-one hub for candidate profiles. Upload, search, and manage CVs, interview notes, and test results – structured and AI-powered.">
+        content="Selekt is your all-in-one hub for candidate profiles. Upload, search, and manage CVs, interview notes, and test results – structured and AI-powered.">
     <meta name="keywords"
-       content="candidate profiles, CV database, recruitment platform, interview notes, AI recruitment, candidate search, Selekt, test results, hiring tools, talent management">
+        content="candidate profiles, CV database, recruitment platform, interview notes, AI recruitment, candidate search, Selekt, test results, hiring tools, talent management">
     <!-- Title -->
     <title>Selekt - Candidate Hub</title>
     <!-- Favicon generated using https://www.favicon-generator.org/ -->
@@ -26,21 +27,22 @@
 <body>
     <div class="hero-container">
         <div class="overlay-shadow"></div>
-            <div class="content-wrapper">
+        <div class="content-wrapper">
             <!-- Header -->
             <header class="d-flex justify-content-between align-items-center px-4 py-3">
                 <a href="/" class="text-decoration-none">
-                <img src="{% static 'media/images/logo.png' %}" alt="Logo" class="logo-img">
+                    <img src="{% static 'media/images/logo.png' %}" alt="Logo" class="logo-img">
                 </a>
                 <a href="{% url 'login' %}" class="btn button-base scn-button">
-                Log in
+                    Log in
                 </a>
             </header>
 
             <div class="container hero">
                 <p class="tag">👋 Hello busy rectruiter</p>
                 <h1 class="mt-4">Your all-in-one hub <br>for candidate profiles</h1>
-                <p class="mt-4 hero-text">Save and organize all your candidates – searchable, structured, and powered by AI.</p>
+                <p class="mt-4 hero-text">Save and organize all your candidates – searchable, structured, and powered by
+                    AI.</p>
                 <a href="{% url 'signup' %}" class="btn button-base cta-button">Sign up - <b>it's free</b></a>
             </div>
 
@@ -54,16 +56,17 @@
                             <div class="position-absolute top-0 end-0 p-4">
                                 <span class="heart-icon"><i class="fa-regular fa-heart"></i></span>
                             </div>
-                    
+
                             <div class="px-4 pt-4 pb-2">
                                 <div class="d-flex align-items-center gap-3 mb-3">
-                                    <img src="{% static 'media/images/people-3.png' %}" alt="Julia Forsberg" class="candidate-img" />
+                                    <img src="{% static 'media/images/people-3.png' %}" alt="Julia Forsberg"
+                                        class="candidate-img" />
                                     <div>
                                         <h4 class="mb-0">Julia Forsberg</h6>
-                                        <small class="text-muted">HR Specialist</small>
+                                            <small class="text-muted">HR Specialist</small>
                                     </div>
                                 </div>
-                    
+
                                 <div class="skill-container">
                                     <span class="skill-badge">Recruitment</span>
                                     <span class="skill-badge">Onboarding</span>
@@ -71,85 +74,9 @@
                                     <span class="skill-badge">+2</span>
                                 </div>
                             </div>
-                    
+
                             <hr>
-                    
-                            <div class="d-flex justify-content-between align-items-center px-4 pb-3">
-                                <a href="#" class="btn button-base scn-button read-btn">Read more</a>
-                                <div class="dot-menu">
-                                    <span class="dot"></span>
-                                    <span class="dot"></span>
-                                    <span class="dot"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Candidate Card 2 -->
-                    <div class="col-md-4 col-sm-6">
-                        <div class="candidate-card bg-white position-relative">
-                            <!-- Heart Icon -->
-                            <div class="position-absolute top-0 end-0 p-4">
-                                <span class="heart-icon"><i class="fa-regular fa-heart"></i></span>
-                            </div>
-                    
-                            <div class="px-4 pt-4 pb-2">
-                                <div class="d-flex align-items-center gap-3 mb-3">
-                                    <img src="{% static 'media/images/people-2.png' %}" alt="Oliver Eriksson" class="candidate-img" />
-                                    <div>
-                                        <h4 class="mb-0">Oliver Eriksson</h6>
-                                        <small class="text-muted">Business Analyst</small>
-                                    </div>
-                                </div>
-                    
-                                <div class="skill-container">
-                                    <span class="skill-badge">Excel</span>
-                                    <span class="skill-badge">Power BI</span>
-                                    <span class="skill-badge">SQL</span>
-                                    <span class="skill-badge">+2</span>
-                                </div>
-                            </div>
-                    
-                            <hr>
-                    
-                            <div class="d-flex justify-content-between align-items-center px-4 pb-3">
-                                <a href="#" class="btn button-base scn-button read-btn">Read more</a>
-                                <div class="dot-menu">
-                                    <span class="dot"></span>
-                                    <span class="dot"></span>
-                                    <span class="dot"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Candidate Card 3 -->
-                    <div class="col-md-4 col-sm-6">
-                        <div class="candidate-card bg-white position-relative">
-                            <!-- Heart Icon -->
-                            <div class="position-absolute top-0 end-0 p-4">
-                                <span class="heart-icon"><i class="fa-solid fa-heart"></i></span>
-                            </div>
-                    
-                            <div class="px-4 pt-4 pb-2">
-                                <div class="d-flex align-items-center gap-3 mb-3">
-                                    <img src="{% static 'media/images/people-1.png' %}" alt="Hugo Nilsson" class="candidate-img" />
-                                    <div>
-                                        <h4 class="mb-0">Hugo Nilsson</h6>
-                                        <small class="text-muted">Cybersecurity Analyst</small>
-                                    </div>
-                                </div>
-                    
-                                <div class="skill-container">
-                                    <span class="skill-badge">Nmap</span>
-                                    <span class="skill-badge">Wireshark</span>
-                                    <span class="skill-badge">Kali Linux</span>
-                                    <span class="skill-badge">+3</span>
-                                </div>
-                            </div>
-                    
-                            <hr>
-                    
+
                             <div class="d-flex justify-content-between align-items-center px-4 pb-3">
                                 <a href="#" class="btn button-base scn-button read-btn">Read more</a>
                                 <div class="dot-menu">
@@ -161,7 +88,85 @@
                         </div>
                     </div>
 
-        
+                    <!-- Candidate Card 2 -->
+                    <div class="col-md-4 col-sm-6">
+                        <div class="candidate-card bg-white position-relative">
+                            <!-- Heart Icon -->
+                            <div class="position-absolute top-0 end-0 p-4">
+                                <span class="heart-icon"><i class="fa-regular fa-heart"></i></span>
+                            </div>
+
+                            <div class="px-4 pt-4 pb-2">
+                                <div class="d-flex align-items-center gap-3 mb-3">
+                                    <img src="{% static 'media/images/people-2.png' %}" alt="Oliver Eriksson"
+                                        class="candidate-img" />
+                                    <div>
+                                        <h4 class="mb-0">Oliver Eriksson</h6>
+                                            <small class="text-muted">Business Analyst</small>
+                                    </div>
+                                </div>
+
+                                <div class="skill-container">
+                                    <span class="skill-badge">Excel</span>
+                                    <span class="skill-badge">Power BI</span>
+                                    <span class="skill-badge">SQL</span>
+                                    <span class="skill-badge">+2</span>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="d-flex justify-content-between align-items-center px-4 pb-3">
+                                <a href="#" class="btn button-base scn-button read-btn">Read more</a>
+                                <div class="dot-menu">
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Candidate Card 3 -->
+                    <div class="col-md-4 col-sm-6">
+                        <div class="candidate-card bg-white position-relative">
+                            <!-- Heart Icon -->
+                            <div class="position-absolute top-0 end-0 p-4">
+                                <span class="heart-icon"><i class="fa-solid fa-heart"></i></span>
+                            </div>
+
+                            <div class="px-4 pt-4 pb-2">
+                                <div class="d-flex align-items-center gap-3 mb-3">
+                                    <img src="{% static 'media/images/people-1.png' %}" alt="Hugo Nilsson"
+                                        class="candidate-img" />
+                                    <div>
+                                        <h4 class="mb-0">Hugo Nilsson</h6>
+                                            <small class="text-muted">Cybersecurity Analyst</small>
+                                    </div>
+                                </div>
+
+                                <div class="skill-container">
+                                    <span class="skill-badge">Nmap</span>
+                                    <span class="skill-badge">Wireshark</span>
+                                    <span class="skill-badge">Kali Linux</span>
+                                    <span class="skill-badge">+3</span>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <div class="d-flex justify-content-between align-items-center px-4 pb-3">
+                                <a href="#" class="btn button-base scn-button read-btn">Read more</a>
+                                <div class="dot-menu">
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                     <!-- Candidate Card 4 -->
                     <div class="col-md-4 col-sm-6">
                         <div class="candidate-card bg-white position-relative">
@@ -169,16 +174,17 @@
                             <div class="position-absolute top-0 end-0 p-4">
                                 <span class="heart-icon"><i class="fa-regular fa-heart"></i></span>
                             </div>
-                    
+
                             <div class="px-4 pt-4 pb-2">
                                 <div class="d-flex align-items-center gap-3 mb-3">
-                                    <img src="{% static 'media/images/people-4.png' %}" alt="Clara Lund" class="candidate-img" />
+                                    <img src="{% static 'media/images/people-4.png' %}" alt="Clara Lund"
+                                        class="candidate-img" />
                                     <div>
                                         <h4 class="mb-0">Clara Lund</h6>
-                                        <small class="text-muted">Frontend Developer</small>
+                                            <small class="text-muted">Frontend Developer</small>
                                     </div>
                                 </div>
-                    
+
                                 <div class="skill-container">
                                     <span class="skill-badge">HTML</span>
                                     <span class="skill-badge">CSS</span>
@@ -186,9 +192,9 @@
                                     <span class="skill-badge">+3</span>
                                 </div>
                             </div>
-                    
+
                             <hr>
-                    
+
                             <div class="d-flex justify-content-between align-items-center px-4 pb-3">
                                 <a href="#" class="btn button-base scn-button read-btn">Read more</a>
                                 <div class="dot-menu">
@@ -207,16 +213,17 @@
                             <div class="position-absolute top-0 end-0 p-4">
                                 <span class="heart-icon"><i class="fa-solid fa-heart"></i></span>
                             </div>
-                    
+
                             <div class="px-4 pt-4 pb-2">
                                 <div class="d-flex align-items-center gap-3 mb-3">
-                                    <img src="{% static 'media/images/people-5.png' %}" alt="Felix Larsson" class="candidate-img" />
+                                    <img src="{% static 'media/images/people-5.png' %}" alt="Felix Larsson"
+                                        class="candidate-img" />
                                     <div>
                                         <h4 class="mb-0">Felix Larsson</h6>
-                                        <small class="text-muted">Fullstack Developer</small>
+                                            <small class="text-muted">Fullstack Developer</small>
                                     </div>
                                 </div>
-                    
+
                                 <div class="skill-container">
                                     <span class="skill-badge">Python</span>
                                     <span class="skill-badge">Django</span>
@@ -224,9 +231,9 @@
                                     <span class="skill-badge">+3</span>
                                 </div>
                             </div>
-                    
+
                             <hr>
-                    
+
                             <div class="d-flex justify-content-between align-items-center px-4 pb-3">
                                 <a href="#" class="btn button-base scn-button read-btn">Read more</a>
                                 <div class="dot-menu">
@@ -237,7 +244,7 @@
                             </div>
                         </div>
                     </div>
-                
+
                     <!-- Candidate Card 6 -->
                     <div class="col-md-4 col-sm-6">
                         <div class="candidate-card bg-white position-relative">
@@ -245,16 +252,17 @@
                             <div class="position-absolute top-0 end-0 p-4">
                                 <span class="heart-icon"><i class="fa-regular fa-heart"></i></span>
                             </div>
-                    
+
                             <div class="px-4 pt-4 pb-2">
                                 <div class="d-flex align-items-center gap-3 mb-3">
-                                    <img src="{% static 'media/images/people-6.png' %}" alt="Amanda Lindqvist" class="candidate-img" />
+                                    <img src="{% static 'media/images/people-6.png' %}" alt="Amanda Lindqvist"
+                                        class="candidate-img" />
                                     <div>
                                         <h4 class="mb-0">Amanda Lindqvist</h6>
-                                        <small class="text-muted">Digital Marketing Specialist</small>
+                                            <small class="text-muted">Digital Marketing Specialist</small>
                                     </div>
                                 </div>
-                    
+
                                 <div class="skill-container">
                                     <span class="skill-badge">Google Ads</span>
                                     <span class="skill-badge">Facebook Ads</span>
@@ -262,25 +270,80 @@
                                     <span class="skill-badge">+3</span>
                                 </div>
                             </div>
-            
-                        <hr>
-                
-                        <div class="d-flex justify-content-between align-items-center px-4 pb-3">
-                            <a href="#" class="btn button-base scn-button read-btn">Read more</a>
-                            <div class="dot-menu">
-                                <span class="dot"></span>
-                                <span class="dot"></span>
-                                <span class="dot"></span>
+
+                            <hr>
+
+                            <div class="d-flex justify-content-between align-items-center px-4 pb-3">
+                                <a href="#" class="btn button-base scn-button read-btn">Read more</a>
+                                <div class="dot-menu">
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                    <span class="dot"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-            </div>
+                </div>
             </div>
         </div>
+    </div>
+
+    <section class="cv-story-section py-5">
+        <div class="container">
+      
+          <!-- STEP 1 -->
+          <div class="row align-items-center mb-5">
+            <div class="col-md-6 mb-4 mb-md-0">
+              <img src="{% static 'media/images/selekt-step-1.png' %}" alt="Illustration 1" class="img-fluid section-img">
+            </div>
+            <div class="col-md-6">
+              <p class="section-tag mb-2 d-inline-block tag">The problem</span>
+              <h3 class="section-heading mt-3">Every new job brings <br>hundreds of CVs</h3>
+              <p class="section-text">
+                You’re juggling multiple roles and urgent deadlines. With every new job opening, you receive piles of CVs – and barely have time to read them.
+                <br><br>
+                After a hire is made, the rest are forgotten. Valuable profiles, lost in inboxes or folders.
+              </p>
+            </div>
+          </div>
+      
+          <!-- STEP 2 -->
+          <div class="row align-items-center flex-md-row-reverse mb-5">
+            <div class="col-md-5 mb-4 mb-md-0">
+              <img src="https://via.placeholder.com/300x300" alt="Illustration 2" class="img-fluid">
+            </div>
+            <div class="col-md-7">
+              <span class="section-tag mb-2 d-inline-block">⚙️ The solution</span>
+              <h3 class="section-heading">Let AI do the heavy lifting</h3>
+              <p class="section-text">
+                Just upload a CV – Selekt instantly summarizes the candidate, extracts key skills, and organizes the data for you.
+                <br><br>
+                No manual copy-paste, no formatting. It’s fast, structured, and ready to use.
+              </p>
+            </div>
+          </div>
+      
+          <!-- STEP 3 -->
+          <div class="row align-items-center">
+            <div class="col-md-5 mb-4 mb-md-0">
+              <img src="https://via.placeholder.com/300x300" alt="Illustration 3" class="img-fluid">
+            </div>
+            <div class="col-md-7">
+              <span class="section-tag mb-2 d-inline-block">♻️ The long-term win</span>
+              <h3 class="section-heading">Find top talent faster by <br>reusing your own CVs</h3>
+              <p class="section-text">
+                Next time you recruit, just search your own AI-sorted database. Filter by skills, role or experience and rediscover great candidates you’ve already vetted.
+                <br><br>
+                Selekt helps you save time, avoid double work – and never waste a good CV again.
+              </p>
+            </div>
+          </div>
+      
         </div>
-      </div>
+      </section>
+
 </body>
 <script src="{% static 'js/scripts.js' %}"></script>
+
 </html>
