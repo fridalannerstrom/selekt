@@ -108,6 +108,7 @@ h4 {
 
 .section-img {
   border-radius: 20px;
+  border: 1px solid #EBD9C1
 }
 
 /* HEADER */
@@ -164,6 +165,41 @@ header {
   font-size: 1rem;
   color: #555;
   line-height: 1.7rem;
+}
+
+/* INDEX PAGE */
+
+.step-box {
+  background-color: #f7fbe5;
+  border: 1px solid #e2f299;
+  padding: 30px 40px;
+  border-radius: 15px;
+  height: 100%;
+}
+
+.step-number {
+  width: 36px;
+  height: 36px;
+  background-color: #d6f013;
+  color: black;
+  font-weight: 700;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+  font-size: 1rem;
+}
+
+.step-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.step-text {
+  font-size: 0.95rem;
+  color: #444;
 }
 
 
