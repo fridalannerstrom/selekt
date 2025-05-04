@@ -38,6 +38,12 @@ h4 {
   font-weight: 600;
 }
 
+/* TEXT STYLES */
+
+.section-text {
+  font-size: 0.9rem;
+}
+
 .text-muted {
   color: grey;
   font-size: 0.8rem;
