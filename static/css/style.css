@@ -509,3 +509,15 @@ body.modal-open #deleteCandidateModal + .modal-backdrop {
   margin-right: 10px;
   color: rgb(97, 97, 97);
 }
+
+.clear-button {
+margin-right: 70px;
+background-color: #EFEFEF;
+border: 0px;
+}
+
+.clear-button:hover {
+  background-color: #EFEFEF;
+  color: black;
+  }
+
