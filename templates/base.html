@@ -30,11 +30,13 @@
 
   <!-- Header -->
 <header class="d-flex justify-content-between align-items-center px-4 py-3">
-  <a href="{% url 'dashboard' %}" class="text-decoration-none">
-    <img src="{% static 'media/images/logo.png' %}" alt="Logo" class="logo-img">
-  </a>
+    <div class="header-logo">
+    <a href="{% url 'dashboard' %}" class="text-decoration-none">
+      <img src="{% static 'media/images/logo.png' %}" alt="Logo" class="logo-img">
+    </a>
+  </div>
 
-  <div class="d-flex align-items-center gap-3">
+  <div class="d-flex align-items-center gap-3 header-buttons">
     <button type="button" class="btn button-base cta-button" data-bs-toggle="modal" data-bs-target="#uploadCandidateModal">
       <i class="fa-solid fa-plus"></i> Upload Candidate
     </button>

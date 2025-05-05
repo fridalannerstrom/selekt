@@ -552,6 +552,7 @@ border: 0px;
   transform: none !important;
 }
 
+/* MEDIA QUERIES */
 
 @media (max-width: 360px) {
 
@@ -601,8 +602,6 @@ border: 0px;
   
 @media (max-width: 767px) {
 
-
-
   .tab-tabs {
     order: 3;
     width: 100%;
@@ -622,4 +621,22 @@ border: 0px;
       text-align: right;
     }
 
+    .candidate-search input{
+      font-size: 0.8rem;
+    }
+
+    .logged-in-body .cta-button {
+    font-size: 0.7rem;
+    padding: 10px;
+    }
+
+.logo-img {
+  width: 100%;
+  max-width: 100px;
+  padding-right: 10px;
+}
+
+.header-logo {
+  width: 30%;
+}
   }
