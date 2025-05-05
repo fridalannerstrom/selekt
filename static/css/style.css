@@ -182,20 +182,6 @@ header {
   margin-bottom: 20px;
 }
 
-.step-number {
-  width: 36px;
-  height: 36px;
-  background-color: #d6f013;
-  color: black;
-  font-weight: 700;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 15px;
-  font-size: 1rem;
-}
-
 .step-title {
   font-weight: 600;
   font-size: 1.1rem;
@@ -205,6 +191,15 @@ header {
 .step-text {
   font-size: 0.95rem;
   color: #444;
+}
+
+.cta-background {
+  background-image: url('../media/images/selekt-background.png');
+  background-size: cover;
+  background-position: bottom;
+  padding: 100px 40px;
+  border-radius: 20px;
+  border: 1px solid #e2f299;
 }
 
 
