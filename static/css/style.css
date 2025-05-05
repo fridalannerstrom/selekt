@@ -521,3 +521,27 @@ border: 0px;
   color: black;
   }
 
+
+.page-item .page-link {
+  color: #333;     
+  border: 0px;
+  font-size: 0.8rem;
+}
+
+.page-item .page-link:hover {
+  background-color: #ffffff;
+  color: #000;
+}
+
+.page-item.active .page-link {
+  background-color: #e7e7e7; 
+  color: #000;
+  border: 0px;
+  border-radius: 100px;
+}
+
+.page-link:active {
+  background-color: inherit !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
