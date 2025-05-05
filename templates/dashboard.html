@@ -22,38 +22,49 @@
 </div>
 
 <div class="container py-5">
-  <!-- Header / Controls -->
-  <div class="filter-header d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3 pb-4">
+
+<!-- Header / Controls -->
+<div class="pb-4 mb-4">
+  <div class="row align-items-center text-center text-md-start">
 
     <!-- Sort dropdown -->
-    <form id="sortForm" class="d-flex align-items-center sort-form">
-      <select name="sort" id="sortSelect" class="form-select w-auto">
-        <option value="" {% if not request.GET.sort %}selected{% endif %}>Default (Newest first)</option>
-        <option value="name" {% if request.GET.sort == "name" %}selected{% endif %}>Alphabetical (A–Z)</option>
-      </select>
-    </form>
+    <div class="col-12 col-md-2 mb-2 mb-md-0 tab-filter">
+      <form id="sortForm" class="sort-form w-100">
+        <select name="sort" id="sortSelect" class="form-select">
+          <option value="" {% if not request.GET.sort %}selected{% endif %}>Default (Newest first)</option>
+          <option value="name" {% if request.GET.sort == "name" %}selected{% endif %}>Alphabetical (A–Z)</option>
+        </select>
+      </form>
+    </div>
 
     <!-- Tabs -->
-    <ul class="nav justify-content-center flex-grow-1 job-title-tabs">
-      <li class="nav-item">
-        <a class="nav-link {% if not active_title %}active{% endif %}" href="{% url 'dashboard' %}">All</a>
-      </li>
-      {% for title in job_titles %}
-      <li class="nav-item">
-        <a class="nav-link {% if active_title == title.job_title %}active{% endif %}"
-          href="?title={{ title.job_title|urlencode }}">
-          {{ title.job_title }}
-        </a>
-      </li>
-      {% endfor %}
-    </ul>
+    <div class="col-12 col-md-8 mb-2 mb-md-0">
+      <ul class="nav justify-content-center flex-wrap job-title-tabs">
+        <li class="nav-item">
+          <a class="nav-link {% if not active_title %}active{% endif %}" href="{% url 'dashboard' %}">All</a>
+        </li>
+        {% for title in job_titles %}
+        <li class="nav-item">
+          <a class="nav-link {% if active_title == title.job_title %}active{% endif %}"
+            href="?title={{ title.job_title|urlencode }}">
+            {{ title.job_title }}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
 
-    <!-- Favorite button -->
-    <button id="favoritesToggle" type="button" class="btn btn-outline-dark d-flex align-items-center gap-2 favorites-toggle">
-      <i class="fa-regular fa-heart"></i> Show Favorites
-    </button>
-
+    <!-- Favorites button -->
+    <div class="col-12 col-md-2 mb-2 mb-md-0 d-flex justify-content-md-end">
+      <button id="favoritesToggle" type="button"
+        class="btn btn-outline-dark d-flex align-items-center justify-content-center gap-2 favorites-toggle mx-md-0 mx-auto">
+        <i class="fa-regular fa-heart"></i> Show Favorites
+      </button>
+    </div>
+    
   </div>
+</div>
+
 
   <!-- Candidates -->
 

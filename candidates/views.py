@@ -74,7 +74,7 @@ def dashboard(request):
         .exclude(job_title__exact='')
         .values('job_title')
         .annotate(count=Count('job_title'))
-        .order_by('-count')[:5]
+        .order_by('-count')[:4]
     )
 
     paginator = Paginator(candidates, 12)
