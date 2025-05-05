@@ -499,6 +499,39 @@ body.modal-open #deleteCandidateModal + .modal-backdrop {
   max-width: 250px;
 }
 
+.candidate-modal-profile {
+  padding-bottom: 40px;
+  border-bottom: 1px solid #dbdbdb;
+}
+
+.nav-tabs {
+  border: 0px;
+  padding: 0px;
+  margin: 0px;
+}
+
+.nav-tabs .nav-link {
+  border-bottom: 2px;
+  padding: 6px 16px;
+  margin-right: 0px;
+  color: #333;
+  font-size: 0.85rem;
+  transition: 0.3s;
+  border: 0px;
+  margin-left: 0px;
+}
+
+/* Hover-effekt */
+.nav-tabs .nav-link:hover {
+  color: #000;
+}
+
+/* Aktiv tabb */
+.nav-tabs .nav-link.active {
+  border-bottom: 2px solid black;
+  font-weight: 500;
+}
+
 /* CANDIDATE CARD DROPDOWN */
 
 .dot-menu-dropdown {
