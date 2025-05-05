@@ -116,19 +116,20 @@
 </div>
 
 {% if show_welcome_popup %}
-<div class="modal fade" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content p-4" style="border-radius: 15px;">
+<div class="modal fade p-sm-5" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered rounded">
+    <div class="modal-content p-5">
       
       <!-- Modal Content -->
       <div class="d-flex justify-content-center gap-2 mb-3">
-        <img src="{% static 'media/images/welcome-popup-image.png' %}" alt="Welcome Image" style="width: 100%;">
+        <img src="{% static 'media/images/welcome.png' %}" alt="Welcome Image" class="welcome-image">
       </div>
 
       <div class="text-center">
         <h3 class="mb-3">Welcome to Selekt!</h3>
-        <p class="text-muted mb-4">Discover everything Selekt has to offer by uploading your first candidate.</p>
-
+        <p class="text-muted mb-4">
+          Let’s get your first candidate in – and show you how easy, structured and smart recruiting can be.</p>
+        </p>
         <a href="{% url 'candidate_add' %}" class="btn button-base cta-button mb-4" id="uploadFirstCandidateBtn">
           Upload your first candidate
         </a>
@@ -270,7 +271,7 @@ document.addEventListener('DOMContentLoaded', function() {
       favoritesToggle.classList.remove('btn-outline-dark');
       favoritesToggle.classList.add('btn-dark');
     } else {
-      favoritesToggle.innerHTML = '<i class="fas fa-heart"></i> Show Favorites';
+      favoritesToggle.innerHTML = '<i class="fa-regular fa-heart"></i> Show Favorites';
       favoritesToggle.classList.add('btn-outline-dark');
       favoritesToggle.classList.remove('btn-dark');
     }
