@@ -25,20 +25,20 @@
 
 <!-- Header / Controls -->
 <div class="pb-4 mb-4">
-  <div class="row align-items-center text-center text-md-start">
+  <div class="d-flex flex-wrap align-items-center text-center text-md-start flex-md-row flex-column-reverse">
 
     <!-- Sort dropdown -->
-    <div class="col-12 col-md-2 mb-2 mb-md-0 tab-filter">
+    <div class="col-12 col-md-2 mb-2 mb-md-0 tab-sorting">
       <form id="sortForm" class="sort-form w-100">
         <select name="sort" id="sortSelect" class="form-select">
-          <option value="" {% if not request.GET.sort %}selected{% endif %}>Default (Newest first)</option>
+          <option value="" {% if not request.GET.sort %}selected{% endif %}>Date (Newest first)</option>
           <option value="name" {% if request.GET.sort == "name" %}selected{% endif %}>Alphabetical (A–Z)</option>
         </select>
       </form>
     </div>
 
     <!-- Tabs -->
-    <div class="col-12 col-md-8 mb-2 mb-md-0">
+    <div class="col-12 col-md-8 mb-2 mb-md-0 tab-tabs">
       <ul class="nav justify-content-center flex-wrap job-title-tabs">
         <li class="nav-item">
           <a class="nav-link {% if not active_title %}active{% endif %}" href="{% url 'dashboard' %}">All</a>
@@ -55,7 +55,7 @@
     </div>
 
     <!-- Favorites button -->
-    <div class="col-12 col-md-2 mb-2 mb-md-0 d-flex justify-content-md-end">
+    <div class="tab-fav col-12 col-md-2 mb-2 mb-md-0 d-flex justify-content-md-end">
       <button id="favoritesToggle" type="button"
         class="btn btn-outline-dark d-flex align-items-center justify-content-center gap-2 favorites-toggle mx-md-0 mx-auto">
         <i class="fa-regular fa-heart"></i> Show Favorites

@@ -569,38 +569,57 @@ border: 0px;
   }
 }
 
-/* Justera layouten för desktop */
 
-/*
-@media (min-width: 768px) {
-  .custom-sort {
-    flex: 0 0 15%;
-    max-width: 15%;
-  }
-
-  .custom-tabs {
-    flex: 0 0 70%;
-    max-width: 70%;
-    min-width: 400px;
-  }
-
-  .custom-fav {
-    flex: 0 0 15%;
-    max-width: 15%;
-  }
-}
-
-/* Mobil layout - fullbredd och centrerat */
-/*
-@media (max-width: 767.98px) {
+@media (max-width: 900px) {
   #sortForm,
   #favoritesToggle {
     width: 100%;
     justify-content: center;
   }
 
-  .favorites-toggle {
-    display: flex;
-    justify-content: center;
+  .tab-tabs {
+    order: 1;
+    width: 100%;
+    padding-bottom: 30px;
   }
-}
+  
+  .tab-sorting {
+    width: 40%;
+    margin-right: 10%;
+      order: 2;
+    }
+
+    .tab-fav {
+      margin-left: 10%;
+      order: 3;
+      width: 40%;
+      text-align: right;
+    }
+
+  }
+
+  
+@media (max-width: 767px) {
+
+
+
+  .tab-tabs {
+    order: 3;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .tab-sorting {
+    width: 100%;
+      order: 2;
+      margin-right: 0;
+    }
+
+    .tab-fav {
+      order: 1;
+      width: 100%;
+      margin-left: 0;
+      text-align: right;
+    }
+
+  }
