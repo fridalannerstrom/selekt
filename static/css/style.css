@@ -237,12 +237,21 @@ header {
 
 /* CANDIDATE CARDS */
 
+.candidate-card-wrapper {
+  flex: 1 1 360px; /* min 360px, väx uppåt */
+  max-width: 100%; /* för att inte klippa på mindre skärmar */
+  min-width: 360px;
+}
 
 .candidate-card {
+  min-width: 100%; /* fyller wrappern */
   border-radius: 16px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   transition: 0.3s ease;
-  position: relative;
+}
+
+.candidate-card .text-muted {
+  font-size: 0.8rem;
 }
 
 .candidate-card hr {
@@ -265,6 +274,7 @@ header {
   align-items: center;
 }
 
+.skill-badge-extra,
 .skill-badge {
   background-color: #fef6ed;
   padding: 4px 10px;
@@ -272,6 +282,7 @@ header {
   font-size: 0.75rem;
   white-space: nowrap;
   flex-shrink: 0;
+  border: 1px solid #EBD9C1;
 }
 
 .skill-badge-modal {
@@ -279,11 +290,6 @@ header {
   padding: 4px 10px;
   border-radius: 20px;
   font-size: 0.85rem;
-}
-
-.skill-badge-extra {
-  background-color: #fce5cd;
-  font-weight: 500;
 }
 
 .read-btn {
@@ -512,12 +518,12 @@ body.modal-open #deleteCandidateModal + .modal-backdrop {
 
 .clear-button {
 margin-right: 70px;
-background-color: #EFEFEF;
+background-color: transparent;
 border: 0px;
 }
 
 .clear-button:hover {
-  background-color: #EFEFEF;
+  background-color: transparent;
   color: black;
   }
 
