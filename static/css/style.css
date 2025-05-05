@@ -464,6 +464,36 @@ body.modal-open #deleteCandidateModal + .modal-backdrop {
   opacity: 0 !important;
 }
 
+.modal-candidate .fav-button {
+  font-size: 0.9rem;
+  color: black;
+  background-color: white;
+  border: 0px;
+}
+
+.modal-candidate .fav-button i {
+  color: #E94C82;
+  margin-right: 10px;
+}
+
+
+.modal-candidate .fav-button:active {
+  background-color: white;
+  color: black;
+}
+
+.modal-candidate .edit-button {
+  font-size: 0.9rem;
+}
+
+.modal-candidate .delete-button {
+  font-size: 0.9rem;
+}
+
+.modal-header {
+  border: 0px;
+}
+
 .welcome-image {
   width: 90%;
   max-width: 250px;
