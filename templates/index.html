@@ -394,7 +394,8 @@
         </div>
       </section>
 
-      <section class="container">
+      <!-- CTA SECTION -->
+      <section class="container mt-5 mb-5">
         <div class="text-center cta-background">
           <span class="tag">Get started with Selekt</span>
           <h3 class="section-heading mt-4 mb-3">Ready to never lose a<br>great candidate again?</em>
@@ -405,6 +406,22 @@
           <a href="{% url 'signup' %}" class="btn button-base scn-button mt-4">Sign up - <b>it's free</b></a>
         </div>
         </section>
+
+        <!-- FOOTER -->
+        <footer class="custom-footer text-center text-white">
+            <div class="footer-main ">
+                <a href="/" class="text-decoration-none">
+                    <img src="{% static 'media/images/logo-white.png' %}" alt="Logo" class="footer-logo">
+                </a>
+              <p class="section-text pt-3 pb-4">Selekt helps recruiters organize, search and reuse<br>
+                candidate profiles – with AI support.</p>
+            </div>
+            <div class="footer-bottom">
+              <p class="mb-0">Made with <span class="heart">❤️</span> by Frida –
+                <a href="https://github.com/fridalannerstrom" target="_blank" class="footer-link">Check me out on GitHub</a>
+              </p>
+            </div>
+          </footer>
 
 </body>
 <script src="{% static 'js/scripts.js' %}"></script>
