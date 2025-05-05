@@ -166,16 +166,19 @@
     {% else %}
     <div class="empty-state text-center py-5">
       {% if show_favorites %}
-        <h2>No favorites yet</h2>
-        <p class="text-muted">Click the heart icon on candidates you like to add them here.</p>
+      <img src="{% static 'media/images/no-favorites.png' %}" alt="Illustration of woman with shoulder shrug" class="empty-state-image" />
+        <h3>No favorites yet</h3>
+        <p class="text-muted mb-4">Click the heart icon on candidates you like to add them here.</p>
       {% elif request.GET.q or request.GET.title %}
-        <h2>No results found</h2>
+      <img src="{% static 'media/images/no-search.png' %}" alt="Illustration of woman with shoulder shrug" class="empty-state-image" />
+        <h3>No results found</h3>
         <p class="text-muted">Try adjusting your search or filters.</p>
       {% else %}
-        <h2>No candidates here</h2>
+      <img src="{% static 'media/images/nothing-here.png' %}" alt="Illustration of woman with shoulder shrug" class="empty-state-image" />
+        <h3>No candidates here</h3>
         <p class="text-muted mb-4">Get started by uploading your first candidate</p>
             <button type="button" class="btn button-base cta-button" data-bs-toggle="modal" data-bs-target="#uploadCandidateModal">
-      <i class="fa-solid fa-plus"></i> Upload Candidate
+      Upload Candidate
             </button>
       {% endif %}
     </div>
