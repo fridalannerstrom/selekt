@@ -126,7 +126,7 @@
               <a href="{% url 'candidate_edit' candidate.id %}" class="dropdown-item small">Edit</a>
               <button type="button" class="dropdown-item small"
                 onclick="openDeleteCandidateModal({{ candidate.id|escapejs }}, '{{ candidate.name|escapejs }}')">
-                Remove
+                Delete
               </button>
             </div>
           </div>
