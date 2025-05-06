@@ -539,11 +539,11 @@ function addDeleteFileListeners() {
       if (data.is_favorite) {
         favoriteButtonModal.classList.add('btn-dark');
         favoriteButtonModal.classList.remove('btn-outline-dark');
-        favoriteButtonModal.innerHTML = '<i class="fas fa-heart" id="heart-modal-' + candidateId + '"></i> Remove from favorites';
+        favoriteButtonModal.innerHTML = '<i class="fas fa-heart" id="heart-modal-' + candidateId + '"></i> <span class="label-desktop">Remove from favorites</span>';
       } else {
         favoriteButtonModal.classList.add('btn-outline-dark');
         favoriteButtonModal.classList.remove('btn-dark');
-        favoriteButtonModal.innerHTML = '<i class="far fa-heart" id="heart-modal-' + candidateId + '"></i> Add to favorites';
+        favoriteButtonModal.innerHTML = '<i class="far fa-heart" id="heart-modal-' + candidateId + '"></i> <span class="label-desktop">Add to favorites</span>';
       }
     }
   })

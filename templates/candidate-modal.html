@@ -13,7 +13,7 @@
   <div class="d-flex justify-content-between align-items-start candidate-modal-profile">
 
     <!-- Profile image -->
-    <div class="d-flex gap-3 align-items-center">
+    <div class="d-flex gap-3 align-items-center candidate-modal-image">
       {% if candidate.profile_image %}
         <img src="{{ candidate.profile_image.url }}" alt="Profile Image" />
       {% else %}
@@ -21,7 +21,7 @@
       {% endif %}
 
       <!-- Profile name and jobtitle -->
-      <div>
+      <div class="candidate-modal-name">
         <h1 class="small-h1">{{ candidate.name }}</h1>
         {% if candidate.job_title %}
           <small class="text-muted">{{ candidate.job_title }}</small>
@@ -32,7 +32,7 @@
     </div>
 
     <!-- Action buttons -->
-    <div class="d-flex gap-2">
+    <div class="d-flex gap-2 candidate-modal-buttons">
 
       <!-- Favorite button -->
       <button id="favoriteButtonModal-{{ candidate.id }}"
@@ -40,21 +40,21 @@
               onclick="toggleFavorite({{ candidate.id }}, null, this)">
         {% if candidate.is_favorite %}
           <i id="heart-modal-{{ candidate.id }}"
-             class="fa{% if candidate.is_favorite %}-solid{% else %}-regular{% endif %} fa-heart"></i> Remove from favorites
+             class="fa{% if candidate.is_favorite %}-solid{% else %}-regular{% endif %} fa-heart"></i><span class="label-desktop"> Remove from favorites</span>
         {% else %}
           <i id="heart-modal-{{ candidate.id }}"
-             class="fa{% if candidate.is_favorite %}-solid{% else %}-regular{% endif %} fa-heart"></i> Add to favorites
+             class="fa{% if candidate.is_favorite %}-solid{% else %}-regular{% endif %} fa-heart"></i><span class="label-desktop"> Add to favorites</span>
         {% endif %}
       </button>
 
       <!-- Edit button -->
       <a href="{% url 'candidate_edit' candidate.pk %}"
-         class="btn button-base scn-button edit-button"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+         class="btn button-base scn-button edit-button"><i class="fa-solid fa-pen-to-square"></i><span class="label-desktop"> Edit</span></a>
 
       <!-- Delete button -->
       <a href="#"
          class="btn button-base scn-button delete-button"
-         onclick="openDeleteCandidateModal({{ candidate.id }}, '{{ candidate.name|escapejs }}')"><i class="fa-regular fa-trash-can"></i> Delete</a>
+         onclick="openDeleteCandidateModal({{ candidate.id }}, '{{ candidate.name|escapejs }}')"><i class="fa-regular fa-trash-can"></i><span class="label-desktop"> Delete</span></a>
       </div>
 
   </div>
