@@ -1,13 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
+
 <div class="container mt-5">
+
+  <!-- Page heading -->
   <h2 class="mb-4">Add Candidate</h2>
+
+  <!-- Form for creating a new candidate -->
   <form method="post">
+
+    <!-- CSRF token -->
     {% csrf_token %}
+
+    <!-- Render the form fields -->
     {{ form.as_p }}
+
+    <!-- Submit button -->
     <button type="submit" class="btn btn-success">Save</button>
+
+    <!-- Cancel button  -->
     <a href="{% url 'dashboard' %}" class="btn btn-secondary">Cancel</a>
   </form>
 </div>
+
 {% endblock %}
