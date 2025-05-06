@@ -658,6 +658,12 @@ border: 0px;
   .skill-container {
     display: none;
   }
+
+  .candidate-modal-buttons {
+    left: 30px;
+    top: -20px;
+  }
+
 }
 
 
@@ -688,25 +694,20 @@ border: 0px;
     }
 
     .candidate-modal-image {
-      border: 1px solid red;
       display: block !important;
     }
     
     .candidate-modal-buttons {
-      border: 1px solid blue;
       position: absolute;
       right: 30px;
     }
       
     .candidate-modal-name {
-      border: 1px solid rgb(0, 255, 157);
-      order: 3;
       width: 100%;
       margin-top: 20px;
     }
   
     .candidate-modal-profile {
-      border: 1px solid green;
       padding: 30px;
     }
 
@@ -730,6 +731,16 @@ font-size: 0.8rem;
       margin: 0px;
     }
 
+
+    .modal-candidate {
+      width: 90vw;
+    }
+    
+    .modal-candidate {
+      left: 3%;
+      right: 3%;
+    }
+    
 
   }
 
@@ -773,6 +784,7 @@ font-size: 0.8rem;
 .header-logo {
   width: 30%;
 }
+
 }
 
 
