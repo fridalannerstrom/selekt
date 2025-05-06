@@ -467,6 +467,11 @@ class CandidateCreatePrefilledView(CreateView):
     form_class = CandidateForm
     template_name = 'candidate-form.html'
 
+    def get(self, request, *args, **kwargs):
+        if request.session.get('prefill_candidate'):
+            messages.success(request, "Information extracted from your PDF. Remember to save your candidate.")
+        return super().get(request, *args, **kwargs)
+
     def get_initial(self):
         initial = super().get_initial()
         data = self.request.session.get('prefill_candidate', {})

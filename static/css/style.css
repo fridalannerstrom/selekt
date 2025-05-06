@@ -37,14 +37,20 @@ h3 {
   font-weight: 200;
 }
 
-.section-heading {
-  font-size: 2.5rem;
-  line-height: 3.5rem;
-}
-
 h4 {
   font-size: 1.1rem;
   font-weight: 600;
+}
+
+h5 {
+  font-family: 'Libre Baskerville', serif;
+  font-weight: 200;
+  line-height: 2rem;
+}
+
+.section-heading {
+  font-size: 2.5rem;
+  line-height: 3.5rem;
 }
 
 /* TEXT STYLES */
@@ -480,6 +486,9 @@ header {
 
 .modal-candidate img {
   width: 20%;
+  height: auto; 
+  aspect-ratio: 1 / 1; 
+  object-fit: cover; 
   max-width: 450px;
   min-width: 100px;
   border-radius: 100px;
@@ -623,7 +632,7 @@ body.modal-open #deleteCandidateModal + .modal-backdrop {
   color: #000;
 }
 
-.nav-link.active {
+.nav-tabs .nav-link.active {
   border-bottom: 2px solid black;
   font-weight: 800;
 }
@@ -800,7 +809,7 @@ h1 {
     .candidate-modal-image {
       display: block !important;
     }
-    
+
     .candidate-modal-buttons {
       position: absolute;
       right: 30px;
