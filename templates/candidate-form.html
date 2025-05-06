@@ -30,7 +30,7 @@
 
 
         <!-- Name -->
-        <div class="mb-4">
+        <div class="mb-4 mt-4">
           <input type="text" name="name" class="form-control form-control-lg {% if form.name.errors %}is-invalid{% endif %}" placeholder="Name" value="{{ form.name.value|default_if_none:'' }}">
           {% if form.name.errors %}
             <div class="invalid-feedback d-block">{{ form.name.errors.0 }}</div>
@@ -148,14 +148,14 @@
                 <div class="d-flex gap-2 mb-2">
                   <input type="text" name="link_names" value="{{ link.name }}" class="form-control" placeholder="Link name">
                   <input type="text" name="link_urls" value="{{ link.url }}" class="form-control" placeholder="Link URL">
-                  <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeLink(this)">✖️</button>
+                  <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeLink(this)">X</button>
                 </div>
                 {% endfor %}
               {% endif %}
             </div>
 
             <!-- Här läggs nya rader till -->
-            <button type="button" class="btn btn-outline-primary mt-2" onclick="addLinkRow()">+ Add another link</button>
+            <button type="button" class="btn button-base outline-button mt-2" onclick="addLinkRow()">+ Add another link</button>
           </div>
 
           {% if form.links.errors %}

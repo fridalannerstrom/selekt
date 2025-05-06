@@ -85,6 +85,18 @@ h4 {
   color: white;
 }
 
+.outline-button {
+  background-color: #ffffff;
+  color: #2A2722;
+  border: 1px solid #2A2722;
+}
+
+.outline-button:hover {
+  background-color: #f0f0f0;
+  color: #2A2722;
+  border: 1px solid #2A2722;
+}
+
 .logged-in-body .cta-button {
   font-size: 0.9rem;
 }
@@ -99,13 +111,13 @@ h4 {
 }
 
 .base-link {
-  text-decoration: none;
-  color: #5453EC;
+  text-decoration: underline;
+  color: #2A2722;
   font-weight: 600;
 }
 
 .base-link:hover {
-  color: #8888f7;
+  color: #383531;
 }
 
 /* IMAGES */
