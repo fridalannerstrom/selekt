@@ -285,7 +285,11 @@ def settings_view(request):
         new_password1 = request.POST.get('new_password1')
         new_password2 = request.POST.get('new_password2')
 
-        if current_password and new_password1 and new_password2:
+        if current_password or new_password1 or new_password2:
+            if not current_password or not new_password1 or not new_password2:
+                messages.error(request, 'To change your password, you must fill in all three fields.')
+                return redirect('settings')
+
             if not user.check_password(current_password):
                 messages.error(request, 'Current password is incorrect.')
                 return redirect('settings')

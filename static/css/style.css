@@ -657,6 +657,10 @@ body.modal-open #deleteCandidateModal + .modal-backdrop {
   margin-bottom: 30px;
 }
 
+.dropdown-item:active {
+background-color: grey;
+}
+
 /* DASHBOARD */
 
 .nav-link.active {
@@ -721,6 +725,15 @@ border: 0px;
   width: 100%;
 }
 
+/* SETTINGS PAGE */
+
+.settings-profile-pic {
+  width: 100px; 
+  height: 100px; 
+  object-fit: cover;
+  margin: auto;
+}
+
 /* MEDIA QUERIES */
 
 @media (max-width: 360px) {
@@ -742,6 +755,15 @@ border: 0px;
     left: 30px;
     top: -20px;
   }
+
+  
+h1 {
+  font-size: 1.6rem;
+}
+
+.small-h1 {
+  font-size: 1.4rem;
+}
 
 }
 

@@ -51,31 +51,24 @@
 
         <hr class="my-4">
 
-        <h5 class="fw-bold">Change Password</h5>
+        <!-- Change Password -->
+        <h4 class="my-4">Change Password</h4>
 
-        <!-- Current password -->
-        <div class="mb-3">
-          <label class="form-label">Current Password</label>
-          <input type="password" class="form-control" name="current_password" required>
+        <div class="mb-4">
+        <label for="current_password">Current Password</label>
+        <input type="password" name="current_password" id="current_password" class="form-control">
         </div>
 
-        <!-- New password -->
-        <div class="mb-3">
-          <label class="form-label">New Password</label>
-          <input type="password" class="form-control" name="new_password1" required>
-        </div>
+        <div class="mb-4">
+        <label for="new_password1">New Password</label>
+        <input type="password" name="new_password1" id="new_password1" class="form-control">
+          </div>
 
-        <!-- Confirm new password -->
-        <div class="mb-3">
-          <label class="form-label">Confirm New Password</label>
-          <input type="password" class="form-control" name="new_password2" required>
-        </div>
-
-        <!-- Save Changes Button -->
-        <div class="text-end mt-4">
-        <button type="submit" class="btn button-base scn-button">Save Changes</button>
-        </div>
-
+        <div class="mb-4">
+        <label for="new_password2">Confirm New Password</label>
+        <input type="password" name="new_password2" id="new_password2" class="form-control">
+      </div>
+        
       </div>
 
       <!-- Right Side -->
@@ -85,9 +78,9 @@
         <div class="card p-3 mb-4 text-center">
           <h5 class="card-title fw-bold">Profile Picture</h5>
           {% if profile.profile_image %}
-          <img src="{{ profile.profile_image.url }}" class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover;">
+          <img src="{{ profile.profile_image.url }}" class="rounded-circle settings-profile-pic" style="width: 100px; height: 100px; object-fit: cover;">
         {% else %}
-          <img src="{% static 'media/images/user-pic.png' %}" class="rounded-circle" style="width: 100px; height: 100px; object-fit: cover;">
+          <img src="{% static 'media/images/user-pic.png' %}" class="rounded-circle settings-profile-pic" style="width: 100px; height: 100px; object-fit: cover;">
         {% endif %}
           <input type="file" name="profile_picture" class="form-control mt-2">
         </div>
@@ -101,6 +94,10 @@
           </button>
         </div>
 
+                <!-- Save Changes Button -->
+                <div class="mt-4 d-grid">
+                  <button type="submit" class="btn button-base scn-button">Save Changes</button>
+                </div>
       </div>
 
     </div>
