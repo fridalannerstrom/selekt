@@ -117,113 +117,38 @@
 </div>
 
 {% if show_welcome_popup %}
-<div class="modal fade p-sm-5" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true">
+<div class="modal fade" id="welcomeModal"
+     tabindex="-1"
+     aria-hidden="true"
+     data-dismiss-url="{% url 'dismiss_welcome' %}"
+     data-csrf-token="{{ csrf_token }}">
   <div class="modal-dialog modal-dialog-centered rounded">
-    <div class="modal-content p-5">
-      
-      <!-- Modal Content -->
-      <div class="d-flex justify-content-center gap-2 mb-3">
-        <img src="{% static 'media/images/welcome.png' %}" alt="Welcome Image" class="welcome-image">
+    <div class="modal-content p-3 p-md-5 text-center">
+      <button type="button" class="btn-close position-absolute top-0 end-0 m-3"
+              data-bs-dismiss="modal" aria-label="Close"></button>
+
+      <img src="{% static 'media/images/welcome.png' %}" alt="Welcome Image" class="welcome-image mb-3 mx-auto d-block">
+
+      <h3 class="mb-3">Welcome to Selekt!</h3>
+      <p class="text-muted mb-4">
+        Let’s get your first candidate in – and show you how easy, structured and smart recruiting can be.
+      </p>
+
+      <button id="uploadFirstCandidateBtn"
+              class="btn button-base cta-button mb-4"
+              data-redirect-url="{% url 'candidate_add' %}">
+        Upload your first candidate
+      </button>
+
+      <div>
+        <button type="button" class="btn btn-link text-muted small" id="doLaterBtn">
+          Do this later
+        </button>
       </div>
-
-      <div class="text-center">
-        <h3 class="mb-3">Welcome to Selekt!</h3>
-        <p class="text-muted mb-4">
-          Let’s get your first candidate in – and show you how easy, structured and smart recruiting can be.</p>
-        </p>
-        <a href="{% url 'candidate_add' %}" class="btn button-base cta-button mb-4" id="uploadFirstCandidateBtn">
-          Upload your first candidate
-        </a>
-
-        <div>
-          <button type="button" class="btn btn-link text-muted small" id="doLaterBtn">
-            Do this later
-          </button>
-        </div>
-      </div>
-
     </div>
   </div>
 </div>
-
-
-
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var welcomeModalElement = document.getElementById('welcomeModal');
-    var welcomeModal = new bootstrap.Modal(welcomeModalElement);
-    var hasDismissed = false;
-    
-    welcomeModal.show();
-  
-    function dismissWelcome() {
-      if (hasDismissed) return;
-      hasDismissed = true;
-      
-      fetch("{% url 'dismiss_welcome' %}", {
-        method: "POST",
-        headers: {
-          'X-CSRFToken': '{{ csrf_token }}',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({})
-      }).then(response => {
-        if (response.ok) {
-          welcomeModal.hide();
-        }
-      });
-    }
-  
-    document.getElementById('uploadFirstCandidateBtn').addEventListener('click', function() {
-      dismissWelcome();
-      window.location.href = "{% url 'candidate_add' %}";
-    });
-  
-    document.getElementById('doLaterBtn').addEventListener('click', function() {
-      dismissWelcome();
-    });
-  
-    welcomeModalElement.addEventListener('hide.bs.modal', function () {
-      dismissWelcome();
-    });
-  });
-  </script>
 {% endif %}
-
-<!-- Upload Candidate Modal -->
-<div class="modal fade" id="uploadCandidateModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content p-4 text-center upload-modal">
-
-      <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
-
-      <h3 class="mb-3 mt-4">How would you like to add your candidate?</h3>
-
-      <div class="row justify-content-center mt-4 gap-3 mb-4">
-
-        <!-- Upload with PDF -->
-        <div class="col-10 col-md-5 p-4 border upload-choice" onclick="window.location.href='{% url 'upload_pdf_candidates' %}'">
-          <div class="text-center">
-            <i class="fa-regular fa-file-pdf fa-2x mb-4"></i>
-            <h6><strong>Upload with PDF</strong></h6>
-            <p class="text-muted">Let AI scan the CV and pre-fill the form for you.</p>
-          </div>
-        </div>
-
-        <!-- Fill manually -->
-        <div class="col-10 col-md-5 border upload-choice p-4" onclick="window.location.href='{% url 'candidate_add' %}'">
-          <div class="text-center mb-2">
-            <i class="fa-regular fa-pen-to-square fa-2x mb-4"></i>
-            <h6><strong>Add manually</strong></h6>
-            <p class="text-muted small">Fill in the candidate details yourself step by step.</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
 
 </body>
 
@@ -246,6 +171,7 @@
 <script src="{% static 'js/sorting.js' %}"></script>
 <script src="{% static 'js/utils.js' %}"></script>
 <script src="{% static 'js/uploadCandidate.js' %}"></script>
+<script src="{% static 'js/welcomeModal.js' %}"></script>
 
 <!-- Initiering av Trumbowyg och annan logik -->
 <script>
