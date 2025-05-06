@@ -1,56 +1,63 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-{% load static %}
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Meta tags for search engines -->
+
+    <!-- Meta tags for SEO -->
     <meta name="description"
         content="Selekt is your all-in-one hub for candidate profiles. Upload, search, and manage CVs, interview notes, and test results – structured and AI-powered.">
     <meta name="keywords"
         content="candidate profiles, CV database, recruitment platform, interview notes, AI recruitment, candidate search, Selekt, test results, hiring tools, talent management">
-    <!-- Title -->
+
+    <!-- Page title -->
     <title>Selekt - Candidate Hub</title>
-    <!-- Favicon generated using https://www.favicon-generator.org/ -->
+
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="{% static 'media/favicon/android-icon-144x144.png' %}" sizes="48x48">
     <link rel="shortcut icon" href="{% static 'media/favicon/favicon.ico' %}">
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'media/favicon/apple-icon-180x180.png' %}">
-    <!-- Bootstrap -->
+
+    <!-- Stylesheets -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Stylesheet -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <!-- Font Awesome -->
+
+    <!-- Icons -->
     <script src="https://kit.fontawesome.com/e2348d3361.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <div class="hero-container">
+    <!-- Main Content -->
+    <main class="hero-container">
         <div class="overlay-shadow"></div>
         <div class="content-wrapper">
-            <!-- Header -->
+
+            <!-- Header Navigation -->
             <header class="d-flex justify-content-between align-items-center px-4 py-3">
                 <a href="/" class="text-decoration-none">
                     <img src="{% static 'media/images/logo.png' %}" alt="Logo" class="logo-img">
                 </a>
-                <a href="{% url 'login' %}" class="btn button-base scn-button">
-                    Log in
-                </a>
+                <a href="{% url 'login' %}" class="btn button-base scn-button">Log in</a>
             </header>
 
+            <!-- Hero Section -->
             <div class="container hero">
-                <p class="tag">👋 Hello busy rectruiter</p>
+                <p class="tag">👋 Hello busy recruiter</p>
                 <h1 class="mt-4">Your all-in-one hub <br>for candidate profiles</h1>
                 <p class="mt-4 hero-text">Save and organize all your candidates – searchable, structured, and powered by
                     AI.</p>
                 <a href="{% url 'signup' %}" class="btn button-base cta-button">Sign up - <b>it's free</b></a>
             </div>
 
-            <div class="container py-5">
+            <!-- Candidates Preview Cards -->
+            <section class="container py-5">
+                <h2 class="visually-hidden">Candidate list</h2>
                 <div class="row g-4 justify-content-center">
 
                     <!-- Candidate Card 1 -->
-                    <div class="col-md-4 col-sm-6">
+                    <article class="col-md-4 col-sm-6">
                         <div class="candidate-card bg-white position-relative">
                             <!-- Heart Icon -->
                             <div class="position-absolute top-0 end-0 p-4">
@@ -62,8 +69,8 @@
                                     <img src="{% static 'media/images/people-3.png' %}" alt="Julia Forsberg"
                                         class="candidate-img" />
                                     <div>
-                                        <h4 class="mb-0">Julia Forsberg</h6>
-                                            <small class="text-muted">HR Specialist</small>
+                                        <h4 class="mb-0">Julia Forsberg</h4>
+                                        <small class="text-muted">HR Specialist</small>
                                     </div>
                                 </div>
 
@@ -86,10 +93,10 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </article>
 
                     <!-- Candidate Card 2 -->
-                    <div class="col-md-4 col-sm-6">
+                    <article class="col-md-4 col-sm-6">
                         <div class="candidate-card bg-white position-relative">
                             <!-- Heart Icon -->
                             <div class="position-absolute top-0 end-0 p-4">
@@ -101,8 +108,8 @@
                                     <img src="{% static 'media/images/people-2.png' %}" alt="Oliver Eriksson"
                                         class="candidate-img" />
                                     <div>
-                                        <h4 class="mb-0">Oliver Eriksson</h6>
-                                            <small class="text-muted">Business Analyst</small>
+                                        <h4 class="mb-0">Oliver Eriksson</h4>
+                                        <small class="text-muted">Business Analyst</small>
                                     </div>
                                 </div>
 
@@ -125,10 +132,10 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </article>
 
                     <!-- Candidate Card 3 -->
-                    <div class="col-md-4 col-sm-6">
+                    <article class="col-md-4 col-sm-6">
                         <div class="candidate-card bg-white position-relative">
                             <!-- Heart Icon -->
                             <div class="position-absolute top-0 end-0 p-4">
@@ -140,8 +147,8 @@
                                     <img src="{% static 'media/images/people-1.png' %}" alt="Hugo Nilsson"
                                         class="candidate-img" />
                                     <div>
-                                        <h4 class="mb-0">Hugo Nilsson</h6>
-                                            <small class="text-muted">Cybersecurity Analyst</small>
+                                        <h4 class="mb-0">Hugo Nilsson</h4>
+                                        <small class="text-muted">Cybersecurity Analyst</small>
                                     </div>
                                 </div>
 
@@ -164,11 +171,11 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </article>
 
 
                     <!-- Candidate Card 4 -->
-                    <div class="col-md-4 col-sm-6">
+                    <article class="col-md-4 col-sm-6">
                         <div class="candidate-card bg-white position-relative">
                             <!-- Heart Icon -->
                             <div class="position-absolute top-0 end-0 p-4">
@@ -180,8 +187,8 @@
                                     <img src="{% static 'media/images/people-4.png' %}" alt="Clara Lund"
                                         class="candidate-img" />
                                     <div>
-                                        <h4 class="mb-0">Clara Lund</h6>
-                                            <small class="text-muted">Frontend Developer</small>
+                                        <h4 class="mb-0">Clara Lund</h4>
+                                        <small class="text-muted">Frontend Developer</small>
                                     </div>
                                 </div>
 
@@ -204,10 +211,10 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </article>
 
                     <!-- Candidate Card 5 -->
-                    <div class="col-md-4 col-sm-6">
+                    <article class="col-md-4 col-sm-6">
                         <div class="candidate-card bg-white position-relative">
                             <!-- Heart Icon -->
                             <div class="position-absolute top-0 end-0 p-4">
@@ -219,8 +226,8 @@
                                     <img src="{% static 'media/images/people-5.png' %}" alt="Felix Larsson"
                                         class="candidate-img" />
                                     <div>
-                                        <h4 class="mb-0">Felix Larsson</h6>
-                                            <small class="text-muted">Fullstack Developer</small>
+                                        <h4 class="mb-0">Felix Larsson</h4>
+                                        <small class="text-muted">Fullstack Developer</small>
                                     </div>
                                 </div>
 
@@ -243,10 +250,10 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </article>
 
                     <!-- Candidate Card 6 -->
-                    <div class="col-md-4 col-sm-6">
+                    <article class="col-md-4 col-sm-6">
                         <div class="candidate-card bg-white position-relative">
                             <!-- Heart Icon -->
                             <div class="position-absolute top-0 end-0 p-4">
@@ -258,8 +265,8 @@
                                     <img src="{% static 'media/images/people-6.png' %}" alt="Amanda Lindqvist"
                                         class="candidate-img" />
                                     <div>
-                                        <h4 class="mb-0">Amanda Lindqvist</h6>
-                                            <small class="text-muted">Digital Marketing Specialist</small>
+                                        <h4 class="mb-0">Amanda Lindqvist</h4>
+                                        <small class="text-muted">Digital Marketing Specialist</small>
                                     </div>
                                 </div>
 
@@ -282,148 +289,143 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </article>
 
                 </div>
-            </div>
+            </section>
         </div>
-    </div>
+    </main>
 
+    <!-- Problem-Solution-Outcome Story Section -->
     <section class="cv-story-section py-5 pt-7">
         <div class="container pt-5">
-      
-          <!-- STEP 1 -->
-          <div class="row align-items-center mb-5">
-            <div class="col-md-6 mb-4 mb-md-0">
-              <img src="{% static 'media/images/selekt-step-1.png' %}" alt="Illustration 1" class="img-fluid section-img">
-            </div>
-            <div class="col-md-6">
-              <p class="tag">The problem</span>
-              <h3 class="section-heading mt-4 mb-3">Drowning in CVs <br>every time you hire?</h3>
-              <p class="section-text">
-                Recruiters handle multiple roles at once. Each new job brings a flood of CVs – and hardly enough time to review them.
-                </p>
-                <p class="section-text">
-                Once the role is filled, most profiles are forgotten – even the good ones.
-              </p>
-            </div>
-          </div>
-      
-          <!-- STEP 2 -->
-          <div class="row align-items-center flex-md-row-reverse mb-5">
-            <div class="col-md-6 mb-4 mb-md-0 text-end">
-              <img src="{% static 'media/images/selekt-step-2.png' %}" alt="Illustration 2" class="img-fluid section-img">
-            </div>
-            <div class="col-md-6">
-                <p class="tag">The solution</span>
-              <h3 class="section-heading mt-4 mb-3">Let AI do the <br>CV reading <i>for you</i></h3>
-              <p class="section-text">
-                Just upload a CV – Selekt instantly summarizes the candidate, highlights key skills, and organizes the data.
-                </p>
-                <p class="section-text">
-                No need for formatting or copy-pasting – it’s structured, fast, and <b>fully automated.</b>
-              </p>
-            </div>
-          </div>
-      
-          <!-- STEP 3 -->
-          <div class="row align-items-center">
-            <div class="col-md-6 mb-4 mb-md-0">
-              <img src="{% static 'media/images/selekt-step-3.png' %}" alt="Illustration 3" class="img-fluid section-img">
-            </div>
-            <div class="col-md-6">
-                <p class="tag">The long-term win</span>
-              <h3 class="section-heading mt-4 mb-3">All candidates saved, sorted and searchable.</h3>
-              <p class="section-text">
-                Next time you recruit, just search your AI-sorted database.
-            </p>
-            <p class="section-text">
-                Filter by skills, role or experience – and instantly rediscover great candidates you already have.
-              </p>
-            </div>
-          </div>
-      
-        </div>
-      </section>
 
-      <section class="searchable-section py-5">
+            <!-- Step 1: The Problem -->
+            <div class="row align-items-center mb-5">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <img src="{% static 'media/images/selekt-step-1.png' %}" alt="Illustration 1"
+                        class="img-fluid section-img">
+                </div>
+                <div class="col-md-6">
+                    <p class="tag">The problem</p>
+                    <h3 class="section-heading mt-4 mb-3">Drowning in CVs <br>every time you hire?</h3>
+                    <p class="section-text">Recruiters handle multiple roles at once. Each new job brings a flood of CVs
+                        – and hardly enough time to review them.</p>
+                    <p class="section-text">Once the role is filled, most profiles are forgotten – even the good ones.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Step 2: The Solution -->
+            <div class="row align-items-center flex-md-row-reverse mb-5">
+                <div class="col-md-6 mb-4 mb-md-0 text-end">
+                    <img src="{% static 'media/images/selekt-step-2.png' %}" alt="Illustration 2"
+                        class="img-fluid section-img">
+                </div>
+                <div class="col-md-6">
+                    <p class="tag">The solution</p>
+                    <h3 class="section-heading mt-4 mb-3">Let AI do the <br>CV reading <i>for you</i></h3>
+                    <p class="section-text">Just upload a CV – Selekt instantly summarizes the candidate, highlights key
+                        skills, and organizes the data.</p>
+                    <p class="section-text">No need for formatting or copy-pasting – it’s structured, fast, and <b>fully
+                            automated.</b></p>
+                </div>
+            </div>
+
+            <!-- Step 3: Long-Term Value -->
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <img src="{% static 'media/images/selekt-step-3.png' %}" alt="Illustration 3"
+                        class="img-fluid section-img">
+                </div>
+                <div class="col-md-6">
+                    <p class="tag">The long-term win</p>
+                    <h3 class="section-heading mt-4 mb-3">All candidates saved, sorted and searchable.</h3>
+                    <p class="section-text">Next time you recruit, just search your AI-sorted database.</p>
+                    <p class="section-text">Filter by skills, role or experience – and instantly rediscover great
+                        candidates you already have.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="searchable-section py-5">
         <div class="container text-center">
-          <span class="tag">Who is Selekt for?</span>
-          <h3 class="section-heading mt-4 mb-3">Build your<br>own <em>candidate pool</em>
-          </h3>
-          <p class="section-text mb-5">
-            Selekt is for recruiters who want a smarter way to manage candidates, <br class="d-none d-md-block">
-            not just during a single hiring process, <strong>but over time.</strong>
-          </p>
-      
-          <div class="row g-4 justify-content-center">
-            <!-- Box 1 -->
-            <div class="col-md-4">
-              <div class="step-box">
-                <i class="fa-solid fa-folder-open"></i>
-                <h5 class="step-title">Everything in one place</h5>
-                <p class="section-text">
-                 CVs, notes, profile pictures, links, test results, and documents – all saved in one structured view.
-                </p>
-              </div>
-            </div>
-      
-            <!-- Box 2 -->
-            <div class="col-md-4">
-              <div class="step-box">
-                <i class="fa-solid fa-sliders"></i>
-                <h5 class="step-title">Structured, searchable data</h5>
-                <p class="section-text">
-                Search by skills, experience, title, or custom tags – no more digging through folders or emails.
-                </p>
-              </div>
-            </div>
-      
-            <!-- Box 3 -->
-            <div class="col-md-4">
-              <div class="step-box">
-                <i class="fa-solid fa-rotate"></i>
-                <h5 class="step-title">Designed to reuse</h5>
-                <p class="section-text">
-                Build your own candidate pool and rediscover talent you already trust – for future hires.
-                </p>
-              </div>
-            </div>
-          </div>
-      
-        </div>
-      </section>
+            <span class="tag">Who is Selekt for?</span>
+            <h3 class="section-heading mt-4 mb-3">Build your<br>own <em>candidate pool</em></h3>
+            <p class="section-text mb-5">
+                Selekt is for recruiters who want a smarter way to manage candidates, <br class="d-none d-md-block">
+                not just during a single hiring process, <strong>but over time.</strong>
+            </p>
 
-      <!-- CTA SECTION -->
-      <section class="container mt-5 mb-5">
+            <div class="row g-4 justify-content-center">
+                <!-- Feature 1 -->
+                <div class="col-md-4">
+                    <div class="step-box">
+                        <i class="fa-solid fa-folder-open"></i>
+                        <h5 class="step-title">Everything in one place</h5>
+                        <p class="section-text">CVs, notes, profile pictures, links, test results, and documents – all
+                            saved in one structured view.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="col-md-4">
+                    <div class="step-box">
+                        <i class="fa-solid fa-sliders"></i>
+                        <h5 class="step-title">Structured, searchable data</h5>
+                        <p class="section-text">Search by skills, experience, title, or custom tags – no more digging
+                            through folders or emails.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="col-md-4">
+                    <div class="step-box">
+                        <i class="fa-solid fa-rotate"></i>
+                        <h5 class="step-title">Designed to reuse</h5>
+                        <p class="section-text">Build your own candidate pool and rediscover talent you already trust –
+                            for future hires.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="container mt-5 mb-5">
         <div class="text-center cta-background">
-          <span class="tag">Get started with Selekt</span>
-          <h3 class="section-heading mt-4 mb-3">Ready to never lose a<br>great candidate again?</em>
-          </h3>
-          <p class="section-text">
-            Start building your own searchable, AI-powered talent pool today.
-          </p>
-          <a href="{% url 'signup' %}" class="btn button-base scn-button mt-4">Sign up - <b>it's free</b></a>
+            <span class="tag">Get started with Selekt</span>
+            <h3 class="section-heading mt-4 mb-3">Ready to never lose a<br>great candidate again?</h3>
+            <p class="section-text">Start building your own searchable, AI-powered talent pool today.</p>
+            <a href="{% url 'signup' %}" class="btn button-base scn-button mt-4">Sign up - <b>it's free</b></a>
         </div>
-        </section>
+    </section>
 
-        <!-- FOOTER -->
-        <footer class="custom-footer text-center text-white">
-            <div class="footer-main ">
-                <a href="/" class="text-decoration-none">
-                    <img src="{% static 'media/images/logo-white.png' %}" alt="Logo" class="footer-logo">
-                </a>
-              <p class="section-text pt-3 pb-4">Selekt helps recruiters organize, search and reuse<br>
-                candidate profiles – with AI support.</p>
-            </div>
-            <div class="footer-bottom">
-              <p class="mb-0">Made with <span class="heart">❤️</span> by Frida –
-                <a href="https://github.com/fridalannerstrom" target="_blank" class="footer-link">Check me out on GitHub</a>
-              </p>
-            </div>
-          </footer>
+    <!-- Footer -->
+    <footer class="custom-footer text-center text-white">
+        <div class="footer-main">
+            <a href="/" class="text-decoration-none">
+                <img src="{% static 'media/images/logo-white.png' %}" alt="Logo" class="footer-logo">
+            </a>
+            <p class="section-text pt-3 pb-4">
+                Selekt helps recruiters organize, search and reuse<br>
+                candidate profiles – with AI support.
+            </p>
+        </div>
+        <div class="footer-bottom">
+            <p class="mb-0">Made with <span class="heart">❤️</span> by Frida –
+                <a href="https://github.com/fridalannerstrom" target="_blank" class="footer-link">Check me out on
+                    GitHub</a>
+            </p>
+        </div>
+    </footer>
 
+    <!-- Custom Scripts -->
+    <script src="{% static 'js/scripts.js' %}"></script>
 </body>
-<script src="{% static 'js/scripts.js' %}"></script>
 
 </html>
