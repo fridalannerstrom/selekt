@@ -6,10 +6,10 @@
                 <a href="{{ f.file.url }}" target="_blank">{{ f.file.name|slice:"25" }}</a><br>
                 <small class="text-muted">Uploaded: {{ f.uploaded_at|date:"Y-m-d H:i" }}</small>
             </div>
-            <button class="btn btn-sm btn-danger delete-file-btn" 
+            <button class="btn btn-sm delete-file-btn" 
                 data-file-id="{{ f.id }}" 
                 data-file-name="{{ f.file.name|slice:'25' }}">
-                <i class="fas fa-trash"></i>
+                <i class="fa-regular fa-trash-can"></i>
             </button>
         </li>
     {% endfor %}
