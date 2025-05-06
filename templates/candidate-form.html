@@ -12,16 +12,17 @@
     {% csrf_token %}
     <div class="row">
 
+      <!-- Alert messages -->
       {% if messages %}
       <div class="container mt-3">
         {% for message in messages %}
-          <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-            {{ message }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
         {% endfor %}
       </div>
-    {% endif %}
+      {% endif %}
 
       <!-- Left side -->
       <div class="col-md-8">
@@ -32,60 +33,72 @@
 
         <!-- Name -->
         <div class="mb-4 mt-4">
-          <input type="text" name="name" class="form-control form-control-lg {% if form.name.errors %}is-invalid{% endif %}" placeholder="Name" value="{{ form.name.value|default_if_none:'' }}">
+          <input type="text" name="name"
+            class="form-control form-control-lg {% if form.name.errors %}is-invalid{% endif %}" placeholder="Name"
+            value="{{ form.name.value|default_if_none:'' }}">
           {% if form.name.errors %}
-            <div class="invalid-feedback d-block">{{ form.name.errors.0 }}</div>
+          <div class="invalid-feedback d-block">{{ form.name.errors.0 }}</div>
           {% endif %}
         </div>
 
         <!-- Job Title -->
         <div class="mb-4">
-          <input type="text" name="job_title" class="form-control form-control-lg {% if form.job_title.errors %}is-invalid{% endif %}" placeholder="Job Title" value="{{ form.job_title.value|default_if_none:'' }}">
+          <input type="text" name="job_title"
+            class="form-control form-control-lg {% if form.job_title.errors %}is-invalid{% endif %}"
+            placeholder="Job Title" value="{{ form.job_title.value|default_if_none:'' }}">
           {% if form.job_title.errors %}
-            <div class="invalid-feedback d-block">{{ form.job_title.errors.0 }}</div>
+          <div class="invalid-feedback d-block">{{ form.job_title.errors.0 }}</div>
           {% endif %}
-        </div>         
+        </div>
 
         <!-- Profile Summary -->
         <div class="mb-4">
           <label class="form-label fw-bold">Profile</label>
-          <textarea id="profile_summary" name="profile_summary" class="form-control wysiwyg {% if form.profile_summary.errors %}is-invalid{% endif %}" rows="6">{{ form.profile_summary.value|default_if_none:'' }}</textarea>
+          <textarea id="profile_summary" name="profile_summary"
+            class="form-control wysiwyg {% if form.profile_summary.errors %}is-invalid{% endif %}"
+            rows="6">{{ form.profile_summary.value|default_if_none:'' }}</textarea>
           {% if form.profile_summary.errors %}
-            <div class="invalid-feedback d-block">{{ form.profile_summary.errors.0 }}</div>
+          <div class="invalid-feedback d-block">{{ form.profile_summary.errors.0 }}</div>
           {% endif %}
         </div>
 
         <!-- Work Experience -->
         <div class="mb-4">
           <label class="form-label fw-bold">Work Experience</label>
-          <textarea id="work_experience" name="work_experience" class="form-control wysiwyg {% if form.work_experience.errors %}is-invalid{% endif %}" rows="6">{{ form.work_experience.value|default_if_none:'' }}</textarea>
+          <textarea id="work_experience" name="work_experience"
+            class="form-control wysiwyg {% if form.work_experience.errors %}is-invalid{% endif %}"
+            rows="6">{{ form.work_experience.value|default_if_none:'' }}</textarea>
           {% if form.work_experience.errors %}
-            <div class="invalid-feedback d-block">{{ form.work_experience.errors.0 }}</div>
+          <div class="invalid-feedback d-block">{{ form.work_experience.errors.0 }}</div>
           {% endif %}
         </div>
 
         <!-- Education -->
         <div class="mb-4">
           <label class="form-label fw-bold">Education</label>
-          <textarea id="education" name="education" class="form-control wysiwyg {% if form.education.errors %}is-invalid{% endif %}" rows="6">{{ form.education.value|default_if_none:'' }}</textarea>
+          <textarea id="education" name="education"
+            class="form-control wysiwyg {% if form.education.errors %}is-invalid{% endif %}"
+            rows="6">{{ form.education.value|default_if_none:'' }}</textarea>
           {% if form.education.errors %}
-            <div class="invalid-feedback d-block">{{ form.education.errors.0 }}</div>
+          <div class="invalid-feedback d-block">{{ form.education.errors.0 }}</div>
           {% endif %}
         </div>
 
         <!-- Other -->
         <div class="mb-4">
           <label class="form-label fw-bold">Other</label>
-          <textarea id="other" name="other" class="form-control wysiwyg {% if form.other.errors %}is-invalid{% endif %}" rows="6">{{ form.other.value|default_if_none:'' }}</textarea>
+          <textarea id="other" name="other" class="form-control wysiwyg {% if form.other.errors %}is-invalid{% endif %}"
+            rows="6">{{ form.other.value|default_if_none:'' }}</textarea>
           {% if form.other.errors %}
-            <div class="invalid-feedback d-block">{{ form.other.errors.0 }}</div>
+          <div class="invalid-feedback d-block">{{ form.other.errors.0 }}</div>
           {% endif %}
         </div>
 
         <!-- Notes -->
         <div class="mb-4">
           <label class="form-label fw-bold">Notes</label>
-          <textarea id="notes" name="notes" class="form-control wysiwyg" rows="4">{{ form.notes.value|default_if_none:'' }}</textarea>
+          <textarea id="notes" name="notes" class="form-control wysiwyg"
+            rows="4">{{ form.notes.value|default_if_none:'' }}</textarea>
         </div>
 
       </div>
@@ -96,14 +109,16 @@
         <!-- Profile Image -->
         <div class="text-center mb-4">
           {% if form.instance.profile_image %}
-            <img src="{{ form.instance.profile_image.url }}" class="rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+          <img src="{{ form.instance.profile_image.url }}" class="rounded-circle mb-3"
+            style="width: 150px; height: 150px; object-fit: cover;">
           {% else %}
-            <img src="{% static 'media/images/user-pic.png' %}" class="rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+          <img src="{% static 'media/images/user-pic.png' %}" class="rounded-circle mb-3"
+            style="width: 150px; height: 150px; object-fit: cover;">
           {% endif %}
           <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <input type="file" name="profile_image" class="form-control mt-2">
-        </form>
+          </form>
         </div>
 
         <!-- Contact Information -->
@@ -111,61 +126,68 @@
           <h5 class="card-title fw-bold">Contact Information</h5>
 
           <!-- Email -->
-          <input type="email" name="email" class="form-control mb-2 {% if form.email.errors %}is-invalid{% endif %}" placeholder="Email" value="{{ form.email.value|default_if_none:'' }}">
-            {% if form.email.errors %}
-              <div class="invalid-feedback d-block">{{ form.email.errors.0 }}</div>
-            {% endif %}
+          <input type="email" name="email" class="form-control mb-2 {% if form.email.errors %}is-invalid{% endif %}"
+            placeholder="Email" value="{{ form.email.value|default_if_none:'' }}">
+          {% if form.email.errors %}
+          <div class="invalid-feedback d-block">{{ form.email.errors.0 }}</div>
+          {% endif %}
 
           <!-- Phone number -->
-          <input type="text" name="phone_number" class="form-control mb-2 {% if form.phone_number.errors %}is-invalid{% endif %}" placeholder="Phone" value="{{ form.phone_number.value|default_if_none:'' }}">
+          <input type="text" name="phone_number"
+            class="form-control mb-2 {% if form.phone_number.errors %}is-invalid{% endif %}" placeholder="Phone"
+            value="{{ form.phone_number.value|default_if_none:'' }}">
           {% if form.phone_number.errors %}
-            <div class="invalid-feedback d-block">{{ form.phone_number.errors.0 }}</div>
+          <div class="invalid-feedback d-block">{{ form.phone_number.errors.0 }}</div>
           {% endif %}
 
           <!-- Location -->
-          <input type="text" name="location" class="form-control {% if form.location.errors %}is-invalid{% endif %}" placeholder="Location" value="{{ form.location.value|default_if_none:'' }}">
-            {% if form.location.errors %}
-              <div class="invalid-feedback d-block">{{ form.location.errors.0 }}</div>
-            {% endif %}
+          <input type="text" name="location" class="form-control {% if form.location.errors %}is-invalid{% endif %}"
+            placeholder="Location" value="{{ form.location.value|default_if_none:'' }}">
+          {% if form.location.errors %}
+          <div class="invalid-feedback d-block">{{ form.location.errors.0 }}</div>
+          {% endif %}
         </div>
 
         <!-- Skills -->
         <div class="card p-3 mb-4">
           <h5 class="card-title fw-bold">Skills</h5>
-          <input id="top_skills" name="top_skills" class="form-control {% if form.top_skills.errors %}is-invalid{% endif %}" value="{{ form.top_skills.value|default_if_none:'' }}">
-            <small class="text-muted mt-1 d-block">Separate skills by commas or Enter.</small>
-            {% if form.top_skills.errors %}
-              <div class="invalid-feedback d-block">{{ form.top_skills.errors.0 }}</div>
-            {% endif %}
+          <input id="top_skills" name="top_skills"
+            class="form-control {% if form.top_skills.errors %}is-invalid{% endif %}"
+            value="{{ form.top_skills.value|default_if_none:'' }}">
+          <small class="text-muted mt-1 d-block">Separate skills by commas or Enter.</small>
+          {% if form.top_skills.errors %}
+          <div class="invalid-feedback d-block">{{ form.top_skills.errors.0 }}</div>
+          {% endif %}
         </div>
 
         <!-- Links -->
         <div class="card p-3 mb-4">
           <h5 class="card-title fw-bold">Links</h5>
-            <!-- Här kommer alla existerande länkar -->
-            <div id="linkFields">
-              {% if form.instance.links %}
-                {% for link in form.instance.get_links %}
-                <div class="d-flex gap-2 mb-2">
-                  <input type="text" name="link_names" value="{{ link.name }}" class="form-control" placeholder="Link name">
-                  <input type="text" name="link_urls" value="{{ link.url }}" class="form-control" placeholder="Link URL">
-                  <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeLink(this)">X</button>
-                </div>
-                {% endfor %}
-              {% endif %}
+          <!-- Här kommer alla existerande länkar -->
+          <div id="linkFields">
+            {% if form.instance.links %}
+            {% for link in form.instance.get_links %}
+            <div class="d-flex gap-2 mb-2">
+              <input type="text" name="link_names" value="{{ link.name }}" class="form-control" placeholder="Link name">
+              <input type="text" name="link_urls" value="{{ link.url }}" class="form-control" placeholder="Link URL">
+              <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeLink(this)">X</button>
             </div>
-
-            <!-- Här läggs nya rader till -->
-            <button type="button" class="btn button-base outline-button mt-2" onclick="addLinkRow()">+ Add another link</button>
+            {% endfor %}
+            {% endif %}
           </div>
 
-          {% if form.links.errors %}
-          <div class="invalid-feedback d-block text-danger mt-2">
-            {{ form.links.errors.0 }}
-          </div>
-          {% endif %}
+          <!-- Här läggs nya rader till -->
+          <button type="button" class="btn button-base outline-button mt-2" onclick="addLinkRow()">+ Add another
+            link</button>
+        </div>
 
-          <!-- Files -->
+        {% if form.links.errors %}
+        <div class="invalid-feedback d-block text-danger mt-2">
+          {{ form.links.errors.0 }}
+        </div>
+        {% endif %}
+
+        <!-- Files -->
         <div class="mb-4">
           <label class="form-label fw-bold">Files</label>
           <input type="file" name="candidate_files" class="form-control" multiple>

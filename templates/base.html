@@ -2,11 +2,14 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Selekt is your all-in-one hub for candidate profiles. Upload, search, and manage CVs, interview notes, and test results – structured and AI-powered.">
-  <meta name="keywords" content="candidate profiles, CV database, recruitment platform, interview notes, AI recruitment, candidate search, Selekt, test results, hiring tools, talent management">
+  <meta name="description"
+    content="Selekt is your all-in-one hub for candidate profiles. Upload, search, and manage CVs, interview notes, and test results – structured and AI-powered.">
+  <meta name="keywords"
+    content="candidate profiles, CV database, recruitment platform, interview notes, AI recruitment, candidate search, Selekt, test results, hiring tools, talent management">
   <title>Selekt - Candidate Hub</title>
 
   <!-- Favicon -->
@@ -38,26 +41,32 @@
     </div>
 
     <div class="d-flex align-items-center gap-3 header-buttons">
-      <button type="button" class="btn button-base cta-button" data-bs-toggle="modal" data-bs-target="#uploadCandidateModal">
+      <button type="button" class="btn button-base cta-button" data-bs-toggle="modal"
+        data-bs-target="#uploadCandidateModal">
         <i class="fa-solid fa-plus"></i> Upload Candidate
       </button>
 
       <!-- User Dropdown -->
       <div class="dropdown">
-        <button class="btn dropdown-toggle p-0 border-0 bg-transparent" type="button" id="userMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+        <button class="btn dropdown-toggle p-0 border-0 bg-transparent" type="button" id="userMenuButton"
+          data-bs-toggle="dropdown" aria-expanded="false">
           {% if profile and profile.profile_image %}
-            <img src="{{ profile.profile_image.url }}" alt="Profile" class="rounded-circle profile-pic">
+          <img src="{{ profile.profile_image.url }}" alt="Profile" class="rounded-circle profile-pic">
           {% else %}
-            <img src="{% static 'media/images/user-pic.png' %}" alt="Default Image" class="rounded-circle profile-pic">
+          <img src="{% static 'media/images/user-pic.png' %}" alt="Default Image" class="rounded-circle profile-pic">
           {% endif %}
         </button>
         <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userMenuButton">
           <li class="dropdown-header small text-muted">
             You are logged in as:<br><strong>{{ user.username }}</strong>
           </li>
-          <li><hr class="dropdown-divider"></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
           <li><a class="dropdown-item" href="{% url 'settings' %}">Settings</a></li>
-          <li><hr class="dropdown-divider"></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
           <li>
             <form method="post" action="{% url 'logout' %}">
               {% csrf_token %}
@@ -99,4 +108,5 @@
     });
   </script>
 </body>
+
 </html>
