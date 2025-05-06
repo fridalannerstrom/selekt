@@ -97,6 +97,8 @@
       <!-- Tab content -->
       <div class="tab-content mt-4" id="profileTabsContent">
         <div class="tab-pane fade show active" id="about" role="tabpanel">
+
+          <!-- Profile Summary -->
           <h4 class="fw-bold">Profile</h4>
           {% if candidate.profile_summary %}
             <p>{{ candidate.profile_summary|safe }}</p>
@@ -105,14 +107,24 @@
               No profile summary added yet. <a href="{% url 'candidate_edit' candidate.pk %}">Add information here</a>
             </div>
           {% endif %}
+
+          <hr>
+
+          <!-- Skills -->
           <h4 class="fw-bold mt-4">Skills</h4>
           {% if candidate.top_skills %}
+          <div class="skill-container-modal">
             {% for skill in candidate.skill_list %}<span class="skill-badge-modal">{{ skill }}</span>{% endfor %}
+          </div>
           {% else %}
             <div class="alert alert-warning">
               No skills added yet. <a href="{% url 'candidate_edit' candidate.pk %}">Add information here</a>
             </div>
           {% endif %}
+
+          <hr>
+
+          <!-- Word Experience -->
           <h4 class="fw-bold mt-4">Work Experience</h4>
           {% if candidate.work_experience %}
             <div class="mb-3">{{ candidate.work_experience|safe }}</div>
@@ -121,6 +133,10 @@
               No work experience added yet. <a href="{% url 'candidate_edit' candidate.pk %}">Add information here</a>
             </div>
           {% endif %}
+
+          <hr>
+
+          <!-- Education -->
           <h4 class="fw-bold mt-4">Education</h4>
           {% if candidate.education %}
             <p>{{ candidate.education|safe }}</p>
@@ -129,6 +145,10 @@
               No education information yet. <a href="{% url 'candidate_edit' candidate.pk %}">Add information here</a>
             </div>
           {% endif %}
+
+          <hr>
+
+          <!-- Other -->
           <h4 class="fw-bold mt-4">Other</h4>
           {% if candidate.other %}
             <p>{{ candidate.other|safe }}</p>
@@ -180,8 +200,8 @@
     <!-- Right column: Contact information -->
     <div class="col-lg-4 right-candidate-column">
       <div class="sidebar">
-        <h6 class="fw-bold">Contact Information</h6>
-        <p>
+        <h4 class="fw-bold mb-4">Contact Information</h4>
+        <p class="candidate-modal-contact">
           <strong>Email</strong>
           <br>
           {% if candidate.email %}
@@ -190,7 +210,7 @@
             <span class="text-muted">No email provided.</span>
           {% endif %}
         </p>
-        <p>
+        <p class="candidate-modal-contact">
           <strong>Phone</strong>
           <br>
           {% if candidate.phone_number %}
@@ -199,7 +219,7 @@
             <span class="text-muted">No phone number provided.</span>
           {% endif %}
         </p>
-        <p>
+        <p class="candidate-modal-contact">
           <strong>Address</strong>
           <br>
           {% if candidate.location %}
@@ -208,13 +228,13 @@
             <span class="text-muted">No location provided.</span>
           {% endif %}
         </p>
-        <p>
+        <p class="candidate-modal-contact">
           <strong>Links</strong>
           <br>
           {% if candidate.get_links %}
-            <div class="d-flex flex-wrap gap-2 mt-2">
+            <div class="gap-2 mt-2">
               {% for link in candidate.get_links %}
-                <a href="{{ link.url }}" target="_blank" class="btn btn-light btn-sm">{{ link.name }}</a>
+                <a href="{{ link.url }}" target="_blank" class="btn btn-light btn-sm candidate-modal-link">{{ link.name }}</a>
               {% endfor %}
             </div>
           {% else %}
