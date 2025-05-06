@@ -150,6 +150,41 @@
 </div>
 {% endif %}
 
+<!-- Upload Candidate Modal -->
+<div class="modal fade" id="uploadCandidateModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-4 text-center upload-modal">
+
+      <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
+
+      <h3 class="mb-3 mt-4">How would you like to add your candidate?</h3>
+
+      <div class="row justify-content-center mt-4 gap-3 mb-4">
+
+        <!-- Upload with PDF -->
+        <div class="col-10 col-md-5 p-4 border upload-choice" onclick="window.location.href='{% url 'upload_pdf_candidates' %}'">
+          <div class="text-center">
+            <i class="fa-regular fa-file-pdf fa-2x mb-4"></i>
+            <h6><strong>Upload with PDF</strong></h6>
+            <p class="text-muted">Let AI scan the CV and pre-fill the form for you.</p>
+          </div>
+        </div>
+
+        <!-- Fill manually -->
+        <div class="col-10 col-md-5 border upload-choice p-4" onclick="window.location.href='{% url 'candidate_add' %}'">
+          <div class="text-center mb-2">
+            <i class="fa-regular fa-pen-to-square fa-2x mb-4"></i>
+            <h6><strong>Add manually</strong></h6>
+            <p class="text-muted small">Fill in the candidate details yourself step by step.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
 </body>
 
 <!-- jQuery – måste ligga FÖRST -->
