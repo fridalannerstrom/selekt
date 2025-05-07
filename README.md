@@ -698,7 +698,6 @@ Each test includes a description of the area, the expected result, the actual re
 |-----------|------------------|----------------|------------|
 | Empty form submission | Validation errors shown, no data saved | ✅ Errors displayed correctly | ![Empty form](screenshots/empty_form.png) |
 | Invalid email input | Email validation error shown | ✅ Error shown | ![Invalid email](screenshots/invalid_email.png) |
-| Long text input | Text wraps or is limited gracefully | ✅ Handled correctly | ![Long text](screenshots/long_text.png) |
 | Nonexistent candidate access | 404 error returned | ✅ 404 page shown | ![404](screenshots/404_candidate.png) |
 | OpenAI failure handling | Graceful error shown to user | ✅ Custom error message shown | ![OpenAI error](screenshots/openai_error.png) |
 | Rapid favorite toggling | No crash, favorite toggled correctly | ✅ Works as expected | ![Favorite toggle](screenshots/favorite_toggle.png) |
@@ -706,6 +705,10 @@ Each test includes a description of the area, the expected result, the actual re
 | Unauthorized access | Redirect to login | ✅ Redirected as expected | ![Redirect](screenshots/unauthorized.png) |
 | Mobile view of dashboard | UI is responsive and buttons work | ✅ Responsive and readable | ![Mobile](screenshots/mobile_dashboard.png) |
 | Candidate with no data | Page loads, blank fields handled | ✅ Empty sections render cleanly | ![No data](screenshots/empty_candidate.png) |
+| Invalid file upload | Error message shown for unsupported file types | ✅ Error displayed, upload blocked | ![File Upload](screenshots/empty_candidate.png) |
+| Session timeout | After logout, accessing protected routes redirects to login | ✅ Redirect to login page shown | ![Session timeout](screenshots/empty_candidate.png) |
+| Page refresh during form | Form resets cleanly on refresh | ✅ Form resets without error | ![Page Refresh](screenshots/empty_candidate.png) |
+| Special characters in candidate | Text with symbols (e.g. é, ö, @) saved and displayed correctly | ✅ Characters saved and rendered correctly | ![Special Characters](screenshots/empty_candidate.png) |
 
 ---
 
