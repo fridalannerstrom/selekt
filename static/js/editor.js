@@ -58,20 +58,33 @@ function addLinkRow(name = '', url = '') {
 function updateHiddenLinks() {
     const hiddenInput = document.getElementById('linksField'); 
     const linkRows = document.querySelectorAll('#linkFields > div'); 
-    let linksData = '';
+    const jsonInput = document.getElementById("hiddenLinksInput");
 
-    // Loop through each row and collect valid name+url pairs
+    let linksData = '';
+    let linksArray = []; 
+
     linkRows.forEach(row => {
         const inputs = row.querySelectorAll('input');
         const name = inputs[0].value.trim();
         const url = inputs[1].value.trim();
+
         if (name && url) {
-            linksData += `${name}:::${url};;;`; // Custom format with ::: and ;;;
+            linksData += `${name}:::${url};;;`;
+            linksArray.push({ name, url });
         }
     });
 
-    // Set the combined value in the hidden field
-    hiddenInput.value = linksData;
+    if (hiddenInput) {
+        hiddenInput.value = linksData;
+    } else {
+        console.warn("Hidden input with id='linksField' not found.");
+    }
+
+    if (jsonInput) {
+        jsonInput.value = JSON.stringify(linksArray);
+    } else {
+        console.warn("Hidden input with id='hiddenLinksInput' not found.");
+    }
 }
 
 // Removes a link row when the remove button is clicked (alternative method)

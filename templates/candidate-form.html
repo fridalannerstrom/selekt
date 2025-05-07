@@ -163,7 +163,8 @@
         <!-- Links -->
         <div class="card p-3 mb-4">
           <h5 class="card-title fw-bold">Links</h5>
-          <!-- Här kommer alla existerande länkar -->
+          
+          <!-- All links -->
           <div id="linkFields">
             {% if form.instance.links %}
             {% for link in form.instance.get_links %}
@@ -176,7 +177,10 @@
             {% endif %}
           </div>
 
-          <!-- Här läggs nya rader till -->
+          <input type="hidden" id="linksField" name="linksField">
+          <input type="hidden" id="hiddenLinksInput" name="linksJson">
+
+          <!-- New links -->
           <button type="button" class="btn button-base outline-button mt-2" onclick="addLinkRow()">+ Add another
             link</button>
         </div>
