@@ -768,3 +768,7 @@ Added the necessary hidden inputs in the HTML form:
 Updated the JavaScript to include null checks and graceful fallbacks.
 
 The function now works as expected, storing both a combined string (linksField) and a JSON representation (linksJson) of the user-added links for further backend use.
+
+### ⚠️ ARIA Warning (non-blocking)
+
+A non-critical ARIA warning was observed in the browser console regarding `aria-hidden` on a modal element that retained focus. This warning does not impact the functionality or accessibility of the app for typical users, and was therefore left unresolved in this student project context.
