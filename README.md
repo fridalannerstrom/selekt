@@ -772,3 +772,12 @@ The function now works as expected, storing both a combined string (linksField) 
 ### ⚠️ ARIA Warning (non-blocking)
 
 A non-critical ARIA warning was observed in the browser console regarding `aria-hidden` on a modal element that retained focus. This warning does not impact the functionality or accessibility of the app for typical users, and was therefore left unresolved in this student project context.
+
+
+### 🟡 Conditional Script Execution
+
+To prevent JavaScript errors on pages where certain upload elements are not present, a conditional check was added to the `initUploadScript()` function. When expected DOM elements are missing, the script logs a non-blocking warning:
+
+> `Upload script not initialized: missing DOM elements.`
+
+This ensures the script only runs on pages that include the file upload interface, avoiding runtime errors and improving code robustness across templates.

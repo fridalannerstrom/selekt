@@ -5,17 +5,21 @@ function initUploadScript() {
     const selectedFilesList = document.getElementById("selectedFilesList");
     const uploadArea = document.getElementById("fileUploadArea");
     const fileListArea = document.getElementById("fileListArea");
+
+    if (!uploadArea || !fileElem || !uploadBtn || !selectedFilesList || !fileListArea) {
+        console.warn("Upload script not initialized: missing DOM elements.");
+        return;
+    }
+
     let selectedFiles = [];
-  
-    if (!uploadArea) return;
-  
+
     const candidateId = uploadArea.dataset.candidateId;
   
     // Handle file selection
     fileElem.addEventListener("change", function () {
-      selectedFiles = Array.from(fileElem.files);
-      selectedFilesList.innerHTML = selectedFiles.map(f => `<div>${f.name}</div>`).join("");
-      uploadBtn.classList.remove("d-none");
+        selectedFiles = Array.from(fileElem.files);
+        selectedFilesList.innerHTML = selectedFiles.map(f => `<div>${f.name}</div>`).join("");
+        uploadBtn.classList.remove("d-none");
     });
   
     // Handle upload click
