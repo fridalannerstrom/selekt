@@ -1,3 +1,4 @@
+// Run this once the entire DOM is fully loaded
 document.addEventListener('DOMContentLoaded', function () {
 
     document.querySelectorAll('.dot-menu').forEach(menu => {

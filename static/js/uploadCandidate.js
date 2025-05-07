@@ -1,7 +1,6 @@
-/**
- * Handles PDF upload and automatic candidate creation via OpenAI.
- */
+// Handles PDF upload and automatic candidate creation via OpenAI.
 
+// Run this once the entire DOM is fully loaded
 document.addEventListener("DOMContentLoaded", function () {
     const uploadArea = document.getElementById("fileUploadArea");
 
