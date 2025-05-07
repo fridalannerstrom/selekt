@@ -7,7 +7,9 @@ function initUploadScript() {
     const fileListArea = document.getElementById("fileListArea");
 
     if (!uploadArea || !fileElem || !uploadBtn || !selectedFilesList || !fileListArea) {
-        console.warn("Upload script not initialized: missing DOM elements.");
+        if (window.location.pathname.includes("/candidates/") && window.location.pathname.includes("upload")) {
+            console.warn("Upload script not initialized: missing DOM elements.");
+        }
         return;
     }
 
