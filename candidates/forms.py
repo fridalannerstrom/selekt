@@ -1,6 +1,7 @@
 from django import forms
 from .models import Candidate
 
+# Custom form for creating/editing Candidate instances
 class CandidateForm(forms.ModelForm):
 
     class Meta:
@@ -26,12 +27,21 @@ class CandidateForm(forms.ModelForm):
             if field_name != 'name':
                 field.required = False
 
+            # Add Bootstrap styling to all fields
             field.widget.attrs['class'] = 'form-control'
 
 
+# Utility function to parse serialized link data into a structured list
 def get_links(form):
     """
-    Return the links as a list of dictionaries: [{'name': ..., 'url': ...}]
+    Return the 'links' field as a list of dictionaries:
+    [{'name': ..., 'url': ...}]
+    
+    The data is stored as a single string in this format:
+    "GitHub:::https://github.com/user;;;LinkedIn:::https://linkedin.com/in/user"
+    
+    This format is used because it's the structure returned by OpenAI
+    when extracting multiple named links from a candidate's profile.
     """
     links = []
     link_data = form.data.get('links') or form.initial.get('links')

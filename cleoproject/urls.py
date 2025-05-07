@@ -23,15 +23,26 @@ from django.conf.urls.static import static
 from candidates import views
 
 urlpatterns = [
+    # Admin
     path('admin/', admin.site.urls),
-    path('', candidate_views.index, name='index'),
+
+    # Authentication
     path('signup/', candidate_views.signup, name='signup'),
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+
+    # Dashboard & home
+    path('', candidate_views.index, name='index'),
     path('dashboard/', candidate_views.dashboard, name='dashboard'),
+
+    # App: Candidates
     path('candidates/', include('candidates.urls')), 
+
+    # User settings & account
     path('settings/', views.settings_view, name='settings'),
     path('settings/delete/', views.delete_account, name='delete_account'),
+
+    # Misc AJAX/API views
     path('toggle-favorite/<int:candidate_id>/', views.toggle_favorite, name='toggle_favorite'),
     path('dismiss-welcome/', views.dismiss_welcome, name='dismiss_welcome'), 
 ]
