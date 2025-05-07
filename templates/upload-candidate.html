@@ -4,7 +4,10 @@
 {% block content %}
 <div class="container py-5">
 
+  <!-- Success message that appears after file upload -->
   <div id="flashMessage" class="alert alert-success d-none" role="alert">Files uploaded successfully!</div>
+
+   <!-- File upload area -->
   <div id="fileUploadArea" class="border rounded p-4 text-center mb-4">
     <img src="{% static 'media/images/upload-candidate.png' %}" alt="Upload illustration" class="upload-illustration mb-4">
     <h1 class="small-h1 mb-2">One PDF in – full candidate profile out!</h1>
@@ -12,8 +15,6 @@
     <input type="file" id="fileElem" accept=".pdf" name="file" style="display:none">
     <label for="fileElem" class="btn btn-primary mb-3 button-base scn-button mt-3">Select Files</label>
   </div>
-
-  <div id="uploadResults"></div>
 
   <!-- CSRF -->
   <form id="csrfTokenForm" style="display:none;">

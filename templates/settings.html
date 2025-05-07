@@ -10,9 +10,9 @@
       {% if messages %}
       <div class="container mt-3">
         {% for message in messages %}
-          <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ message }}
-          </div>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          {{ message }}
+        </div>
         {% endfor %}
       </div>
       {% endif %}
@@ -33,14 +33,14 @@
 
         <!-- First Name -->
         <div class="mb-4">
-            <label class="form-label fw-bold">First Name</label>
-            <input type="text" name="first_name" class="form-control" value="{{ user.first_name|default_if_none:'' }}">
+          <label class="form-label fw-bold">First Name</label>
+          <input type="text" name="first_name" class="form-control" value="{{ user.first_name|default_if_none:'' }}">
         </div>
-        
+
         <!-- Last Name -->
         <div class="mb-4">
-            <label class="form-label fw-bold">Last Name</label>
-            <input type="text" name="last_name" class="form-control" value="{{ user.last_name|default_if_none:'' }}">
+          <label class="form-label fw-bold">Last Name</label>
+          <input type="text" name="last_name" class="form-control" value="{{ user.last_name|default_if_none:'' }}">
         </div>
 
         <!-- Email -->
@@ -55,20 +55,20 @@
         <h4 class="my-4">Change Password</h4>
 
         <div class="mb-4">
-        <label for="current_password">Current Password</label>
-        <input type="password" name="current_password" id="current_password" class="form-control">
+          <label for="current_password">Current Password</label>
+          <input type="password" name="current_password" id="current_password" class="form-control">
         </div>
 
         <div class="mb-4">
-        <label for="new_password1">New Password</label>
-        <input type="password" name="new_password1" id="new_password1" class="form-control">
-          </div>
+          <label for="new_password1">New Password</label>
+          <input type="password" name="new_password1" id="new_password1" class="form-control">
+        </div>
 
         <div class="mb-4">
-        <label for="new_password2">Confirm New Password</label>
-        <input type="password" name="new_password2" id="new_password2" class="form-control">
-      </div>
-        
+          <label for="new_password2">Confirm New Password</label>
+          <input type="password" name="new_password2" id="new_password2" class="form-control">
+        </div>
+
       </div>
 
       <!-- Right Side -->
@@ -78,10 +78,12 @@
         <div class="card p-3 mb-4 text-center">
           <h5 class="card-title fw-bold">Profile Picture</h5>
           {% if profile.profile_image %}
-          <img src="{{ profile.profile_image.url }}" class="rounded-circle settings-profile-pic" style="width: 100px; height: 100px; object-fit: cover;">
-        {% else %}
-          <img src="{% static 'media/images/user-pic.png' %}" class="rounded-circle settings-profile-pic" style="width: 100px; height: 100px; object-fit: cover;">
-        {% endif %}
+          <img src="{{ profile.profile_image.url }}" class="rounded-circle settings-profile-pic"
+            style="width: 100px; height: 100px; object-fit: cover;">
+          {% else %}
+          <img src="{% static 'media/images/user-pic.png' %}" class="rounded-circle settings-profile-pic"
+            style="width: 100px; height: 100px; object-fit: cover;">
+          {% endif %}
           <input type="file" name="profile_picture" class="form-control mt-2">
         </div>
 
@@ -89,37 +91,21 @@
         <div class="card p-3 border-danger">
           <h5 class="card-title text-danger fw-bold">Danger Zone</h5>
           <p class="small text-muted mb-3">Delete your account permanently. This action cannot be undone.</p>
-          <button type="button" class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
+          <button type="button" class="btn btn-danger w-100" data-bs-toggle="modal"
+            data-bs-target="#confirmDeleteModal">
             Delete Account
           </button>
         </div>
 
-                <!-- Save Changes Button -->
-                <div class="mt-4 d-grid">
-                  <button type="submit" class="btn button-base scn-button">Save Changes</button>
-                </div>
+        <!-- Save Changes Button -->
+        <div class="mt-4 d-grid">
+          <button type="submit" class="btn button-base scn-button">Save Changes</button>
+        </div>
       </div>
 
     </div>
 
   </form>
 </div>
-
-<!-- Modal for Delete Confirmation -->
-<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content p-4 text-center">
-        <h5>Are you sure you want to delete your account?</h5>
-        <p class="text-muted small">This action cannot be undone.</p>
-        <div class="d-flex justify-content-center gap-2 mt-3">
-          <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
-          <form action="{% url 'delete_account' %}" method="post">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-danger btn-sm">Yes, delete</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
 
 {% endblock %}
