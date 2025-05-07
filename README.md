@@ -667,7 +667,7 @@ Code coverage was measured using the `coverage.py` tool.
 ```bash
 coverage run manage.py test
 coverage report
-coverage html  # optional: generate a detailed HTML report
+coverage html 
 ```
 
 ### Result summary:
@@ -684,17 +684,36 @@ This level of test coverage is considered strong for a full-stack student projec
 
 ---
 
-## 🧪 Manual Testing
+# Manual Testing
 
-In addition to automated tests, extensive manual testing was carried out, including:
+In addition to automated testing, this project was thoroughly manually tested to ensure robustness, proper validation, and user experience across different usage scenarios. These tests are essential for fulfilling the criteria for **Distinction** as outlined in the Code Institute Full Stack assessment rubric.
 
-- Creating, editing, and deleting candidates via the UI.
-- Verifying that unauthorized access to candidate detail pages is blocked.
-- Testing file upload and modal behavior.
-- Checking that welcome modal logic works across sessions.
-- Confirming mobile responsiveness and usability.
+Each test includes a description of the area, the expected result, the actual result, and optionally a screenshot for visual proof.
 
-Edge cases were also tested, including empty fields, rapid toggling of favorite buttons, and multiple users interacting with the system.
+---
+
+## ✅ Manual Test Table
+
+| Test Area | Expected Result | Actual Result | Screenshot |
+|-----------|------------------|----------------|------------|
+| Empty form submission | Validation errors shown, no data saved | ✅ Errors displayed correctly | ![Empty form](screenshots/empty_form.png) |
+| Invalid email input | Email validation error shown | ✅ Error shown | ![Invalid email](screenshots/invalid_email.png) |
+| Long text input | Text wraps or is limited gracefully | ✅ Handled correctly | ![Long text](screenshots/long_text.png) |
+| Nonexistent candidate access | 404 error returned | ✅ 404 page shown | ![404](screenshots/404_candidate.png) |
+| OpenAI failure handling | Graceful error shown to user | ✅ Custom error message shown | ![OpenAI error](screenshots/openai_error.png) |
+| Rapid favorite toggling | No crash, favorite toggled correctly | ✅ Works as expected | ![Favorite toggle](screenshots/favorite_toggle.png) |
+| Welcome modal close | Closes and doesn't reappear after reload | ✅ Modal dismissed permanently | ![Modal](screenshots/welcome_modal.png) |
+| Unauthorized access | Redirect to login | ✅ Redirected as expected | ![Redirect](screenshots/unauthorized.png) |
+| Mobile view of dashboard | UI is responsive and buttons work | ✅ Responsive and readable | ![Mobile](screenshots/mobile_dashboard.png) |
+| Candidate with no data | Page loads, blank fields handled | ✅ Empty sections render cleanly | ![No data](screenshots/empty_candidate.png) |
+
+---
+
+## Notes
+
+- Manual tests were performed on both Chrome and Firefox, in desktop and mobile views.
+- Edge cases such as excessive input, fast user interactions, and broken sessions were considered.
+- Where relevant, screenshots have been added in a `screenshots/` directory to verify the results visually.
 
 ---
 
