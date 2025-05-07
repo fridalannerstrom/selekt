@@ -790,17 +790,17 @@ This ensures the script only runs on pages that include the file upload interfac
 
 | File | Validator Result | Comments |
 |------|------------------|----------|
-| `base.html` | ✅ Valid | - |
+| `base.html` | | - |
 | `dashboard.html` |  | - |
 | `candidate-form.html` |  | - |
-| `login.html` | | - |
+| `login.html` | ✅ Valid | - |
 | `register.html` |  | - |
 | `404.html` |  | - |
 | `add-candidate.html` |  | - |
 | `base-auth.html` |  | - |
 | `candidate-form.html` |  | - |
 | `file-list.html` |  | - |
-| `index.html` |  | - |
+| `index.html` | ✅ Valid | - |
 | `modals.html` |  | - |
 | `settings.html` |  | - |
 | `signup.html` |  | - |
