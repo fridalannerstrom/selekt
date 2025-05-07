@@ -803,7 +803,7 @@ This ensures the script only runs on pages that include the file upload interfac
 | `index.html` | ✅ Valid | - |
 | `modals.html` |  | - |
 | `settings.html` |  | - |
-| `signup.html` |  | - |
+| `signup.html` | ✅ Valid | - |
 | `upload-candidate.html` |  | - |
 
 
