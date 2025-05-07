@@ -63,3 +63,12 @@ class CandidateTests(TestCase):
         response = self.client.post(reverse('candidate_delete', args=[candidate.id]))
         self.assertEqual(response.status_code, 302)
         self.assertFalse(Candidate.objects.filter(id=candidate.id).exists())
+
+    def test_user_cannot_access_others_candidate(self):
+        """Users should not be able to access another user's candidate detail view."""
+        other_user = User.objects.create_user(username='otheruser', password='secret')
+        candidate = Candidate.objects.create(user=other_user, name='Not Yours')
+
+        response = self.client.get(reverse('candidate_detail', args=[candidate.id]))
+
+        self.assertEqual(response.status_code, 404)
