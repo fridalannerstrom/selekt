@@ -78,11 +78,10 @@
         <p class="text-muted mb-4">
           Let’s get your first candidate in – and show you how easy, structured and smart recruiting can be.
         </p>
-  
-        <button id="uploadFirstCandidateBtn"
-                class="btn button-base cta-button mb-4"
-                data-redirect-url="{% url 'candidate_add' %}">
-          Upload your first candidate
+
+        <button type="button" class="btn button-base cta-button" data-bs-toggle="modal"
+        data-bs-target="#uploadCandidateModal">
+        Upload your first candidate
         </button>
   
         <div>
