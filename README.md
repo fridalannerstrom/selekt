@@ -699,7 +699,7 @@ Each test includes a description of the area, the expected result, the actual re
 | Empty form submission | Validation errors shown, no data saved | ✅ Errors displayed correctly | ![Empty form](static/media/documentation/empty-form.png) |
 | Invalid email input | Email validation error shown | ✅ Error shown | ![Invalid email](static/media/documentation/email-error.png) |
 | Nonexistent candidate access | 404 error returned | ✅ 404 page shown | ![404](static/media/documentation/404.png) |
-| OpenAI failure handling | Graceful error shown to user | ✅ Custom error message shown | ![OpenAI error](static/media/documentation/openaierror.png) |
+| OpenAI failure handling | Error shown to user with CTA | ✅ Error message and button shown | ![OpenAI error](static/media/documentation/openaierror.png) |
 | Rapid favorite toggling | No crash, favorite toggled correctly | ✅ Works as expected | ![Favorite toggle](static/media/documentation/favorite-toggle.png) |
 | Welcome modal close | Closes and doesn't reappear after reload | ✅ Modal dismissed permanently | ![Modal](static/media/documentation/welcome.png) |
 | Unauthorized access | Redirect to login | ✅ Redirected as expected | ![Redirect](static/media/documentation/redirect-login.png) |
