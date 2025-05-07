@@ -615,3 +615,68 @@ The JavaScript was restructured so that:
 - Script tags were ordered correctly: jQuery first, then Trumbowyg, then Bootstrap, and finally the custom script block.
 
 After this fix, the WYSIWYG editor works consistently across both **create** and **edit** candidate forms with full formatting functionality restored.
+
+
+
+
+# Testing
+
+This project includes both **automated** and **manual** testing to ensure that all key functionalities work reliably and securely. The testing effort covers everything from basic authentication and CRUD operations to session handling, AJAX responses, and AI data parsing. This is in line with the [Code Institute Full Stack assessment criteria](https://codeinstitute.net), aiming for **Distinction** level.
+
+---
+
+## ✅ Automated Testing
+
+Automated tests were written using Django's built-in `TestCase` framework and run with:
+
+```bash
+python manage.py test
+```
+
+### 🔬 Overview of Automated Tests
+
+| Test Name | Description |
+|-----------|-------------|
+| `test_dashboard_loads` | Ensures that the dashboard is accessible to logged-in users. |
+| `test_dashboard_requires_login` | Ensures that anonymous users are redirected to the login page. |
+| `test_create_candidate` | Checks that a candidate can be created successfully. |
+| `test_update_candidate` | Checks that candidate data can be updated via the form. |
+| `test_delete_candidate` | Verifies that a candidate can be deleted and removed from the database. |
+| `test_user_cannot_access_others_candidate` | Protects data by restricting access to other users’ candidates. |
+| `test_toggle_favorite` | Verifies that a user can toggle favorite status via AJAX and get a correct JSON response. |
+| `test_call_openai_returns_expected_data` | Mocks OpenAI response and verifies JSON structure and content parsing. |
+| `test_candidate_create_form_prefills_from_session` | Tests that session data correctly pre-fills the candidate creation form. |
+| `test_welcome_modal_shown_only_once` | Ensures the welcome modal is shown only on the first login and never again. |
+
+All tests pass successfully:
+
+```bash
+Ran 10 tests in X.XXXs
+OK
+```
+
+---
+
+## 🧪 Manual Testing
+
+In addition to automated tests, extensive manual testing was carried out, including:
+
+- Creating, editing, and deleting candidates via the UI.
+- Verifying that unauthorized access to candidate detail pages is blocked.
+- Testing file upload and modal behavior.
+- Checking that welcome modal logic works across sessions.
+- Confirming mobile responsiveness and usability.
+
+Edge cases were also tested, including empty fields, rapid toggling of favorite buttons, and multiple users interacting with the system.
+
+---
+
+## 🛠 Technologies Used for Testing
+
+- Python 3.11
+- Django TestCase (unit and view tests)
+- unittest.mock (mocking external APIs like OpenAI)
+- Bootstrap modals and JavaScript for frontend behavior simulation
+
+
+
