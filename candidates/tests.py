@@ -3,6 +3,42 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from .models import Candidate
 from django.conf import settings
+from unittest.mock import patch, MagicMock
+import json
+from candidates.views import call_openai
+
+
+class OpenAITests(TestCase):
+    @patch('candidates.views.client.chat.completions.create')
+    def test_call_openai_returns_expected_data(self, mock_create):
+        """call_openai() should return structured JSON when OpenAI responds"""
+        # Arrange
+        mock_response = MagicMock()
+        mock_response.choices = [
+            MagicMock(message=MagicMock(content=json.dumps({
+                "name": "Test Person",
+                "email": "test@example.com",
+                "phone_number": "123456789",
+                "job_title": "Developer",
+                "profile_summary": "An experienced developer.",
+                "work_experience": "5 years at Company X",
+                "education": "B.Sc. Computer Science",
+                "location": "Stockholm",
+                "links": "LinkedIn:::https://linkedin.com/in/test;;;",
+                "top_skills": "Python, Django",
+                "other": "",
+                "notes": ""
+            })))
+        ]
+        mock_create.return_value = mock_response
+
+        # Act
+        result = call_openai("Fake CV text here")
+
+        # Assert
+        self.assertEqual(result["name"], "Test Person")
+        self.assertEqual(result["job_title"], "Developer")
+        self.assertIn("Python", result["top_skills"])       
 
 class CandidateTests(TestCase):
     def setUp(self):
@@ -72,3 +108,40 @@ class CandidateTests(TestCase):
         response = self.client.get(reverse('candidate_detail', args=[candidate.id]))
 
         self.assertEqual(response.status_code, 404)
+
+    def test_toggle_favorite(self):
+        """User can toggle favorite status for a candidate."""
+        candidate = Candidate.objects.create(user=self.user, name='Favorite Test')
+
+        url = reverse('toggle_favorite', args=[candidate.id])
+        
+        # First POST – adds favorite
+        response = self.client.post(url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(response.status_code, 200)
+        self.assertJSONEqual(response.content, {'is_favorite': True})
+
+        # Second POST – removes favorite
+        response = self.client.post(url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(response.status_code, 200)
+        self.assertJSONEqual(response.content, {'is_favorite': False})
+
+    def test_candidate_create_form_prefills_from_session(self):
+        """Candidate form should prefill from session data"""
+        # Arrange
+        session = self.client.session
+        session['prefill_candidate'] = {
+            'name': 'Session Test',
+            'email': 'session@example.com',
+            'job_title': 'Prefilled Role',
+            'top_skills': 'React, Vue',
+        }
+        session.save()
+
+        # Act
+        response = self.client.get(reverse('candidate_create_with_prefill'))
+
+        # Assert
+        self.assertContains(response, 'value="Session Test"')
+        self.assertContains(response, 'value="session@example.com"')
+        self.assertContains(response, 'value="Prefilled Role"')
+        self.assertContains(response, 'React, Vue')
