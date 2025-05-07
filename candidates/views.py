@@ -1,46 +1,56 @@
+# ==========================================
+# IMPORTS
+# ==========================================
+
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import DetailView, UpdateView, CreateView, ListView, DeleteView
+from django.views.generic import DetailView, UpdateView, CreateView, DeleteView
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.urls import reverse_lazy
-from .models import Candidate, CandidateFile, Profile, Favorite
-from .forms import CandidateForm
-from django.http import Http404
+from django.urls import reverse_lazy, reverse
+from django.http import Http404, JsonResponse
 from django.template.loader import render_to_string
-from django.http import JsonResponse
 from django.contrib import messages
 from django.utils.safestring import mark_safe
 from django.db.models import Q, Count
-from django.contrib.auth import logout
 from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.password_validation import validate_password, ValidationError
-import fitz  # PyMuPDF
-from openai import OpenAI
 from django.conf import settings
-import env
-import json
 from django.views.decorators.http import require_http_methods
 from django.views.generic.edit import FormView
 from django.urls import reverse
 from django.utils.http import urlencode
-from .forms import CandidateForm
+
+import fitz  # PyMuPDF
 import logging
+import json
+import os
+import env
+
+from openai import OpenAI
+from .models import Candidate, CandidateFile, Profile, Favorite
+from .forms import CandidateForm
 
 logger = logging.getLogger(__name__)
-
-import os
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 
+# ==========================================
+# BASIC VIEWS: Index, Dashboard, Signup
+# ==========================================
+
+
+# View for the landing page. Redirects logged-in users to dashboard.
 def index(request):
     if request.user.is_authenticated:
         return redirect('dashboard')
     return render(request, 'index.html')
 
+
+# Handles dashboard logic: filtering, sorting, pagination and favorites.
 @login_required
 def dashboard(request):
     query = request.GET.get('q', '')
@@ -77,14 +87,17 @@ def dashboard(request):
         .order_by('-count')[:4]
     )
 
+    # Pagination
     paginator = Paginator(candidates, 12)
     page_number = request.GET.get('page')
     candidates = paginator.get_page(page_number)
 
+    # Prepare skill list and favorites
     for candidate in candidates:
         candidate.skill_list = [skill.strip() for skill in candidate.top_skills.split(',')]
         candidate.is_favorite = Favorite.objects.filter(user=request.user, candidate=candidate).exists()
 
+    # Show welcome popup for first-time users
     show_welcome_popup = False
     if hasattr(request.user, 'profile') and request.user.profile.is_first_login:
         show_welcome_popup = True
@@ -98,7 +111,8 @@ def dashboard(request):
     }
     return render(request, 'dashboard.html', context)
 
-# Signup
+
+# Signup view using built-in UserCreationForm
 def signup(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -110,7 +124,11 @@ def signup(request):
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
 
-# Add candidate
+# ==========================================
+# CANDIDATE VIEWS: Create, Read, Update, Delete, Modal, File Upload
+# ==========================================
+
+# Create new candidate (standard form)
 @method_decorator(login_required, name='dispatch')
 class CandidateCreateView(CreateView):
     model = Candidate
@@ -120,7 +138,7 @@ class CandidateCreateView(CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
 
-        # Hantera länkar som vanligt
+        # Format custom links
         link_names = self.request.POST.getlist('link_names')
         link_urls = self.request.POST.getlist('link_urls')
         combined_links = ''
@@ -131,6 +149,7 @@ class CandidateCreateView(CreateView):
 
         response = super().form_valid(form)
 
+        # Handle file uploads
         for file in self.request.FILES.getlist('candidate_files'):
             CandidateFile.objects.create(candidate=self.object, file=file)
 
@@ -140,7 +159,7 @@ class CandidateCreateView(CreateView):
         return reverse_lazy('dashboard')
 
 
-# Candidate detail
+# Candidate detail view
 class CandidateDetailView(DetailView):
     model = Candidate
     template_name = 'candidate-detail.html'
@@ -152,7 +171,7 @@ class CandidateDetailView(DetailView):
             raise Http404("This candidate does not belong to you.")
         return obj
 
-# Edit candidate
+# Update candidate
 class CandidateUpdateView(UpdateView):
     model = Candidate
     fields = [
@@ -171,6 +190,7 @@ class CandidateUpdateView(UpdateView):
     def form_valid(self, form):
         response = super().form_valid(form)
 
+        # Reformat links
         link_names = self.request.POST.getlist('link_names')
         link_urls = self.request.POST.getlist('link_urls')
 
@@ -189,7 +209,7 @@ class CandidateUpdateView(UpdateView):
         return self.request.path
 
 
-# Candidate Modal
+# Load candidate modal (AJAX)
 @login_required
 def candidate_modal(request, pk):
     candidate = get_object_or_404(Candidate, pk=pk, user=request.user)
@@ -200,6 +220,7 @@ def candidate_modal(request, pk):
   
     html = render_to_string('candidate-modal.html', {'candidate': candidate}, request=request)
     return JsonResponse({'html': html})
+
 
 # Delete candidate
 class CandidateDeleteView(DeleteView):
@@ -213,6 +234,7 @@ class CandidateDeleteView(DeleteView):
             raise Http404("This candidate does not belong to you.")
         return obj
 
+# Upload files to existing candidate
 def upload_candidate_files(request, pk):
     candidate = get_object_or_404(Candidate, id=pk)
 
@@ -223,13 +245,16 @@ def upload_candidate_files(request, pk):
 
     return JsonResponse({'error': 'Only POST method allowed'}, status=400)
 
+
+
+# Get files for candidate
 @login_required
 def get_candidate_files(request, pk):
     candidate = get_object_or_404(Candidate, pk=pk, user=request.user)
     html = render_to_string('file-list.html', {'candidate': candidate})
     return JsonResponse({'html': html})
 
-
+# Delete single file
 @login_required
 def delete_candidate_file(request, file_id):
     candidate_file = get_object_or_404(CandidateFile, id=file_id, candidate__user=request.user)
@@ -237,7 +262,7 @@ def delete_candidate_file(request, file_id):
     return JsonResponse({'message': 'File deleted successfully'})
 
 
-# Candidate Search
+# Candidate search view
 def candidate_search(request):
     query = request.GET.get('q', '')
     candidates = Candidate.objects.all()
@@ -245,7 +270,7 @@ def candidate_search(request):
 
     return render(request, 'candidate-search.html', {'candidates': candidates})
 
-
+# Filtering
 def filter_candidates(queryset, query):
     if query:
         queryset = queryset.filter(
@@ -256,6 +281,44 @@ def filter_candidates(queryset, query):
         )
     return queryset
 
+
+# ==========================================
+# FAVORITE & WELCOME LOGIC
+# ==========================================
+
+
+# Toggle favorite status for candidate
+@csrf_exempt
+@login_required
+def toggle_favorite(request, candidate_id):
+    candidate = get_object_or_404(Candidate, id=candidate_id)
+    favorite, created = Favorite.objects.get_or_create(user=request.user, candidate=candidate)
+
+    if not created:
+        favorite.delete()
+        is_favorite = False
+    else:
+        is_favorite = True
+
+    return JsonResponse({'is_favorite': is_favorite})
+
+# Dismiss welcome popup
+@csrf_exempt
+@login_required
+def dismiss_welcome(request):
+    if request.method == 'POST':
+        if hasattr(request.user, 'profile'):
+            request.user.profile.is_first_login = False
+            request.user.profile.save()
+        return JsonResponse({'status': 'ok'})
+    return JsonResponse({'status': 'error'}, status=400)
+
+
+# ==========================================
+# ACCOUNT & SETTINGS
+# ==========================================
+
+# Delete user account
 @login_required
 def delete_account(request):
     if request.method == 'POST':
@@ -265,9 +328,9 @@ def delete_account(request):
         return redirect('index')  
     else:
         return redirect('settings')
-    
 
-# Settings
+
+# View and update user settings (name, email, password, profile picture)
 @login_required
 def settings_view(request):
     user = request.user
@@ -280,7 +343,8 @@ def settings_view(request):
 
         if 'profile_picture' in request.FILES:
             profile.profile_image = request.FILES['profile_picture']
-        
+
+        # Password change validation        
         current_password = request.POST.get('current_password')
         new_password1 = request.POST.get('new_password1')
         new_password2 = request.POST.get('new_password2')
@@ -318,31 +382,13 @@ def settings_view(request):
 
     return render(request, 'settings.html', {'user': user, 'profile': profile})
 
-@csrf_exempt
-@login_required
-def toggle_favorite(request, candidate_id):
-    candidate = get_object_or_404(Candidate, id=candidate_id)
-    favorite, created = Favorite.objects.get_or_create(user=request.user, candidate=candidate)
 
-    if not created:
-        favorite.delete()
-        is_favorite = False
-    else:
-        is_favorite = True
+# ==========================================
+# AI PDF HANDLING (OpenAI, CV parsing)
+# ==========================================
 
-    return JsonResponse({'is_favorite': is_favorite})
 
-@csrf_exempt
-@login_required
-def dismiss_welcome(request):
-    if request.method == 'POST':
-        if hasattr(request.user, 'profile'):
-            request.user.profile.is_first_login = False
-            request.user.profile.save()
-        return JsonResponse({'status': 'ok'})
-    return JsonResponse({'status': 'error'}, status=400)
-
-# Upload PDF candidates
+# Upload PDF file and parse it with OpenAI
 @login_required
 def upload_pdf_candidates(request):
     if request.method == 'GET':
@@ -374,6 +420,8 @@ def upload_pdf_candidates(request):
 
         return JsonResponse({'results': [result]})
 
+
+# Extract text from uploaded PDF
 def extract_text_from_pdf(file):
     text = ""
     with fitz.open(stream=file.read(), filetype="pdf") as doc:
@@ -382,38 +430,7 @@ def extract_text_from_pdf(file):
     return text
 
 
-def call_openai(text):
-    import openai
-    openai.api_key = 'your-api-key-here'
-
-    prompt = f"Extract structured candidate data from the following CV:\n\n{text}"
-    response = openai.ChatCompletion.create(
-        model="gpt-4",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.2
-    )
-
-    content = response.choices[0].message.content
-    return eval(content)  # för demo, byt gärna till json.loads(...) om du returnerar JSON
-
-def create_candidate_from_data(data, user):
-    return Candidate.objects.create(
-        user=user,
-        name=data.get('name', 'Unnamed'),
-        email=data.get('email', ''),
-        phone_number=data.get('phone_number', ''),
-        job_title=data.get('job_title', ''),
-        profile_summary=data.get('profile_summary', ''),
-        work_experience=data.get('work_experience', ''),
-        education=data.get('education', ''),
-        location=data.get('location', ''),
-        links=data.get('links', ''),
-        top_skills=", ".join(data.get('top_skills', [])),  # list → str
-        other=data.get('other', ''),
-        notes=data.get('notes', ''),
-    )
-
-
+# Call OpenAI to extract structured data from CV text
 def call_openai(text):
     prompt = f"""
     You are an expert AI recruiter. Your task is to extract structured candidate data from the following CV text. 
@@ -450,6 +467,7 @@ def call_openai(text):
     content = response.choices[0].message.content.strip()
     return json.loads(content)
 
+# Save parsed data temporarily in session
 @login_required
 @require_http_methods(["POST"])
 def create_candidate_from_openai(request):
@@ -457,11 +475,10 @@ def create_candidate_from_openai(request):
         data = json.loads(request.body)
     except json.JSONDecodeError:
         return JsonResponse({'error': 'Invalid JSON'}, status=400)
-
-    # Spara datan i sessionen så vi kan använda den i formuläret
     request.session['prefill_candidate'] = data
     return JsonResponse({'redirect_url': reverse('candidate_create_with_prefill')})
 
+# Prefilled candidate creation view
 class CandidateCreatePrefilledView(CreateView):
     model = Candidate
     form_class = CandidateForm
@@ -482,7 +499,6 @@ class CandidateCreatePrefilledView(CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-
         link_names = self.request.POST.getlist('link_names')
         link_urls = self.request.POST.getlist('link_urls')
         combined_links = ''
