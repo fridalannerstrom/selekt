@@ -619,6 +619,7 @@ After this fix, the WYSIWYG editor works consistently across both **create** and
 
 
 
+
 # Testing
 
 This project includes both **automated** and **manual** testing to ensure that all key functionalities work reliably and securely. The testing effort covers everything from basic authentication and CRUD operations to session handling, AJAX responses, and AI data parsing. This is in line with the [Code Institute Full Stack assessment criteria](https://codeinstitute.net), aiming for **Distinction** level.
@@ -657,6 +658,32 @@ OK
 
 ---
 
+## 📊 Code Coverage
+
+Code coverage was measured using the `coverage.py` tool.
+
+### To run and view coverage:
+
+```bash
+coverage run manage.py test
+coverage report
+coverage html  # optional: generate a detailed HTML report
+```
+
+### Result summary:
+
+- **Total coverage:** 74%
+- Key files tested:
+  - `candidates/tests.py`: **100%**
+  - `candidates/views.py`: **57%** – all key views tested
+  - `candidates/models.py`: **76%** – including business logic and relationships
+- Other files like forms and context processors are partially covered.
+- Migrations and boilerplate code excluded from active testing.
+
+This level of test coverage is considered strong for a full-stack student project and includes both unit tests and view tests across user interactions and AI features.
+
+---
+
 ## 🧪 Manual Testing
 
 In addition to automated tests, extensive manual testing was carried out, including:
@@ -676,7 +703,7 @@ Edge cases were also tested, including empty fields, rapid toggling of favorite 
 - Python 3.11
 - Django TestCase (unit and view tests)
 - unittest.mock (mocking external APIs like OpenAI)
+- coverage.py (code coverage reports)
 - Bootstrap modals and JavaScript for frontend behavior simulation
 
-
-
+---
