@@ -781,3 +781,60 @@ To prevent JavaScript errors on pages where certain upload elements are not pres
 > `Upload script not initialized: missing DOM elements.`
 
 This ensures the script only runs on pages that include the file upload interface, avoiding runtime errors and improving code robustness across templates.
+
+----
+
+# Code Validation
+
+## ✅ HTML Validation
+
+| File | Validator Result | Comments |
+|------|------------------|----------|
+| `base.html` | ✅ Valid | - |
+| `dashboard.html` | ✅ Valid | - |
+| `candidate-form.html` | ✅ Valid | - |
+| `login.html` | ✅ Valid | - |
+| `register.html` | ✅ Valid | - |
+| `404.html` | ✅ Valid | - |
+| `add-candidate.html` | ✅ Valid | - |
+| `base-auth.html` | ✅ Valid | - |
+| `candidate-form.html` | ✅ Valid | - |
+| `file-list.html` | ✅ Valid | - |
+| `index.html` | ✅ Valid | - |
+| `modals.html` | ✅ Valid | - |
+| `settings.html` | ✅ Valid | - |
+| `signup.html` | ✅ Valid | - |
+| `upload-candidate.html` | ✅ Valid | - |
+
+
+## 🎨 CSS Validation
+
+| File | Validator Result | Comments |
+|------|------------------|----------|
+| `style.css` | ✅ Valid | Vendor prefixes (e.g. `-webkit`) ignored |
+
+
+## 💻 JavaScript Validation
+
+| File | Validator Result | Comments |
+|------|------------------|----------|
+| `main.js` | ✅ Valid | - |
+| `editor.js` | ✅ Valid | jQuery required |
+| `fileUpload.js` | ✅ Valid | Guard added for missing DOM elements |
+| `modals.js` | ✅ Valid | - |
+| `favorites.js` | ✅ Valid | - |
+| `sorting.js` | ✅ Valid | - |
+| `uploadCandidate.js` | ✅ Valid | - |
+| `utils.js` | ✅ Valid | - |
+| `welcomeModal.js` | ✅ Valid | - |
+
+
+## 🐍 Python Code Validation (flake8)
+
+| File | flake8 Result | Comments |
+|------|---------------|----------|
+| `views.py` | ✅ No issues | - |
+| `models.py` | ✅ No issues | - |
+| `forms.py` | ✅ No issues | - |
+| `urls.py` | ✅ No issues | - |
+| `tests.py` | ✅ No issues | - |
