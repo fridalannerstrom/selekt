@@ -50,10 +50,10 @@
         <h5>Are you sure you want to delete your account?</h5>
         <p class="text-muted small">This action cannot be undone.</p>
         <div class="d-flex justify-content-center gap-2 mt-3">
-          <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn button-base outline-button" data-bs-dismiss="modal">Cancel</button>
           <form action="{% url 'delete_account' %}" method="post">
             {% csrf_token %}
-            <button type="submit" class="btn btn-danger btn-sm">Yes, delete</button>
+            <button type="submit" class="btn button-base scn-button">Yes, delete</button>
           </form>
         </div>
       </div>
