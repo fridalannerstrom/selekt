@@ -791,50 +791,50 @@ This ensures the script only runs on pages that include the file upload interfac
 | File | Validator Result | Comments |
 |------|------------------|----------|
 | `base.html` | ✅ Valid | - |
-| `dashboard.html` | ✅ Valid | - |
-| `candidate-form.html` | ✅ Valid | - |
-| `login.html` | ✅ Valid | - |
-| `register.html` | ✅ Valid | - |
-| `404.html` | ✅ Valid | - |
-| `add-candidate.html` | ✅ Valid | - |
-| `base-auth.html` | ✅ Valid | - |
-| `candidate-form.html` | ✅ Valid | - |
-| `file-list.html` | ✅ Valid | - |
-| `index.html` | ✅ Valid | - |
-| `modals.html` | ✅ Valid | - |
-| `settings.html` | ✅ Valid | - |
-| `signup.html` | ✅ Valid | - |
-| `upload-candidate.html` | ✅ Valid | - |
+| `dashboard.html` |  | - |
+| `candidate-form.html` |  | - |
+| `login.html` | | - |
+| `register.html` |  | - |
+| `404.html` |  | - |
+| `add-candidate.html` |  | - |
+| `base-auth.html` |  | - |
+| `candidate-form.html` |  | - |
+| `file-list.html` |  | - |
+| `index.html` |  | - |
+| `modals.html` |  | - |
+| `settings.html` |  | - |
+| `signup.html` |  | - |
+| `upload-candidate.html` |  | - |
 
 
 ## 🎨 CSS Validation
 
 | File | Validator Result | Comments |
 |------|------------------|----------|
-| `style.css` | ✅ Valid | Vendor prefixes (e.g. `-webkit`) ignored |
+| `style.css` |  | Vendor prefixes (e.g. `-webkit`) ignored |
 
 
 ## 💻 JavaScript Validation
 
 | File | Validator Result | Comments |
 |------|------------------|----------|
-| `main.js` | ✅ Valid | - |
-| `editor.js` | ✅ Valid | jQuery required |
-| `fileUpload.js` | ✅ Valid | Guard added for missing DOM elements |
-| `modals.js` | ✅ Valid | - |
-| `favorites.js` | ✅ Valid | - |
-| `sorting.js` | ✅ Valid | - |
-| `uploadCandidate.js` | ✅ Valid | - |
-| `utils.js` | ✅ Valid | - |
-| `welcomeModal.js` | ✅ Valid | - |
+| `main.js` | | - |
+| `editor.js` |  | jQuery required |
+| `fileUpload.js` |  | Guard added for missing DOM elements |
+| `modals.js` |  | - |
+| `favorites.js` |  | - |
+| `sorting.js` |  | - |
+| `uploadCandidate.js` |  | - |
+| `utils.js` | | - |
+| `welcomeModal.js` |  | - |
 
 
 ## 🐍 Python Code Validation (flake8)
 
 | File | flake8 Result | Comments |
 |------|---------------|----------|
-| `views.py` | ✅ No issues | - |
-| `models.py` | ✅ No issues | - |
-| `forms.py` | ✅ No issues | - |
-| `urls.py` | ✅ No issues | - |
-| `tests.py` | ✅ No issues | - |
+| `views.py` |  | - |
+| `models.py` |  | - |
+| `forms.py` |  | - |
+| `urls.py` |  | - |
+| `tests.py` |  | - |
