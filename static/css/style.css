@@ -329,6 +329,7 @@ header {
 .skill-container {
   flex-wrap: nowrap;
   overflow: hidden;
+  min-height: 32px;
 }
 
 .skill-container-modal {
@@ -923,7 +924,7 @@ border: 0px;
     font-size: 2rem;
     line-height: 2.5rem;
   }
-  
+
   .candidate-modal-content {
     padding: 0px;
   }

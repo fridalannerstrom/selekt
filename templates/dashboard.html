@@ -105,14 +105,16 @@
           </div>
 
           <!-- Skill badges -->
+          {% with candidate.skill_list as skills %}
           <div class="skill-container">
-            {% with candidate.skill_list as skills %}
             {% for skill in skills %}
-            <span class="skill-badge">{{ skill }}</span>
+              {% if skill %}
+                <span class="skill-badge">{{ skill }}</span>
+              {% endif %}
             {% endfor %}
-            <span class="skill-badge skill-badge-extra" style="display: none;"></span>
-            {% endwith %}
           </div>
+        {% endwith %}
+
         </div>
 
         <hr>
