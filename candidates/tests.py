@@ -145,3 +145,26 @@ class CandidateTests(TestCase):
         self.assertContains(response, 'value="session@example.com"')
         self.assertContains(response, 'value="Prefilled Role"')
         self.assertContains(response, 'React, Vue')
+
+    def test_welcome_modal_shown_only_once(self):
+        """Welcome modal should appear only once for first-time users."""
+
+        self.user.profile.is_first_login = True
+        self.user.profile.save()
+
+        # First visit: modal should be shown
+        response = self.client.get(reverse('dashboard'))
+        self.assertContains(response, 'id="welcomeModal"') 
+
+        # Simulate dismissing the welcome popup via AJAX POST
+        url = reverse('dismiss_welcome')
+        response = self.client.post(url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(response.status_code, 200)
+
+        # Refresh profile and check that the first login flag is now False
+        self.user.profile.refresh_from_db()
+        self.assertFalse(self.user.profile.is_first_login)
+
+        # Second visit: modal should no longer be shown
+        response = self.client.get(reverse('dashboard'))
+        self.assertNotContains(response, 'id="welcomeModal"')
