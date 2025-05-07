@@ -433,22 +433,26 @@ def extract_text_from_pdf(file):
 # Call OpenAI to extract structured data from CV text
 def call_openai(text):
     prompt = f"""
-    You are an expert AI recruiter. Your task is to extract structured candidate data from the following CV text. 
+    You are an expert AI recruiter. Your task is to extract structured 
+    candidate data from the following CV text. 
     Please return a JSON object in this format:
 
     {{
         "name": "",
         "email": "",
         "phone_number": "",
-        "job_title": "",       # Suggest a relevant title if not clearly stated. Make it short and relevant. Do not use & or "and" in title.
-        "profile_summary": "", # Write a short professional summary based on the CV content
+        "job_title": "",       # Suggest a relevant title if not clearly 
+        stated. Make it short and relevant. Do not use & or "and" in title.
+        "profile_summary": "", # Write a short professional summary based on 
+        the CV content
         "work_experience": "",
         "education": "",
         "location": "",
         "links": "",
         "top_skills": "",      
         # Only return short, keyword-style skills as a comma-separated string.
-        Prioritize the shortest and most relevant terms first (e.g. “SQL, Python, UX”).
+        Prioritize the shortest and most relevant terms first (e.g. “SQL, 
+        Python, UX”).
         Avoid full sentences or descriptive phrases.
         "other": "",
         "notes": ""

@@ -36,10 +36,10 @@ def get_links(form):
     """
     Return the 'links' field as a list of dictionaries:
     [{'name': ..., 'url': ...}]
-    
+
     The data is stored as a single string in this format:
     "GitHub:::https://github.com/user;;;LinkedIn:::https://linkedin.com/in/user"
-    
+
     This format is used because it's the structure returned by OpenAI
     when extracting multiple named links from a candidate's profile.
     """
