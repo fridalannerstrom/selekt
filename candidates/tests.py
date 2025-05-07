@@ -34,3 +34,32 @@ class CandidateTests(TestCase):
         expected_redirect = f"{settings.LOGIN_URL}?next={reverse('dashboard')}"
         self.assertRedirects(response, expected_redirect)
 
+    def test_update_candidate(self):
+        """User can update an existing candidate."""
+        candidate = Candidate.objects.create(
+            user=self.user,
+            name='Old Name',
+            email='old@example.com',
+            job_title='Tester'
+        )
+
+        response = self.client.post(reverse('candidate_edit', args=[candidate.id]), {
+            'name': 'New Name',
+            'email': 'new@example.com',
+            'job_title': 'Senior Tester',
+            'top_skills': 'Testing, Python'
+        })
+
+        self.assertRedirects(response, reverse('candidate_edit', args=[candidate.id]))
+        candidate.refresh_from_db()
+        self.assertEqual(candidate.name, 'New Name')
+        self.assertEqual(candidate.email, 'new@example.com')
+
+
+    def test_delete_candidate(self):
+        """User can delete their candidate."""
+        candidate = Candidate.objects.create(user=self.user, name='Delete Me')
+
+        response = self.client.post(reverse('candidate_delete', args=[candidate.id]))
+        self.assertEqual(response.status_code, 302)
+        self.assertFalse(Candidate.objects.filter(id=candidate.id).exists())
