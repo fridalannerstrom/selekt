@@ -763,6 +763,21 @@ border: 0px;
 }
 
 /* =====================================
+   404 PAGE
+====================================== */
+
+.page-not-found-image {
+  width: 90%;
+  max-width: 250px;
+  border-radius: 15px;
+}
+
+.page-not-found-heading {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+/* =====================================
    MEDIA QUERIES
 ====================================== */
 

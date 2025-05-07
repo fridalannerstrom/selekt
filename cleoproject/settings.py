@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-v%q5%l&uo2^#h+dqx^!#lrl-5(gi77u1*nc#ihm0c3rn$uy4b_
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1'] 
 
@@ -124,6 +124,8 @@ MEDIA_URL = '/media/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
