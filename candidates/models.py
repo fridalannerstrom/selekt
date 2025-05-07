@@ -7,7 +7,7 @@ from django.dispatch import receiver
 class Candidate(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
-    email = models.EmailField()
+    email = models.EmailField(blank=True, null=True)
     phone_number = models.CharField(max_length=20, blank=True)
     job_title = models.CharField(max_length=100, blank=True)
     profile_summary = models.TextField(blank=True)
