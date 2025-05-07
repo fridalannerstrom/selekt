@@ -760,8 +760,7 @@ border: 0px;
    MEDIA QUERIES
 ====================================== */
 
-
-/* Extra Small Devices - Phones */
+/* Extra small devices (phones, less than 360px) */
 @media (max-width: 360px) {
 
   .candidate-card-wrapper {
@@ -793,63 +792,11 @@ border: 0px;
   .candidate-modal-content {
     padding: 0px;
   }
-
-}
-
-/* Small Devices - Tablets and Phones  */
-@media (max-width: 767px) {
-
-  .tab-tabs {
-    order: 3;
-    width: 100%;
-    margin-bottom: 20px;
-  }
   
-  .tab-sorting {
-    width: 100%;
-      order: 2;
-      margin-right: 0;
-    }
-
-  .tab-fav {
-    order: 1;
-    width: 100%;
-    margin-left: 0;
-    text-align: right;
-  }
-
-  .candidate-search input{
-    font-size: 0.8rem;
-  }
-
-  .logged-in-body .cta-button {
-  font-size: 0.7rem;
-  padding: 10px;
-  }
-
-  .logo-img {
-    width: 100%;
-    max-width: 100px;
-    padding-right: 10px;
-  }
-
-  .header-logo {
-    width: 30%;
-  }
-
-  .hero h1 {
-    font-size: 2.5rem;
-  }
-
-  .section-heading {
-    font-size: 2rem;
-    line-height: 2.5rem;
-  }
-
 }
 
 
-/* Medium Devices - Small Laptops and Tablets */
+/* Medium devices (tablets, less than 900px) */
 @media (max-width: 900px) {
 
   #sortForm,
@@ -863,7 +810,7 @@ border: 0px;
     width: 100%;
     padding-bottom: 30px;
   }
-  
+
   .tab-sorting {
     width: 40%;
     margin-right: 10%;
@@ -885,7 +832,7 @@ border: 0px;
     position: absolute;
     right: 30px;
   }
-    
+
   .candidate-modal-name {
     width: 100%;
     margin-top: 20px;
@@ -908,7 +855,7 @@ border: 0px;
   .delete-button i {
     font-size: 0.8rem;
   }
-    
+
   .modal-candidate .fav-button i {
     font-size: 0.8rem;
     padding: 0px;
@@ -917,20 +864,74 @@ border: 0px;
 
   .modal-candidate {
     width: 90vw;
-  }
-    
-  .modal-candidate {
     left: 3%;
     right: 3%;
   }
-    
+
   .candidate-modal-information {
     padding: 30px;
+  }
+}
+
+
+/* Small devices (phones, less than 767px) */
+@media (max-width: 767px) {
+
+  .tab-tabs {
+    order: 3;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .tab-sorting {
+    width: 100%;
+    order: 2;
+    margin-right: 0;
+  }
+
+  .tab-fav {
+    order: 1;
+    width: 100%;
+    margin-left: 0;
+    text-align: right;
+  }
+
+  .candidate-search input {
+    font-size: 0.8rem;
+  }
+
+  .logged-in-body .cta-button {
+    font-size: 0.7rem;
+    padding: 10px;
+  }
+
+  .logo-img {
+    width: 100%;
+    max-width: 100px;
+    padding-right: 10px;
+  }
+
+  .header-logo {
+    width: 30%;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .section-heading {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+  
+  .candidate-modal-content {
+    padding: 0px;
   }
 
 }
 
-/* Extra Large Devices - High Resolution Screens */
+
+/* Large devices (desktops, less than 1540px) */
 @media (max-width: 1540px) {
 
   .label-desktop {
@@ -949,7 +950,6 @@ border: 0px;
   .delete-button:hover {
     background-color: #e7e7e6;
     color: black;
-
   }
 
   .modal-candidate .fav-button i {
@@ -971,12 +971,11 @@ border: 0px;
 
   .left-candidate-column {
     width: 100%;
-    padding: 0;
+    padding: 0px;
   }
 
   .right-candidate-column {
     width: 100%;
     margin-top: 40px;
   }
-
 }
