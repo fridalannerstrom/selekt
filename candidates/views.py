@@ -94,7 +94,7 @@ def dashboard(request):
 
     # Prepare skill list and favorites
     for candidate in candidates:
-        candidate.skill_list = [skill.strip() for skill in candidate.top_skills.split(',')]
+        candidate.skill_list = [skill.strip() for skill in candidate.top_skills.split(',') if skill.strip()]
         candidate.is_favorite = Favorite.objects.filter(user=request.user, candidate=candidate).exists()
 
     # Show welcome popup for first-time users

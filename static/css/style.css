@@ -357,6 +357,11 @@ header {
   font-size: 0.8rem;
 }
 
+.invisible-placeholder {
+  min-height: 32px;
+  visibility: hidden;
+}
+
 .no-break {
   white-space: nowrap !important;
 }

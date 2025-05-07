@@ -106,13 +106,19 @@
 
           <!-- Skill badges -->
           {% with candidate.skill_list as skills %}
-          <div class="skill-container">
-            {% for skill in skills %}
-              {% if skill %}
+          {% if skills and skills|length > 0 %}
+            <!-- Show real skills if they exist -->
+            <div class="skill-container">
+              {% for skill in skills %}
                 <span class="skill-badge">{{ skill }}</span>
-              {% endif %}
-            {% endfor %}
-          </div>
+              {% endfor %}
+              <!-- Extra span used by JS for +3 etc -->
+              <span class="skill-badge skill-badge-extra" style="display: none;"></span>
+            </div>
+          {% else %}
+            <!-- Placeholder to preserve card height -->
+            <div class="skill-container invisible-placeholder"></div>
+          {% endif %}
         {% endwith %}
 
         </div>
@@ -194,7 +200,7 @@
         </ul>
       </nav>
     </div>
-
+    
   <!-- If no candidates match -->
   {% else %}
   <div class="empty-state text-center py-5">
