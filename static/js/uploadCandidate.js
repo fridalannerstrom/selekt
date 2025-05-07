@@ -73,11 +73,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     uploadArea.innerHTML = `
               <div class="alert alert-danger text-center p-4">
                 ❌ <strong>Something went wrong:</strong><br>
-                ${err.message}<br>
-                Please try uploading a different PDF file.
+                ${err.message}
               </div>
               <div class="text-center mt-3">
-                <label for="fileElem" class="btn btn-primary">Choose a new file</label>
+                <label for="fileElem" class="btn button-base scn-button">Choose a new file</label>
                 <input type="file" id="fileElem" name="file" style="display:none">
               </div>
             `;
