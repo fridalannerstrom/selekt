@@ -726,3 +726,13 @@ Each test includes a description of the area, the expected result, the actual re
 - Bootstrap modals and JavaScript for frontend behavior simulation
 
 ---
+
+## Future Improvements
+
+The following features were considered "Could Have" and may be added in future iterations:
+
+| Feature | Description |
+|--------|-------------|
+| Improved formatting of OpenAI responses | Using Markdown or structured HTML tags to enhance readability of generated candidate summaries. |
+| Sticky candidate sidebar | Keeping key candidate information visible while scrolling the dashboard. |
+| More extensive validation | Such as handling empty form submissions or displaying custom messages for missing candidate data. |
