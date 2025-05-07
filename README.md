@@ -738,3 +738,33 @@ The following features were considered "Could Have" and may be added in future i
 | Improved formatting of OpenAI responses | Using Markdown or structured HTML tags to enhance readability of generated candidate summaries. |
 | Sticky candidate sidebar | Keeping key candidate information visible while scrolling the dashboard. |
 | More extensive validation | Such as handling empty form submissions or displaying custom messages for missing candidate data. |
+
+---
+
+## 🛠️ Bug Fix: JavaScript error when adding new links
+
+During development, a JavaScript error occurred when attempting to add new link fields dynamically in the candidate form:
+
+Uncaught ReferenceError: linksArray is not defined
+Uncaught ReferenceError: jsonInput is not defined
+
+Cause:
+The updateHiddenLinks() function attempted to use an undefined variable linksArray.
+
+Later, the hidden input element for storing JSON (jsonInput) was not correctly defined, leading to another reference error.
+
+Additionally, the hidden <input> elements expected by the function were missing from the form.
+
+Fix:
+Defined the linksArray variable within the function.
+
+Corrected the variable name to jsonInput for clarity and consistency.
+
+Added the necessary hidden inputs in the HTML form:
+
+<input type="hidden" id="linksField" name="linksField">
+<input type="hidden" id="hiddenLinksInput" name="linksJson">
+
+Updated the JavaScript to include null checks and graceful fallbacks.
+
+The function now works as expected, storing both a combined string (linksField) and a JSON representation (linksJson) of the user-added links for further backend use.
