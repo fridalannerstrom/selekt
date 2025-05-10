@@ -810,18 +810,20 @@ This ensures the script only runs on pages that include the file upload interfac
 
 | File | Validator Result | Comments |
 |------|------------------|----------|
-| `style.css` |  | Vendor prefixes (e.g. `-webkit`) ignored |
+| `style.css` | ✅ Valid | - |
 
 
 ## 💻 JavaScript Validation
 
+Added /* jslint esversion: 6 */ to prevent warnings about ES6
+
 | File | Validator Result | Comments |
 |------|------------------|----------|
 | `main.js` | | - |
-| `editor.js` |  | jQuery required |
+| `editor.js` | ✅ Valid | jQuery required |
 | `fileUpload.js` |  | Guard added for missing DOM elements |
 | `modals.js` |  | - |
-| `favorites.js` |  | - |
+| `favorites.js` | ✅ Valid | toggleFavorite is used in HTML; warning can be ignored. "?" line break warning is stylistic only. |
 | `sorting.js` |  | - |
 | `uploadCandidate.js` |  | - |
 | `utils.js` | | - |

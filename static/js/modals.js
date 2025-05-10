@@ -1,3 +1,5 @@
+/* jslint esversion: 6 */
+
 // Open Candidate Detail Modal
 function openCandidateModal(candidateId) {
     // Fetch candidate modal HTML from backend

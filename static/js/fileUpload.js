@@ -1,3 +1,5 @@
+/* jslint esversion: 6 */
+
 // Initializes the file upload functionality for a candidate
 function initUploadScript() {
     const fileElem = document.getElementById("fileElem");

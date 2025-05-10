@@ -1,3 +1,5 @@
+/* jslint esversion: 6 */
+
 // Handles PDF upload and automatic candidate creation via OpenAI.
 
 // Run this once the entire DOM is fully loaded

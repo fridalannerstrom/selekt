@@ -1,3 +1,5 @@
+/* jslint esversion: 6 */
+
 // When the DOM is fully loaded, initialize Trumbowyg editors on specified textareas
 $(document).ready(function () {
     $('#profile_summary').trumbowyg();  

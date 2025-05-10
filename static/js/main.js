@@ -1,3 +1,5 @@
+/* jslint esversion: 6 */
+
 // Wait until the entire DOM is fully loaded
 document.addEventListener('DOMContentLoaded', () => {
 
