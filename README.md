@@ -819,15 +819,15 @@ Added /* jslint esversion: 6 */ to prevent warnings about ES6
 
 | File | Validator Result | Comments |
 |------|------------------|----------|
-| `main.js` | | - |
-| `editor.js` | ✅ Valid | jQuery required |
-| `fileUpload.js` |  | Guard added for missing DOM elements |
-| `modals.js` |  | - |
+| `main.js` | ✅ Valid | initUploadScript is defined in another file and used globally; warning can be ignored. |
+| `editor.js` | ✅ Valid | $ is provided by jQuery; showAddLinkForm, addLinkRow, and removeLink are used in HTML or reserved for flexibility. |
+| `fileUpload.js` |  | openDeleteFileModal is defined elsewhere; initUploadScript and reloadFiles are reserved for future use. |
+| `modals.js` | ✅ Valid | bootstrap and global functions are defined externally; modal functions are triggered via HTML. |
 | `favorites.js` | ✅ Valid | toggleFavorite is used in HTML; warning can be ignored. "?" line break warning is stylistic only. |
-| `sorting.js` |  | - |
-| `uploadCandidate.js` |  | - |
-| `utils.js` | | - |
-| `welcomeModal.js` |  | - |
+| `sorting.js` | ✅ Valid | Line 16 warning is stylistic; code works as intended. |
+| `uploadCandidate.js` | ✅ Valid | Line break before "?" is stylistic and does not affect execution; code runs as intended. |
+| `utils.js` | ✅ Valid | updateHiddenLinks is defined in another file and used globally; warning can be ignored. |
+| `welcomeModal.js` | ✅ Valid | Optional chaining requires ES11; works in all modern browsers. bootstrap is defined via CDN. |
 
 
 ## 🐍 Python Code Validation (flake8)
