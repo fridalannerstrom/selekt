@@ -792,7 +792,7 @@ This ensures the script only runs on pages that include the file upload interfac
 |------|------------------|----------|
 | `base.html` | ✅ Valid | - |
 | `dashboard.html` | ✅ Valid | - |
-| `candidate-form.html` |  | - |
+| `candidate-form.html` | ✅ Valid | - |
 | `login.html` | ✅ Valid | - |
 | `404.html` |  | - |
 | `add-candidate.html` |  | - |

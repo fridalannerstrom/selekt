@@ -29,8 +29,7 @@
 </head>
 
 <body>
-
-  <main>
+<main>
     <div class="content-wrapper">
 
         <!-- Header Navigation -->
@@ -40,16 +39,16 @@
             </a>
         </header>
 
-    <div class="container mt-5 text-center">
-      <img src="{% static 'media/images/404.png' %}" alt="404 - are you lost?"
-        class="page-not-found-image mb-3 mx-auto d-block">
-      <p class="tag mt-4">404 - page not found</p>
-      <h2 class="page-not-found-heading">Hey, there's no candidates here!</h2>
-      <p class="text-muted">Either they’ve left the building, or you’ve reached the wrong galaxy.</p>
-      <a href="{% url 'dashboard' %}" class="btn button-base cta-button mt-3">Back to dashboard</a>
+        <div class="container mt-5 text-center">
+            <img src="{% static 'media/images/404.png' %}" alt="404 - are you lost?"
+                class="page-not-found-image mb-3 mx-auto d-block">
+            <p class="tag mt-4">404 - page not found</p>
+            <h2 class="page-not-found-heading">Hey, there's no candidates here!</h2>
+            <p class="text-muted">Either they’ve left the building, or you’ve reached the wrong galaxy.</p>
+            <a href="{% url 'dashboard' %}" class="btn button-base cta-button mt-3">Back to dashboard</a>
+        </div>
     </div>
-
-  </main>
+</main>
 
     <!-- Footer -->
     <footer class="custom-footer text-center text-white">
