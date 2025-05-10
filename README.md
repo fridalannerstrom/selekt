@@ -794,16 +794,16 @@ This ensures the script only runs on pages that include the file upload interfac
 | `dashboard.html` | ✅ Valid | - |
 | `candidate-form.html` | ✅ Valid | - |
 | `login.html` | ✅ Valid | - |
-| `404.html` |  | - |
-| `add-candidate.html` |  | - |
+| `404.html` | ✅ Valid | - |
+| `add-candidate.html` | ✅ Valid | - |
 | `base-auth.html` | ✅ Valid | - |
-| `candidate-form.html` |  | - |
+| `candidate-form.html` | ✅ Valid | - |
 | `file-list.html` | ✅ Valid | - |
 | `index.html` | ✅ Valid | - |
 | `modals.html` | ✅ Valid | - |
-| `settings.html` |  | - |
+| `settings.html` | ✅ Valid | - |
 | `signup.html` | ✅ Valid | - |
-| `upload-candidate.html` |  | - |
+| `upload-candidate.html` | ✅ Valid | - |
 
 
 ## 🎨 CSS Validation

@@ -78,11 +78,9 @@
         <div class="card p-3 mb-4 text-center">
           <h5 class="card-title fw-bold">Profile Picture</h5>
           {% if profile.profile_image %}
-          <img src="{{ profile.profile_image.url }}" class="rounded-circle settings-profile-pic"
-            style="width: 100px; height: 100px; object-fit: cover;">
+          <img src="{{ profile.profile_image.url }}" class="rounded-circle settings-profile-pic" alt="profile picture">
           {% else %}
-          <img src="{% static 'media/images/user-pic.png' %}" class="rounded-circle settings-profile-pic"
-            style="width: 100px; height: 100px; object-fit: cover;">
+          <img src="{% static 'media/images/user-pic.png' %}" class="rounded-circle settings-profile-pic" alt="profile picture">
           {% endif %}
           <input type="file" name="profile_picture" class="form-control mt-2">
         </div>
