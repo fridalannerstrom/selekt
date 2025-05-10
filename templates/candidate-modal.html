@@ -214,7 +214,7 @@
         <p class="candidate-modal-contact">
 
         <!-- Email -->
-        <p class="candidate-modal-contact">
+        <p class="candidate-modal-contact text-truncate">
           <strong>Email</strong><br>
           {% if candidate.email %}
             {{ candidate.email }}
@@ -224,7 +224,7 @@
         </p>
 
         <!-- Phone -->
-        <p class="candidate-modal-contact">
+        <p class="candidate-modal-contact text-truncate">
           <strong>Phone</strong><br>
           {% if candidate.phone_number %}
             {{ candidate.phone_number }}
@@ -234,7 +234,7 @@
         </p>
 
         <!-- Location -->
-        <p class="candidate-modal-contact">
+        <p class="candidate-modal-contact text-truncate">
           <strong>Address</strong><br>
           {% if candidate.location %}
             {{ candidate.location }}
