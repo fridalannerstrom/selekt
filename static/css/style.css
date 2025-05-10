@@ -751,6 +751,12 @@ border: 0px;
   width: 70px;
 }
 
+.candidate-form-profile-image {
+  width: 150px; 
+  height: 150px; 
+  object-fit: cover;
+}
+
 /* =====================================
    SETTINGS PAGE
 ====================================== */
