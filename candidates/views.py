@@ -480,7 +480,7 @@ def create_candidate_from_openai(request):
     except json.JSONDecodeError:
         return JsonResponse({'error': 'Invalid JSON'}, status=400)
     request.session['prefill_candidate'] = data
-    return JsonResponse({'redirect_url': reverse('candidate_create_with_prefill')})
+    return JsonResponse({'redirect_url': reverse('candidates:candidate_create_with_prefill')})
 
 # Prefilled candidate creation view
 class CandidateCreatePrefilledView(CreateView):

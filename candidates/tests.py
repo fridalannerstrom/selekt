@@ -53,7 +53,7 @@ class CandidateTests(TestCase):
 
     def test_create_candidate(self):
         """User can create a candidate."""
-        response = self.client.post(reverse('candidate_add'), {
+        response = self.client.post(reverse('candidates:candidate_add'), {
             'name': 'Anna Test',
             'email': 'anna@example.com',
             'job_title': 'Developer',
@@ -79,14 +79,14 @@ class CandidateTests(TestCase):
             job_title='Tester'
         )
 
-        response = self.client.post(reverse('candidate_edit', args=[candidate.id]), {
+        response = self.client.post(reverse('candidates:candidate_edit', args=[candidate.id]), {
             'name': 'New Name',
             'email': 'new@example.com',
             'job_title': 'Senior Tester',
             'top_skills': 'Testing, Python'
         })
 
-        self.assertRedirects(response, reverse('candidate_edit', args=[candidate.id]))
+        self.assertRedirects(response, reverse('candidates:candidate_edit', args=[candidate.id]))
         candidate.refresh_from_db()
         self.assertEqual(candidate.name, 'New Name')
         self.assertEqual(candidate.email, 'new@example.com')
@@ -96,7 +96,7 @@ class CandidateTests(TestCase):
         """User can delete their candidate."""
         candidate = Candidate.objects.create(user=self.user, name='Delete Me')
 
-        response = self.client.post(reverse('candidate_delete', args=[candidate.id]))
+        response = self.client.post(reverse('candidates:candidate_delete', args=[candidate.id]))
         self.assertEqual(response.status_code, 302)
         self.assertFalse(Candidate.objects.filter(id=candidate.id).exists())
 
@@ -105,7 +105,7 @@ class CandidateTests(TestCase):
         other_user = User.objects.create_user(username='otheruser', password='secret')
         candidate = Candidate.objects.create(user=other_user, name='Not Yours')
 
-        response = self.client.get(reverse('candidate_detail', args=[candidate.id]))
+        response = self.client.get(reverse('candidates:candidate_detail', args=[candidate.id]))
 
         self.assertEqual(response.status_code, 404)
 
@@ -113,7 +113,7 @@ class CandidateTests(TestCase):
         """User can toggle favorite status for a candidate."""
         candidate = Candidate.objects.create(user=self.user, name='Favorite Test')
 
-        url = reverse('toggle_favorite', args=[candidate.id])
+        url = reverse('candidates:toggle_favorite', args=[candidate.id])
         
         # First POST – adds favorite
         response = self.client.post(url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
@@ -138,7 +138,7 @@ class CandidateTests(TestCase):
         session.save()
 
         # Act
-        response = self.client.get(reverse('candidate_create_with_prefill'))
+        response = self.client.get(reverse('candidates:candidate_create_with_prefill'))
 
         # Assert
         self.assertContains(response, 'value="Session Test"')
@@ -157,7 +157,7 @@ class CandidateTests(TestCase):
         self.assertContains(response, 'id="welcomeModal"') 
 
         # Simulate dismissing the welcome popup via AJAX POST
-        url = reverse('dismiss_welcome')
+        url = reverse('candidates:dismiss_welcome')
         response = self.client.post(url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(response.status_code, 200)
 
