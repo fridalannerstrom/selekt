@@ -142,7 +142,7 @@
 
             <!-- Dropdown menu inside dot menu -->
             <div class="dot-menu-dropdown d-none position-absolute end-0 mt-2 p-2 bg-white border rounded shadow">
-              <a href="{% url 'candidate_edit' candidate.id %}" class="dropdown-item small">Edit</a>
+              <a href="{% url 'candidates:candidate_edit' candidate.id %}" class="dropdown-item small">Edit</a>
               <button type="button" class="dropdown-item small"
                 onclick="openDeleteCandidateModal({{ candidate.id|escapejs }}, '{{ candidate.name|escapejs }}')">
                 Delete

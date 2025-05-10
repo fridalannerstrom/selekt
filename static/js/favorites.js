@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
    * @param {string|number} candidateId - The ID of the candidate to toggle
    */
   function toggleFavorite(candidateId) {
-    fetch(`/toggle-favorite/${candidateId}/`, {
+    fetch(`/candidates/toggle-favorite/${candidateId}/`, {
       method: 'POST',
       headers: {
         'X-CSRFToken': '{{ csrf_token }}', // Replace with dynamic CSRF token if needed

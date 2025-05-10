@@ -48,7 +48,7 @@
       </button>
 
       <!-- Edit button -->
-      <a href="{% url 'candidate_edit' candidate.pk %}"
+      <a href="{% url 'candidates:candidate_edit' candidate.pk %}"
          class="btn button-base scn-button edit-button"><i class="fa-solid fa-pen-to-square"></i><span class="label-desktop"> Edit</span></a>
 
       <!-- Delete button -->
@@ -106,7 +106,7 @@
             <p>{{ candidate.profile_summary|safe }}</p>
           {% else %}
             <div class="alert alert-warning">
-              No profile summary added yet. <a href="{% url 'candidate_edit' candidate.pk %}">Add information here</a>
+              No profile summary added yet. <a href="{% url 'candidates:candidate_edit' candidate.pk %}">Add information here</a>
             </div>
           {% endif %}
 
@@ -120,7 +120,7 @@
           </div>
           {% else %}
             <div class="alert alert-warning">
-              No skills added yet. <a href="{% url 'candidate_edit' candidate.pk %}">Add information here</a>
+              No skills added yet. <a href="{% url 'candidates:candidate_edit' candidate.pk %}">Add information here</a>
             </div>
           {% endif %}
 
@@ -132,7 +132,7 @@
             <div class="mb-3">{{ candidate.work_experience|safe }}</div>
           {% else %}
             <div class="alert alert-warning">
-              No work experience added yet. <a href="{% url 'candidate_edit' candidate.pk %}">Add information here</a>
+              No work experience added yet. <a href="{% url 'candidates:candidate_edit' candidate.pk %}">Add information here</a>
             </div>
           {% endif %}
 
@@ -144,7 +144,7 @@
             <p>{{ candidate.education|safe }}</p>
           {% else %}
             <div class="alert alert-warning">
-              No education information yet. <a href="{% url 'candidate_edit' candidate.pk %}">Add information here</a>
+              No education information yet. <a href="{% url 'candidates:candidate_edit' candidate.pk %}">Add information here</a>
             </div>
           {% endif %}
 
@@ -156,7 +156,7 @@
             <p>{{ candidate.other|safe }}</p>
           {% else %}
             <div class="alert alert-warning">
-              No additional information added yet. <a href="{% url 'candidate_edit' candidate.pk %}">Add information here</a>
+              No additional information added yet. <a href="{% url 'candidates:candidate_edit' candidate.pk %}">Add information here</a>
             </div>
           {% endif %}
         </div>
@@ -169,7 +169,7 @@
             <p>{{ candidate.notes|safe }}</p>
           {% else %}
             <div class="alert alert-warning">
-              No notes yet. <a href="{% url 'candidate_edit' candidate.pk %}">Add information here</a>
+              No notes yet. <a href="{% url 'candidates:candidate_edit' candidate.pk %}">Add information here</a>
             </div>
           {% endif %}
         </div>
