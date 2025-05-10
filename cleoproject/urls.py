@@ -28,7 +28,11 @@ urlpatterns = [
 
     # Authentication
     path('signup/', candidate_views.signup, name='signup'),
-    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    path(
+        'login/',
+        auth_views.LoginView.as_view(template_name='login.html'),
+        name='login'
+    ),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 
     # Dashboard & home
@@ -44,4 +48,7 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(
+        settings.MEDIA_URL,
+        document_root=settings.MEDIA_ROOT
+    )

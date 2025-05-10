@@ -7,6 +7,7 @@ from django.dispatch import receiver
 # Main Candidate Model
 # ==========================
 
+
 class Candidate(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
@@ -17,30 +18,33 @@ class Candidate(models.Model):
     work_experience = models.TextField(blank=True)
     education = models.TextField(blank=True)
     location = models.CharField(max_length=100, blank=True)
-    links = models.CharField(max_length=255, blank=True, help_text="e.g. LinkedIn, GitHub URLs")
-    profile_image = models.ImageField(upload_to='profile_images/', blank=True, null=True)
+    links = models.CharField(max_length=255, blank=True,
+                             help_text="e.g. LinkedIn, GitHub URLs")
+    profile_image = models.ImageField(
+        upload_to='profile_images/', blank=True, null=True)
     other = models.TextField(blank=True)
     notes = models.TextField(blank=True)
     top_skills = models.CharField(
         blank=True,
-        help_text="Write top skills separated by commas (e.g. Communication, Leadership, SQL)"
+        help_text="Write top skills separated by commas "
+        "(e.g. Communication, Leadership, SQL)"
     )
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
 
-
     def skill_list(self):
         """
         Returns the 'top_skills' field as a clean list.
         """
-        return [skill.strip() for skill in self.top_skills.split(",") if skill.strip()]
-
+        return [skill.strip()
+                for skill in self.top_skills.split(",") if skill.strip()]
 
     def get_links(self):
         """
-        Converts the serialized 'links' string (format: name:::url;;;name:::url)
+        Converts the serialized 'links'
+        string (format: name:::url;;;name:::url)
         into a list of dictionaries for easier use in templates.
         """
         if not self.links:
@@ -57,8 +61,10 @@ class Candidate(models.Model):
 # Files uploaded per Candidate
 # ==========================
 
+
 class CandidateFile(models.Model):
-    candidate = models.ForeignKey('Candidate', on_delete=models.CASCADE, related_name='files')
+    candidate = models.ForeignKey(
+        'Candidate', on_delete=models.CASCADE, related_name='files')
     file = models.FileField(upload_to='candidate_files/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
@@ -72,12 +78,13 @@ class CandidateFile(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_image = models.ImageField(upload_to='profile_images/', blank=True, null=True)
+    profile_image = models.ImageField(
+        upload_to='profile_images/', blank=True, null=True)
     is_first_login = models.BooleanField(default=True)
 
     def __str__(self):
         return f"Profile of {self.user.username}"
-    
+
 
 # Automatically create or update Profile when a User is saved
 @receiver(post_save, sender=User)
@@ -90,9 +97,11 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
 # Favorite Candidates
 # ==========================
 
+
 class Favorite(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    candidate = models.ForeignKey(Candidate, on_delete=models.CASCADE, related_name='favorites')
+    candidate = models.ForeignKey(
+        Candidate, on_delete=models.CASCADE, related_name='favorites')
 
     class Meta:
         unique_together = ('user', 'candidate')  # Prevent duplicate favorites

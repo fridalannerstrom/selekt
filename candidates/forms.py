@@ -1,6 +1,7 @@
 from django import forms
 from .models import Candidate
 
+
 # Custom form for creating/editing Candidate instances
 class CandidateForm(forms.ModelForm):
 
@@ -9,7 +10,8 @@ class CandidateForm(forms.ModelForm):
         fields = [
             'name', 'email', 'phone_number', 'job_title',
             'profile_summary', 'work_experience', 'education',
-            'location', 'links', 'profile_image', 'other', 'notes', 'top_skills'
+            'location', 'links', 'profile_image', 'other',
+            'notes', 'top_skills'
         ]
         widgets = {
             'profile_summary': forms.Textarea(attrs={'rows': 4}),

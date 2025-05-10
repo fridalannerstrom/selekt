@@ -815,13 +815,14 @@ This ensures the script only runs on pages that include the file upload interfac
 
 ## 💻 JavaScript Validation
 
-Added /* jslint esversion: 6 */ to prevent warnings about ES6
+All JavaScript files were tested using JSLint. ES6 syntax was enabled via `/* jslint esversion: 6 */`.  
+All remaining warnings were reviewed and documented below. No functional issues were found.
 
 | File | Validator Result | Comments |
 |------|------------------|----------|
 | `main.js` | ✅ Valid | initUploadScript is defined in another file and used globally; warning can be ignored. |
 | `editor.js` | ✅ Valid | $ is provided by jQuery; showAddLinkForm, addLinkRow, and removeLink are used in HTML or reserved for flexibility. |
-| `fileUpload.js` |  | openDeleteFileModal is defined elsewhere; initUploadScript and reloadFiles are reserved for future use. |
+| `fileUpload.js` | ✅ Valid | openDeleteFileModal is defined elsewhere; initUploadScript and reloadFiles are reserved for future use. |
 | `modals.js` | ✅ Valid | bootstrap and global functions are defined externally; modal functions are triggered via HTML. |
 | `favorites.js` | ✅ Valid | toggleFavorite is used in HTML; warning can be ignored. "?" line break warning is stylistic only. |
 | `sorting.js` | ✅ Valid | Line 16 warning is stylistic; code works as intended. |
@@ -832,10 +833,15 @@ Added /* jslint esversion: 6 */ to prevent warnings about ES6
 
 ## 🐍 Python Code Validation (flake8)
 
+All Python files were validated using `flake8` in VS Code.  
+No critical issues were found.  
+
 | File | flake8 Result | Comments |
 |------|---------------|----------|
-| `views.py` |  | - |
-| `models.py` |  | - |
-| `forms.py` |  | - |
-| `urls.py` |  | - |
-| `tests.py` |  | - |
+| `views.py` | ✅ Valid | `env` is imported in `views.py`, while not referenced directly in code, it's required for OpenAI integration and should not be removed. |
+| `models.py` | ✅ Valid | - |
+| `forms.py` | ✅ Valid | - |
+| `urls.py` | ✅ Valid | (app file) |
+| `urls.py` | ✅ Valid | (project file) |
+| `tests.py` | ✅ Valid | - |
+| `admin.py` | ✅ Valid | - |

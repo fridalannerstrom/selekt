@@ -38,12 +38,14 @@ class OpenAITests(TestCase):
         # Assert
         self.assertEqual(result["name"], "Test Person")
         self.assertEqual(result["job_title"], "Developer")
-        self.assertIn("Python", result["top_skills"])       
+        self.assertIn("Python", result["top_skills"])
+
 
 class CandidateTests(TestCase):
     def setUp(self):
         self.client = Client()
-        self.user = User.objects.create_user(username='testuser', password='password123')
+        self.user = User.objects.create_user(
+            username='testuser', password='password123')
         self.client.login(username='testuser', password='password123')
 
     def test_dashboard_loads(self):
@@ -79,49 +81,68 @@ class CandidateTests(TestCase):
             job_title='Tester'
         )
 
-        response = self.client.post(reverse('candidates:candidate_edit', args=[candidate.id]), {
-            'name': 'New Name',
-            'email': 'new@example.com',
-            'job_title': 'Senior Tester',
-            'top_skills': 'Testing, Python'
-        })
+        url = reverse('candidates:candidate_edit', args=[candidate.id])
+        response = self.client.post(
+            url,
+            {
+                'name': 'New Name',
+                'email': 'new@example.com',
+                'job_title': 'Senior Tester',
+                'top_skills': 'Testing, Python'
+            }
+        )
 
-        self.assertRedirects(response, reverse('candidates:candidate_edit', args=[candidate.id]))
+        self.assertRedirects(
+            response, reverse(
+                'candidates:candidate_edit', args=[
+                    candidate.id]))
         candidate.refresh_from_db()
         self.assertEqual(candidate.name, 'New Name')
         self.assertEqual(candidate.email, 'new@example.com')
-
 
     def test_delete_candidate(self):
         """User can delete their candidate."""
         candidate = Candidate.objects.create(user=self.user, name='Delete Me')
 
-        response = self.client.post(reverse('candidates:candidate_delete', args=[candidate.id]))
+        response = self.client.post(
+            reverse(
+                'candidates:candidate_delete',
+                args=[
+                    candidate.id]))
         self.assertEqual(response.status_code, 302)
         self.assertFalse(Candidate.objects.filter(id=candidate.id).exists())
 
     def test_user_cannot_access_others_candidate(self):
-        """Users should not be able to access another user's candidate detail view."""
-        other_user = User.objects.create_user(username='otheruser', password='secret')
+        """Users should not be able to access another
+        user's candidate detail view."""
+        other_user = User.objects.create_user(
+            username='otheruser', password='secret')
         candidate = Candidate.objects.create(user=other_user, name='Not Yours')
 
-        response = self.client.get(reverse('candidates:candidate_detail', args=[candidate.id]))
+        response = self.client.get(
+            reverse(
+                'candidates:candidate_detail',
+                args=[
+                    candidate.id]))
 
         self.assertEqual(response.status_code, 404)
 
     def test_toggle_favorite(self):
         """User can toggle favorite status for a candidate."""
-        candidate = Candidate.objects.create(user=self.user, name='Favorite Test')
+        candidate = Candidate.objects.create(
+            user=self.user, name='Favorite Test')
 
         url = reverse('candidates:toggle_favorite', args=[candidate.id])
-        
+
         # First POST – adds favorite
-        response = self.client.post(url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        response = self.client.post(
+            url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(response.status_code, 200)
         self.assertJSONEqual(response.content, {'is_favorite': True})
 
         # Second POST – removes favorite
-        response = self.client.post(url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        response = self.client.post(
+            url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(response.status_code, 200)
         self.assertJSONEqual(response.content, {'is_favorite': False})
 
@@ -138,7 +159,8 @@ class CandidateTests(TestCase):
         session.save()
 
         # Act
-        response = self.client.get(reverse('candidates:candidate_create_with_prefill'))
+        response = self.client.get(
+            reverse('candidates:candidate_create_with_prefill'))
 
         # Assert
         self.assertContains(response, 'value="Session Test"')
@@ -154,11 +176,12 @@ class CandidateTests(TestCase):
 
         # First visit: modal should be shown
         response = self.client.get(reverse('dashboard'))
-        self.assertContains(response, 'id="welcomeModal"') 
+        self.assertContains(response, 'id="welcomeModal"')
 
         # Simulate dismissing the welcome popup via AJAX POST
         url = reverse('candidates:dismiss_welcome')
-        response = self.client.post(url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        response = self.client.post(
+            url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(response.status_code, 200)
 
         # Refresh profile and check that the first login flag is now False

@@ -17,18 +17,15 @@ from django.db.models import Q, Count
 from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator
 from django.contrib.auth import update_session_auth_hash
-from django.contrib.auth.password_validation import validate_password, ValidationError
-from django.conf import settings
+from django.contrib.auth.password_validation import validate_password
+from django.contrib.auth.password_validation import ValidationError
 from django.views.decorators.http import require_http_methods
-from django.views.generic.edit import FormView
-from django.urls import reverse
-from django.utils.http import urlencode
 
 import fitz  # PyMuPDF
 import logging
 import json
 import os
-import env
+import env  # Needed to load environment variables (used by OpenAI client)
 
 from openai import OpenAI
 from .models import Candidate, CandidateFile, Profile, Favorite
@@ -67,7 +64,8 @@ def dashboard(request):
 
     # Favorites
     if show_favorites:
-        favorite_candidates = Favorite.objects.filter(user=request.user).values_list('candidate_id', flat=True)
+        favorite_candidates = Favorite.objects.filter(
+            user=request.user).values_list('candidate_id', flat=True)
         candidates = candidates.filter(id__in=favorite_candidates)
 
     # Sorting
@@ -94,18 +92,27 @@ def dashboard(request):
 
     # Prepare skill list and favorites
     for candidate in candidates:
-        candidate.skill_list = [skill.strip() for skill in candidate.top_skills.split(',') if skill.strip()]
-        candidate.is_favorite = Favorite.objects.filter(user=request.user, candidate=candidate).exists()
+        candidate.skill_list = [
+            skill.strip()
+            for skill in candidate.top_skills.split(',')
+            if skill.strip()
+        ]
+        candidate.is_favorite = Favorite.objects.filter(
+            user=request.user,
+            candidate=candidate
+        ).exists()
 
     # Show welcome popup for first-time users
     show_welcome_popup = False
-    if hasattr(request.user, 'profile') and request.user.profile.is_first_login:
+    if hasattr(
+            request.user,
+            'profile') and request.user.profile.is_first_login:
         show_welcome_popup = True
 
     context = {
         'candidates': candidates,
         'job_titles': job_titles,
-        'active_title': filter_title, 
+        'active_title': filter_title,
         'show_favorites': show_favorites,
         'show_welcome_popup': show_welcome_popup,
     }
@@ -129,6 +136,8 @@ def signup(request):
 # ==========================================
 
 # Create new candidate (standard form)
+
+
 @method_decorator(login_required, name='dispatch')
 class CandidateCreateView(CreateView):
     model = Candidate
@@ -172,6 +181,8 @@ class CandidateDetailView(DetailView):
         return obj
 
 # Update candidate
+
+
 class CandidateUpdateView(UpdateView):
     model = Candidate
     fields = [
@@ -185,7 +196,7 @@ class CandidateUpdateView(UpdateView):
         obj = super().get_object(queryset)
         if obj.user != self.request.user:
             raise Http404("This candidate does not belong to you.")
-        return obj    
+        return obj
 
     def form_valid(self, form):
         response = super().form_valid(form)
@@ -203,7 +214,7 @@ class CandidateUpdateView(UpdateView):
         self.object.save()
 
         messages.success(self.request, mark_safe('Candidate is updated'))
-        return response    
+        return response
 
     def get_success_url(self):
         return self.request.path
@@ -213,12 +224,15 @@ class CandidateUpdateView(UpdateView):
 @login_required
 def candidate_modal(request, pk):
     candidate = get_object_or_404(Candidate, pk=pk, user=request.user)
-    skills = [skill.strip() for skill in candidate.top_skills.split(',')] if candidate.top_skills else []
-    candidate.skill_list = skills 
+    skills = [skill.strip() for skill in candidate.top_skills.split(
+        ',')] if candidate.top_skills else []
+    candidate.skill_list = skills
 
-    candidate.is_favorite = Favorite.objects.filter(user=request.user, candidate=candidate).exists()
-  
-    html = render_to_string('candidate-modal.html', {'candidate': candidate}, request=request)
+    candidate.is_favorite = Favorite.objects.filter(
+        user=request.user, candidate=candidate).exists()
+
+    html = render_to_string('candidate-modal.html',
+                            {'candidate': candidate}, request=request)
     return JsonResponse({'html': html})
 
 
@@ -235,6 +249,8 @@ class CandidateDeleteView(DeleteView):
         return obj
 
 # Upload files to existing candidate
+
+
 def upload_candidate_files(request, pk):
     candidate = get_object_or_404(Candidate, id=pk)
 
@@ -246,7 +262,6 @@ def upload_candidate_files(request, pk):
     return JsonResponse({'error': 'Only POST method allowed'}, status=400)
 
 
-
 # Get files for candidate
 @login_required
 def get_candidate_files(request, pk):
@@ -255,9 +270,12 @@ def get_candidate_files(request, pk):
     return JsonResponse({'html': html})
 
 # Delete single file
+
+
 @login_required
 def delete_candidate_file(request, file_id):
-    candidate_file = get_object_or_404(CandidateFile, id=file_id, candidate__user=request.user)
+    candidate_file = get_object_or_404(
+        CandidateFile, id=file_id, candidate__user=request.user)
     candidate_file.delete()
     return JsonResponse({'message': 'File deleted successfully'})
 
@@ -271,6 +289,8 @@ def candidate_search(request):
     return render(request, 'candidate-search.html', {'candidates': candidates})
 
 # Filtering
+
+
 def filter_candidates(queryset, query):
     if query:
         queryset = queryset.filter(
@@ -292,7 +312,8 @@ def filter_candidates(queryset, query):
 @login_required
 def toggle_favorite(request, candidate_id):
     candidate = get_object_or_404(Candidate, id=candidate_id)
-    favorite, created = Favorite.objects.get_or_create(user=request.user, candidate=candidate)
+    favorite, created = Favorite.objects.get_or_create(
+        user=request.user, candidate=candidate)
 
     if not created:
         favorite.delete()
@@ -303,6 +324,8 @@ def toggle_favorite(request, candidate_id):
     return JsonResponse({'is_favorite': is_favorite})
 
 # Dismiss welcome popup
+
+
 @csrf_exempt
 @login_required
 def dismiss_welcome(request):
@@ -323,9 +346,9 @@ def dismiss_welcome(request):
 def delete_account(request):
     if request.method == 'POST':
         user = request.user
-        logout(request) 
-        user.delete()   
-        return redirect('index')  
+        logout(request)
+        user.delete()
+        return redirect('index')
     else:
         return redirect('settings')
 
@@ -344,14 +367,16 @@ def settings_view(request):
         if 'profile_picture' in request.FILES:
             profile.profile_image = request.FILES['profile_picture']
 
-        # Password change validation        
+        # Password change validation
         current_password = request.POST.get('current_password')
         new_password1 = request.POST.get('new_password1')
         new_password2 = request.POST.get('new_password2')
 
         if current_password or new_password1 or new_password2:
             if not current_password or not new_password1 or not new_password2:
-                messages.error(request, 'To change your password, you must fill in all three fields.')
+                messages.error(
+                    request,
+                    'To change your password, you must fill in all fields.')
                 return redirect('settings')
 
             if not user.check_password(current_password):
@@ -370,14 +395,16 @@ def settings_view(request):
                 return redirect('settings')
 
             user.set_password(new_password1)
-            update_session_auth_hash(request, user)  # så att man inte loggas ut
-            messages.success(request, 'Your password has been changed successfully.')
-
+            # så att man inte loggas ut
+            update_session_auth_hash(request, user)
+            messages.success(
+                request, 'Your password has been changed successfully.')
 
         user.save()
         profile.save()
 
-        messages.success(request, 'Your settings have been updated successfully!')
+        messages.success(
+            request, 'Your settings have been updated successfully!')
         return redirect('settings')
 
     return render(request, 'settings.html', {'user': user, 'profile': profile})
@@ -414,7 +441,8 @@ def upload_pdf_candidates(request):
                 'results': [{
                     'status': 'error',
                     'filename': file.name,
-                    'error': "Something went wrong while analyzing the CV. Please try again with another file."
+                    'error': "Something went wrong while analyzing the CV. "
+                    "Please try again with another file."
                 }]
             }, status=500)
 
@@ -433,25 +461,25 @@ def extract_text_from_pdf(file):
 # Call OpenAI to extract structured data from CV text
 def call_openai(text):
     prompt = f"""
-    You are an expert AI recruiter. Your task is to extract structured 
-    candidate data from the following CV text. 
+    You are an expert AI recruiter. Your task is to extract structured
+    candidate data from the following CV text.
     Please return a JSON object in this format:
 
     {{
         "name": "",
         "email": "",
         "phone_number": "",
-        "job_title": "",       # Suggest a relevant title if not clearly 
+        "job_title": "",       # Suggest a relevant title if not clearly
         stated. Make it short and relevant. Do not use & or "and" in title.
-        "profile_summary": "", # Write a short professional summary based on 
+        "profile_summary": "", # Write a short professional summary based on
         the CV content
         "work_experience": "",
         "education": "",
         "location": "",
         "links": "",
-        "top_skills": "",      
+        "top_skills": "",
         # Only return short, keyword-style skills as a comma-separated string.
-        Prioritize the shortest and most relevant terms first (e.g. “SQL, 
+        Prioritize the shortest and most relevant terms first (e.g. “SQL,
         Python, UX”).
         Avoid full sentences or descriptive phrases.
         "other": "",
@@ -472,6 +500,8 @@ def call_openai(text):
     return json.loads(content)
 
 # Save parsed data temporarily in session
+
+
 @login_required
 @require_http_methods(["POST"])
 def create_candidate_from_openai(request):
@@ -480,9 +510,12 @@ def create_candidate_from_openai(request):
     except json.JSONDecodeError:
         return JsonResponse({'error': 'Invalid JSON'}, status=400)
     request.session['prefill_candidate'] = data
-    return JsonResponse({'redirect_url': reverse('candidates:candidate_create_with_prefill')})
+    return JsonResponse({'redirect_url': reverse(
+        'candidates:candidate_create_with_prefill')})
 
 # Prefilled candidate creation view
+
+
 class CandidateCreatePrefilledView(CreateView):
     model = Candidate
     form_class = CandidateForm
@@ -490,7 +523,9 @@ class CandidateCreatePrefilledView(CreateView):
 
     def get(self, request, *args, **kwargs):
         if request.session.get('prefill_candidate'):
-            messages.success(request, "Information extracted from your PDF. Remember to save your candidate.")
+            messages.success(
+                request,
+                "Information extracted from your PDF. Remember to save.")
         return super().get(request, *args, **kwargs)
 
     def get_initial(self):
