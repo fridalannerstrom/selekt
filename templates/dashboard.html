@@ -92,9 +92,9 @@
           <div class="d-flex align-items-center gap-3 mb-3">
             <!-- Candidate image -->
             {% if candidate.profile_image %}
-            <img src="{{ candidate.profile_image.url }}" alt="Profile Image" />
+            <img src="{{ candidate.profile_image.url }}" alt="Profile Image">
             {% else %}
-            <img src="{% static 'media/images/user-pic.png' %}" alt="Profile Image" />
+            <img src="{% static 'media/images/user-pic.png' %}" alt="Profile Image">
             {% endif %}
 
             <!-- Name and job title -->
@@ -207,19 +207,19 @@
 
     <!-- If user has no favorites -->
     {% if show_favorites %}
-    <img src="{% static 'media/images/no-favorites.png' %}" alt="No favorites" class="empty-state-image" />
+    <img src="{% static 'media/images/no-favorites.png' %}" alt="No favorites" class="empty-state-image">
     <h3>No favorites yet</h3>
     <p class="text-muted mb-4">Click the heart icon on candidates you like to add them here.</p>
 
     <!-- If search or filters yield no result -->
     {% elif request.GET.q or request.GET.title %}
-    <img src="{% static 'media/images/no-search.png' %}" alt="No results" class="empty-state-image" />
+    <img src="{% static 'media/images/no-search.png' %}" alt="No results" class="empty-state-image">
     <h3>No results found</h3>
     <p class="text-muted">Try adjusting your search or filters.</p>
 
     <!-- If no candidates at all -->
     {% else %}
-    <img src="{% static 'media/images/nothing-here.png' %}" alt="No candidates" class="empty-state-image" />
+    <img src="{% static 'media/images/nothing-here.png' %}" alt="No candidates" class="empty-state-image">
     <h3>No candidates here</h3>
     <p class="text-muted mb-4">Get started by uploading your first candidate</p>
 

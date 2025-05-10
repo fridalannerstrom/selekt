@@ -17,7 +17,7 @@
         <p class="text-muted small">This action cannot be undone.</p>
         <div class="d-flex justify-content-center gap-2 mt-3">
           <button type="button" class="btn button-base outline-button" data-bs-dismiss="modal">Cancel</button>
-          <form id="deleteCandidateForm" method="post" action="">
+          <form id="deleteCandidateForm" method="post">
             {% csrf_token %}
             <button type="submit" class="btn button-base scn-button">Yes, delete</button>
           </form>
@@ -34,7 +34,7 @@
         <p class="text-muted small">This action cannot be undone.</p>
         <div class="d-flex justify-content-center gap-2 mt-3">
           <button type="button" class="btn button-base outline-button" data-bs-dismiss="modal">Cancel</button>
-          <form id="deleteFileForm" method="post" action="">
+          <form id="deleteFileForm" method="post">
             {% csrf_token %}
             <button type="submit" class="btn button-base scn-button">Yes, delete</button>
           </form>
