@@ -849,3 +849,4 @@ No critical issues were found.
 ## Notes
 
 - Remember to write about needing work for SEO, like better titles on pages
+- Write about the link "back to candidates" should open the candidate modal when you've edited a candidate. Currently, when you edit a candidate and click "back", you end up at the dashboard and you need to find the candidate again to see the changes. Not very good UX
