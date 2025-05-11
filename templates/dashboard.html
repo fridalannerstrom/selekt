@@ -37,7 +37,7 @@
         <form id="sortForm" class="sort-form w-100">
           <select name="sort" id="sortSelect" class="form-select">
             <option value="" {% if not request.GET.sort %}selected{% endif %}>Date (Newest first)</option>
-            <option value="name" {% if request.GET.sort=="name" %}selected{% endif %}>Alphabetical (A–Z)</option>
+            <option value="name" {% if sort == "name" %}selected{% endif %}>Alphabetical (A–Z)</option>
           </select>
         </form>
       </div>
@@ -172,23 +172,25 @@
 
         <!-- Page numbers with ellipses when needed -->
         {% for num in candidates.paginator.page_range %}
-        {% if num == 1 or num == candidates.paginator.num_pages or num >= candidates.number|add:"-2" and num <=
-          candidates.number|add:"2" %} {% if num==candidates.number %} <li class="page-item active">
-          <span class="page-link">{{ num }}</span>
-          </li>
-          {% else %}
-          <li class="page-item">
-            <a class="page-link" href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ num }}">{{
-              num }}</a>
-          </li>
-          {% endif %}
-          {% elif num == 2 and candidates.number|add:"-2" > 2 %}
-          <li class="page-item disabled"><span class="page-link">...</span></li>
-          {% elif num == candidates.paginator.num_pages|add:"-1" and candidates.number|add:"2" <
-            candidates.paginator.num_pages|add:"-1" %} <li class="page-item disabled"><span class="page-link">...</span>
-            </li>
+          {% if num == 1 or num == candidates.paginator.num_pages or num >= candidates.number|add:"-2" and num <= candidates.number|add:"2" %}
+            {% if num == candidates.number %}
+              <li class="page-item active">
+                <span class="page-link">{{ num }}</span>
+              </li>
+            {% else %}
+              <li class="page-item">
+                <a class="page-link" href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ num }}">{{ num }}</a>
+              </li>
             {% endif %}
-            {% endfor %}
+          {% else %}
+            {% if num == 2 and candidates.number|add:"-2" > 2 %}
+              <li class="page-item disabled"><span class="page-link">...</span></li>
+            {% endif %}
+            {% if num == candidates.paginator.num_pages|add:"-1" and candidates.number|add:"2" < candidates.paginator.num_pages|add:"-1" %}
+              <li class="page-item disabled"><span class="page-link">...</span></li>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
 
             <!-- Show "Next" button if available -->
             {% if candidates.has_next %}
@@ -203,18 +205,19 @@
     </nav>
   </div>
 
-  <!-- If no candidates match -->
+<!-- If no candidates match -->
+{% else %}
+<div class="empty-state text-center py-5">
+
+  <!-- If user has no favorites -->
+  {% if show_favorites %}
+  <img src="{% static 'media/images/no-favorites.png' %}" alt="No favorites" class="empty-state-image">
+  <h3>No favorites yet</h3>
+  <p class="text-muted mb-4">Click the heart icon on candidates you like to add them here.</p>
+
+  <!-- If search or filters yield no result -->
   {% else %}
-  <div class="empty-state text-center py-5">
-
-    <!-- If user has no favorites -->
-    {% if show_favorites %}
-    <img src="{% static 'media/images/no-favorites.png' %}" alt="No favorites" class="empty-state-image">
-    <h3>No favorites yet</h3>
-    <p class="text-muted mb-4">Click the heart icon on candidates you like to add them here.</p>
-
-    <!-- If search or filters yield no result -->
-    {% elif request.GET.q or request.GET.title %}
+    {% if request.GET.q or request.GET.title %}
     <img src="{% static 'media/images/no-search.png' %}" alt="No results" class="empty-state-image">
     <h3>No results found</h3>
     <p class="text-muted">Try adjusting your search or filters.</p>
@@ -231,8 +234,10 @@
       Upload Candidate
     </button>
     {% endif %}
-  </div>
   {% endif %}
+
+</div>
+{% endif %}
 
 </div>
 

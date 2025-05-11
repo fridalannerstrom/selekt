@@ -115,6 +115,7 @@ def dashboard(request):
         'active_title': filter_title,
         'show_favorites': show_favorites,
         'show_welcome_popup': show_welcome_popup,
+        'sort': sort,
     }
     return render(request, 'dashboard.html', context)
 

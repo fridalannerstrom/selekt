@@ -1,3 +1,5 @@
+/* jslint esversion: 6 */
+
 // Run this once the entire DOM is fully loaded
 document.addEventListener('DOMContentLoaded', function () {
     const favoritesToggle = document.getElementById('favoritesToggle');
