@@ -25,7 +25,6 @@ import fitz  # PyMuPDF
 import logging
 import json
 import os
-import env  # Needed to load environment variables (used by OpenAI client)
 
 from openai import OpenAI
 from .models import Candidate, CandidateFile, Profile, Favorite
