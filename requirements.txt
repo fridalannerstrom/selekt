@@ -32,6 +32,7 @@ openai==1.76.2
 pathspec==0.12.1
 pillow==11.2.1
 propcache==0.3.1
+psycopg2-binary==2.9.10
 pycodestyle==2.13.0
 pydantic==2.11.4
 pydantic_core==2.33.2
