@@ -845,3 +845,7 @@ No critical issues were found.
 | `urls.py` | ✅ Valid | (project file) |
 | `tests.py` | ✅ Valid | - |
 | `admin.py` | ✅ Valid | - |
+
+## Notes
+
+- Remember to write about needing work for SEO, like better titles on pages
