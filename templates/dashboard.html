@@ -32,15 +32,15 @@
   <div class="pb-4 mb-4">
     <div class="d-flex flex-wrap align-items-center text-center text-md-start flex-md-row flex-column-reverse">
 
-    <!-- Sort dropdown -->
-    <div class="col-12 col-md-2 mb-2 mb-md-0 tab-sorting">
-      <form id="sortForm" class="sort-form w-100">
-        <select name="sort" id="sortSelect" class="form-select">
-          <option value="" {% if not request.GET.sort %}selected{% endif %}>Date (Newest first)</option>
-          <option value="name" {% if request.GET.sort == "name" %}selected{% endif %}>Alphabetical (A–Z)</option>
-        </select>
-      </form>
-    </div>
+      <!-- Sort dropdown -->
+      <div class="col-12 col-md-2 mb-2 mb-md-0 tab-sorting">
+        <form id="sortForm" class="sort-form w-100">
+          <select name="sort" id="sortSelect" class="form-select">
+            <option value="" {% if not request.GET.sort %}selected{% endif %}>Date (Newest first)</option>
+            <option value="name" {% if request.GET.sort=="name" %}selected{% endif %}>Alphabetical (A–Z)</option>
+          </select>
+        </form>
+      </div>
 
       <!-- Tabs for job titles -->
       <div class="col-12 col-md-8 mb-2 mb-md-0 tab-tabs">
@@ -82,7 +82,8 @@
         <!-- Favorite icon in top-right corner -->
         <div class="position-absolute top-0 end-0 p-4">
           <span class="heart-icon" onclick="toggleFavorite({{ candidate.id }}, this)">
-            <i id="heart-card-{{ candidate.id }}" class="fa{% if candidate.is_favorite %}-solid{% else %}-regular{% endif %} fa-heart"></i>
+            <i id="heart-card-{{ candidate.id }}"
+              class="fa{% if candidate.is_favorite %}-solid{% else %}-regular{% endif %} fa-heart"></i>
           </span>
         </div>
 
@@ -106,19 +107,19 @@
           <!-- Skill badges -->
           {% with candidate.skill_list as skills %}
           {% if skills and skills|length > 0 %}
-            <!-- Show real skills if they exist -->
-            <div class="skill-container">
-              {% for skill in skills %}
-                <span class="skill-badge">{{ skill }}</span>
-              {% endfor %}
-              <!-- Extra span used by JS for +3 etc -->
-              <span class="skill-badge skill-badge-extra" style="display: none;"></span>
-            </div>
+          <!-- Show real skills if they exist -->
+          <div class="skill-container">
+            {% for skill in skills %}
+            <span class="skill-badge">{{ skill }}</span>
+            {% endfor %}
+            <!-- Extra span used by JS for +3 etc -->
+            <span class="skill-badge skill-badge-extra display-none"></span>
+          </div>
           {% else %}
-            <!-- Placeholder to preserve card height -->
-            <div class="skill-container invisible-placeholder"></div>
+          <!-- Placeholder to preserve card height -->
+          <div class="skill-container invisible-placeholder"></div>
           {% endif %}
-        {% endwith %}
+          {% endwith %}
 
         </div>
 
@@ -132,7 +133,7 @@
             class="btn button-base scn-button read-btn">Read more</a>
 
           <!-- Dot menu -->
-          <div class="dot-menu position-relative p-2 rounded" style="cursor: pointer;">
+          <div class="dot-menu position-relative p-2 rounded cursor">
             <div class="d-flex flex-row justify-content-center align-items-center">
               <span class="dot"></span>
               <span class="dot mx-1"></span>
@@ -154,52 +155,54 @@
     {% endfor %}
   </div>
 
+  <!-- Pagination below candidates -->
+  <div class="d-flex justify-content-center mt-5">
+    <nav>
+      <ul class="pagination">
 
-    <!-- Pagination below candidates -->
-    <div class="d-flex justify-content-center mt-5">
-      <nav>
-        <ul class="pagination">
+        <!-- Show "Previous" button if available -->
+        {% if candidates.has_previous %}
+        <li class="page-item">
+          <a class="page-link"
+            href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ candidates.previous_page_number }}">
+            Previous
+          </a>
+        </li>
+        {% endif %}
 
-           <!-- Show "Previous" button if available -->
-          {% if candidates.has_previous %}
+        <!-- Page numbers with ellipses when needed -->
+        {% for num in candidates.paginator.page_range %}
+        {% if num == 1 or num == candidates.paginator.num_pages or num >= candidates.number|add:"-2" and num <=
+          candidates.number|add:"2" %} {% if num==candidates.number %} <li class="page-item active">
+          <span class="page-link">{{ num }}</span>
+          </li>
+          {% else %}
           <li class="page-item">
-            <a class="page-link" href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ candidates.previous_page_number }}">
-              Previous
-            </a>
+            <a class="page-link" href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ num }}">{{
+              num }}</a>
           </li>
           {% endif %}
-    
-          <!-- Page numbers with ellipses when needed -->
-          {% for num in candidates.paginator.page_range %}
-            {% if num == 1 or num == candidates.paginator.num_pages or num >= candidates.number|add:"-2" and num <= candidates.number|add:"2" %}
-              {% if num == candidates.number %}
-                <li class="page-item active">
-                  <span class="page-link">{{ num }}</span>
-                </li>
-              {% else %}
-                <li class="page-item">
-                  <a class="page-link" href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ num }}">{{ num }}</a>
-                </li>
-              {% endif %}
-            {% elif num == 2 and candidates.number|add:"-2" > 2 %}
-              <li class="page-item disabled"><span class="page-link">...</span></li>
-            {% elif num == candidates.paginator.num_pages|add:"-1" and candidates.number|add:"2" < candidates.paginator.num_pages|add:"-1" %}
-              <li class="page-item disabled"><span class="page-link">...</span></li>
+          {% elif num == 2 and candidates.number|add:"-2" > 2 %}
+          <li class="page-item disabled"><span class="page-link">...</span></li>
+          {% elif num == candidates.paginator.num_pages|add:"-1" and candidates.number|add:"2" <
+            candidates.paginator.num_pages|add:"-1" %} <li class="page-item disabled"><span class="page-link">...</span>
+            </li>
             {% endif %}
-          {% endfor %}
+            {% endfor %}
 
-          <!-- Show "Next" button if available -->
-          {% if candidates.has_next %}
-          <li class="page-item">
-            <a class="page-link" href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ candidates.next_page_number }}">
-              Next
-            </a>
-          </li>
-          {% endif %}
-        </ul>
-      </nav>
-    </div>
-    
+            <!-- Show "Next" button if available -->
+            {% if candidates.has_next %}
+            <li class="page-item">
+              <a class="page-link"
+                href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ candidates.next_page_number }}">
+                Next
+              </a>
+            </li>
+            {% endif %}
+      </ul>
+    </nav>
+  </div>
+
   <!-- If no candidates match -->
   {% else %}
   <div class="empty-state text-center py-5">

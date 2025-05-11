@@ -12,12 +12,12 @@
     <img src="{% static 'media/images/upload-candidate.png' %}" alt="Upload illustration" class="upload-illustration mb-4">
     <h1 class="small-h1 mb-2">One PDF in – full candidate profile out!</h1>
     <p class="text-muted">Upload a CV and let our AI instantly generate a structured candidate overview.</p>
-    <input type="file" id="fileElem" accept=".pdf" name="file" style="display:none">
+    <input type="file" id="fileElem" accept=".pdf" name="file" class="display-none">
     <label for="fileElem" class="btn btn-primary mb-3 button-base scn-button mt-3">Select Files</label>
   </div>
 
   <!-- CSRF -->
-  <form id="csrfTokenForm" style="display:none;">
+  <form id="csrfTokenForm" class="display-none">
     {% csrf_token %}
   </form>
 </div>
