@@ -15,6 +15,7 @@ cssbeautifier==1.15.4
 distro==1.9.0
 Django==5.2
 djlint==1.36.4
+dj-database-url
 EditorConfig==0.17.0
 flake8==7.2.0
 frozenlist==1.6.0
