@@ -40,6 +40,7 @@ pydantic==2.11.4
 pydantic_core==2.33.2
 pyflakes==3.3.2
 PyMuPDF==1.25.5
+python-dotenv==1.1.0
 PyYAML==6.0.2
 regex==2024.11.6
 requests==2.32.3
