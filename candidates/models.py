@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from cloudinary.models import CloudinaryField
+from cloudinary_storage.storage import MediaCloudinaryStorage, RawMediaCloudinaryStorage
 
 # ==========================
 # Main Candidate Model
@@ -63,9 +64,11 @@ class Candidate(models.Model):
 
 
 class CandidateFile(models.Model):
-    candidate = models.ForeignKey(
-        'Candidate', on_delete=models.CASCADE, related_name='files')
-    file = models.FileField(upload_to='candidate_files/')
+    candidate = models.ForeignKey('Candidate', on_delete=models.CASCADE, related_name='files')
+    file = models.FileField(
+        upload_to='candidate_files/',
+        storage=RawMediaCloudinaryStorage()
+    )
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

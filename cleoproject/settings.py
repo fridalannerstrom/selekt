@@ -161,4 +161,12 @@ CLOUDINARY_STORAGE = {
     'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
     'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
     'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
+    'RESOURCE_TYPE': 'raw',
+    'UPLOAD_TYPE': 'upload',
+    'OPTIONS': {
+        'resource_type': 'raw',
+        'access_mode': 'public',
+        'use_filename': True,
+        'unique_filename': False,
+    }
 }
