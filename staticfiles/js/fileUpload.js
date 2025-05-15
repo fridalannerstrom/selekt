@@ -1,3 +1,5 @@
+/* jslint esversion: 6 */
+
 // Initializes the file upload functionality for a candidate
 function initUploadScript() {
     const fileElem = document.getElementById("fileElem");
@@ -5,17 +7,23 @@ function initUploadScript() {
     const selectedFilesList = document.getElementById("selectedFilesList");
     const uploadArea = document.getElementById("fileUploadArea");
     const fileListArea = document.getElementById("fileListArea");
+
+    if (!uploadArea || !fileElem || !uploadBtn || !selectedFilesList || !fileListArea) {
+        if (window.location.pathname.includes("/candidates/") && window.location.pathname.includes("upload")) {
+            console.warn("Upload script not initialized: missing DOM elements.");
+        }
+        return;
+    }
+
     let selectedFiles = [];
-  
-    if (!uploadArea) return;
-  
+
     const candidateId = uploadArea.dataset.candidateId;
   
     // Handle file selection
     fileElem.addEventListener("change", function () {
-      selectedFiles = Array.from(fileElem.files);
-      selectedFilesList.innerHTML = selectedFiles.map(f => `<div>${f.name}</div>`).join("");
-      uploadBtn.classList.remove("d-none");
+        selectedFiles = Array.from(fileElem.files);
+        selectedFilesList.innerHTML = selectedFiles.map(f => `<div>${f.name}</div>`).join("");
+        uploadBtn.classList.remove("d-none");
     });
   
     // Handle upload click

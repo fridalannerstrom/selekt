@@ -19,6 +19,13 @@ body,
   margin: 0;
 }
 
+.display-none {
+  display: none;
+}
+
+.cursor {
+  cursor: pointer;
+}
 /* =====================================
    HEADINGS
 ====================================== */
@@ -751,6 +758,12 @@ border: 0px;
   width: 70px;
 }
 
+.candidate-form-profile-image {
+  width: 150px; 
+  height: 150px; 
+  object-fit: cover;
+}
+
 /* =====================================
    SETTINGS PAGE
 ====================================== */
@@ -760,6 +773,21 @@ border: 0px;
   height: 100px; 
   object-fit: cover;
   margin: auto;
+}
+
+/* =====================================
+   404 PAGE
+====================================== */
+
+.page-not-found-image {
+  width: 90%;
+  max-width: 250px;
+  border-radius: 15px;
+}
+
+.page-not-found-heading {
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 /* =====================================

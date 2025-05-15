@@ -1,3 +1,5 @@
+/* jslint esversion: 6 */
+
 // Run this once the entire DOM is fully loaded
 document.addEventListener('DOMContentLoaded', function () {
     const favoritesToggle = document.getElementById('favoritesToggle');
@@ -43,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
    * @param {string|number} candidateId - The ID of the candidate to toggle
    */
   function toggleFavorite(candidateId) {
-    fetch(`/toggle-favorite/${candidateId}/`, {
+    fetch(`/candidates/toggle-favorite/${candidateId}/`, {
       method: 'POST',
       headers: {
         'X-CSRFToken': '{{ csrf_token }}', // Replace with dynamic CSRF token if needed
