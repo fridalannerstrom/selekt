@@ -96,12 +96,6 @@
             {% else %}
               <img src="{% static 'media/images/user-pic.png' %}" alt="Profile Image">
             {% endif %}
-            <!-- ta bort sen -->
-            {% if candidate.profile_image %}
-              <p>{{ candidate.profile_image.url }}</p>
-            {% else %}
-              <p><em>Ingen bild</em></p>
-            {% endif %}
 
             <!-- Name and job title -->
             <div>
