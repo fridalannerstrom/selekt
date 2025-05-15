@@ -67,7 +67,7 @@ This section outlines the user-centered design approach behind Selekt. The proje
 Selekt is built for recruiters who are short on time and often manage multiple roles simultaneously. These users are typically:
 
 - Working in fast-paced environments with high candidate volume
-- Using desktop computers as their primary tool (Selekt is designed desktop-first)
+- Using desktop computers as their primary tool (Selekt should be designed desktop-first)
 - Needing instant access to structured information without distractions
 - Looking for automation, clarity, and speed in their daily workflow
 
@@ -95,44 +95,47 @@ Selekt prioritizes simplicity, responsiveness, and automation – it’s designe
 
 ---
 
-### User Stories
+## User Stories
 
-User stories were collected and structured using MoSCoW prioritization:
-
-
-**🔴 Must-Have:**
-
-- Users must be able to sign up, log in, and log out
-- Recruiters must be able to add, view, edit, and delete candidate profiles
-- CVs must be uploaded and parsed into structured summaries using AI
-- Extracted data (skills, summary, etc.) must be saved to the database
-- Recruiters must be able to search and sort candidates
-- Each user must only see their own candidate data
-- Users must be able to manage their account and delete it if needed
-- A clear, styled interface must be in place to support all key workflows
+User stories were defined using the MoSCoW prioritization method to ensure a focused and value-driven development.  
+They are grouped below by priority level and mapped to project epics to support traceability and agile planning.
 
 
-**🟡 Should-Have:**
+### 🔴 Must-Have – Core functionality needed for a usable MVP
 
-- Upload additional files and notes during candidate creation
-- Add tags or categories to candidates for easier filtering
-- Favorite candidates for future reference
-- Paginate long candidate lists and show progress/loading states
-- pload profile pictures and support extended profile fields
-- Preview extracted data before saving
-- Protect views and URLs based on login status
-- Refine design, layout, and interactive UI elements
+These features are critical to delivering the main user value and are linked to key epics such as **User Authentication**, **Candidate Management**, and **AI Upload & Parsing**.
 
-
-**🟢 Could-Have:**
-
-- Generate ready-to-send email templates per candidate
-- Compare candidates side by side
-- Add welcome messages or helpful empty states
-- Improve UX around account deletion confirmation
-- Add advanced filtering or bulk actions
+- **Authentication:** Users must be able to sign up, log in, and log out securely.
+- **Candidate CRUD:** Recruiters must be able to add, view, edit, and delete candidate profiles.
+- **AI CV Parsing:** CVs must be uploaded and parsed into structured summaries using AI.
+- **Data Storage:** Extracted data (skills, summary, etc.) must be saved to the database.
+- **Search & Sort:** Recruiters must be able to search and sort candidates effectively.
+- **Private Access:** Each user must only see their own candidate data.
+- **Account Control:** Users must be able to manage and delete their account if needed.
+- **UI Framework:** A clean and styled user interface must support all key workflows.
 
 
+### 🟡 Should-Have – Important features to improve usability and experience
+
+These features enhance the overall user journey and support better interaction and security. They are included if time permits and are linked to **Interface**, **User Roles**, and **Performance Feedback**.
+
+- Support uploading additional files and notes during candidate creation.
+- Allow adding tags or categories to candidates for easier filtering.
+- Enable users to mark candidates as favorites for quick reference.
+- Paginate long candidate lists and display loading/progress indicators.
+- Preview extracted candidate data before saving it.
+- Protect URLs and views based on user login status.
+
+
+
+### 🟢 Could-Have – Optional enhancements to boost value
+
+These are nice-to-have features that provide additional polish and flexibility. Linked to **AI Tools** and **Candidate Comparison** epics.
+
+- Generate ready-to-send email templates for each candidate.
+- Compare candidates side by side based on selected criteria.
+- Show welcome messages or helpful empty states for better UX.
+- Add advanced filtering, search combinations, or bulk actions.
 
 ---
 
