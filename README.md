@@ -1,11 +1,16 @@
-Selekt is a web application created to help recruiters and HR professionals manage candidates more efficiently.
+![Selekt Mockup](static/media/documentation/all-devices-black.png)
 
-Built as part of my Full-Stack Software Development course, this project allowed me to combine my passion for psychology, recruitment, and technology into a practical, real-world platform.
+Welcome to **Selekt** 🎉
 
-The goal of the application is to provide users with an intuitive and accessible system where they can register, log in, add and manage candidates, and store important information such as CVs, test results, and interview notes. I wanted the system to be simple yet powerful, making it easier to organize, compare, and assess candidates during a recruitment process.
+Selekt is an AI-powered web application designed to **help recruiters manage candidates** in a faster, smarter, and more structured way. Upload a CV, and Selekt instantly summarizes the profile, extracts key skills, and organizes everything into a clean, searchable format – no formatting or manual input needed.
 
-Selekt is designed with a clean and professional interface, focusing on usability, responsiveness, and a user-friendly experience.
+The idea for Selekt came from my years working as a web administrator for companies in the recruitment industry. I saw how much valuable candidate information gets lost in inboxes, folders, and outdated spreadsheets. With Selekt, I wanted to build a tool that not only streamlines day-to-day recruitment tasks but also gives recruiters long-term value by helping them build their own candidate pool.
 
+Selekt acts as your personal, always-accessible candidate database – a single place where you can store everything you know about your candidates: CVs, interview notes, test results, links, documents, skills, and more. All profiles are searchable and structured, making it easy to rediscover great candidates for future roles.
+
+This project was created as part of my Full-Stack Software Development diploma at Code Institute and allowed me to bring together my passion for recruitment, psychology, and tech – and turn it into a real, working solution.
+
+💻 [View the application live here](https://selekt-3ceec5fdccb6.herokuapp.com/)
 
 # Table of Contents
 
@@ -55,7 +60,38 @@ Selekt is designed with a clean and professional interface, focusing on usabilit
 
 ## User Experience (UX)
 
-This section covers the user-centered design process of the project. It includes the project goals, user stories, wireframes, and the overall visual and interactive design decisions.
+This section outlines the user-centered design approach behind Selekt. The project was planned with both recruiter needs and technical feasibility in mind – ensuring a smooth, intuitive experience backed by powerful functionality.
+
+### Target Group
+
+Selekt is built for recruiters who are short on time and often manage multiple roles simultaneously. These users are typically:
+
+- Working in fast-paced environments with high candidate volume
+- Using desktop computers as their primary tool (Selekt is designed desktop-first)
+- Needing instant access to structured information without distractions
+- Looking for automation, clarity, and speed in their daily workflow
+
+Selekt prioritizes simplicity, responsiveness, and automation – it’s designed to save time, reduce admin tasks, and help recruiters make better decisions, faster.
+
+### Goals
+
+**External users (recruiters) want to:**
+
+- Quickly upload and summarize candidate CVs
+- Store all candidate information in one place (CVs, notes, test results, links, images)
+- Search and filter candidates based on skills, roles, or custom tags
+- Assess candidates and related files efficiently
+- Reuse previously evaluated candidates in future recruitment
+
+
+**The site owner (admin/developer) wants to:**
+
+- Provide a streamlined, user-friendly tool for recruiters
+- Store data securely and enable user-based authentication
+- Ensure the system is scalable and easy to maintain
+- Gain experience with Django, PostgreSQL, and AI APIs in a real-world project
+
+---
 
 - **Goals:** Outlines the main goals for both external users and the site owner.
 - **User Stories:** Lists the user stories collected during the planning phase, prioritized by must-have, should-have, could-have categories.
