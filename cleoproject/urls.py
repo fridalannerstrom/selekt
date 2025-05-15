@@ -45,7 +45,6 @@ urlpatterns = [
     # User settings & account
     path('settings/', views.settings_view, name='settings'),
     path('settings/delete/', views.delete_account, name='delete_account'),
-    path('test-storage/', views.test_storage, name='test_storage'),
 ]
 
 if settings.DEBUG:

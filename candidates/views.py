@@ -20,6 +20,7 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.password_validation import ValidationError
 from django.views.decorators.http import require_http_methods
+from django.core.files.storage import default_storage
 
 import fitz  # PyMuPDF
 import logging
@@ -158,14 +159,15 @@ class CandidateCreateView(CreateView):
 
         response = super().form_valid(form)
 
-        # Handle file uploads
+        from django.core.files.storage import default_storage
+        if self.object.profile_image and not self.object.profile_image.url.startswith('http'):
+            self.object.profile_image.storage = default_storage
+            self.object.save()
+
         for file in self.request.FILES.getlist('candidate_files'):
             CandidateFile.objects.create(candidate=self.object, file=file)
 
         return response
-
-    def get_success_url(self):
-        return reverse_lazy('dashboard')
 
 
 # Candidate detail view
@@ -538,6 +540,7 @@ class CandidateCreatePrefilledView(CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+
         link_names = self.request.POST.getlist('link_names')
         link_urls = self.request.POST.getlist('link_urls')
         combined_links = ''
@@ -548,6 +551,11 @@ class CandidateCreatePrefilledView(CreateView):
 
         response = super().form_valid(form)
 
+        # FIX för Cloudinary
+        if self.object.profile_image and not self.object.profile_image.url.startswith('http'):
+            self.object.profile_image.storage = default_storage
+            self.object.save()
+
         for file in self.request.FILES.getlist('candidate_files'):
             CandidateFile.objects.create(candidate=self.object, file=file)
 
@@ -555,9 +563,3 @@ class CandidateCreatePrefilledView(CreateView):
 
     def get_success_url(self):
         return reverse_lazy('dashboard')
-
-from django.conf import settings
-from django.http import JsonResponse
-
-def test_storage(request):
-    return JsonResponse({'storage': settings.DEFAULT_FILE_STORAGE})
