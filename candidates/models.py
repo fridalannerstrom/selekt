@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from cloudinary.models import CloudinaryField
 
 # ==========================
 # Main Candidate Model
@@ -20,8 +21,7 @@ class Candidate(models.Model):
     location = models.CharField(max_length=100, blank=True)
     links = models.CharField(max_length=255, blank=True,
                              help_text="e.g. LinkedIn, GitHub URLs")
-    profile_image = models.ImageField(
-        upload_to='profile_images/', blank=True, null=True)
+    profile_image = CloudinaryField('image', blank=True, null=True)
     other = models.TextField(blank=True)
     notes = models.TextField(blank=True)
     top_skills = models.CharField(

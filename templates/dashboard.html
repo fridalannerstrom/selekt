@@ -91,12 +91,17 @@
         <div class="px-4 pt-4 pb-2">
           <div class="d-flex align-items-center gap-3 mb-3">
             <!-- Candidate image -->
-            {% if candidate.profile_image %}
-            <img src="{{ candidate.profile_image.url }}" alt="Profile Image">
+            {% if candidate.profile_image and candidate.profile_image.url %}
+              <img src="{{ candidate.profile_image.url }}" alt="Profile Image">
             {% else %}
-            <img src="{% static 'media/images/user-pic.png' %}" alt="Profile Image">
+              <img src="{% static 'media/images/user-pic.png' %}" alt="Profile Image">
             {% endif %}
-            <p>{{ candidate.profile_image.url }}</p>
+            <!-- ta bort sen -->
+            {% if candidate.profile_image %}
+              <p>{{ candidate.profile_image.url }}</p>
+            {% else %}
+              <p><em>Ingen bild</em></p>
+            {% endif %}
 
             <!-- Name and job title -->
             <div>

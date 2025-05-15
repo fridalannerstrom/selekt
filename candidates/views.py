@@ -148,7 +148,6 @@ class CandidateCreateView(CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
 
-        # Format custom links
         link_names = self.request.POST.getlist('link_names')
         link_urls = self.request.POST.getlist('link_urls')
         combined_links = ''
@@ -157,17 +156,18 @@ class CandidateCreateView(CreateView):
                 combined_links += f'{name}:::{url};;;'
         form.instance.links = combined_links
 
-        response = super().form_valid(form)
+        if 'profile_image' in self.request.FILES:
+            form.instance.profile_image = self.request.FILES['profile_image']
 
-        from django.core.files.storage import default_storage
-        if self.object.profile_image and not self.object.profile_image.url.startswith('http'):
-            self.object.profile_image.storage = default_storage
-            self.object.save()
+        response = super().form_valid(form)
 
         for file in self.request.FILES.getlist('candidate_files'):
             CandidateFile.objects.create(candidate=self.object, file=file)
 
         return response
+
+    def get_success_url(self):
+        return reverse_lazy('dashboard')
 
 
 # Candidate detail view
