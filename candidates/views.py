@@ -555,3 +555,9 @@ class CandidateCreatePrefilledView(CreateView):
 
     def get_success_url(self):
         return reverse_lazy('dashboard')
+
+from django.conf import settings
+from django.http import JsonResponse
+
+def test_storage(request):
+    return JsonResponse({'storage': settings.DEFAULT_FILE_STORAGE})
