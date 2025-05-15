@@ -73,6 +73,8 @@ Selekt is built for recruiters who are short on time and often manage multiple r
 
 Selekt prioritizes simplicity, responsiveness, and automation – it’s designed to save time, reduce admin tasks, and help recruiters make better decisions, faster.
 
+---
+
 ### Goals
 
 **External users (recruiters) want to:**
@@ -90,6 +92,47 @@ Selekt prioritizes simplicity, responsiveness, and automation – it’s designe
 - Store data securely and enable user-based authentication
 - Ensure the system is scalable and easy to maintain
 - Gain experience with Django, PostgreSQL, and AI APIs in a real-world project
+
+---
+
+### User Stories
+
+User stories were collected and structured using MoSCoW prioritization:
+
+
+**🔴 Must-Have:**
+
+- Users must be able to sign up, log in, and log out
+- Recruiters must be able to add, view, edit, and delete candidate profiles
+- CVs must be uploaded and parsed into structured summaries using AI
+- Extracted data (skills, summary, etc.) must be saved to the database
+- Recruiters must be able to search and sort candidates
+- Each user must only see their own candidate data
+- Users must be able to manage their account and delete it if needed
+- A clear, styled interface must be in place to support all key workflows
+
+
+**🟡 Should-Have:**
+
+- Upload additional files and notes during candidate creation
+- Add tags or categories to candidates for easier filtering
+- Favorite candidates for future reference
+- Paginate long candidate lists and show progress/loading states
+- pload profile pictures and support extended profile fields
+- Preview extracted data before saving
+- Protect views and URLs based on login status
+- Refine design, layout, and interactive UI elements
+
+
+**🟢 Could-Have:**
+
+- Generate ready-to-send email templates per candidate
+- Compare candidates side by side
+- Add welcome messages or helpful empty states
+- Improve UX around account deletion confirmation
+- Add advanced filtering or bulk actions
+
+
 
 ---
 
