@@ -95,13 +95,13 @@ Selekt prioritizes simplicity, responsiveness, and automation – it’s designe
 
 ---
 
-## User Stories
+### User Stories
 
 User stories were defined using the MoSCoW prioritization method to ensure a focused and value-driven development.  
 They are grouped below by priority level and mapped to project epics to support traceability and agile planning.
 
 
-### 🔴 Must-Have – Core functionality needed for a usable MVP
+#### 🔴 Must-Have – Core functionality needed for a usable MVP
 
 These features are critical to delivering the main user value and are linked to key epics such as **User Authentication**, **Candidate Management**, and **AI Upload & Parsing**.
 
@@ -115,7 +115,7 @@ These features are critical to delivering the main user value and are linked to 
 - **UI Framework:** A clean and styled user interface must support all key workflows.
 
 
-### 🟡 Should-Have – Important features to improve usability and experience
+#### 🟡 Should-Have – Important features to improve usability and experience
 
 These features enhance the overall user journey and support better interaction and security. They are included if time permits and are linked to **Interface**, **User Roles**, and **Performance Feedback**.
 
@@ -128,7 +128,7 @@ These features enhance the overall user journey and support better interaction a
 
 
 
-### 🟢 Could-Have – Optional enhancements to boost value
+#### 🟢 Could-Have – Optional enhancements to boost value
 
 These are nice-to-have features that provide additional polish and flexibility. Linked to **AI Tools** and **Candidate Comparison** epics.
 
@@ -138,6 +138,49 @@ These are nice-to-have features that provide additional polish and flexibility. 
 - Add advanced filtering, search combinations, or bulk actions.
 
 ---
+
+### Wireframes
+
+To ensure a structured and user-friendly interface, low-fidelity wireframes were created using **Adobe XD** during the early design phase of the project. These wireframes helped visualize key page layouts, user flows, and core interactions before any code was written.
+
+As the platform is primarily intended for use by **recruiters working on desktop computers**, a **desktop-first approach** was adopted throughout the design process. While the application remains responsive and accessible across devices, mobile optimization was not prioritized at this stage.
+
+The wireframes served as a design blueprint and were iteratively refined as new functionality was added during development.
+
+WIREFRAMES HERE
+
+---
+
+### Graphic Design & Color Scheme
+
+The graphic design of Selekt is crafted to communicate clarity, structure, and a sense of trust — all essential traits for a digital product aimed at busy recruiters and HR professionals. Since Selekt is designed as a **desktop-first** web application, the visual identity is tailored to larger screens and professional use cases, where users need to process and compare information efficiently.
+
+#### Colors
+
+The color palette combines vibrant accents with neutral foundations to create a modern, clean, and professional feel. The overall look aims to be easy on the eyes, while supporting intuitive scanning and usability in high-focus work environments.
+
+- **Primary Colors:** Bright blue `#5959FF`, lime yellow `#E8FF41`, and soft blue `#C6DAFF` serve as attention-grabbing UI accents. These colors were chosen to energize the interface while giving a unique and recognizable brand identity. Blue represents reliability and digital innovation; yellow conveys energy and potential; and light blue adds a sense of clarity and calm.
+
+- **Base Colors:** Black `#2C2B2A` and off-white `#F3ECE6` are used as grounding tones to balance out the bright accents. This ensures strong readability and gives the interface a confident, editorial feel.
+
+Together, these colors give Selekt a confident yet friendly tone — serious enough for recruitment professionals, but dynamic enough to reflect the forward-thinking nature of AI-powered tools.
+
+#### Fonts
+
+- **Libre Baskerville** is used for headings. It’s a serif font that adds a professional and refined tone, making headings stand out and signaling structure.
+- **Poppins** is used for paragraph text. It’s a geometric sans-serif font optimized for screen readability, especially helpful when reading structured content like candidate profiles or tool instructions.
+
+This combination of serif and sans-serif fonts supports **both hierarchy and usability**, giving the interface a polished and user-focused aesthetic.
+
+#### UI Visuals
+
+The interface uses clean layouts, rounded buttons, and spacious margins to create a calm and approachable environment. Hover states, shadows, and iconography are used sparingly and with intent — keeping attention on the data, not the decorations.
+
+Illustrations used in the interface feature a recurring character — a friendly recruiter persona — to reinforce the brand’s human tone and to guide users through key actions. Images are designed to blend with the color scheme using soft gradients and matching hues.
+
+All visuals are optimized for desktop presentation and accessibility.
+
+
 
 - **Goals:** Outlines the main goals for both external users and the site owner.
 - **User Stories:** Lists the user stories collected during the planning phase, prioritized by must-have, should-have, could-have categories.
