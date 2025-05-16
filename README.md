@@ -530,7 +530,7 @@ Automated tests were implemented using Django's `TestCase` framework and run via
 python manage.py test
 ```
 
-#### 🔍 Test Overview
+#### Test Overview
 
 | Test Name | Description |
 |-----------|-------------|
@@ -545,9 +545,7 @@ python manage.py test
 | `test_candidate_create_form_prefills_from_session` | Session prefill is correctly parsed into form fields |
 | `test_welcome_modal_shown_only_once` | Welcome modal appears only once on first login |
 
-✅ **All tests pass successfully**
-
----
+**All tests pass successfully**
 
 #### Code Coverage
 
@@ -570,15 +568,10 @@ coverage html
 | Boilerplate/migrations | Excluded |
 
 > 💡 Total project coverage: **74%**  
-> ✔️ Strong for a full-stack MVP with AI integration
-
----
 
 ### Manual Testing
 
 In addition to automated testing, this project was thoroughly manually tested to ensure robustness, proper validation, and user experience across different usage scenarios. Each test includes a description of the area, the expected result, the actual result, and optionally a screenshot for visual proof.
-
----
 
 #### Manual Test Table
 
@@ -597,8 +590,6 @@ In addition to automated testing, this project was thoroughly manually tested to
 | Session timeout | After logout, accessing protected routes redirects to login | ✅ Redirect to login page shown | ![Session timeout](static/media/documentation/redirect-login.png) |
 | Special characters in candidate | Text with symbols (e.g. é, ö, @) saved and displayed correctly | ✅ Characters saved and rendered correctly | ![Special Characters](static/media/documentation/special-characters.png) |
 
----
-
 #### Technologies Used for Testing
 
 - Python 3.11
@@ -606,8 +597,6 @@ In addition to automated testing, this project was thoroughly manually tested to
 - unittest.mock (mocking external APIs like OpenAI)
 - coverage.py (code coverage reports)
 - Bootstrap modals and JavaScript for frontend behavior simulation
-
----
 
 #### Future Improvements
 
@@ -619,6 +608,19 @@ The following features were considered "Could Have" and may be added in future i
 | Sticky candidate sidebar | Keeping key candidate information visible while scrolling the dashboard. |
 | More extensive validation | Such as handling empty form submissions or displaying custom messages for missing candidate data. |
 | Upload loading indicator | Add a visual loading animation or progress indicator when uploading files to improve feedback and avoid user confusion. |
+
+
+### Performance Testing
+
+To evaluate the overall performance, accessibility, and SEO compliance of the application, I used [Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/) in **Chrome DevTools** on the deployed version of the site (outside the login wall).
+
+Since the platform requires authentication, full Lighthouse testing was only possible on public-facing pages.
+
+The performance scores on the index page were excellent:
+
+| Page | Mobile | Desktop |
+|--------|----------------------|
+| Index    | ![Lighthouse Results](static/media/documentation/pagespeed-mobile.png) | ![Lighthouse Results](static/media/documentation/pagespeed-desktop.png) |
 
 ---
 
