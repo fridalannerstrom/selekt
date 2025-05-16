@@ -396,14 +396,14 @@ This section outlines all core and additional features included in Selekt, along
 
 | Page | Description | Screenshot |
 |------|-------------|------------|
-| **Login / Signup** | Clean, distraction-free forms with validation. Login redirects to dashboard. | SCREENSHOT |
-| **Dashboard** | Displays candidate cards, filtering, sorting, and favorites toggle. | SCREENSHOT |
-| **Candidate Modal** | Full detail view with tabs for notes and uploaded files. | SCREENSHOT |
-| **Candidate Form** | Rich form with multiple fields, file upload, and profile image support. | SCREENSHOT |
-| **Upload PDF** | AI-powered upload page that extracts and pre-fills candidate data. | SCREENSHOT |
-| **Upload Options Modal** | Choose between AI-based upload or manual form entry. | SCREENSHOT |
-| **Settings Page** | Allows users to update personal info, profile image, password, and delete account | SCREENSHOT |
-| **404 Page** | Branded error page with illustration and friendly message for lost users | SCREENSHOT |
+| **Login / Signup** | Clean, distraction-free forms with validation. Login redirects to dashboard. | ![Login / Signup](static/media/documentation/login.png) |
+| **Dashboard** | Displays candidate cards, filtering, sorting, and favorites toggle. | ![Dashboard](static/media/documentation/dashboard.png) |
+| **Candidate Modal** | Full detail view with tabs for notes and uploaded files. | ![Candidate Modal](static/media/documentation/candidate-modal.png) |
+| **Candidate Form** | Rich form with multiple fields, file upload, and profile image support. | ![Candidate Form](static/media/documentation/candidate-form.png) |
+| **Upload PDF** | AI-powered upload page that extracts and pre-fills candidate data. | ![Upload PDF](static/media/documentation/upload-pdf.png) |
+| **Upload Options Modal** | Choose between AI-based upload or manual form entry. | ![Upload Options Modal](static/media/documentation/upload-options.png) |
+| **Settings Page** | Allows users to update personal info, profile image, password, and delete account | ![Settings Page](static/media/documentation/settings.png) |
+| **404 Page** | Branded error page with illustration and friendly message for lost users | ![404 Page](static/media/documentation/404.png) |
 
 ---
 
@@ -411,14 +411,14 @@ This section outlines all core and additional features included in Selekt, along
 
 | Feature | Description | Screenshot |
 |--------|-------------|------------|
-| **User Authentication** | Secure login, logout, and signup with Django’s built-in user model. | SCREENSHOT |
-| **Dashboard Overview** | Sort and filter candidates by job title, search term, or favorites. | SCREENSHOT |
-| **CRUD for Candidates** | Create, update, view, and delete candidates with form validation. | SCREENSHOT |
-| **Candidate Modal** | Open dynamic modal for faster interactions without leaving dashboard. | SCREENSHOT |
-| **Favorite Candidates** | Bookmark candidates for quick access. Stored per user. | SCREENSHOT |
-| **Cloud-based File Upload** | Upload multiple CVs and files per candidate using Cloudinary. | SCREENSHOT |
-| **OpenAI Integration** | Parse PDFs and extract structured data (name, skills, summary, etc.) | SCREENSHOT |
-| **Prefilled Forms** | Candidate form is automatically pre-populated after AI parsing. | SCREENSHOT |
+| **User Authentication** | Secure login, logout, and signup with Django’s built-in user model. | ![User Authentication](static/media/documentation/user-auth.png) |
+| **Dashboard Overview** | Sort and filter candidates by job title, search term, or favorites. | ![Dashboard Overview](static/media/documentation/dashboard-overview.png) |
+| **CRUD for Candidates** | Create, update, view, and delete candidates with form validation. | ![CRUD for Candidates](static/media/documentation/candidate-crud.png) |
+| **Candidate Modal** | Open dynamic modal for faster interactions without leaving dashboard. | ![Candidate Modal](static/media/documentation/candidate-modal.png) |
+| **Favorite Candidates** | Bookmark candidates for quick access. Stored per user. | ![Favorite Candidates](static/media/documentation/candidate-favorite.png) |
+| **Cloud-based File Upload** | Upload multiple CVs and files per candidate using Cloudinary. | ![Cloud-based File Upload](static/media/documentation/candidate-files.png) |
+| **OpenAI Integration** | Parse PDFs and extract structured data (name, skills, summary, etc.) | ![OpenAI Integration](static/media/documentation/openai.png) |
+| **Prefilled Forms** | Candidate form is automatically pre-populated after AI parsing. | ![Prefilled Forms](static/media/documentation/prefilled-form.png) |
 
 ---
 
@@ -426,22 +426,21 @@ This section outlines all core and additional features included in Selekt, along
 
 | Feature | Benefit | Screenshot |
 |--------|---------|------------|
-| **Welcome Popup** | Guides first-time users through uploading their first candidate. | Screenshot |
-| **Smart Tabs (Top Titles)** | The dashboard automatically displays tabs for your four most common job titles. | Screenshot |
-| **Favorite Filtering** | Show only bookmarked candidates, even when search or tabs are used. | Screenshot |
-| **Sort by Name or Date** | Toggle between alphabetical or date-based ordering on the dashboard. | Screenshot |
-| **Basic Search** | Search candidates using keywords (e.g. name, title, skills). Could be improved in future versions. | Screenshot |
-| **Add Candidates Manually** | Users can choose to fill in all candidate information themselves. | Screenshot |
-| **AI-based Profile Summary** | The "Profile" section is automatically generated by OpenAI from the uploaded CV. | Screenshot |
-| **Skills Extraction + Manual Input** | Top skills are extracted by AI from the CV, and users can also manually enter or edit them (comma-separated). | Screenshot |
-| **Profile Pictures** | Each candidate can have a profile image uploaded via Cloudinary. | Screenshot |
-| **Add Multiple Links** | Dynamically add as many custom links as you like (e.g., GitHub, LinkedIn) in a flexible input loop. | Screenshot |
-| **Notes Tab per Candidate** | Add personal notes to each candidate in a dedicated tab. | Screenshot |
-| **File Upload** | Upload and manage files like CVs and test results under each candidate. | Screenshot |
-| **Delete Confirmation Popup** | Deleting candidates or files prompts a confirmation modal to prevent mistakes. | Screenshot |
-| **Custom 404 Page** | A branded “lost in space” illustration provides a helpful and friendly fallback if the user hits a broken link. | Screenshot |
-| **Bulk Upload** | Allow multiple files to be uploaded at one in candidate modal | SCREENSHOT | Screenshot |
-| **Empty States with CTA** | If no candidates exist, users see a custom illustration and clear call-to-action button to upload their first candidate. | Screenshot |
+| **Welcome Popup** | Guides first-time users through uploading their first candidate. | ![Welcome Popup](static/media/documentation/welcome-modal.png) |
+| **Smart Tabs (Top Titles)** | The dashboard automatically displays tabs for your four most common job titles. | ![Smart Tabs](static/media/documentation/tabs.png) |
+| **Favorite Filtering** | Show only bookmarked candidates, even when search or tabs are used. | ![Favorite Filtering](static/media/documentation/favorite-candidate.png) |
+| **Sort by Name or Date** | Toggle between alphabetical or date-based ordering on the dashboard. | ![Sort by Name or Date](static/media/documentation/sorting.png) |
+| **Basic Search** | Search candidates using keywords (e.g. name, title, skills). Could be improved in future versions. | ![Basic Search](static/media/documentation/search.png) |
+| **Add Candidates Manually** | Users can choose to fill in all candidate information themselves. | ![Add Candidates Manually](static/media/documentation/candidate-manually.png) |
+| **AI-based Profile Summary** | The "Profile" section is automatically generated by OpenAI from the uploaded CV. | ![AI-based Profile Summary](static/media/documentation/static/media/documentation/ai-summary.png) |
+| **Skills Extraction + Manual Input** | Top skills are extracted by AI from the CV, and users can also manually enter or edit them (comma-separated). | ![Skills Extraction + Manual Input](static/media/documentation/skills.png) |
+| **Profile Pictures** | Each candidate can have a profile image uploaded via Cloudinary. | ![Profile Pictures](static/media/documentation/profile-pic.png) |
+| **Add Multiple Links** | Dynamically add as many custom links as you like (e.g., GitHub, LinkedIn) in a flexible input loop. | ![Add Multiple Links](static/media/documentation/links.png) |
+| **Notes Tab** | Add personal notes to each candidate in a dedicated tab. | ![Notes Tab](static/media/documentation/notes.png) |
+| **File Upload** | Upload and manage files like CVs and test results under each candidate. | ![File Upload](static/media/documentation/candidate-files.png) |
+| **Delete Confirmation Popup** | Deleting candidates or files prompts a confirmation modal to prevent mistakes. | ![Delete Confirmation Popup](static/media/documentation/delete.png) |
+| **Bulk Upload** | Allow multiple files to be uploaded at one in candidate modal | ![Bulk Upload](static/media/documentation/static/media/documentation/bulk-upload.png) |
+| **Empty States with CTA** | If no candidates exist, users see a custom illustration and clear call-to-action button to upload their first candidate. | ![Empty States with CTA](static/media/documentation/empty-state.png) |
 
 #### Notes on Search Functionality
 
@@ -453,10 +452,10 @@ The dashboard includes a basic search bar where users can search candidates by n
 
 | Planned Feature | Description |
 |-----------------|-------------|
-| **Bulk Upload** | Allow multiple PDFs to be parsed at once | SCREENSHOT |
-| **AI Interview Notes Summarizer** | Upload notes and get a clean summary | SCREENSHOT |
-| **Candidate Comparison Tool** | Compare two candidates side-by-side | SCREENSHOT |
-| **Tags & Smart Filters** | Add custom tags and more flexible filtering | SCREENSHOT |
+| **Bulk Upload** | Allow multiple PDFs to be parsed at once | 
+| **AI Interview Notes Summarizer** | Upload notes and get a clean summary |
+| **Candidate Comparison Tool** | Compare two candidates side-by-side |
+| **Tags & Smart Filters** | Add custom tags and more flexible filtering |
 
 
 ---
