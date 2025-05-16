@@ -12,6 +12,18 @@ This project was created as part of my Full-Stack Software Development diploma a
 
 💻 [View the application live here](https://selekt-3ceec5fdccb6.herokuapp.com/)
 
+You’re welcome to create your own account and test the full flow — or use the **test account** to explore the features directly:
+
+**Login credentials**  
+**Username:** `example-user`  
+**Password:** `EXAMPLEUSERSELEKT1337`
+
+This account contains several pre-loaded candidates with test data.  
+Check out the candidate **Isabelle Ström** — under "Files" you’ll find a PDF CV.  
+You can download and **re-upload this CV** to test the **AI-powered PDF upload feature**.
+
+Enjoy exploring!
+
 # Table of Contents
 
 1. [User Experience (UX)](#user-experience-ux)
