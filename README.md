@@ -441,6 +441,7 @@ This section outlines all core and additional features included in Selekt, along
 | **Delete Confirmation Popup** | Deleting candidates or files prompts a confirmation modal to prevent mistakes. | ![Delete Confirmation Popup](static/media/documentation/delete.png) |
 | **Bulk Upload** | Allow multiple files to be uploaded at one in candidate modal | ![Bulk Upload](static/media/documentation/static/media/documentation/bulk-upload.png) |
 | **Empty States with CTA** | If no candidates exist, users see a custom illustration and clear call-to-action button to upload their first candidate. | ![Empty States with CTA](static/media/documentation/empty-state.png) |
+| **Pagination** | Candidate list is paginated to improve performance and readability. Maximum 12 candidates are shown per page. | ![Pagination](static/media/documentation/pagination.png) |
 
 #### Notes on Search Functionality
 
