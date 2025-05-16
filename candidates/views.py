@@ -552,7 +552,10 @@ class CandidateCreatePrefilledView(CreateView):
         response = super().form_valid(form)
 
         # FIX för Cloudinary
-        if self.object.profile_image and not self.object.profile_image.url.startswith('http'):
+        if (
+            self.object.profile_image and
+            not self.object.profile_image.url.startswith('http')
+        ):
             self.object.profile_image.storage = default_storage
             self.object.save()
 

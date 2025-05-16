@@ -159,7 +159,7 @@ The graphic design of Selekt is crafted to communicate clarity, structure, and a
 
 The color palette combines vibrant accents with neutral foundations to create a modern, clean, and professional feel. The overall look aims to be easy on the eyes, while supporting intuitive scanning and usability in high-focus work environments.
 
-- **Primary Colors:** Bright blue `#5959FF`, lime yellow `#E8FF41`, and soft blue `#C6DAFF` serve as attention-grabbing UI accents. These colors were chosen to energize the interface while giving a unique and recognizable brand identity. Blue represents reliability and digital innovation; yellow conveys energy and potential; and light blue adds a sense of clarity and calm.
+- **Primary Colors:** Talent Blue `#5453EC`, Lime Flash `#E1F44B`, and Focus Blue `#B5CAFF` serve as attention-grabbing UI accents. These colors were chosen to energize the interface while giving a unique and recognizable brand identity. Blue represents reliability and digital innovation; yellow conveys energy and potential; and light blue adds a sense of clarity and calm.
 
 - **Base Colors:** Black `#2C2B2A` and off-white `#F3ECE6` are used as grounding tones to balance out the bright accents. This ensures strong readability and gives the interface a confident, editorial feel.
 
@@ -176,58 +176,333 @@ This combination of serif and sans-serif fonts supports **both hierarchy and usa
 
 The interface uses clean layouts, rounded buttons, and spacious margins to create a calm and approachable environment. Hover states, shadows, and iconography are used sparingly and with intent — keeping attention on the data, not the decorations.
 
-Illustrations used in the interface feature a recurring character — a friendly recruiter persona — to reinforce the brand’s human tone and to guide users through key actions. Images are designed to blend with the color scheme using soft gradients and matching hues.
+The visual language of Selekt is enriched by a series of custom illustrations that represent the core actions, emotions, and situations recruiters face in their daily work. These illustrations help humanize the interface and guide users through the application in a light-hearted and approachable way — without compromising the professional tone.
 
-All visuals are optimized for desktop presentation and accessibility.
+A single character — the recruiter persona — appears across all visuals, creating consistency and personality throughout the platform. The character is shown in different contexts: using the tool, celebrating, exploring, and making decisions.
+
+The illustrations were created with ChatGPT and with a soft color palette and rounded shapes to match the UI’s calm and friendly tone. Each image supports a specific scenario or state in the application.
 
 
+![Selekt Moodboard](static/media/documentation/moodboard.png)
 
-- **Goals:** Outlines the main goals for both external users and the site owner.
-- **User Stories:** Lists the user stories collected during the planning phase, prioritized by must-have, should-have, could-have categories.
-- **Wireframes:** Displays initial wireframes or mockups that guided the project layout and structure.
-- **Graphic Design & Color Scheme:** Describes the color palette, typography, and graphical elements used.
-- **UI/UX Design:** Explains how the user interface and experience were designed with usability, accessibility, and intuitive navigation in mind.
+### UI/UX Design
+
+The user interface and overall user experience of Selekt were designed with a clear goal in mind: to create a fast, intuitive, and stress-free tool for busy recruiters. With limited time and a high volume of candidate data, recruiters need a system that feels effortless to navigate and easy to trust.  
+
+Selekt was developed with a **desktop-first mindset**, as the tool is intended to be used primarily in professional settings where large screens and structured layouts are the norm.
+
+#### ✏️ Design Approach
+
+The initial focus was on creating UI mockups for the most essential user flows:
+- The **landing page** (public marketing page)
+- The **login/signup view**
+- The **dashboard** with candidate cards and filters
+- The **candidate profile view**
+- The **edit candidate form**
+- Various **popups** (e.g. onboarding, upload options)
+- The **PDF upload screen**
+
+These views were created in **Adobe XD**. During development, the product evolved beyond the original design scope, and several additional screens were added or refined based on feedback and functionality needs. The visual design followed the same principles throughout to ensure consistency and clarity.
+
+![Selekt UI Design](static/media/documentation/ui-design.png)
+
+### 💡 UX Considerations
+
+- **Clean, distraction-free layout:** Users should always understand where they are, what they can do, and what’s next.
+- **Minimal color usage:** Bright accent colors are used sparingly for clarity, drawing focus to key actions like uploading or saving.
+- **Hierarchy through typography:** Headings (Libre Baskerville) create structure, while body text (Poppins) ensures readability.
+- **Illustrations and feedback:** Custom visuals help guide the user through actions, errors, and empty states.
+- **Accessibility and responsiveness:** While optimized for desktop, key elements such as color contrast, tab order, and alt-text have been considered for inclusive use.
+
+### 🌀 Iterative Changes
+
+Throughout development, several design decisions were adjusted:
+- The layout of the candidate cards was optimized for readability when working with large datasets.
+- The **edit candidate** form was simplified and grouped for better overview.
+- The **upload flow** was split into two clear options: AI-based PDF parsing or manual entry.
+
+All changes were guided by the core principle: **fast access to relevant candidate information, with minimal effort**.
 
 ---
 
 ## Agile Methodology
 
-This project followed an Agile approach throughout the development process. GitHub Projects was used to manage and track progress with Epics, User Stories, and Tasks. User Stories were categorized and prioritized using the MoSCoW method (Must-have, Should-have, Could-have, Won't-have). Screenshots and examples of the project board are provided to show how the project evolved over time.
+This project is developed using an **Agile-inspired workflow** with GitHub Projects. [See Selekt Github Projekt here.](https://github.com/users/fridalannerstrom/projects/2)
+
+All functionality is broken down into **user stories**, written from the user's perspective in the format:
+
+> *As a user, I want to... so that...*
+
+Each user story includes:
+- **Type:** User Story or Epic Story
+- **Priority:** Assigned using the [MoSCoW method](https://en.wikipedia.org/wiki/MoSCoW_method) (Must Have, Should Have, Could Have, Won’t Have)
+- **Acceptance Criteria:** Clear conditions to define when a story is complete
+
+I use **GitHub Projects (Kanban board view)** to visually organize and track my work:
+- `Backlog`: All user stories and epics are added here initially
+- `Ready`: Tasks that are prioritized and ready to begin
+- `In Progress`: Tasks currently being worked on
+- `In Review`: Stories ready for testing or feedback
+- `Done`: Completed work
+
+### Labels
+Each issue is tagged with:
+- **Type** (e.g., `user story`, `epic story`)
+- **Priority** (e.g., `must-have`, `should-have`)
+
+### Epic Stories
+Larger themes are grouped into *epic stories*. Each epic includes links to related user stories and acts as a checklist of progress.  
+Example epics: `User Authentication`, `Candidate Management`, `File Uploads`.
+
+### Iterative Development
+
+The scope of the project evolved over time. For example:
+- The original design included only a basic dashboard and candidate profile view.
+- During development, new features like a **welcome modal**, **PDF upload flow**, and **favorites system** were added as a result of testing and feedback.
+- Several wireframes were revised or expanded to match new user needs.
+
+This reflects an agile mindset — allowing the plan to adapt while keeping the user’s goals in focus.
+
+### Example User Story
+
+> **Story:** As a recruiter, I want to upload a CV so that I can automatically generate a structured candidate profile.
+
+**Acceptance Criteria:**
+- The recruiter can select a PDF file
+- The file is parsed by the AI and displays extracted data
+- The extracted data can be previewed and edited before saving
 
 ---
 
 ## Project Overview
 
-This section gives a broad overview of the project and technical structure, specifically tailored for a Django-based web application.
+This section provides a high-level overview of the Selekt application: its purpose, workflows, technical architecture, and structure. Selekt is built using Django and follows an MVC (Model-View-Template) pattern to ensure a scalable and maintainable codebase.
 
-- **Introduction:** A brief explanation of the project purpose and its intended audience.
-- **Workflows:** Describes the user workflows and how users interact with the system (e.g., register, log in, add candidates).
-- **Database Overview:** Summarizes the Django data models and relationships used in the application.
-- **Project Goals:** Details the business logic and goals the application is designed to meet.
-- **Project Structure:** Outlines the Django app structure (apps, models, views, templates) and folder organization.
+---
+
+### 🔍 Introduction
+
+**Selekt** is a web-based platform designed for recruiters and hiring professionals to streamline candidate management. The goal is to reduce time spent on repetitive admin tasks by using AI to extract and structure CV data, and to make it easier to search, compare, and reuse candidate profiles in future recruitment processes.
+
+The target user is:
+- A **recruiter or HR manager** working primarily on a **desktop**
+- Often under time pressure
+- In need of a simple and intuitive system that works “out of the box”
+
+---
+
+### Workflows
+
+Users interact with the system in the following key flows:
+
+| Step | Action                                  | Purpose |
+|------|-----------------------------------------|---------|
+| 1    | Register or log in                      | Secure access to candidate data |
+| 2    | Upload CV or enter candidate manually   | Create new structured profiles |
+| 3    | Browse candidates via dashboard         | View, sort, and filter candidates |
+| 4    | View full candidate profile             | See skills, experience, notes, and files |
+| 5    | Add notes or upload documents           | Enrich candidate profile |
+| 6    | Favorite candidates                     | Shortlist the database |
+
+📷 **BILD: Flowchart or user journey map here**
+
+---
+
+### Database Overview
+
+The core data models in Selekt are designed to represent candidates and their related content in a structured, reusable, and recruiter-friendly way.
+
+| Model           | Description                                                        | Key Relationships |
+|------------------|--------------------------------------------------------------------|-------------------|
+| `Candidate`      | Main candidate profile with personal info, experience, skills, etc. | `ForeignKey` to `User` |
+| `CandidateFile`  | Stores uploaded files such as CVs or test results                  | `ForeignKey` to `Candidate` |
+| `Favorite`       | Links a user to a candidate they’ve bookmarked                     | `ForeignKey` to both `User` and `Candidate` (unique together) |
+| `Profile`        | Extended user profile, includes profile image and first-login flag | `OneToOneField` to `User` |
+| `User`           | Django's built-in user model used for authentication               | Owns related `Candidate`, `Favorite`, and `Profile` objects |
+
+📷 **BILD: ERD (Entity Relationship Diagram)**
+
+---
+
+### Project Goals
+
+| Goal | Description |
+|------|-------------|
+| Simplify candidate management | Avoid cluttered spreadsheets or disorganized documents |
+| Leverage AI to reduce manual tasks | Use OpenAI to extract structured candidate data from uploaded PDFs |
+| Speed up recruitment | Use OpenAI to extract skills and experience from CVs instantly |
+| Improve reusability | Allow recruiters to save and search through their own talent pool |
+| Provide structure | Offer a standardized way to view, edit, and compare candidates |
+| Keep it minimal | Focus on core needs — no distractions, no bloated features |
+
+---
+
+### Project Structure
+
+The Selekt project is built using Django and follows the **Model-View-Template** (MVT) architectural pattern. It is organized into clearly separated folders for candidates-related logic, global project configuration, templates, static files, and media storage. The structure supports modular development, clean routing, and easy feature expansion.
+
+Below is an overview of the core folders and their responsibilities:
+
+| Folder/File               | Description |
+|---------------------------|-------------|
+| `candidates/`             | The main Django app containing all candidate logic, models, forms, views, and URLs |
+| ├── `models.py`           | Data models: `Candidate`, `CandidateFile`, `Favorite`, `Profile` |
+| ├── `views.py`            | All class-based and function-based views including CRUD, AI upload, dashboard, modals |
+| ├── `urls.py`             | URL routes for candidate-related features |
+| ├── `forms.py`            | Form classes for adding/editing candidates |
+| ├── `context_processors.py` | Adds profile picture globally to templates |
+| `cleoproject/`            | Root project folder containing settings and global URL config |
+| ├── `settings.py`         | Project settings including cloud storage, OpenAI integration, login redirects |
+| ├── `urls.py`             | Top-level URL routes for login, dashboard, and app includes |
+| `templates/`              | HTML templates organized by view (e.g. `dashboard`, `candidate-form`, `modals`) |
+| `static/`                 | Static assets (CSS, JavaScript, fonts, images) used in the frontend |
+| `media/`                  | Cloudinary-based media handling for uploaded files and profile images |
+| `.env / env.py`           | Environment variables for local development (e.g. API keys, debug mode) |
+| `requirements.txt`        | Python dependencies |
+| `Procfile`                | Used for deployment to Heroku |
+| `manage.py`               | Django’s command-line utility |
+
+This setup makes the application **modular**, **extensible**, and easy to maintain or scale in the future. The structure follows Django conventions and has been kept clean and consistent throughout development.
+
+### 🤖 AI Integration
+
+The application uses the **OpenAI GPT-4o API** to automatically extract structured candidate information from uploaded CVs in PDF format.  
+This feature enhances productivity by transforming unstructured data into prefilled candidate profiles.
+
+The logic is implemented directly in Django views and includes:
+- PDF text extraction (via PyMuPDF)
+- Prompt engineering and response handling
+- JSON prefill into the candidate form via session
 
 ---
 
 ## Features
 
-This section details the core and additional features of the application.
+This section outlines all core and additional features included in Selekt, along with changes made during development and planned improvements. The application has been built with a focus on usability, speed, and structured candidate management.
 
-- **Page Elements:** Describes important static or dynamic page elements across the site.
-- **Key Features:** Highlights the main functionalities, such as CRUD operations, user authentication, and dashboard overview.
-- **Additional Features:** Lists extra features that improve usability or user experience (e.g., search, filtering).
-- **Feature Changes:** Mentions any features that evolved or changed during development.
-- **Future Features:** Lists planned future improvements and new features that were outside the current scope.
+---
+
+### 📄 Page Elements
+
+| Page | Description | Screenshot |
+|------|-------------|------------|
+| **Login / Signup** | Clean, distraction-free forms with validation. Login redirects to dashboard. | SCREENSHOT |
+| **Dashboard** | Displays candidate cards, filtering, sorting, and favorites toggle. | SCREENSHOT |
+| **Candidate Modal** | Full detail view with tabs for notes and uploaded files. | SCREENSHOT |
+| **Candidate Form** | Rich form with multiple fields, file upload, and profile image support. | SCREENSHOT |
+| **Upload PDF** | AI-powered upload page that extracts and pre-fills candidate data. | SCREENSHOT |
+| **Upload Options Modal** | Choose between AI-based upload or manual form entry. | SCREENSHOT |
+| **Settings Page** | Allows users to update personal info, profile image, password, and delete account | SCREENSHOT |
+| **404 Page** | Branded error page with illustration and friendly message for lost users | SCREENSHOT |
+
+---
+
+### ⭐ Key Features
+
+| Feature | Description | Screenshot |
+|--------|-------------|------------|
+| **User Authentication** | Secure login, logout, and signup with Django’s built-in user model. | SCREENSHOT |
+| **Dashboard Overview** | Sort and filter candidates by job title, search term, or favorites. | SCREENSHOT |
+| **CRUD for Candidates** | Create, update, view, and delete candidates with form validation. | SCREENSHOT |
+| **Candidate Modal** | Open dynamic modal for faster interactions without leaving dashboard. | SCREENSHOT |
+| **Favorite Candidates** | Bookmark candidates for quick access. Stored per user. | SCREENSHOT |
+| **Cloud-based File Upload** | Upload multiple CVs and files per candidate using Cloudinary. | SCREENSHOT |
+| **OpenAI Integration** | Parse PDFs and extract structured data (name, skills, summary, etc.) | SCREENSHOT |
+| **Prefilled Forms** | Candidate form is automatically pre-populated after AI parsing. | SCREENSHOT |
+
+---
+
+### ✨ Additional Features
+
+| Feature | Benefit | Screenshot |
+|--------|---------|------------|
+| **Welcome Popup** | Guides first-time users through uploading their first candidate. | Screenshot |
+| **Smart Tabs (Top Titles)** | The dashboard automatically displays tabs for your four most common job titles. | Screenshot |
+| **Favorite Filtering** | Show only bookmarked candidates, even when search or tabs are used. | Screenshot |
+| **Sort by Name or Date** | Toggle between alphabetical or date-based ordering on the dashboard. | Screenshot |
+| **Basic Search** | Search candidates using keywords (e.g. name, title, skills). Could be improved in future versions. | Screenshot |
+| **Add Candidates Manually** | Users can choose to fill in all candidate information themselves. | Screenshot |
+| **AI-based Profile Summary** | The "Profile" section is automatically generated by OpenAI from the uploaded CV. | Screenshot |
+| **Skills Extraction + Manual Input** | Top skills are extracted by AI from the CV, and users can also manually enter or edit them (comma-separated). | Screenshot |
+| **Profile Pictures** | Each candidate can have a profile image uploaded via Cloudinary. | Screenshot |
+| **Add Multiple Links** | Dynamically add as many custom links as you like (e.g., GitHub, LinkedIn) in a flexible input loop. | Screenshot |
+| **Notes Tab per Candidate** | Add personal notes to each candidate in a dedicated tab. | Screenshot |
+| **File Upload** | Upload and manage files like CVs and test results under each candidate. | Screenshot |
+| **Delete Confirmation Popup** | Deleting candidates or files prompts a confirmation modal to prevent mistakes. | Screenshot |
+| **Custom 404 Page** | A branded “lost in space” illustration provides a helpful and friendly fallback if the user hits a broken link. | Screenshot |
+| **Bulk Upload** | Allow multiple files to be uploaded at one in candidate modal | SCREENSHOT | Screenshot |
+| **Empty States with CTA** | If no candidates exist, users see a custom illustration and clear call-to-action button to upload their first candidate. | Screenshot |
+
+#### Notes on Search Functionality
+
+The dashboard includes a basic search bar where users can search candidates by name, title, location, or top skills. While functional, the search currently uses simple substring matching. A more advanced implementation using AI logic with fuzzy search or weighted fields could improve result accuracy in future iterations.
+
+---
+
+### Future Features
+
+| Planned Feature | Description |
+|-----------------|-------------|
+| **Bulk Upload** | Allow multiple PDFs to be parsed at once | SCREENSHOT |
+| **AI Interview Notes Summarizer** | Upload notes and get a clean summary | SCREENSHOT |
+| **Candidate Comparison Tool** | Compare two candidates side-by-side | SCREENSHOT |
+| **Tags & Smart Filters** | Add custom tags and more flexible filtering | SCREENSHOT |
+
 
 ---
 
 ## Tools and Technologies
 
-An overview of the core technologies and tools used during the development.
+Selekt was developed using a modern full-stack toolchain, combining proven backend technologies with flexible frontend libraries and cloud-based services.
 
-- **Languages:** Lists the main programming languages used (Python, HTML5, CSS3, JavaScript).
-- **Libraries:** Mentions frameworks and libraries, such as Django, Bootstrap, etc.
-- **Development Tools:** Lists tools like GitHub, Gitpod, VS Code, etc.
-- **Other Tools:** Lists additional resources like Heroku, Postgres, Draw.io (for diagrams), etc.
+---
+
+### Languages
+
+| Language  | Usage |
+|-----------|-------|
+| **Python** | Core backend logic using Django framework |
+| **HTML5**  | Templates for user interface and structure |
+| **CSS3**   | Styling, responsive layout, and custom branding |
+| **JavaScript** | Frontend interactivity (modals, dynamic forms, tag inputs) |
+
+---
+
+### Frameworks & Libraries
+
+| Tool | Purpose |
+|------|---------|
+| **Django** | Main web framework (MVT pattern, authentication, ORM) |
+| **Bootstrap (via CDN)** | Responsive layout and component structure |
+| **Trumbowyg** | WYSIWYG editor for candidate profile fields |
+| **Tagify** | Skill tag input system for comma-separated fields |
+| **Cloudinary + Cloudinary Storage** | File/image upload handling for candidate profile pictures and CVs |
+| **OpenAI (gpt-4)** | AI integration for CV parsing and profile generation |
+
+---
+
+### Development Tools
+
+| Tool | Role |
+|------|------|
+| **Git & GitHub** | Version control, branching, issues, and epics |
+| **GitHub Projects** | Agile board for user stories and MoSCoW prioritization |
+| **Visual Studio Code (VS Code)** | Local development, debugging, and extension support |
+| **SQLite** | Default development database for local testing |
+| **PostgreSQL (Heroku-ready)** | Cloud-compatible database for deployment scenarios |
+
+---
+
+### Other Tools & Resources
+
+| Tool | Description |
+|------|-------------|
+| **Heroku** | Cloud platform for deployment and production hosting |
+| **Whitenoise** | Static file management for production |
+| **dj-database-url** | Simplifies cloud DB configuration in `settings.py` |
+| **dotenv / env.py** | For environment variable handling across local and prod |
+| **Draw.io / Canva / Adobe XD** | Used for wireframing, UI design, and ERD sketches |
+| **Markdown** | Used extensively for documenting user stories, README and planning |
 
 ---
 
@@ -268,42 +543,6 @@ Acknowledgements and references for resources, code snippets, or inspiration use
 ## ✍️ Author
 
 This project was created by **Frida Lannerström** as part of Portfolio Project 4 in the Full Stack Developer Diploma at Code Institute.
-
----
-
-## 🔄 Agile Working Methodology
-
-This project is developed using an **Agile-inspired workflow** with GitHub Projects.
-
-All functionality is broken down into **user stories**, written from the user's perspective in the format:
-
-> *As a user, I want to... so that...*
-
-Each user story includes:
-- **Type:** User Story or Epic Story
-- **Priority:** Assigned using the [MoSCoW method](https://en.wikipedia.org/wiki/MoSCoW_method) (Must Have, Should Have, Could Have, Won’t Have)
-- **Acceptance Criteria:** Clear conditions to define when a story is complete
-
-I use **GitHub Projects (Kanban board view)** to visually organize and track my work:
-- `Backlog`: All user stories and epics are added here initially
-- `Ready`: Tasks that are prioritized and ready to begin
-- `In Progress`: Tasks currently being worked on
-- `In Review`: Stories ready for testing or feedback
-- `Done`: Completed work
-
-### 🏷️ Labels
-Each issue is tagged with:
-- **Type** (e.g., `user story`, `epic story`)
-- **Priority** (e.g., `must-have`, `should-have`)
-
-### 🧩 Epic Stories
-Larger themes are grouped into *epic stories*. Each epic includes links to related user stories and acts as a checklist of progress.  
-Example epics: `User Authentication`, `Candidate Management`, `File Uploads`.
-
-This structure helps me:
-- Keep focus and prioritize correctly
-- Demonstrate planning and iterative work
-- Track progress clearly, even on a solo project
 
 ---
 

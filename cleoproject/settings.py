@@ -21,7 +21,7 @@ load_dotenv()  # For .env
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Load local env.py if present (useful in development, e.g. on Windows)
+# Load local env.py if present
 if os.path.exists(os.path.join(BASE_DIR, "env.py")):
     import env
 
@@ -35,7 +35,7 @@ OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'selekt-3ceec5fdccb6.herokuapp.com'] 
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'selekt-3ceec5fdccb6.herokuapp.com']
 
 # Application definition
 
@@ -91,7 +91,7 @@ DATABASES = {
     'default': dj_database_url.config(
         default=f"sqlite:///{os.path.join(BASE_DIR, 'db.sqlite3')}",
         conn_max_age=600,
-        ssl_require=False  
+        ssl_require=False
     )
 }
 
