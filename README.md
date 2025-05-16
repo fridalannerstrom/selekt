@@ -384,8 +384,6 @@ The project uses environment variables to manage sensitive settings like `SECRET
 - This ensures `DEBUG=True` locally for development, and `DEBUG=False` in production (e.g., on Render).
 - No secrets are committed to the repository.
 - All secret keys are stored in environment variables, which are managed through Render's environment settings.
-
-
 ---
 
 ## Features
