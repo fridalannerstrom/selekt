@@ -141,13 +141,13 @@ These are nice-to-have features that provide additional polish and flexibility. 
 
 ### Wireframes
 
-To ensure a structured and user-friendly interface, low-fidelity wireframes were created using **Adobe XD** during the early design phase of the project. These wireframes helped visualize key page layouts, user flows, and core interactions before any code was written.
+To support the early design process, a few simple wireframes were created using **Adobe XD**. These focused on illustrating the overall structure of the dashboard, candidate list view, and profile pages. Rather than investing heavily in detailed wireframes, I transitioned early to high-fidelity design in code to better experiment with layout, styling, and interactions in a live environment.
 
-As the platform is primarily intended for use by **recruiters working on desktop computers**, a **desktop-first approach** was adopted throughout the design process. While the application remains responsive and accessible across devices, mobile optimization was not prioritized at this stage.
+This approach helped me quickly get a sense of how recruiters would navigate and interact with the platform. Since the application is intended for use primarily on **desktop** by **busy recruiters**, I adopted a **desktop-first design** from the start. While the platform is responsive, mobile optimization was not a key focus at this stage.
 
-The wireframes served as a design blueprint and were iteratively refined as new functionality was added during development.
+The initial wireframes served as a basic layout reference and evolved naturally as new features were added and tested. A screenshot of the original wireframes is included below for reference.
 
-WIREFRAMES HERE
+![Wireframes](static/media/documentation/wireframes.png)
 
 ---
 
@@ -280,7 +280,7 @@ This section provides a high-level overview of the Selekt application: its purpo
 
 ---
 
-### 🔍 Introduction
+### Introduction
 
 **Selekt** is a web-based platform designed for recruiters and hiring professionals to streamline candidate management. The goal is to reduce time spent on repetitive admin tasks by using AI to extract and structure CV data, and to make it easier to search, compare, and reuse candidate profiles in future recruitment processes.
 
@@ -304,7 +304,7 @@ Users interact with the system in the following key flows:
 | 5    | Add notes or upload documents           | Enrich candidate profile |
 | 6    | Favorite candidates                     | Shortlist the database |
 
-📷 **BILD: Flowchart or user journey map here**
+![Flowchart](static/media/documentation/flowchart.png)
 
 ---
 
@@ -319,8 +319,6 @@ The core data models in Selekt are designed to represent candidates and their re
 | `Favorite`       | Links a user to a candidate they’ve bookmarked                     | `ForeignKey` to both `User` and `Candidate` (unique together) |
 | `Profile`        | Extended user profile, includes profile image and first-login flag | `OneToOneField` to `User` |
 | `User`           | Django's built-in user model used for authentication               | Owns related `Candidate`, `Favorite`, and `Profile` objects |
-
-📷 **BILD: ERD (Entity Relationship Diagram)**
 
 ---
 
