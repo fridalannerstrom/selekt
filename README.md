@@ -374,6 +374,16 @@ The logic is implemented directly in Django views and includes:
 - Prompt engineering and response handling
 - JSON prefill into the candidate form via session
 
+## Deployment and Security Practices
+
+The project uses environment variables to manage sensitive settings like `SECRET_KEY` and `DEBUG`.
+
+- `DEBUG` is set using: `DEBUG = os.environ.get("DEBUG", "False") == "True"`.
+- This ensures `DEBUG=True` locally for development, and `DEBUG=False` in production (e.g., on Render).
+- No secrets are committed to the repository.
+- All secret keys are stored in environment variables, which are managed through Render's environment settings.
+
+
 ---
 
 ## Features
@@ -984,83 +994,3 @@ A huge thank you to:
 ## ✍️ Author
 
 This project was created by **Frida Lannerström** as part of Portfolio Project 4 in the Full Stack Developer Diploma at Code Institute.
-
----
-
-
-# ✅ Project 4 Distinction Checklist
-
-## 1. Planning & UX/Design
-- [ ] Use an Agile tool (e.g., GitHub Projects) to plan the project.
-- [ ] Create and document Epics → User Stories → Tasks.
-- [ ] Define clear User Acceptance Criteria.
-- [ ] Design wireframes, mockups, and document UX work.
-- [ ] Follow UX design principles and accessibility guidelines (WCAG).
-- [ ] Ensure the website is fully responsive.
-- [ ] Organize information according to Information Hierarchy.
-- [ ] Create intuitive and user-friendly navigation.
-
-## 2. Frontend
-- [ ] Use semantic HTML and clean CSS.
-- [ ] Validate HTML/CSS with W3C/Jigsaw validators.
-- [ ] Link JavaScript correctly and validate it.
-- [ ] Link CSS in `<head>` and JavaScript at the bottom of `<body>`.
-- [ ] Avoid aggressive pop-ups or autoplaying media.
-
-## 3. Backend (Python/Django)
-- [ ] Follow MVC (Model-View-Template) architecture correctly.
-- [ ] Create at least one custom model and document it.
-- [ ] Implement full CRUD functionality (Create, Read, Update, Delete).
-- [ ] Display immediate feedback on data changes.
-- [ ] Implement forms with correct validation.
-- [ ] Write robust Python code following PEP8 standards.
-- [ ] Ensure secure data handling and clear error messages.
-
-## 4. Authentication and Permissions
-- [ ] Implement user registration and login.
-- [ ] Use role-based permissions (e.g., admin vs. user).
-- [ ] Prevent unauthorized access to protected pages.
-- [ ] Display current login state to the user.
-
-## 5. Testing
-- [ ] Create Python tests for critical functionality.
-- [ ] Create JavaScript tests where relevant.
-- [ ] Document all tests in the README.
-- [ ] Document found bugs, fixes, and any unfixed bugs.
-
-## 6. Git and Version Control
-- [ ] Use Git continuously with small and clear commits.
-- [ ] No passwords or secrets included in the code (use `.gitignore`).
-- [ ] Write meaningful commit messages.
-- [ ] Handle requirements.txt and version branches properly.
-
-## 7. Deployment
-- [ ] Deploy the app to a cloud platform (e.g., Render, Heroku).
-- [ ] Set `DEBUG = False` in the deployed version.
-- [ ] Store secrets securely (environment variables).
-- [ ] Provide clear deployment documentation in README.
-- [ ] Remove commented-out code and broken links.
-
-## 8. Code Quality
-- [ ] Ensure consistent, readable code (indentation, naming conventions).
-- [ ] Name all files and folders consistently without spaces or capitals.
-- [ ] Include clear comments in all custom code files.
-- [ ] Maintain a clean file structure (separate folders for CSS, JS, templates).
-
-## 9. README.md
-- [ ] Write README in English, structured with Markdown.
-- [ ] Include:
-  - Project description and purpose
-  - How to clone/run the project
-  - Features and User Stories
-  - Database model/schema
-  - Testing documentation
-  - Deployment process
-  - Security practices
-
-## 10. Extra for Distinction
-- [ ] Ensure the project is original (not a walkthrough copy).
-- [ ] Create a professional-grade UI and clean code structure.
-- [ ] Provide immediate feedback for all user actions.
-- [ ] Demonstrate high-level "craftsmanship" in code.
-- [ ] Implement strong security features (API error handling, form validation, 404 pages).
