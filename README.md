@@ -304,6 +304,10 @@ Users interact with the system in the following key flows:
 | 5    | Add notes or upload documents           | Enrich candidate profile |
 | 6    | Favorite candidates                     | Shortlist the database |
 
+It's important to note that this system is designed to support internal candidate management only. Actions such as contacting candidates, scheduling interviews, or making hiring decisions happen outside of this application. The goal of the platform is to help recruiters **collect, organize, and evaluate all available candidate data** in one place — including CVs, test results, notes, and other files.
+
+The user journey effectively ends once a candidate has been fully profiled and optionally marked as a favorite for shortlisting purposes. This separation ensures a clear focus on **data structuring and decision support**, rather than trying to replicate external communication or HR processes.
+
 ![Flowchart](static/media/documentation/flowchart.png)
 
 ---
