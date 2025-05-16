@@ -880,6 +880,53 @@ Best practices followed:
 - GitHub Projects used to track epics, user stories, and bugs
 - `.env` and `.sqlite3` files excluded via `.gitignore`
 
+### Heroku Deployment
+
+The live version is hosted on **Heroku**, using PostgreSQL and Cloudinary for file storage.
+
+**Steps followed:**
+
+1. **Create Heroku app:**
+```bash
+heroku create selekt-app-name
+```
+
+2. **Add Heroku PostgreSQL add-on:**
+```bash
+heroku addons:create heroku-postgresql:hobby-dev
+```
+
+3. **Set environment variables in Heroku Dashboard:**
+- `SECRET_KEY`
+- `DEBUG = False`
+- `CLOUDINARY_*`
+- `OPENAI_API_KEY`
+
+4. **Update settings.py:**
+- Used `dj_database_url` to connect to PostgreSQL
+- Added `whitenoise` for static file handling
+- Set `STATIC_ROOT` and `MEDIA_ROOT`
+
+5. **Configure Cloudinary:**
+- Cloud-based storage for profile images and uploaded files
+- Used `cloudinary_storage` for both `DEFAULT_FILE_STORAGE` and `STATICFILES_STORAGE`
+
+6. **Push code to Heroku:**
+```bash
+git push heroku main
+```
+
+7. **Run migrations and create superuser:**
+```bash
+heroku run python manage.py migrate
+heroku run python manage.py createsuperuser
+```
+
+8. **Open the live app:**
+```bash
+heroku open
+```
+
 ---
 
 ### Deployment Notes
@@ -934,16 +981,11 @@ A huge thank you to:
 
 ---
 
-This project would not exist in its current form without the support, tools, and knowledge shared by these communities and individuals.
-
-
-
 ## ✍️ Author
 
 This project was created by **Frida Lannerström** as part of Portfolio Project 4 in the Full Stack Developer Diploma at Code Institute.
 
 ---
-
 
 
 # ✅ Project 4 Distinction Checklist
