@@ -33,7 +33,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", "fallback-key-for-local")
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", "False") == "True"
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'selekt-3ceec5fdccb6.herokuapp.com']
 
