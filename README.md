@@ -1,6 +1,13 @@
 ![Selekt Mockup](static/media/documentation/all-devices-black.png)
 
-Welcome to **Selekt** 🎉
+# Welcome to **Selekt** 🎉
+
+![Django](https://img.shields.io/badge/Django-5.x-092E20?logo=django)
+![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-13-336791?logo=postgresql)
+![Azure](https://img.shields.io/badge/Hosting-Azure-0089D6?logo=microsoftazure)
+![OpenAI](https://img.shields.io/badge/OpenAI-Integration-black?logo=openai)
+![Recruitment](https://img.shields.io/badge/Domain-Recruitment-4CAF50)
 
 Selekt is an AI-powered web application designed to **help recruiters manage candidates** in a faster, smarter, and more structured way. Upload a CV, and Selekt instantly summarizes the profile, extracts key skills, and organizes everything into a clean, searchable format – no formatting or manual input needed.
 
